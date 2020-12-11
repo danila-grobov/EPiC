@@ -4,12 +4,15 @@
   "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel app.js -o app.js"
   },
   "keywords": [],
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10"
   }
 }
