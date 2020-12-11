@@ -1,0 +1,15 @@
+{
+  "name": "learning-and-engagement-tool",
+  "version": "1.0.0",
+  "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
