@@ -7,4 +7,3 @@ COPY package-lock.json package-lock.json
 COPY babel.config.json babel.config.json
 RUN npm install
 RUN npm run build
-CMD node app.js
