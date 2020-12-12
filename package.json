@@ -1,0 +1,16 @@
+{
+  "name": "learning-and-engagement-tool",
+  "version": "1.0.0",
+  "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
+  "main": "index.js",
+  "scripts": {
+    "docker": "docker-compose -f docker_config/docker-compose.yml up",
+    "server": "docker exec -it web npm run start",
+    "install": "docker exec -it web npm i"
+  },
+  "keywords": [],
+  "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
+  "license": "ISC",
+  "dependencies": {
+  }
+}

@@ -1,12 +1,14 @@
 version: "3.9"
 services:
   db:
+    container_name: db
     build:
       context: .
       dockerfile: DockerfileDB
-    volumes:
-      - ./config.sql /docker-entrypoint-initdb.d/config.sql
+    ports:
+      - "3306:3306"
   web:
+    container_name: web
     build:
       context: ..
       dockerfile: docker_config/Dockerfile
