@@ -4,7 +4,8 @@
   "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
   "main": "index.js",
   "scripts": {
-    "build": "babel app.js -o app.js"
+    "build": "babel ./backend -d compiled",
+    "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js"
   },
   "keywords": [],
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
@@ -13,7 +14,9 @@
     "express": "^4.17.1",
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
-    "@mysql/xdevapi": "^8.0.22"
+    "@mysql/xdevapi": "^8.0.22",
+    "nodemon": "^2.0.6"
   }
 }

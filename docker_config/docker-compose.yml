@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  db:
+    build:
+      context: .
+      dockerfile: DockerfileDB
+    volumes:
+      - ./config.sql /docker-entrypoint-initdb.d/config.sql
+  web:
+    build:
+      context: ..
+      dockerfile: docker_config/Dockerfile
+    ports:
+      - "80:3000"
+    volumes:
+      - logvolume01:/var/log
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ../backend:/app/backend
+      - ./babel.config.json:/app/babel.config.json
+    depends_on:
+      - db
+    tty: true
+volumes:
+  logvolume01: {}
