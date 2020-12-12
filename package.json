@@ -4,7 +4,8 @@
   "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
   "main": "index.js",
   "scripts": {
-    "docker": "docker-compose -f docker_config/docker-compose.yml up",
+    "docker": "docker-compose --project-name epic_app -f docker_config/docker-compose.yml up",
+    "rebuild": "docker-compose --project-name epic_app -f docker_config/docker-compose.yml build --force-rm",
     "server": "docker exec -it web npm run start",
     "install": "docker exec -it web npm i"
   },
