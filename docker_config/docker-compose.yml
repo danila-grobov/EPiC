@@ -1,28 +1,38 @@
 version: "3.9"
 services:
+  #Database container setup
   db:
     container_name: db
+    #Select which dockerfile to use
     build:
       context: .
       dockerfile: DockerfileDB
+    #Expose port 3306 to host as port 3306
     ports:
       - "3306:3306"
+  #Web server setup
   web:
     container_name: web
+    #Select which dockerfile to use
     build:
-      context: ..
-      dockerfile: docker_config/Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    #Expose port 3000 to host as port 80
     ports:
       - "80:3000"
+    #Volume is a persistent place for docker to store files of the container
+    #Basicaly here I'm just syncing local files with the container.
     volumes:
       - logvolume01:/var/log
-      - ./package.json:/app/package.json
+      - ../server_config/docker.package.json:/app/docker.package.json
       - ../backend:/app/backend
       - ../frontend:/app/frontend
-      - ./babel.config.json:/app/babel.config.json
-      - ./webpack.config.js:/app/webpack.config.js
+      - ../server_config/babel.config.json:/app/babel.config.json
+      - ../server_config/webpack.config.js:/app/webpack.config.js
+    #Make sure that database container starts up before the web server.
     depends_on:
       - db
+    #Don't turn off the container after it's done the setup
     tty: true
 volumes:
   logvolume01: {}

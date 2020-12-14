@@ -4,7 +4,6 @@
   "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
   "main": "index.js",
   "scripts": {
-    "build": "babel ./backend -d compiled",
     "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js",
     "webpack": "webpack --watch"
   },

@@ -1,4 +1,7 @@
+#Start from a regular mysql image
 FROM mysql:8 AS db
+#Configure mysql server
 ENV MYSQL_ROOT_PASSWORD=password
 ENV MYSQL_DATABASE=EPiC
+#Add tables to the db
 COPY config.sql /docker-entrypoint-initdb.d/
