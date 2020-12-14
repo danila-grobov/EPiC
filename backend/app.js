@@ -1,5 +1,7 @@
-import express from "express"
-import mysqlx from "@mysql/xdevapi"
+import express from "express";
+import mysqlx from "@mysql/xdevapi";
+import path from "path";
+
 const app = express()
 const port = 3000
 const dbCredentials = {
@@ -8,9 +10,17 @@ const dbCredentials = {
     host: 'db',
     port: '33060'
 };
+
+app.use(express.static(path.join(__dirname, '../dist')));
+console.log(path.join(__dirname, '../dist'));
+app.engine('.html', require('ejs').__express);
+app.set('views', path.join(__dirname, '../frontend/views'));
+app.set('view engine', 'html');
+
 app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+    res.render('index');
+});
+
 app.listen(port, () => {
     mysqlx
         .getSession(dbCredentials)

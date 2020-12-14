@@ -17,9 +17,10 @@ services:
     volumes:
       - logvolume01:/var/log
       - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
       - ../backend:/app/backend
+      - ../frontend:/app/frontend
       - ./babel.config.json:/app/babel.config.json
+      - ./webpack.config.js:/app/webpack.config.js
     depends_on:
       - db
     tty: true

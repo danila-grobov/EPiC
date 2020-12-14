@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "babel ./backend -d compiled",
-    "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js"
+    "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js",
+    "webpack": "webpack --watch"
   },
   "keywords": [],
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
@@ -17,6 +18,17 @@
     "@babel/node": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@mysql/xdevapi": "^8.0.22",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass-loader": "^10.1.0",
+    "node-sass": "^5.0.0",
+    "ejs": "^3.1.5"
   }
 }
