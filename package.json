@@ -8,7 +8,7 @@
     "rebuild": "docker-compose --project-name epic_app -f docker_config/docker-compose.yml build --force-rm",
     "server": "docker exec -it web npm run start",
     "install": "docker exec -it web npm i",
-    "test":  "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
