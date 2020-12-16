@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./app.scss";
+import "./scss/app.scss";
 import Table from "./Table";
 const App = () => {
     return (

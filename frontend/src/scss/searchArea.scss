@@ -2,7 +2,7 @@
 @import "fonts";
 .searchArea {
     background: white;
-    width: 100%;
+    width: auto;
     height: 54px;
     border-radius: 5px;
     display: grid;
@@ -33,7 +33,7 @@
 }
 
 .searchInput__input {
-    @extend %regularText;
+    @extend %regularText_lack;
     grid-row:1;
     width: 100%;
     height: 100%;
@@ -48,6 +48,6 @@
     @extend %greyBlock;
 }
 .searchPhrase__title{
-    @extend %regularText;
+    @extend %regularText_lack;
 }
 

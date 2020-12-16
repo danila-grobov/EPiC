@@ -1,5 +1,5 @@
 import React from "react"
-import "./searchArea.scss"
+import "./scss/searchArea.scss"
 import searchIcon from "./imgs/search.svg"
 import removeIcon from "./imgs/remove.svg"
 export default () => {

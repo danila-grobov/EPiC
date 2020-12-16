@@ -1,11 +1,12 @@
 import React from "react"
-import "./table.scss"
+import "./scss/table.scss"
 import SearchArea from "./SearchArea";
-const Table = () => {
+import TableContent from "./TableContent";
+export default () => {
     return (
         <div className="table">
             <SearchArea />
+            <TableContent />
         </div>
     )
 }
-export default Table;
