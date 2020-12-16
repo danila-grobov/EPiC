@@ -5,7 +5,7 @@
   display: grid;
   align-items: center;
   border-radius: 5px;
-  grid-template-columns: min-content repeat(4,1fr min-content);
+  grid-template-columns: min-content min-content repeat(4,1fr min-content);
 }
 .row--header {
   @extend %row;
