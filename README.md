@@ -13,3 +13,6 @@ Just like backend server it supports auto reload, to start webpack up type ```np
 ```package.json``` located in the root directory is only used for commands intended to run from the host. Modules listed
 in this file, will not be installed. To install a module you have to add it to the ```docker.package.json``` file located
 in the server_config folder, after that you can run ```npm run install``` command in order to install it in the docker container.
+## Fixing port is already in use problem
+If you don't close the backend or frontend properly, it will be left running even after you close your terminal, so to
+fix that just run ```npm run killall``` and it will close frontend and backend for you.
