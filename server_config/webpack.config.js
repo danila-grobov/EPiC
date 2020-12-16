@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = {
     //The file to start interpretation from.
-    entry: "./frontend/src/index.js",
+    entry: "./frontend/src/index.jsx",
     mode: "development",
     watchOptions: { poll: true }, //This is required in order for auto-reload to work in docker.
     module: {

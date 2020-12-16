@@ -1,5 +1,7 @@
-$body-color: red;
-
+@import "colors";
+.app {
+  max-width: 1200px;
+}
 body {
-  color: $body-color;
+  background: $background;
 }
