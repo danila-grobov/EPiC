@@ -1,0 +1,21 @@
+@import "colors";
+@font-face {
+  font-family: 'Lack';
+  src: url("fonts/Lack-Regular.otf");
+}
+@font-face {
+  font-family: 'SourceSansPro';
+  src: url("fonts/SourceSansPro-Regular.ttf");
+}
+@font-face {
+  font-family: 'SourceSansPro-Bold';
+  src: url("fonts/SourceSansPro-Bold.ttf");
+}
+$font_lack: "Lack", Fallback, sans-serif;
+$font_sanspro: "SourceSansPro", Fallback, sans-serif;
+$font_sanspro_bold: "SourceSansPro-Bold", Fallback, sans-serif;
+%regularText {
+  font-family: $font_lack;
+  font-size: 16px;
+  color:$text;
+}
