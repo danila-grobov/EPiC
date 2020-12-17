@@ -1,7 +1,7 @@
 import React from "react"
-import "./scss/searchArea.scss"
-import searchIcon from "./imgs/search.svg"
-import removeIcon from "./imgs/remove.svg"
+import "../scss/searchArea.scss"
+import searchIcon from "../imgs/search.svg"
+import removeIcon from "../imgs/remove.svg"
 export default () => {
     return (
         <div className="searchArea">

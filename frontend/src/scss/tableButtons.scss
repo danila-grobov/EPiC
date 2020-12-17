@@ -9,6 +9,7 @@
   grid-gap: 20px;
 }
 .tableButton {
+  cursor: pointer;
   grid-row: 1;
   height: 100%;
   width: 190px;
@@ -21,6 +22,8 @@
   box-sizing: border-box;
   .tableButton__icon {
     margin-left: 11px;
+    height: auto;
+    width: 12px;
   }
   .tableButton__title {
     font-size:14px;

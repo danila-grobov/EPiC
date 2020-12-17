@@ -1,5 +1,5 @@
 import React from "react"
-import "./scss/tableContent.scss"
+import "../scss/tableContent.scss"
 import Row from "./Row";
 import data from "./testData_table";
 export default () => {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./scss/app.scss";
-import Table from "./Table";
+import Table from "./table_components/Table";
 const App = () => {
     return (
         <div className="app">
