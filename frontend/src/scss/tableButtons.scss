@@ -1,0 +1,33 @@
+@import "fonts";
+@import "colors";
+.tableButtons {
+  width: auto;
+  height: 28px;
+  line-height: 28px;
+  display: grid;
+  justify-content: end;
+  grid-gap: 20px;
+}
+.tableButton {
+  grid-row: 1;
+  height: 100%;
+  width: 190px;
+  display: grid;
+  grid-template-columns: min-content auto;
+  align-items: center;
+  background: white;
+  border: 2px $text_secondary solid;
+  border-radius: 42px;
+  box-sizing: border-box;
+  .tableButton__icon {
+    margin-left: 11px;
+  }
+  .tableButton__title {
+    font-size:14px;
+    font-family: $font_lack;
+    color: $text;
+    text-transform: uppercase;
+    width: auto;
+    text-align: center;
+  }
+}
