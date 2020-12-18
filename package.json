@@ -7,7 +7,8 @@
     "rebuild": "docker-compose --project-name epic_app -f docker_config/docker-compose.yml build --force-rm",
     "backend": "docker exec -it web npm run start",
     "install": "docker exec -it web npm i",
-    "frontend": "docker exec -it web npm run webpack"
+    "frontend": "docker exec -it web npm run webpack",
+    "type": "module"
   },
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
   "license": "ISC"
