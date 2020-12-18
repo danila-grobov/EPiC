@@ -1,2 +1,22 @@
 @import "colors";
 @import "fonts";
+
+.menuBase{
+    background: white;
+    width: 1039px;
+    height: 61px;
+    left: 161px;
+    top: 0px;
+    border-radius: 5px;
+}
+
+.navDropdown{
+  background: white;
+  position: absolute;
+  width: 151px;
+  height: 61px;
+  left: 0px;
+  top: 0px;
+  border-radius: 3.54167px;
+
+}
