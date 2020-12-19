@@ -1,0 +1,62 @@
+@import "colors";
+@import "fonts";
+.invitePopup {
+  position: fixed;
+  min-height: 332px;
+  width: 585px;
+  padding: 20px;
+  z-index: 2;
+  background: white;
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-gap: 30px;
+  border-radius: 5px;
+}
+.invitePopup__background {
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0, 0.1);;
+  backdrop-filter: blur(5px);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  z-index: 1;
+}
+.invitePopup__title {
+  font-family: $font_lack;
+  color: $text;
+  font-size: 24px;
+}
+.invitePopup__header {
+  display: grid;
+  grid-template-columns: auto min-content;
+  align-items: start;
+  width: auto;
+}
+.invitePopup__closeIcon {
+  justify-self: end;
+}
+.invitePopup__content {
+  width: auto;
+  display: grid;
+  grid-gap: 27px;
+}
+.invitePopup__addButton {
+  grid-row: 1;
+  justify-self: end;
+  .button__label {
+    font-size: 18px;
+  }
+}
+.invitePopup__inviteButton {
+  grid-row: 2;
+  .button__label {
+    font-size: 18px;
+  }
+}
+.invitePopup__input {
+  grid-row: 1;
+}
