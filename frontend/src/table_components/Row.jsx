@@ -1,8 +1,9 @@
 import React from "react"
 import "../scss/row.scss"
-import checkBox from "../imgs/checkbox.svg"
+import checkbox from "../imgs/checkbox.svg"
+import checkBox__checked from "../imgs/checkbox__checked.svg"
 export default props => {
-    const {values, rowType} = props;
+    const {values, rowType,tickCheckbox,selected,id} = props;
     const cells = values.map(({value, type}, index) => {
             const visibility = values.length-1 === index || type === "title" ? "--hidden" : "";
             return [
@@ -14,7 +15,7 @@ export default props => {
     const visibility = rowType === "header" ? "--hidden" : "";
     return (
         <div className={`row--${rowType}`}>
-            <img src={checkBox} alt="checkbox" className="row__cell--checkbox"/>
+            <img onClick={tickCheckbox} src={selected ? checkBox__checked : checkbox} alt="checkbox" className="row__cell--checkbox"/>
             <div className={`row__cellSeparator${visibility}`}/>
             {cells}
         </div>

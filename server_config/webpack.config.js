@@ -3,6 +3,7 @@ module.exports = {
     //The file to start interpretation from.
     entry: "./frontend/src/index.jsx",
     mode: "development",
+    devtool:"eval-source-map",
     watchOptions: { poll: true }, //This is required in order for auto-reload to work in docker.
     module: {
         rules: [
@@ -32,10 +33,7 @@ module.exports = {
                 //Convert all the ES6 and jsx syntax into regular javascript.
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: "babel-loader",
-                options: {
-                    presets: ["@babel/env"]
-                }
+                loader: "babel-loader"
             },
             {
                 //Convert all style files to regular css and then insert it into bundle.

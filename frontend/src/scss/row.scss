@@ -5,7 +5,7 @@
   display: grid;
   align-items: center;
   border-radius: 5px;
-  grid-template-columns: min-content min-content repeat(4,1fr min-content);
+  grid-template-columns: 24px+18px min-content repeat(4,1fr min-content);
 }
 .row--header {
   @extend %row;
@@ -66,7 +66,7 @@
   color:$text;
 }
 .row__cell--checkbox {
-  @extend %row_cell;
+  margin-left: 12px;
 }
 .row__cellSeparator {
   border-right: solid 2px $light_grey;
