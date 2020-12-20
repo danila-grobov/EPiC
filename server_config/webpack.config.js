@@ -37,7 +37,7 @@ module.exports = {
             },
             {
                 //Convert all style files to regular css and then insert it into bundle.
-                test:/\.s[ac]ss$/i,
+                test:/\.(s[ac]ss|css)$/i,
                 use: ["style-loader", "css-loader", "sass-loader"]
             }
         ]
