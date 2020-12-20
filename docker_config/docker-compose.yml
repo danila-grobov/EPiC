@@ -20,6 +20,8 @@ services:
     #Expose port 3000 to host as port 80
     ports:
       - "80:3000"
+      - "3001:3001"
+      - "3002:3002"
     #Volume is a persistent place for docker to store files of the container
     #Basicaly here I'm just syncing local files with the container.
     volumes:
