@@ -17,6 +17,13 @@
   @extend %button;
   background: none;
 }
+.button--primary {
+  @extend %button;
+  background: $blue;
+  .button__label {
+    color: white;
+  }
+}
 .button__label {
   font-size: 20px;
   color: #6EB3CB;

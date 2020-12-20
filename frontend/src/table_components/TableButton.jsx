@@ -1,9 +1,9 @@
 import React from "react"
 import "../scss/tableButtons.scss"
 export default props => {
-    const {icon, title} = props;
+    const {icon, title, onClick} = props;
     return (
-        <div className="tableButton">
+        <div className="tableButton" onClick={onClick}>
             <img src={icon} alt={title} className="tableButton__icon"/>
             <span className="tableButton__title">{title}</span>
         </div>

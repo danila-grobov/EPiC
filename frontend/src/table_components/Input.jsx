@@ -8,7 +8,7 @@ export default props => {
         <div className={["textInput", className].join(" ")} style={{width: width}}>
             <span className={focused ? "textInput__label--focused" : "textInput__label"}>{label}</span>
             <input type="text" className="textInput__input"
-                   onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}
+                   onFocus={() => setFocused(true)} onBlur={() => setFocused(value !== "")}
                    value={value} onChange={onChange}/>
         </div>
     );
