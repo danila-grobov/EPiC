@@ -1,12 +1,14 @@
 import React from "react";
 import SizeDropdown from "./SizeDropdown";
-export default () => {
+
+export default props => {
+    const {total,rowCount,setRowCount} = props;
     return (
         <div className="tableSizeSelector">
             <span className="tableSizeSelector__info">
-                {"Showing 1-5 of 100"}
+                {`Showing 1-${rowCount} of ${total}`}
             </span>
-            <SizeDropdown />
+            <SizeDropdown total={total} rowCount={rowCount} setRowCount={setRowCount}/>
         </div>
     )
 }

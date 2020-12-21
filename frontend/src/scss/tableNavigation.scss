@@ -36,9 +36,12 @@
   @extend %pageNumber;
   background: $background;
 }
-.tablePagination__arrow {
+.tablePagination__arrow,.tablePagination__arrow--left {
   grid-row: 1;
   cursor: pointer;
+}
+.tablePagination__arrow--left {
+  transform: rotateY(180deg);
 }
 .tableSizeSelector {
   grid-row: 1;
