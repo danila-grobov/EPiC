@@ -1,13 +1,31 @@
 import React, { Component } from "react";
 import "./app.scss";
 function Profile() {
-    var imageFilepath= "./Default.jpg";
+    //Get teacher info here
+    const teacherID = "dwightSchrute";
+    const defaultFilepath= "./Default.jpg";
+    const possibleFilepath = "./"+teacherID+".jpg";
+
     return(
     <html>
     <body>
-    //Search for existing saved image here
-    <img src=imageFilepath alt="UserImage" width="100" height="100" border-radius={50}></img>
-    <p>...After the script.</p>
+    <img src=imageFilepath alt="UserImage" width="128" height="128" top="166" left="162" border-radius={50}></img>
+
+    <script>
+        try{
+        document.getElementById('USerImage').src='possibleFilepath'
+    }
+        catch(exception){}
+    </script>
+    <h1 top="166" left="212"><span id="teacherID"></span></h1>
+    <form action="/action_page.php">
+        <input type="text" id="fname" name="fname"></input>
+        <input type="text" id="lname" name="lname"></input>
+        <input type="text" id="uname" name="uname"></input>
+        <input type="text" id="email" name="email"></input>
+        <input type="submit" id="save" name="save" value="save"></input>
+    </form>
+    <button onClick={}>Change password</button>
     </body>
     </html>)
 }
