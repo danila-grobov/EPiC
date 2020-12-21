@@ -1,13 +1,27 @@
 @import "colors";
 @import "fonts";
+.textInput__wrapper {
+  width: max-content;
+}
+.textInput__error {
+  color: $red_strong;
+  display: block;
+  padding-top: 5px;
+  padding-left: 15px;
+  font-size: 16px;
+  font-family: $font_sanspro;
+}
 
-.textInput {
+.textInput, .textInput--error {
   border: 3px solid $text_secondary;
   border-radius: 5px;
   height: 40px;
   padding-left: 26px;
   padding-right: 10px;
   position: relative;
+}
+.textInput--error {
+  border-color: $red_strong;
 }
 
 .textInput__input {
@@ -33,6 +47,9 @@
   pointer-events: none;
   transition: 0.1s;
   transition-timing-function: ease-out;
+}
+.textInput__label--error {
+  color: $red_strong;
 }
 .textInput__label--focused {
   font-size: 18px;

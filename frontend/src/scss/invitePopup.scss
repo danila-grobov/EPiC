@@ -3,7 +3,7 @@
 .invitePopup {
   position: fixed;
   min-height: 296px;
-  width: 585px;
+  width: 530px;
   padding: 20px;
   z-index: 2;
   background: white;
@@ -49,6 +49,7 @@
   width: auto;
   display: grid;
   grid-gap: 27px;
+  grid-template-columns: 298px auto;
 }
 .invitePopup__addButton {
   grid-row: 1;
