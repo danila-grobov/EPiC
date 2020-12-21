@@ -21,10 +21,10 @@ export default () => {
         }
     }
     const getCheckboxStatus = () => {
-        console.log(selectedCheckboxes);
-        if(selectedCheckboxes.length >= data.length - 1)
+        const withoutHeaderCheckbox = selectedCheckboxes.filter(checkboxId => checkboxId!==0);
+        if(withoutHeaderCheckbox.length >= data.length - 1)
             return "full"
-        else if(selectedCheckboxes.length === 0)
+        else if(withoutHeaderCheckbox.length === 0)
             return "none"
         return "partial"
     }
