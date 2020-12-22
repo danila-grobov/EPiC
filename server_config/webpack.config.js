@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = {
     //The file to start interpretation from.
-    entry: "./frontend/src/index.js",
+    entry: "./frontend/src/index.jsx",
     mode: "development",
     watchOptions: { poll: true }, //This is required in order for auto-reload to work in docker.
     module: {
@@ -17,7 +17,7 @@ module.exports = {
             },
             {
                 //Convert all style files to regular css and then insert it into bundle.
-                test:/\.s[ac]ss$/i,
+                test:/\.(s[ac]ss|css)$/i,
                 use: ["style-loader", "css-loader", "sass-loader"]
             }
         ]

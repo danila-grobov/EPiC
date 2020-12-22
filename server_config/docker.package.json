@@ -2,7 +2,7 @@
   "name": "learning-and-engagement-tool",
   "version": "1.0.0",
   "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "stop-all" : "killall node",
     "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js",
@@ -26,6 +26,8 @@
     "webpack": "^5.10.1",
     "webpack-cli": "^4.2.0",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
+    "bootstrap": "^4.5.3",
     "react-dom": "^17.0.1",
     "sass-loader": "^10.1.0",
     "node-sass": "^5.0.0",

@@ -29,7 +29,8 @@ PRIMARY KEY(CourseName)
 
 CREATE TABLE Tasks(
 TaskID varchar(5) NOT NULL,
-CourseName varchar(10),
+TaskName varchar(100) NOT NULL,
+CourseName varchar(10) NOT NULL,
 ParentTaskID varchar(5),
 Description text NOT NULL,
 Deadline datetime,
