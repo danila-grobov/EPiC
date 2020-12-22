@@ -33,6 +33,7 @@
     "ejs": "^3.1.5",
     "file-loader": "^6.2.0",
     "browser-sync": "^2.26.13",
-    "react-toastify": "^6.2.0"
+    "react-toastify": "^6.2.0",
+    "react-perfect-scrollbar": "^1.5.8"
   }
 }

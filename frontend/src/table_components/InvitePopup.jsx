@@ -6,6 +6,7 @@ import Button from "./Button";
 import SearchPhrase from "./SearchPhrase";
 import useInput from "../hooks/useInput";
 import FileInput from "./FileInput";
+import ScrollableContainer from "./ScrollableContainer";
 
 export default props => {
     const {closePopup} = props;
@@ -32,8 +33,8 @@ export default props => {
                     />
                     <Button height={46} className={"invitePopup__addButton"} label={"Add to invite list"}
                             type={"secondary"} onClick={() => {
-                                if (updateValid() === 1) addInvite(value)
-                            }}
+                        if (updateValid() === 1) addInvite(value)
+                    }}
                     />
                     <Button height={38} className={"invitePopup__importButton"} label={"Import from JSON"}
                             type={"secondary"} onClick={() => fileInput.current.click()}/>
@@ -43,12 +44,11 @@ export default props => {
                                    data.reduce((valid, element) => {
                                        return typeof element === "string" && element.match(validationRegEx) && valid
                                    }, true)
-                               }/>*
-                    <div className="invitePopup__inviteList">
+                               }/>
+                    <ScrollableContainer className="invitePopup__inviteList">
                         {invites.length !== 0 ? getInviteElements() :
-                            <span className="invitePopup__emptyList">{"No students in the invite list."}</span>
-                        }
-                    </div>
+                            <span className="invitePopup__emptyList">{"No students in the invite list."}</span>}
+                    </ScrollableContainer>
                     <Button height={38} className={"invitePopup__inviteButton"} label={"Invite students"}
                             type={"primary"}/>
                 </div>

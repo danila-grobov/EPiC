@@ -17,4 +17,18 @@
 }
 body {
   background: $background;
+  .ps__thumb-y {
+    background-color: $text !important;;
+    width: 6px !important;
+    opacity: 0.75 !important;
+    right: 0;
+    border-radius: 6px;
+  }
+  .ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y {
+    background-color: $background;
+    opacity: 1 !important;
+    width: 6px;
+    border-radius: 6px;
+  }
 }
+

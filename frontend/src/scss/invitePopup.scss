@@ -1,5 +1,6 @@
 @import "colors";
 @import "fonts";
+
 .invitePopup {
   position: fixed;
   min-height: 296px;
@@ -9,6 +10,7 @@
   background: white;
   display: grid;
   grid-auto-rows: min-content;
+  //grid-auto-columns: 100%;
   grid-gap: 30px;
   border-radius: 5px;
 }
@@ -49,7 +51,6 @@
   width: auto;
   display: grid;
   grid-gap: 27px;
-  grid-template-columns: 298px auto;
 }
 .invitePopup__addButton {
   grid-row: 1;
@@ -69,13 +70,12 @@
 }
 .invitePopup__inviteList {
   grid-row: 3;
-  padding-right: 15px;
+  padding-right: 11px;
   grid-column: 1/3;
+  max-height: 106px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  max-height: 106px;
-  overflow-y: overlay;
 }
 .invitePopup__emptyList {
   width: 100%;
