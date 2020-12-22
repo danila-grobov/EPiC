@@ -2,21 +2,31 @@
 @import "fonts";
 
 .menuBase{
-    background: white;
-    width: 1039px;
+    width: auto;
     height: 61px;
-    left: 161px;
-    top: 0px;
-    border-radius: 5px;
+    display: grid;
+    z-index: 2;
+    top: 20px;
+    position: fixed;
+
 }
 
 .navDropdown{
-  background: white;
-  position: absolute;
-  width: 151px;
-  height: 61px;
-  left: 0px;
-  top: 0px;
-  border-radius: 3.54167px;
+    background: white;
+    position: fixed;
+    width: 151px;
+    height: 61px;
+    top: 20px;
+    border-radius: 3.54167px;
+}
+
+.navMainMenu{
+    background: white;
+    position: fixed;
+    width: 1039px;
+    height: 61px;
+    border-radius: 5px;
+    top: 20px;
+    right: 100px;
 
 }
