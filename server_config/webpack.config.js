@@ -7,6 +7,28 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'imgs',
+                        publicPath: 'imgs',
+                        name: '[hash]-[name].[ext]'
+                    }
+                }
+            },
+            {
+                test: /\.(otf|ttf)$/i,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'fonts',
+                        publicPath: 'fonts',
+                        name: '[hash]-[name].[ext]'
+                    }
+                }
+            },
+            {
                 //Convert all the ES6 and jsx syntax into regular javascript.
                 test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
