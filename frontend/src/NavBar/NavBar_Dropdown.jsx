@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "../scss/navBarDropdown.scss"
-//import drownDownArrow from "../imgs/downArrow.svg"
+
 
 //<img src={dropDownArrow} alt="Dropdown icon" className="dropdown__icon"/>
 

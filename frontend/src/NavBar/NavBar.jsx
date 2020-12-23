@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import "../scss/navBar.scss"
-import NavBar_Dropdown from "./NavBar_Dropdown";
+import dropDownArrow from "../imgs/downArrow.svg"
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
@@ -12,7 +12,7 @@ export default () => {
     return (
        <div className="menuBase">
            <div className = "navDropdown">
-               
+               <img src={dropDownArrow} alt="Dropdown icon" className="dropdown__icon"/>
            </div>
            <div className="navMainMenu">
            </div>
