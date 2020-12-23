@@ -9,16 +9,17 @@ import dropDownArrow from "../imgs/downArrow.svg"
 //a toggle button
 
 export default () => {
+    const course = "CSC2033";
+
     return (
        <div className="menuBase">
-           <div className = "navDropdown">
+           <div className = "navDropdown" course = {course}>
                <img src={dropDownArrow} alt="Dropdown icon" className="dropdown__icon"/>
            </div>
            <div className="navMainMenu">
            </div>
 
        </div>
-
     )
 
 }
