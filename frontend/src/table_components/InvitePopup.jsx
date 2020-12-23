@@ -1,12 +1,13 @@
-import React, {useState, useRef} from "react"
+import React, {useState, useRef,useEffect} from "react"
 import "../scss/invitePopup.scss"
 import remove_dark from "../imgs/remove__dark.svg"
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../general_components/Input";
+import Button from "../general_components/Button";
 import SearchPhrase from "./SearchPhrase";
 import useInput from "../hooks/useInput";
-import FileInput from "./FileInput";
-import ScrollableContainer from "./ScrollableContainer";
+import FileInput from "../general_components/FileInput";
+import ScrollableContainer from "../general_components/ScrollableContainer";
+import FancyInput from "../general_components/FancyInput";
 
 export default props => {
     const {closePopup} = props;
@@ -16,9 +17,6 @@ export default props => {
     const getInviteElements = () => invites.map((invite, index) =>
         <SearchPhrase index={index} key={index} value={invite} onDelete={deleteInvite}/>
     ).reverse();
-    const validationRegEx = /^([a-zA-Z0-9_\-\.]+)@(ncl|newcastle).ac.uk$/;
-    const {bind, value, updateValid, valid} = useInput("", 30, validationRegEx);
-    const fileInput = useRef(null);
     return (
         <div className="invitePopup__wrapper">
             <div className="invitePopup__background" onClick={closePopup}/>
@@ -28,23 +26,14 @@ export default props => {
                     <img src={remove_dark} alt="remove icon" onClick={closePopup} className="invitePopup__closeIcon"/>
                 </div>
                 <div className="invitePopup__content">
-                    <Input width={298} label={"Email"} className={"invitePopup__input"} {...bind}
-                           error={"Please enter a valid newcastle university email address."}
-                    />
-                    <Button height={46} className={"invitePopup__addButton"} label={"Add to invite list"}
-                            type={"secondary"} onClick={() => {
-                        if (updateValid() === 1) addInvite(value)
-                    }}
-                    />
-                    <Button height={38} className={"invitePopup__importButton"} label={"Import from JSON"}
-                            type={"secondary"} onClick={() => fileInput.current.click()}/>
-                    <FileInput inputRef={fileInput} setFileData={setInvites}
+                    <FancyInput label={"Email"} className={"invitePopup__input"}
+                           type={"email"} onSubmit={addInvite} charLimit={30}/>
+                    <FileInput setFileData={setInvites}
                                successMessage={"The emails have been successfully uploaded."}
-                               dataIsValid={data =>
-                                   data.reduce((valid, element) => {
-                                       return typeof element === "string" && element.match(validationRegEx) && valid
-                                   }, true)
-                               }/>
+                               button={<Button height={38} className={"invitePopup__importButton"}
+                                               label={"Import from JSON"} type={"secondary"}/>}
+                               type={"emails"}
+                    />
                     <ScrollableContainer className="invitePopup__inviteList">
                         {invites.length !== 0 ? getInviteElements() :
                             <span className="invitePopup__emptyList">{"No students in the invite list."}</span>}

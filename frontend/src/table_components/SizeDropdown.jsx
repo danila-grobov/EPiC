@@ -17,7 +17,9 @@ export default props => {
             <span className="sizeDropdown__label">
                 {"Listings per page"}
             </span>
-            <input {...bind} onBlur={handleChange} type={"text"} className="sizeDropdown__dropdown"/>
+            <form onSubmit={e => {e.preventDefault(); handleChange(e)}} className="sizeDropdown__dropdown">
+                <input {...bind} onBlur={handleChange} type={"text"} className="sizeDropdown__dropdown"/>
+            </form>
         </div>
     )
 }

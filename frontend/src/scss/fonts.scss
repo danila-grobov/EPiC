@@ -15,10 +15,12 @@
   font-family: 'SourceSansPro-SemiBold';
   src: url("../fonts/SourceSansPro-SemiBold.ttf");
 }
+
 $font_lack: "Lack", Fallback, sans-serif;
 $font_sanspro: "SourceSansPro", Fallback, sans-serif;
 $font_sanspro_bold: "SourceSansPro-Bold", Fallback, sans-serif;
 $font_sanspro_semibold: "SourceSansPro-SemiBold", Fallback, sans-serif;
+
 %regularText_lack {
   font-family: $font_lack;
   font-size: 16px;

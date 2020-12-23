@@ -1,5 +1,6 @@
 @import "colors";
 @import "fonts";
+
 .searchArea {
     background: white;
     width: auto;
@@ -32,7 +33,6 @@
     width: 17px;
     height: 17px;
 }
-
 .searchInput__input {
     @extend %regularText_lack;
     grid-row:1;
@@ -55,4 +55,3 @@
 .searchPhrase__remove {
     cursor: pointer;
 }
-

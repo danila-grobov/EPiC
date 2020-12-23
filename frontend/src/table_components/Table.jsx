@@ -5,7 +5,6 @@ import TableContent from "./TableContent";
 import TableButtons from "./TableButtons";
 import TableNavigation from "./TableNavigation";
 import InvitePopup from "./InvitePopup";
-
 export default () => {
     const [popupState, setPopupState] = useState(false);
     return (

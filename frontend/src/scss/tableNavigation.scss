@@ -1,5 +1,6 @@
 @import "colors";
 @import "fonts";
+
 .tableNavigation {
   background: white;
   height: 42px;
@@ -68,7 +69,6 @@
   color: $text;
   font-family: $font_sanspro;
 }
-
 .sizeDropdown__dropdown {
   grid-row: 1;
   border-radius: 5px;

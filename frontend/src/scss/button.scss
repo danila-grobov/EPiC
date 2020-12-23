@@ -12,7 +12,6 @@
   border-style: solid;
   cursor: pointer;
 }
-
 .button--secondary {
   @extend %button;
   background: none;
@@ -29,4 +28,3 @@
   color: #6EB3CB;
   font-family: $font_lack;
 }
-
