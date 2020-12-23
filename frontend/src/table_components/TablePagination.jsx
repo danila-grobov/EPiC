@@ -13,19 +13,23 @@ const getNumberRange = (from, to) => {
 }
 const getOrderedPages = (currentPage, pageCount) => {
     let nOfPagesAfter = pageCount - currentPage;
-    let nOfPagesBefore = currentPage - 1;
-    let pagesMissingAfter = Math.max(0, 2 - nOfPagesBefore);
-    let pagesMissingBefore = Math.max(0, 2 - nOfPagesAfter);
-
-    const addAfter = Math.min(2,nOfPagesAfter) + pagesMissingAfter;
-    const addBefore = Math.min(2,nOfPagesBefore) + pagesMissingBefore;
-    const numbersBeforeCurr = getNumberRange(currentPage - addBefore, currentPage - 1);
-    const numbersAfterCurr = getNumberRange(currentPage+1, currentPage+addAfter);
-    return [...numbersBeforeCurr,currentPage,...numbersAfterCurr];
+    let nOfPagesBefore = Math.max(0, currentPage - 1);
+    nOfPagesBefore = Math.min(nOfPagesBefore, 2);
+    nOfPagesAfter = Math.min(nOfPagesAfter, 2);
+    if (nOfPagesBefore < 2) {
+        nOfPagesAfter += 2 - nOfPagesBefore;
+    }
+    if (nOfPagesAfter < 2) {
+        nOfPagesBefore += 2 - nOfPagesAfter;
+    }
+    const numbersBeforeCurr = getNumberRange(Math.max(1, currentPage - nOfPagesBefore), currentPage - 1);
+    const numbersAfterCurr = getNumberRange(currentPage + 1, Math.min(pageCount, currentPage + nOfPagesAfter));
+    return [...numbersBeforeCurr, currentPage, ...numbersAfterCurr];
 }
 export default props => {
-    const {rowCount, total, currentPage, setCurrentPage} = props;
+    const {rowCount, total, setCurrentPage} = props;
     const pageCount = Math.ceil(total / rowCount);
+    const currentPage = Math.min(Math.max(props.currentPage, 1), pageCount);
     const moveCurrPage = dir => {
         let newPage = currentPage + dir;
         if (newPage > pageCount) newPage = pageCount;
