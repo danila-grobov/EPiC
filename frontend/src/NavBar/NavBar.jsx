@@ -11,9 +11,8 @@ import NavBar_Dropdown from "./NavBar_Dropdown";
 export default () => {
     return (
        <div className="menuBase">
-
            <div className = "navDropdown">
-               <NavBar_Dropdown/>
+               
            </div>
            <div className="navMainMenu">
            </div>

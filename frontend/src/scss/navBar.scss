@@ -5,28 +5,24 @@
     width: auto;
     height: 61px;
     display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 151px auto;
+    column-gap: 10px;
     z-index: 2;
     top: 20px;
-    position: fixed;
+    position: sticky;
 
 }
 
 .navDropdown{
     background: white;
-    position: fixed;
-    width: 151px;
-    height: 61px;
-    top: 20px;
     border-radius: 3.54167px;
+
 }
 
 .navMainMenu{
     background: white;
-    position: fixed;
-    width: 1039px;
-    height: 61px;
     border-radius: 5px;
-    top: 20px;
-    right: 100px;
+
 
 }

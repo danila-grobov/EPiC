@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import "../scss/navBarDropdown.scss"
+//import drownDownArrow from "../imgs/downArrow.svg"
+
+//<img src={dropDownArrow} alt="Dropdown icon" className="dropdown__icon"/>
 
 //Controls the drop down, will include all of the functionality for that and what not.
 export default () => {
     return (
-        <div className= "navDropdown">
-
-        </div>
+      <div></div>
     )}
