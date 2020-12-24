@@ -5,7 +5,6 @@
     width: auto;
     height: 61px;
     display: grid;
-    grid-auto-flow: column;
     grid-template-columns: 151px auto;
     column-gap: 10px;
     z-index: 2;
@@ -16,7 +15,13 @@
 
 .navDropdown{
     background: white;
-    border-radius: 3.54167px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: auto 14px;
+    column-gap: 13px;
+    padding-right: 24px;
+    padding-left: 18px;
+    align-items: center;
 }
 
 .navMainMenu{
@@ -26,11 +31,13 @@
 }
 
 .dropdown__icon{
-    position: relative;
+
     width: 14px;
-    height: 8px;
-    top: 19px;
-    left: 119px;
 
-
+}
+.courseName{
+    font-family: $font_sanspro_semibold;
+    color: $text;
+    font-size: 20px;
+    text-align: center;
 }

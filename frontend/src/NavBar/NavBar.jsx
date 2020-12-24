@@ -8,12 +8,13 @@ import dropDownArrow from "../imgs/downArrow.svg"
 //NavMainMenu = the section on the right, that contains the logo the links to other pages and for admin, their profile,
 //a toggle button
 
-export default () => {
-    const course = "CSC2033";
+export default (props) => {
+    const {course} = props;
 
     return (
        <div className="menuBase">
-           <div className = "navDropdown" course = {course}>
+           <div className = "navDropdown">
+               <span className="courseName">{course}</span>
                <img src={dropDownArrow} alt="Dropdown icon" className="dropdown__icon"/>
            </div>
            <div className="navMainMenu">
