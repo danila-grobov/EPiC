@@ -18,13 +18,15 @@
   height: 40px;
   padding-left: 26px;
   padding-right: 10px;
+  cursor: text;
   position: relative;
 }
 .textInput--error {
   border-color: $red_strong;
 }
-.textInput__input {
-  width: auto;
+.textInput__input, .textInput__helper {
+  width: max-content;
+  min-width: 1px;
   height: 40px;
   line-height: 40px;
   color: $text;
@@ -33,6 +35,20 @@
   outline: none;
   border: none;
   background: none;
+}
+.textInput__widthDonor {
+  width: max-content;
+  line-height: 40px;
+  color: $text;
+  font-size: 20px;
+  visibility: hidden;
+  font-family: $font_sanspro;
+  position: absolute;
+  top: -100vh;
+}
+.textInput__helper {
+  opacity: 0.5;
+  margin-left: -2px;
 }
 .textInput__label, .textInput__label--focused {
   width: min-content;

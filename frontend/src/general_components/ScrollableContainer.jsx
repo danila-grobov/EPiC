@@ -6,7 +6,7 @@ export default props => {
     const {className, children} = props;
 
     return (
-        <PerfectScrollbar options={{wheelSpeed: 0.5, wheelPropagation: false}} className={className}>
+        <PerfectScrollbar options={{wheelSpeed: 0.5, wheelPropagation: false, minScrollbarLength: 20}} className={className}>
             {children}
         </PerfectScrollbar>
     )
