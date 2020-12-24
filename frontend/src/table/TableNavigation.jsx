@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import "../scss/tableNavigation.scss";
+import "../scss/table/tableNavigation.scss";
 import TablePagination from "./TablePagination";
 import TableSizeSelector from "./TableSizeSelector";
 export default () => {

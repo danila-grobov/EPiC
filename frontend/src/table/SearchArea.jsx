@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import "../scss/searchArea.scss"
+import "../scss/table/searchArea.scss"
 import searchIcon from "../imgs/search.svg"
 import SearchPhrase from "./SearchPhrase";
 import Input from "../general_components/Input";

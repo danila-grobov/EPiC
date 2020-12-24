@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import "../scss/table.scss"
+import "../scss/table/table.scss"
 import SearchArea from "./SearchArea";
 import TableContent from "./TableContent";
 import TableButtons from "./TableButtons";

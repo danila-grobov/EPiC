@@ -1,5 +1,5 @@
 import React from "react"
-import "../scss/row.scss"
+import "../scss/table/row.scss"
 import checkbox from "../imgs/checkbox.svg"
 import checkbox__checked from "../imgs/checkbox__checked.svg"
 import checkbox__partial from "../imgs/checkbox_partial.svg"

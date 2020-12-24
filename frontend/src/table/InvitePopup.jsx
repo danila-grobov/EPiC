@@ -1,5 +1,5 @@
 import React, {useState, useRef,useEffect} from "react"
-import "../scss/invitePopup.scss"
+import "../scss/table/invitePopup.scss"
 import remove_dark from "../imgs/remove__dark.svg"
 import Input from "../general_components/Input";
 import Button from "../general_components/Button";

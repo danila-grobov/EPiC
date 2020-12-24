@@ -45,7 +45,8 @@ module.exports = {
     resolve: {
         //Extensions that can be used as modules
         //import "file.js" is an example of .js
-        extensions: ["*", ".js", ".jsx"]
+        extensions: ["*", ".js", ".jsx"],
+        modules: [path.resolve(__dirname,"frontend/src"),"node_modules"]
     },
     output: {
         path: path.resolve(__dirname, "dist/"),

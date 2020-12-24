@@ -1,5 +1,5 @@
 import React from "react"
-import "../scss/tableButtons.scss"
+import "../scss/table/tableButtons.scss"
 export default props => {
     const {icon, title, onClick} = props;
     return (
