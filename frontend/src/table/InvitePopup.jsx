@@ -27,7 +27,7 @@ export default props => {
                 </div>
                 <div className="invitePopup__content">
                     <FancyInput label={"Email"} className={"invitePopup__input"}
-                           type={"email"} onSubmit={addInvite} charLimit={30}/>
+                                type={"email"} onSubmit={addInvite} charLimit={30}/>
                     <FileInput setFileData={setInvites}
                                successMessage={"The emails have been successfully uploaded."}
                                button={<Button height={38} className={"invitePopup__importButton"}
