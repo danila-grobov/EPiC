@@ -1,8 +1,8 @@
 import React from "react";
-import useInput from "../hooks/useInput";
+import useValue from "../hooks/useValue";
 export default props => {
     const {rowCount,setRowCount,total} = props;
-    const {bind,value:inputValue,setValue} = useInput(rowCount,2);
+    const {bind,value:inputValue,setValue} = useValue(rowCount);
     const handleChange = event => {
         let value = inputValue;
         if( isNaN(value)) value = 3
@@ -18,7 +18,8 @@ export default props => {
                 {"Listings per page"}
             </span>
             <form onSubmit={e => {e.preventDefault(); handleChange(e)}} className="sizeDropdown__dropdown">
-                <input {...bind} onBlur={handleChange} type={"text"} className="sizeDropdown__dropdown"/>
+                <input {...bind} onBlur={handleChange} maxLength={2}
+                       type={"text"} className="sizeDropdown__dropdown"/>
             </form>
         </div>
     )
