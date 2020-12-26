@@ -14,7 +14,7 @@ const App = () => {
 
     return (
         <div className="app">
-            <NavBar course={course} epic={epic} pages={pages} name={name} teacher={teacher} admin{admin}/>
+            <NavBar course={course} epic={epic} pages={pages} name={name} teacher={teacher} admin={admin}/>
             <Table/>;
         </div>
     );
