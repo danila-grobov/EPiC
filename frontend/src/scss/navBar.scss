@@ -24,20 +24,94 @@
     align-items: center;
 }
 
-.navMainMenu{
-    background: white;
-    border-radius: 5px;
-
-}
-
 .dropdown__icon{
 
     width: 14px;
 
 }
+
+.navMainMenu{
+    background: white;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 135px auto;
+    align-items: center;
+
+}
+.epicLogo{
+    font-family: $font_sanspro_semibold;
+    color: $text;
+    font-size: 36px;
+    text-align: center;
+}
+
 .courseName{
     font-family: $font_sanspro_semibold;
     color: $text;
     font-size: 20px;
+    text-align: center;
+}
+
+
+.innerMenu{
+    display: flex;
+    column-gap: 18px;
+    justify-self: right;
+    align-items: center;
+    padding-right: 26px;
+}
+
+.pages{
+    display: flex;
+    column-gap: 14px;
+
+}
+
+.pageName{
+    font-family: $font_sanspro_bold;
+    color: $text;
+    font-size: 14px;
+    text-align: center;
+}
+
+.separator{
+    border-left: solid 2px $text_secondary;
+    width: 0;
+    height: 24px;
+}
+
+
+.userName{
+    font-family: $font_sanspro_bold;
+    color: $text;
+    font-size: 14px;
+    text-align: center;
+}
+
+.profile__icon{
+    width: 32px;
+    height: 32px;
+}
+
+.toggleButton{
+    background: #B3D7E5;
+    width: 162px;
+    height: 32px;
+    border-radius: 25px;
+    display: flex;
+
+}
+
+.teacher{
+    font-family: $font_lack;
+    color: $text_secondary;
+    font-size: 12px;
+    text-align: center;
+}
+
+.admin{
+    font-family: $font_lack;
+    color: white;
+    font-size: 12px;
     text-align: center;
 }
