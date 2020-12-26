@@ -11,14 +11,15 @@ PRIMARY KEY(Username)
 );
 
 CREATE TABLE Students (
-Username varchar(50) NOT NULL,
-Pwd varchar(200) NOT NULL,
-Firstname varchar(50) NOT NULL,
-Lastname varchar(50) NOT NULL,
-Email varchar(50) NOT NULL,
-Skill varchar(15) NOT NULL,
-StudentType varchar(20) NOT NULL,
-Gender varchar(5) NOT NULL,
+Username varchar(50),
+Pwd varchar(200),
+Firstname varchar(50),
+Lastname varchar(50),
+Email varchar(50),
+Skill varchar(15),
+StudentType varchar(20),
+Gender varchar(5),
+InviteStatus varchar(50) NOT NULL,
 PRIMARY KEY(Username)
 );
 

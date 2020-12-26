@@ -1,13 +1,12 @@
-import React, {useState, useRef,useEffect} from "react"
+import React, {useState} from "react"
 import "../scss/table/invitePopup.scss"
 import remove_dark from "../imgs/remove__dark.svg"
-import Input from "../general_components/Input";
 import Button from "../general_components/Button";
 import SearchPhrase from "./SearchPhrase";
-import useInput from "../hooks/useInput";
 import FileInput from "../general_components/FileInput";
 import ScrollableContainer from "../general_components/ScrollableContainer";
 import FancyInput from "../general_components/FancyInput";
+import axios from "axios";
 
 export default props => {
     const {closePopup} = props;
@@ -17,6 +16,18 @@ export default props => {
     const getInviteElements = () => invites.map((invite, index) =>
         <SearchPhrase index={index} key={index} value={invite} onDelete={deleteInvite}/>
     ).reverse();
+    const [loadState, setLoadState] = useState("idle");
+    const sendInvites = () => {
+        setLoadState("loading")
+        axios.post('/api/students', invites)
+            .then(function (response) {
+                setTimeout(() => setLoadState("done"), 500);
+                setTimeout(() => setLoadState("idle"), 1500);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
     return (
         <div className="invitePopup__wrapper">
             <div className="invitePopup__background" onClick={closePopup}/>
@@ -38,8 +49,8 @@ export default props => {
                         {invites.length !== 0 ? getInviteElements() :
                             <span className="invitePopup__emptyList">{"No students in the invite list."}</span>}
                     </ScrollableContainer>
-                    <Button height={38} className={"invitePopup__inviteButton"} label={"Invite students"}
-                            type={"primary"}/>
+                    <Button height={38} width={133} className={"invitePopup__inviteButton"} label={"Invite students"}
+                            type={"primary"} onClick={sendInvites} status={loadState}/>
                 </div>
             </div>
         </div>
