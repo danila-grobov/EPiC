@@ -9,7 +9,9 @@ export default props => {
     const cells = values.map(({value, type}, index) => {
             const visibility = values.length - 1 === index || type === "title" ? "--hidden" : "";
             return [
-                <span key={"row_cell" + index} className={`row__cell row__cell--${type}`}>{value}</span>,
+                <span key={"row_cell" + index} className={`row__cell row__cell--${type}`}>
+                    {value === null ? "--" : value}
+                </span>,
                 <div key={"row__cellSeparator" + index} className={`row__cellSeparator${visibility}`}/>
             ]
         }

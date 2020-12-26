@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import useValue from "../hooks/useValue";
 export default props => {
     const {rowCount,setRowCount,total} = props;
     const {bind,value:inputValue,setValue} = useValue(rowCount);
+    useEffect(() => {
+        setValue(rowCount);
+    },[rowCount])
     const handleChange = event => {
         let value = inputValue;
         if( isNaN(value)) value = 3

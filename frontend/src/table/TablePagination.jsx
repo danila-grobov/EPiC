@@ -3,6 +3,7 @@ import arrow from "../imgs/arrow.svg";
 import arrow_d from "../imgs/arrow_disabled.svg";
 import doubleArrow from "../imgs/doubleArrow.svg";
 import doubleArrow_d from "../imgs/doubleArrow_disabled.svg";
+import {useLayoutEffect} from "react";
 
 const getNumberRange = (from, to) => {
     if (from <= to) {
@@ -28,19 +29,23 @@ const getOrderedPages = (currentPage, pageCount) => {
     const numbersAfterCurr = getNumberRange(
         currentPage + 1,
         Math.min(pageCount, currentPage + nOfPagesAfter));
-    return [...numbersBeforeCurr, currentPage, ...numbersAfterCurr];
+    return [...numbersBeforeCurr, currentPage, ...numbersAfterCurr].slice(0,5);
 }
 export default props => {
-    const {rowCount, total, setCurrentPage} = props;
+    const {rowCount, total, setCurrentPage, currentPage} = props;
     const pageCount = Math.ceil(total / rowCount);
-    // Make sure that the current page is within limits
-    const currentPage = Math.min(Math.max(props.currentPage, 1), pageCount);
     const moveCurrPage = dir => {
         let newPage = currentPage + dir;
         if (newPage > pageCount) newPage = pageCount;
         if (newPage < 1) newPage = 1;
         setCurrentPage(newPage);
     }
+    useLayoutEffect( () => {
+        console.log(currentPage);
+        if(currentPage > pageCount && pageCount !== 0) {
+            setCurrentPage(pageCount)
+        }
+    },[rowCount])
     return (
         <div className="tablePagination">
             <img src={currentPage === 1 ? doubleArrow_d : doubleArrow}
@@ -50,13 +55,14 @@ export default props => {
                  alt="left arrow" className="tablePagination__arrow--left"
                  onClick={() => moveCurrPage(-1)}/>
             {
+                total > 0 ?
                 getOrderedPages(currentPage, pageCount).map((pageN, index) =>
                     <span key={index}
                           className={`tablePagination__pageNumber${pageN === currentPage ? "--current" : ""}`}
                           onClick={() => setCurrentPage(pageN)}>
                         {pageN}
                     </span>
-                )
+                ) : ""
             }
             <img src={currentPage === pageCount ? arrow_d : arrow}
                  alt="right arrow" className="tablePagination__arrow"

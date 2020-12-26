@@ -24,7 +24,6 @@ const emailTransporter = mailer.createTransport({
     auth: emailCredentials
 });
 configExpress(app);
-
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -35,7 +34,15 @@ app.post('/api/students', (req, res) => {
     })
     sendDataToDB("Students", invitesWithTokens).then(() => res.send());
 })
-
+app.get('/api/students', ((req, res) => {
+    const {offset, count} = req.query;
+    getStudentsFromDB(count, offset).then(students => {
+        res.send(formatStudentArray(students.fetchAll()))
+    });
+}))
+app.get('/api/students/count',((req, res) => {
+    getNumberOfStudents().then(count => res.send({count}));
+}))
 function configExpress(app) {
     app.use(express.static(path.join(__dirname, '../dist')));
     app.engine('.html', require('ejs').__express);
@@ -55,22 +62,28 @@ function configExpress(app) {
     })
 }
 
-function sendDataToDB(tableName, data) {
+function getDBSession(callback) {
     return mysqlx
         .getSession(dbCredentials)
         .then(session => {
-            const table = session.getSchema("EPiC").getTable(tableName);
-            return Promise.all(data.map(element => {
-                table
-                    .insert(Object.keys(element))
-                    .values(Object.values(element))
-                    .execute();
-                return emailMessage(domainName + "register/" + element.Username, element.Email);
-            }));
+            return callback(session);
         })
         .catch(err => {
             console.log(err)
         });
+}
+
+function sendDataToDB(tableName, data) {
+    return getDBSession(session => {
+        const table = session.getSchema("EPiC").getTable(tableName);
+        return Promise.all(data.map(element => {
+            table
+                .insert(Object.keys(element))
+                .values(Object.values(element))
+                .execute();
+            return emailMessage(domainName + "register/" + element.Username, element.Email);
+        }));
+    })
 }
 
 function emailMessage(message, email) {
@@ -80,5 +93,42 @@ function emailMessage(message, email) {
             to: email,
             subject: "Your registration link",
             text: message
-        },(err,info) => err ? reject(err) : resolve(info)));
+        }, (err, info) => err ? reject(err) : resolve(info)));
+}
+
+function getStudentsFromDB(count, offset) {
+    return getDBSession(session => {
+        const table = session.getSchema("EPiC").getTable("Students");
+        return table
+            .select("Firstname", "Lastname", "Username", "Email", "InviteStatus")
+            .limit(count)
+            .offset(offset)
+            .execute();
+    })
+}
+
+function formatStudentArray(array) {
+    const header = [
+        {value: "First name", type: "title"},
+        {value: "Last name", type: "title"},
+        {value: "Username",type:"title"},
+        {value: "Email", type: "title"},
+        {value: "Status", type: "title"}
+    ];
+    const valuesWithType = array.map(valueArray => valueArray.map((value,index) => {
+        const type =
+            index !== 4 ? "text" :
+            value === "waiting" ? "warning" :
+            value === "accepted" ? "info" :
+            value === "canceled" ? "danger" : "";
+        return {value, type}
+    }));
+    return [header, ...valuesWithType]
+}
+
+function getNumberOfStudents() {
+    return getDBSession(session => {
+        const table = session.getSchema("EPiC").getTable("Students");
+        return table.count();
+    })
 }
