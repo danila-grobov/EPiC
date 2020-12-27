@@ -109,10 +109,6 @@ a.middle:hover:before {
     transform: scaleX(1);
 }
 
-.pageName:hover{
-
-}
-
 .separator{
     border-left: solid 2px $text_secondary;
     width: 0;
@@ -138,9 +134,8 @@ a.middle:hover:before {
     border-radius: 25px;
     padding-right: 10px;
     padding-left: 10px;
-
-
 }
+
 .switch{
     position: relative;
     display: inline-block;
@@ -193,9 +188,9 @@ input:checked + .slider:before {
     -webkit-transform: translateX(78px);
     -ms-transform: translateX(78px);
     transform: translateX(78px);
+    background-color: #F28F38;
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 25px;
 }
