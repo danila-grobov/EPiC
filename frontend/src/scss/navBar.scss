@@ -1,6 +1,8 @@
 @import "colors";
 @import "fonts";
 
+$animate: all 0.2s ease-in-out;
+
 .menuBase{
     width: auto;
     height: 61px;
@@ -61,17 +63,54 @@
     padding-right: 26px;
 }
 
-.pages{
+.pages {
     display: flex;
-    column-gap: 14px;
-
 }
 
-.pageName{
+.pageName {
     font-family: $font_sanspro_bold;
     color: $text;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
+}
+
+ul{
+    list-style-type: none;
+
+    li {
+        display: inline-block;
+        margin: 0 14px;
+    }
+}
+a:link {
+    text-decoration: none;
+}
+
+a.middle
+{
+    position: relative;
+}
+
+a.middle:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #6EB3CB;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+a.middle:hover:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+.pageName:hover{
+
 }
 
 .separator{
@@ -84,7 +123,7 @@
 .userName{
     font-family: $font_sanspro_bold;
     color: $text;
-    font-size: 14px;
+    font-size: 15px;
     text-align: center;
 }
 
@@ -94,28 +133,88 @@
 }
 
 .toggleButton{
-    background: #B3D7E5;
     width: 162px;
     height: 32px;
     border-radius: 25px;
-    display: flex;
-    align-items: center;
-    column-gap: 35px;
     padding-right: 10px;
     padding-left: 10px;
 
+
 }
+.switch{
+    position: relative;
+    display: inline-block;
+    width: 162px;
+    height: 32px;
+}
+
+/* Hide default HTML checkbox */
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #B3D7E5;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 77px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #6EB3CB;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+
+input:checked + .slider {
+    background-color: #F9C99F;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #F9C99F;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(78px);
+    -ms-transform: translateX(78px);
+    transform: translateX(78px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 25px;
+}
+
+.slider.round:before {
+    border-radius: 25px;
+}
+
 
 .teacher{
     font-family: $font_lack;
     color: white;
     font-size: 14px;
-    text-align: center;
+
 }
 
 .admin{
     font-family: $font_lack;
     color: $text_secondary;
     font-size: 14px;
-    text-align: center;
+
 }

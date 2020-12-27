@@ -27,9 +27,12 @@ export default (props) => {
 
                 <div className="innerMenu">
                     <div className= "pages">
-                        {pages.map((page) =>
-                            <span className="pageName">{page}</span>
-                        )}
+                        <ul>
+                            {pages.map((page) =>
+                               <li><a href="#" className="pageName middle">{page}</a></li>
+                            )}
+                        </ul>
+
                     </div>
 
                     <div className="separator"/>
@@ -38,8 +41,11 @@ export default (props) => {
                     <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
 
                     <div className="toggleButton">
-                        <span className="teacher">{teacher}</span>
-                        <span className="admin">{admin}</span>
+                        <label className="switch">
+                            <input type="checkbox"></input>
+                            <span className="slider round"></span>
+                        </label>
+
                     </div>
 
                 </div>
