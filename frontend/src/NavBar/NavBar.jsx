@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import "../scss/navBar.scss"
+import NavBar_Dropdown from "./NavBar_Dropdown";
 import dropDownArrow from "../imgs/downArrow.svg"
 import profilePhoto from "../imgs/profilePhoto.svg"
 //controls all of the nav bar.
@@ -11,18 +12,14 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 
 export default (props) => {
     const {course, epic, pages, name, teacher, admin} = props;
+    const [isAdmin, setisAdmin] = useState(false);
 
     return (
         <div className="menuBase">
-            <div className="navDropdown">
-                <span className="courseName">{course}</span>
-                <img src={dropDownArrow} alt="Dropdown icon" className="dropdown__icon"/>
-            </div>
 
-
+            <NavBar_Dropdown course={course}/>
 
             <div className="navMainMenu">
-
                 <span className="epicLogo"> {epic}</span>
 
                 <div className="innerMenu">
@@ -41,10 +38,15 @@ export default (props) => {
                     <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
 
                     <div className="toggleButton">
+
                         <label className="switch">
-                            <input type="checkbox"></input>
+                            <input type="checkbox"  onClick={ ()=> setisAdmin(!isAdmin)}></input>
                             <span className="slider round"></span>
                         </label>
+                        <div className="links">
+                            <span className={!isAdmin ? "linkActive": "linkNotActive"}>{teacher}</span>
+                            <span className={!isAdmin ? "linkNotActive": "linkActive"}>{admin}</span>
+                        </div>
 
                     </div>
 

@@ -129,11 +129,11 @@ a.middle:hover:before {
 }
 
 .toggleButton{
+    position: relative;
     width: 162px;
     height: 32px;
     border-radius: 25px;
-    padding-right: 10px;
-    padding-left: 10px;
+
 }
 
 .switch{
@@ -166,10 +166,11 @@ a.middle:hover:before {
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
+    height: 28px;
     width: 77px;
-    left: 4px;
-    bottom: 4px;
+    left: 2px;
+    bottom: 2px;
+    top: 2px;
     background-color: #6EB3CB;
     -webkit-transition: .4s;
     transition: .4s;
@@ -185,9 +186,8 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(78px);
-    -ms-transform: translateX(78px);
-    transform: translateX(78px);
+
+    transform: translateX(81px);
     background-color: #F28F38;
 }
 
@@ -199,17 +199,32 @@ input:checked + .slider:before {
     border-radius: 25px;
 }
 
+.links{
+    position: absolute;
+    display: grid;
+    grid-template-columns: min-content min-content;
+    column-gap: 35px;
+    padding-left: 8px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    pointer-events: none;
 
-.teacher{
-    font-family: $font_lack;
-    color: white;
-    font-size: 14px;
 
 }
 
-.admin{
+.linkActive{
+    font-family: $font_lack;
+    color: white;
+    font-size: 12px;
+
+}
+
+.linkNotActive{
     font-family: $font_lack;
     color: $text_secondary;
-    font-size: 14px;
+    font-size: 12px;
+
 
 }
