@@ -9,7 +9,7 @@ import FancyInput from "../general_components/FancyInput";
 import axios from "axios";
 
 export default props => {
-    const {closePopup} = props;
+    const {closePopup, course} = props;
     const [invites, setInvites] = useState([]);
     const addInvite = invite => setInvites([...invites, invite]);
     const deleteInvite = index => setInvites([...invites.slice(0, index), ...invites.slice(index + 1)]);
@@ -19,7 +19,7 @@ export default props => {
     const [loadState, setLoadState] = useState("idle");
     const sendInvites = () => {
         setLoadState("loading")
-        axios.post('/api/students', invites)
+        axios.post('/api/students', {invites,course})
             .then(function (response) {
                 setTimeout(() => setLoadState("done"), 500);
                 setTimeout(() => setLoadState("idle"), 1500);

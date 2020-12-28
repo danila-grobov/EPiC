@@ -41,7 +41,6 @@ export default props => {
         setCurrentPage(newPage);
     }
     useLayoutEffect( () => {
-        console.log(currentPage);
         if(currentPage > pageCount && pageCount !== 0) {
             setCurrentPage(pageCount)
         }

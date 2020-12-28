@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
     return (
         <div className="app">
-            <Table/>
+            <Table course={"CSC2033"}/>
             <ToastContainer />
         </div>
     );

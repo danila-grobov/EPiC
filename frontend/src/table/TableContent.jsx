@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react"
 import Row from "./Row";
 import axios from "axios";
 
-export default ({rowCount, currentPage}) => {
+export default ({data}) => {
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
     const tickCheckbox = index => {
         if (selectedCheckboxes.includes(index)) {
@@ -28,11 +28,6 @@ export default ({rowCount, currentPage}) => {
             return "none"
         return "partial"
     }
-    const [data,setData] = useState([]);
-    useEffect(
-        () => getStudentData(rowCount, (currentPage - 1) * rowCount,res => setData(res.data)),
-        [rowCount,currentPage]
-    );
     const dataRows = data.map((rowData, index) => {
         if (index === 0)
             return (<Row key={index} rowType={"header"} values={rowData}
@@ -53,9 +48,4 @@ export default ({rowCount, currentPage}) => {
             }
         </div>
     )
-}
-function getStudentData(count, offset, callback) {
-    axios
-        .get("/api/students", {params: {count, offset}})
-        .then(callback);
 }

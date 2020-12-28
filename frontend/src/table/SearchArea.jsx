@@ -4,8 +4,7 @@ import searchIcon from "../imgs/search.svg"
 import SearchPhrase from "./SearchPhrase";
 import Input from "../general_components/Input";
 
-export default () => {
-    const [filters, setFilters] = useState([]);
+export default ({filters, setFilters}) => {
     const handleFilterDelete = index => {
         setFilters([
             ...filters.slice(0, index),
@@ -21,8 +20,20 @@ export default () => {
             </div>
             {
                 filters.map((filter, index) =>
-                    <SearchPhrase key={index} value={filter} index={index} onDelete={handleFilterDelete}/>)
+                    <SearchPhrase key={index} value={formatFilter(filter)} index={index}
+                                  onDelete={handleFilterDelete}/>)
             }
         </div>
     )
+}
+
+function formatFilter(filter) {
+    const filterSplit = filter.split(" || ");
+    const finalFilter = [];
+    filterSplit.map((filter, index) => {
+        finalFilter.push(filter);
+        if (index !== filterSplit.length - 1)
+            finalFilter.push(<span key={"or--" + index} className="searchPhrase__or">{"or"}</span>);
+    })
+    return finalFilter
 }

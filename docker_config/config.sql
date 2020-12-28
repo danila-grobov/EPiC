@@ -25,6 +25,7 @@ PRIMARY KEY(Username)
 
 CREATE TABLE Courses(
 CourseName varchar(10) NOT NULL,
+Color varchar(20) NOT NULL,
 PRIMARY KEY(CourseName)
 );
 
