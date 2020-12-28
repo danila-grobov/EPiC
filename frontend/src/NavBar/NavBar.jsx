@@ -14,13 +14,13 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 //toggle button for teachers/admins
 
 export default (props) => {
-    const {course, epic, pages, name, teacher, admin} = props;
+    const {courses, epic, pages, name, teacher, admin} = props;
     const [isAdmin, setisAdmin] = useState(false);
 
     return (
         <div className="menuBase">
 
-            <NavBar_Dropdown course={course}/>
+            <NavBar_Dropdown courses={courses}/>
 
             <div className="navMainMenu">
                 <span className="epicLogo"> {epic}</span>
