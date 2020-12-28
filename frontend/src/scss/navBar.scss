@@ -19,11 +19,12 @@ $animate: all 0.2s ease-in-out;
     background: white;
     border-radius: 5px;
     display: grid;
-    grid-template-columns: auto 14px;
-    column-gap: 13px;
-    padding-right: 24px;
-    padding-left: 18px;
+    grid-template-columns: auto 20px;
     align-items: center;
+    padding-left: 10px;
+    padding-right: 18px;
+    border: none;
+    cursor: pointer;
 }
 
 .dropdown__icon{

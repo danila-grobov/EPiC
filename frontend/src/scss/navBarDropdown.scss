@@ -1,3 +1,22 @@
 @import "colors";
 @import "fonts";
 
+.dropbtn {
+  color: #475356;
+  font-family: $font_sanspro_semibold;
+  font-size: 20px;
+  background-color: white;
+  width: 100px;
+  height: 61px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 5px;
+  outline: none;
+}
+.dropbtn-2{
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  outline: none;
+}

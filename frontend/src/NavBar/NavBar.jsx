@@ -6,9 +6,12 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
-//NavDropdown = the section on the left that lets teachers/admin decide which module they're looking at
+
 //NavMainMenu = the section on the right, that contains the logo the links to other pages and for admin, their profile,
 //a toggle button
+
+//innerMenu = section to the farther right, contains user's available pages, separator, profile, profile picture, and
+//toggle button for teachers/admins
 
 export default (props) => {
     const {course, epic, pages, name, teacher, admin} = props;
@@ -29,7 +32,6 @@ export default (props) => {
                                <li><a href="#" className="pageName middle">{page}</a></li>
                             )}
                         </ul>
-
                     </div>
 
                     <div className="separator"/>
