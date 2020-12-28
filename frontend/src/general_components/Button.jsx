@@ -12,7 +12,8 @@ export default props => {
             <>
                 <span className="button__label">{"Success!"}</span>
                 <img src={checkmark} alt="checkmark" className="button__icon"/>
-            </> : "";
+            </> :
+        status === "error" ? <span className="button__label">{"Failure!"}</span> : "";
     return (
         <div className={className} style={{height, width}} onClick={onClick}>
             {content}

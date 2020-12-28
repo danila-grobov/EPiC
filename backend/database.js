@@ -1,4 +1,4 @@
-import mysqlx from "@mysql/xdevapi";
+    import mysqlx from "@mysql/xdevapi";
 const dbCredentials = {
     user: 'root',
     password: 'password',

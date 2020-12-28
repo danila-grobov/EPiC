@@ -5,7 +5,7 @@ import checkbox__checked from "../imgs/checkbox__checked.svg"
 import checkbox__partial from "../imgs/checkbox_partial.svg"
 
 export default props => {
-    const {values, rowType, tickCheckbox, selected, id} = props;
+    const {values, rowType, tickCheckbox, selected} = props;
     const cells = values.map(({value, type}, index) => {
             const visibility = values.length - 1 === index || type === "title" ? "--hidden" : "";
             return [

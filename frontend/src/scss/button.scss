@@ -57,7 +57,7 @@
   background: none;
   cursor: auto;
 }
-.button--primary--loading:after {
+.button--primary--loading:after, .button--primary--error:after {
   background: none;
 }
 .button__loading {
@@ -74,6 +74,9 @@
   .button__label {
     text-align: center;
   }
+}
+.button--primary--error {
+  background-color: $red_strong;
 }
 .button__icon {
   width: 100%;

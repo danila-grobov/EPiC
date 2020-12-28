@@ -26,7 +26,8 @@ const processFile = (event, {type, fileInput, successMessage, setFileData}) => {
                 toast.error("The file format is not valid.")
             } else {
                 setFileData(fileContent);
-                toast.success(successMessage);
+                if(successMessage)
+                    toast.success(successMessage);
             }
         } catch (error) {
             toast.error("Please upload a json file.");
@@ -39,7 +40,7 @@ const dataIsValid = (fileContent, type) => fileContent.reduce((valid, element) =
         case "emails":
             return typeof element === "string" && element.match(inputTypes["email"].regEx) && valid
         case "grades":
-            return typeof element === "object" && element.hasOwnProperty("username") &&
+            return typeof element === "object" && element.hasOwnProperty("email") &&
                 element.hasOwnProperty("grade") && valid
     }
 

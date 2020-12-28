@@ -1,9 +1,8 @@
-import React, {useState,useEffect} from "react"
+import React, {useState, useEffect} from "react"
 import Row from "./Row";
 import axios from "axios";
 
-export default ({data}) => {
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+export default ({data, selectedCheckboxes, setSelectedCheckboxes}) => {
     const tickCheckbox = index => {
         if (selectedCheckboxes.includes(index)) {
             setSelectedCheckboxes(
@@ -41,7 +40,7 @@ export default ({data}) => {
     return (
         <div className="tableContent">
             {
-                dataRows.length > 0 ? dataRows :
+                dataRows.length > 1 ? dataRows :
                     <span className="tableContent__empty">
                         {"No students in the system"}
                     </span>
