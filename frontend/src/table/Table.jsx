@@ -36,7 +36,7 @@ export default ({course}) => {
             <TableContent data={studentData} selectedCheckboxes={selectedCheckboxes}
                           setSelectedCheckboxes={setSelectedCheckboxes}/>
             <TableButtons openPopup={() => setPopupState(true)}
-                          usernames={getUsernames(selectedCheckboxes, studentData)}
+                          emails={getEmails(selectedCheckboxes, studentData)}
                           updateTable={updateTable}
                           course={course}
                           reset={() => setSelectedCheckboxes([])}
@@ -57,12 +57,12 @@ function getStudentData(params, callback) {
         .then(callback);
 }
 
-function getUsernames(selectedCheckboxes, data) {
+function getEmails(selectedCheckboxes, data) {
     return selectedCheckboxes
         .filter(id => id !== 0)
         .map(id => {
             const dataRow = data[id];
-            return dataRow ? dataRow[2].value : ""
+            return dataRow ? dataRow[3].value : ""
         })
-        .filter(username => username !== "")
+        .filter(email => email !== "")
 }

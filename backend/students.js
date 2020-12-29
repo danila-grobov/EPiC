@@ -9,25 +9,37 @@ export function addStudentsToDB(data, course) {
         session.sql("USE EPiC").execute();
         session.sql("START TRANSACTION").execute();
         session.sql("SET autocommit=0").execute();
+        const errors = [];
         return Promise.all(data.map(element => {
             return session.sql(`
                     INSERT INTO Students (${Object.keys(element).join(", ")})
                     VALUES (${getSQLValues(Object.values(element))})
-                `).execute().then(() => session.sql(`
-                    INSERT INTO Grades (Username, CourseName)
-                    VALUES ("${element.Username}", "${course}")
-                `).execute()).then(
-                    () => emailMessage(
-                        domainName + "register/" + element.Username,
-                        element.Email)
-                 ) //TODO: separate student insertion to the system and to the course.
+                `)
+                .execute()
+                // .then(
+                //     () => emailMessage(
+                //         domainName + "register/" + element.Username,
+                //         element.Email)
+                // )
+                .catch(e => {
+                    //ignore any errors regarding student invite
+                    session.sql("ROLLBACK").execute();
+                })
+                .then(() => session.sql(`
+                    INSERT INTO Grades (Email, CourseName)
+                    VALUES ("${element.Email}", "${course}")
+                `).execute())
+                .catch((error) => {
+                    if (error.message ===
+                        "Cannot add or update a child row: a foreign key constraint fails" +
+                        " (`EPiC`.`Grades`, CONSTRAINT `Grades_ibfk_2` FOREIGN KEY (`Email`)" +
+                        " REFERENCES `Students` (`Email`))")
+                        errors.push(`Could not invite student with an email "${element.Email}"`);
+                    session.sql("ROLLBACK").execute()
+                })
         })).then(() => {
-                session.sql("COMMIT;").execute();
-        })
-        .catch((error) => {
-            console.log(error.message);
-            session.sql("ROLLBACK").execute()
-            return true;
+            session.sql("COMMIT").execute();
+            return errors;
         })
     })
 }
@@ -39,7 +51,7 @@ function getSQLValues(values) {
 function getSQLBody(course, whereClause) {
     return `
         FROM Students AS s
-        JOIN Grades g ON s.Username = g.Username
+        JOIN Grades g ON s.Email = g.Email
         JOIN Courses c ON g.CourseName= c.CourseName
         WHERE c.CourseName = "${course}" ${whereClause}`;
 }
@@ -57,7 +69,7 @@ export function getStudentsFromDB({count, offset, course}, filters = []) {
             ${getSQLBody(course, whereClause)}
             LIMIT ${count} OFFSET ${offset} `;
         const countSQL = `
-            SELECT COUNT(s.Username)
+            SELECT COUNT(s.Email)
             ${getSQLBody(course, whereClause)}`;
         return Promise.all([
             session.sql(dataSQL).execute(),
@@ -73,10 +85,10 @@ export function getStudentsFromDB({count, offset, course}, filters = []) {
     )
 }
 
-export function removeStudentFromDB(usernames) {
+export function removeStudentFromDB(emails) {
     return getDBSession(session => {
         const grades = session.getSchema("EPiC").getTable("Grades");
-        const whereClause = usernames.map(username => `Username = "${username}"`).join(" OR ");
+        const whereClause = emails.map(email => `Email = "${email}"`).join(" OR ");
         return grades
             .delete()
             .where(whereClause)
@@ -87,26 +99,15 @@ export function removeStudentFromDB(usernames) {
 export function setStudentGrades({data, course}) {
     return getDBSession(session => {
         const grades = session.getSchema("EPiC").getTable("Grades");
-        session.sql("USE EPiC").execute();
-        const whereClause =
-            " AND (" + data
-                .map(({email}, index) => `s.Email = "${email}"`)
-                .join(" OR ") + ")";
-        const dataSQL = `
-            SELECT s.Username
-            ${getSQLBody(course, whereClause)}`;
-        return session.sql(dataSQL).execute().then((result) => {
-            const emails = result.fetchAll();
-            const updateObj = grades.update();
-            const promises = data.map(
-                ({grade}, index) =>
-                    updateObj
-                        .set("Grade", grade)
-                        .where(`Username = "${emails[index]}"`)
-                        .execute()
-            )
-            return Promise.all(promises);
-        })
+        const updateObj = grades.update();
+        const promises = data.map(
+            ({grade, email}) =>
+                updateObj
+                    .set("Grade", grade)
+                    .where(`Email = "${email}"`)
+                    .execute()
+        )
+        return Promise.all(promises);
     })
 }
 

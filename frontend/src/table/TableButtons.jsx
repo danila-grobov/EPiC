@@ -10,13 +10,13 @@ import {stringify} from "qs";
 import {toast} from "react-toastify";
 
 export default props => {
-    const {openPopup, usernames, updateTable, reset, course} = props;
+    const {openPopup, emails, updateTable, reset, course} = props;
     const [fileData, setFileData] = useState([]);
     useEffect(() => setGrades(fileData, course), [fileData])
     return (
         <div className="tableButtons">
             <TableButton icon={remove} title={"remove selected"}
-                         onClick={() => removeFromCourse(usernames, updateTable, reset)}/>
+                         onClick={() => removeFromCourse(emails, updateTable, reset)}/>
             <TableButton onClick={openPopup} icon={add} title={"invite student"}/>
             <FileInput setFileData={setFileData}
                        button={<TableButton icon={upload} title={"import grades"}/>}
@@ -26,11 +26,11 @@ export default props => {
     )
 }
 
-function removeFromCourse(usernames, updateTable, reset) {
-    if (usernames.length !== 0)
+function removeFromCourse(emails, updateTable, reset) {
+    if (emails.length !== 0)
         axios
             .delete('api/students', {
-                params: {usernames},
+                params: {emails},
                 paramsSerializer: params => stringify(params)
             })
             .then(() => {

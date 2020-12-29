@@ -7,12 +7,14 @@ import FileInput from "../general_components/FileInput";
 import ScrollableContainer from "../general_components/ScrollableContainer";
 import FancyInput from "../general_components/FancyInput";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 export default props => {
     const {closePopup, course} = props;
     const [invites, setInvites] = useState([]);
     const addInvite = invite => setInvites([...invites, invite]);
     const deleteInvite = index => setInvites([...invites.slice(0, index), ...invites.slice(index + 1)]);
+    const resetInvites = () => setInvites([]);
     const getInviteElements = () => invites.map((invite, index) =>
         <SearchPhrase index={index} key={index} value={invite} onDelete={deleteInvite}/>
     ).reverse();
@@ -20,11 +22,15 @@ export default props => {
     const sendInvites = () => {
         setLoadState("loading")
         axios.post('/api/students', {invites, course})
-            .then(function ({data: success}) {
+            .then(function ({data: errors}) {
                 setTimeout(() => {
-                    if (success) {
+                    if (errors.length === 0) {
                         setLoadState("done");
-                    } else setLoadState("error")
+                        resetInvites();
+                    } else {
+                        errors.map(error => toast.error(error));
+                        setLoadState("error");
+                    }
                 }, 500);
                 setTimeout(() => setLoadState("idle"), 1500);
             })

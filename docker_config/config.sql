@@ -11,16 +11,16 @@ PRIMARY KEY(Username)
 );
 
 CREATE TABLE Students (
-Username varchar(50),
+Username varchar(50) UNIQUE,
 Pwd varchar(200),
 Firstname varchar(50),
 Lastname varchar(50),
-Email varchar(50) UNIQUE,
+Email varchar(50),
 Skill varchar(15),
 StudentType varchar(20),
 Gender varchar(5),
 InviteStatus varchar(50) NOT NULL,
-PRIMARY KEY(Username)
+PRIMARY KEY(Email)
 );
 
 CREATE TABLE Courses(
@@ -44,13 +44,13 @@ FOREIGN KEY (ParentTaskID)
 
 CREATE TABLE Grades(
 CourseName varchar(10) NOT NULL,
-Username varchar(50),
+Email varchar(50) UNIQUE ,
 PercentDone float,
 Grade float,
 FOREIGN KEY (CourseName)
         REFERENCES Courses(CourseName),
-FOREIGN KEY (Username)
-        REFERENCES Students(Username)
+FOREIGN KEY (Email)
+        REFERENCES Students(Email)
 );
 
 CREATE TABLE TasksDone (
