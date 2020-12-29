@@ -122,6 +122,7 @@ a.middle:hover:before {
     color: $text;
     font-size: 15px;
     text-align: center;
+    text-decoration: none;
 }
 
 .profile__icon{
@@ -205,7 +206,7 @@ input:checked + .slider:before {
     display: grid;
     grid-template-columns: min-content min-content;
     column-gap: 35px;
-    padding-left: 8px;
+    padding-left: 10px;
     top: 0px;
     height: 100%;
     width: 100%;
@@ -219,6 +220,7 @@ input:checked + .slider:before {
     font-family: $font_lack;
     color: white;
     font-size: 12px;
+    transition: .4s;
 
 }
 

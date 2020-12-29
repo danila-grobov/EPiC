@@ -8,13 +8,16 @@ const App = () => {
     const epic = "EPiC";
     const pages = ["HOME", "TASKS", "MANAGE"];
     const name = "Hello, Dwight";
+    const adminRole = true;
     const teacher = "TEACHER";
     const admin = "ADMIN";
 
 
+
     return (
         <div className="app">
-            <NavBar course={courses} epic={epic} pages={pages} name={name} teacher={teacher} admin={admin}/>
+            <NavBar course={courses} epic={epic} pages={pages} name={name} adminRole={adminRole}
+                    teacher={teacher} admin={admin}/>
             <Table/>;
         </div>
     );

@@ -13,8 +13,10 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 //innerMenu = section to the farther right, contains user's available pages, separator, profile, profile picture, and
 //toggle button for teachers/admins
 
+//toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
+
 export default (props) => {
-    const {courses, epic, pages, name, teacher, admin} = props;
+    const {courses, epic, pages, name, adminRole, teacher, admin} = props;
     const [isAdmin, setisAdmin] = useState(false);
 
     return (
@@ -23,6 +25,7 @@ export default (props) => {
             <NavBar_Dropdown courses={courses}/>
 
             <div className="navMainMenu">
+
                 <span className="epicLogo"> {epic}</span>
 
                 <div className="innerMenu">
@@ -36,11 +39,10 @@ export default (props) => {
 
                     <div className="separator"/>
 
-                    <span className="userName">{name}</span>
+                    <a href="#" className="userName">{name}</a>
                     <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
 
                     <div className="toggleButton">
-
                         <label className="switch">
                             <input type="checkbox"  onClick={ ()=> setisAdmin(!isAdmin)}></input>
                             <span className="slider round"></span>
@@ -49,7 +51,6 @@ export default (props) => {
                             <span className={!isAdmin ? "linkActive": "linkNotActive"}>{teacher}</span>
                             <span className={!isAdmin ? "linkNotActive": "linkActive"}>{admin}</span>
                         </div>
-
                     </div>
 
                 </div>
