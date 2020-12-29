@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useRef} from "react"
 import "../scss/table/invitePopup.scss"
 import remove_dark from "../imgs/remove__dark.svg"
 import Button from "../general_components/Button";
@@ -7,7 +7,6 @@ import FileInput from "../general_components/FileInput";
 import ScrollableContainer from "../general_components/ScrollableContainer";
 import FancyInput from "../general_components/FancyInput";
 import axios from "axios";
-import {toast} from "react-toastify";
 
 export default props => {
     const {closePopup, course} = props;
@@ -21,9 +20,9 @@ export default props => {
     const sendInvites = () => {
         setLoadState("loading")
         axios.post('/api/students', {invites, course})
-            .then(function ({data:success}) {
+            .then(function ({data: success}) {
                 setTimeout(() => {
-                    if(success) {
+                    if (success) {
                         setLoadState("done");
                     } else setLoadState("error")
                 }, 500);
@@ -47,15 +46,12 @@ export default props => {
                                                label={"Import from JSON"} type={"secondary"}/>}
                                type={"emails"}
                     />
-
-                    {
-                        invites.length !== 0 ?
-                            <ScrollableContainer className="invitePopup__inviteList">
-                                {getInviteElements()}
-                            </ScrollableContainer> :
-                            <span className="invitePopup__emptyList">{"No students in the invite list."}</span>
-                    }
-
+                    <ScrollableContainer className="invitePopup__inviteList">
+                        {
+                            invites.length !== 0 ? getInviteElements() :
+                                <span className="invitePopup__emptyList">{"No students in the invite list."}</span>
+                        }
+                    </ScrollableContainer>
                     <Button height={38} width={133} className={"invitePopup__inviteButton"} label={"Invite students"}
                             type={"primary"} onClick={sendInvites} status={loadState}/>
                 </div>
