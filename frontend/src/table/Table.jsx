@@ -22,7 +22,7 @@ export default ({course}) => {
             res => {
                 const {students, count} = res.data;
                 setStudentData(students);
-                setTotal(count);
+                setTotal(count[0]);
             });
     }
     useEffect(

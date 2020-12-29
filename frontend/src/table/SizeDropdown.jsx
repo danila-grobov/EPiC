@@ -8,12 +8,13 @@ export default props => {
     },[rowCount])
     const handleChange = event => {
         let value = inputValue;
-        if( isNaN(value)) value = 3
-        if( value < 3) value = 3
-        if( value > total) value = total
+        // console.log(total);
+        // console.log(value);
+        if(isNaN(value)) value = 3
+        if(value < 3) value = 3
+        if(value > total) value = total
         setValue(value)
         setRowCount(value)
-        //TODO: Reload the table with new values
     }
     return (
         <div className="sizeDropdown">
