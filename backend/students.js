@@ -34,10 +34,13 @@ export function addStudentsToDB(data, course) {
                         "Cannot add or update a child row: a foreign key constraint fails" +
                         " (`EPiC`.`Grades`, CONSTRAINT `Grades_ibfk_2` FOREIGN KEY (`Email`)" +
                         " REFERENCES `Students` (`Email`))") {
-                        errors.push(`Could not invite student with an email "${element.Email}"`);
+                        errors.push(`Could not invite student with an email "${element.Email}."`);
                     }
-                    else if(error.message && error.message.search("Duplicate") === -1) {
-                        errors.push(`Unexpected error occurred, when trying to invite ${element.Email}`)
+                    if(error.message.search("Duplicate") !== -1) {
+                        errors.push(`The student with an email ${element.Email} has already been enrolled in the course.`)
+                    }
+                    else if(error.message) {
+                        errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
                     }
                     session.sql("ROLLBACK").execute()
                 })
