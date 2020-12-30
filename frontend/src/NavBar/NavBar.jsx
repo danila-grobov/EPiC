@@ -16,7 +16,12 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 //toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
 
 export default (props) => {
-    const {courses, epic, pages, name, adminRole, teacher, admin} = props;
+    const courses = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
+    const epic = "EPiC";
+    const teacher = "TEACHER";
+    const admin = "ADMIN";
+    const {pages, name, adminRole} = props;
+    //const [currentCourse, setCurrentCourse] = useState("CSC2033")
     const [isAdmin, setisAdmin] = useState(false);
 
     return (
@@ -26,7 +31,7 @@ export default (props) => {
 
             <div className="navMainMenu">
 
-                <span className="epicLogo"> {epic}</span>
+                <span className="epicLogo"> EPiC </span>
 
                 <div className="innerMenu">
                     <div className= "pages">
@@ -42,16 +47,16 @@ export default (props) => {
                     <a href="#" className="userName">{name}</a>
                     <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
 
-                    <div className="toggleButton">
+                    { adminRole === true ? <div className="toggleButton" >
                         <label className="switch">
                             <input type="checkbox"  onClick={ ()=> setisAdmin(!isAdmin)}></input>
                             <span className="slider round"></span>
                         </label>
                         <div className="links">
-                            <span className={!isAdmin ? "linkActive": "linkNotActive"}>{teacher}</span>
-                            <span className={!isAdmin ? "linkNotActive": "linkActive"}>{admin}</span>
+                            <span className={!isAdmin ? "linkActive": "linkNotActive"}>"TEACHER"</span>
+                            <span className={!isAdmin ? "linkNotActive": "linkActive"}>"ADMIN"</span>
                         </div>
-                    </div>
+                    </div>: ""}
 
                 </div>
 

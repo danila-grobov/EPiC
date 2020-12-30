@@ -50,11 +50,12 @@
 
 .dropdown-content a:hover {
   background-color: $background;
-  color: $text
+  color: $text;
+  border-radius: 4px;
+  align-items: center;
+
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
-
