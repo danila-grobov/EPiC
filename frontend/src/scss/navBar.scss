@@ -75,13 +75,13 @@ $animate: all 0.2s ease-in-out;
     text-align: center;
 }
 
-ul{
+.ulStyle{
     list-style-type: none;
 
-    li {
-        display: inline-block;
-        margin: 0 14px;
-    }
+}
+.liStyle {
+    display: inline-block;
+    margin: 0 14px;
 }
 a:link {
     text-decoration: none;

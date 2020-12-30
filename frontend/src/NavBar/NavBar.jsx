@@ -35,9 +35,9 @@ export default (props) => {
 
                 <div className="innerMenu">
                     <div className= "pages">
-                        <ul>
+                        <ul className="ulStyle">
                             {pages.map((page) =>
-                               <li><a href="#" className="pageName middle">{page}</a></li>
+                               <li className="liStyle"><a href="#" className="pageName middle">{page}</a></li>
                             )}
                         </ul>
                     </div>
