@@ -1,11 +1,12 @@
-@import "fonts";
+@import "frontend/src/scss/fonts";
+
 %row {
   height: 42px;
   width: 100%;
   display: grid;
   align-items: center;
   border-radius: 5px;
-  grid-template-columns: min-content min-content repeat(4,1fr min-content);
+  grid-template-columns: 24px+18px min-content repeat(4, 1fr min-content) 77px+24px min-content;
 }
 .row--header {
   @extend %row;
@@ -20,7 +21,7 @@
   background: white;
 }
 %row_cell {
-   margin: 0 12px;
+  margin: 0 12px;
 }
 %row_tag {
   text-align: center;
@@ -36,37 +37,37 @@
 .row__cell--title {
   @extend %row_cell;
   font-family: $font_lack;
-  font-size: 20px;
-  color:$text;
+  font-size: 18px;
+  color: $text;
   text-decoration-style: solid;
 }
 .row__cell--warning {
   @extend %row_cell;
   @extend %row_tag;
-  color:$orange_strong;
+  color: $orange_strong;
   border: solid 1px $orange_strong;
 }
 .row__cell--info {
   @extend %row_tag;
   @extend %row_cell;
-  color:$green_strong;
+  color: $green_strong;
   border: solid 1px $green_strong;
 
 }
 .row__cell--danger {
   @extend %row_tag;
   @extend %row_cell;
-  color:$red_strong;
+  color: $red_strong;
   border: solid 1px $red_strong;
 }
 .row__cell--text {
   @extend %row_cell;
   font-family: $font_sanspro;
   font-size: 16px;
-  color:$text;
+  color: $text;
 }
 .row__cell--checkbox {
-  @extend %row_cell;
+  margin-left: 12px;
 }
 .row__cellSeparator {
   border-right: solid 2px $light_grey;

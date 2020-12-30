@@ -6,7 +6,8 @@
   "scripts": {
     "stop-all" : "killall node",
     "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js",
-    "webpack": "webpack --watch"
+    "webpack": "webpack --watch",
+    "livereload": "npm run webpack & browser-sync start --proxy 'localhost:3000' --no-open --files 'dist'"
   },
   "keywords": [],
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
@@ -30,6 +31,9 @@
     "sass-loader": "^10.1.0",
     "node-sass": "^5.0.0",
     "ejs": "^3.1.5",
-    "file-loader": "^6.2.0"
+    "file-loader": "^6.2.0",
+    "browser-sync": "^2.26.13",
+    "react-toastify": "^6.2.0",
+    "react-perfect-scrollbar": "^1.5.8"
   }
 }

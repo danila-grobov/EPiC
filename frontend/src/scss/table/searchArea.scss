@@ -1,15 +1,18 @@
-@import "colors";
-@import "fonts";
+@import "frontend/src/scss/colors";
+@import "frontend/src/scss/fonts";
+
 .searchArea {
     background: white;
     width: auto;
-    height: 54px;
+    height: auto;
     border-radius: 5px;
-    display: grid;
-    grid-gap: 5px;
-    padding: 0 11px;
+    display: flex;
+    flex-wrap: wrap;
+    grid-auto-flow: column;
+    gap: 5px;
+    padding: 11px;
     align-items: center;
-    grid-auto-columns: min-content;
+    grid-template-columns: repeat(auto-fit, min-content);
 }
 %greyBlock {
     background: $background;
@@ -19,7 +22,6 @@
     grid-gap: 8px;
     padding: 0 8px;
     height: 32px;
-    grid-row: 1;
 }
 .searchInput {
     width: 238px;
@@ -31,7 +33,6 @@
     width: 17px;
     height: 17px;
 }
-
 .searchInput__input {
     @extend %regularText_lack;
     grid-row:1;
@@ -43,11 +44,14 @@
     outline: none;
 }
 .searchPhrase {
-    width: 120px;
-    grid-template-columns: auto min-content;
     @extend %greyBlock;
+    width: min-content;
+    grid-template-columns: max-content min-content;
+    grid-gap: 20px;
 }
 .searchPhrase__title{
     @extend %regularText_lack;
 }
-
+.searchPhrase__remove {
+    cursor: pointer;
+}

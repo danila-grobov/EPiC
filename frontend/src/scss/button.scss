@@ -1,0 +1,30 @@
+@import "fonts";
+@import "colors";
+
+%button {
+  display: grid;
+  align-items: center;
+  border-width: 3px;
+  border-radius: 42px;
+  padding: 0 25px;
+  width: max-content;
+  border-color: $blue;
+  border-style: solid;
+  cursor: pointer;
+}
+.button--secondary {
+  @extend %button;
+  background: none;
+}
+.button--primary {
+  @extend %button;
+  background: $blue;
+  .button__label {
+    color: white;
+  }
+}
+.button__label {
+  font-size: 20px;
+  color: #6EB3CB;
+  font-family: $font_lack;
+}
