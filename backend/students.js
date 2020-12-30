@@ -16,11 +16,11 @@ export function addStudentsToDB(data, course) {
                     VALUES (${getSQLValues(Object.values(element))})
                 `)
                 .execute()
-                // .then(
-                //     () => emailMessage(
-                //         domainName + "register/" + element.Username,
-                //         element.Email)
-                // )
+                .then(
+                    () => emailMessage(
+                        domainName + "register/" + element.Username,
+                        element.Email)
+                )
                 .catch(e => {
                     //ignore any errors regarding student invite
                     session.sql("ROLLBACK").execute();
@@ -33,8 +33,12 @@ export function addStudentsToDB(data, course) {
                     if (error.message ===
                         "Cannot add or update a child row: a foreign key constraint fails" +
                         " (`EPiC`.`Grades`, CONSTRAINT `Grades_ibfk_2` FOREIGN KEY (`Email`)" +
-                        " REFERENCES `Students` (`Email`))")
+                        " REFERENCES `Students` (`Email`))") {
                         errors.push(`Could not invite student with an email "${element.Email}"`);
+                    }
+                    else if(error.message && error.message.search("Duplicate") === -1) {
+                        errors.push(`Unexpected error occurred, when trying to invite ${element.Email}`)
+                    }
                     session.sql("ROLLBACK").execute()
                 })
         })).then(() => {
