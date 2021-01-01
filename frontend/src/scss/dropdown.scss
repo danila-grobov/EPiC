@@ -55,6 +55,7 @@
   color: $text;
   border-radius: 8px;
   align-items: center;
+  background-color: $background;
 
 }
 
@@ -65,11 +66,13 @@
 
 ul{
   list-style-type: none;
+  padding: 0;
 }
 
 li{
-  margin: 0 1px;
+  list-style-type: none;
 }
+
 
 
 
