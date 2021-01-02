@@ -17,9 +17,6 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 
 export default (props) => {
     const courses = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
-    const epic = "EPiC";
-    const teacher = "TEACHER";
-    const admin = "ADMIN";
     const {pages, name, adminRole} = props;
     //const [currentCourse, setCurrentCourse] = useState("CSC2033")
     const [isAdmin, setisAdmin] = useState(false);
