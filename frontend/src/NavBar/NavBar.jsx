@@ -21,6 +21,7 @@ export default (props) => {
     //const [currentCourse, setCurrentCourse] = useState("CSC2033")
     const [isAdmin, setisAdmin] = useState(false);
 
+
     return (
         <div className="menuBase">
 
@@ -41,7 +42,7 @@ export default (props) => {
 
                     <div className="separator"/>
 
-                    <a href="#" className="userName">{name}</a>
+                    <a href="./profile.jsx" className="userName">{name}</a>
                     <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
 
                     { adminRole === true ? <div className="toggleButton" >
@@ -50,8 +51,8 @@ export default (props) => {
                             <span className="slider round"></span>
                         </label>
                         <div className="links">
-                            <span className={!isAdmin ? "linkActive": "linkNotActive"}>"TEACHER"</span>
-                            <span className={!isAdmin ? "linkNotActive": "linkActive"}>"ADMIN"</span>
+                            <span className={!isAdmin ? "linkActive": "linkNotActive"}>TEACHER</span>
+                            <span className={!isAdmin ? "linkNotActive": "linkActive"}>ADMIN</span>
                         </div>
                     </div>: ""}
 

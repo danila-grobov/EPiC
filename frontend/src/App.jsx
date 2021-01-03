@@ -5,6 +5,7 @@ import NavBar from "./NavBar/NavBar";
 import NavBar_Dropdown from "./NavBar/NavBar_Dropdown";
 const App = () => {
     const pages = ["HOME", "TASKS", "MANAGE"];
+    const pagePaths = ["./index.jsx", "./tasks.jsx", "./manage.jsx"];
     const name = "Hello, Dwight";
 
     //const [currentCourse, setCurrentCourse] = useState("CSC2033");
@@ -12,7 +13,7 @@ const App = () => {
 
     return (
         <div className="app">
-            <NavBar  pages={pages} name={name} adminRole={false}/>
+            <NavBar  pages={pages} pagePaths={pagePaths} name={name} adminRole={true}/>
             <Table/>;
         </div>
     );

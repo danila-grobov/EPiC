@@ -12,16 +12,18 @@ function buttonPush() {
 
 export default (props) => {
     const {courses} = props;
+    const [currentCourse, setCurrentCourse] = useState("CSC2033")
+
 
     return (
         <div className="dropdown">
         <div className="navDropdown">
-            <button className="dropbtn">COURSES</button>
+            <button onClick="myFunction()" className="dropbtn">{currentCourse}</button>
 
             <div id= "dropdownContent" className="dropdown-content">
 
                 {courses.map((course) =>
-                    <li><a href="#" >{course}</a></li>
+                    <li><a onClick={() => this.setCurrentCourse({ count: {course} })} href="#" >{course}</a></li>
                     )}
 
             </div>
