@@ -9,7 +9,11 @@
     "install": "docker exec -it web npm i",
     "killall": "docker exec -it web npm run stop-all",
     "frontend": "docker exec -it web npm run webpack"
+
   },
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react-router": "^5.2.0"
+  }
 }

@@ -43,7 +43,7 @@ export default (props) => {
                     <div className="separator"/>
 
                     <a href="./profile.jsx" className="userName">{name}</a>
-                    <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
+                    <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     { adminRole === true ? <div className="toggleButton" >
                         <label className="switch">
