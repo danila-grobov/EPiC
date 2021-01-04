@@ -1,0 +1,75 @@
+@import "colors";
+@import "fonts";
+
+.dropdown{
+  position: relative;
+  display: inline-block;
+
+
+}
+.dropbtn {
+  color: #475356;
+  font-family: $font_sanspro_semibold;
+  font-size: 20px;
+  background-color: white;
+  width: 100px;
+  height: 61px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 5px;
+  outline: none;
+}
+.dropbtn-2{
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  outline: none;
+}
+
+.dropdown-content{
+  display: block;
+  position: absolute;
+  background-color: white;
+  top: 72px;
+  right: 2px;
+  width: 151px;
+  border-radius: 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+
+}
+
+.dropdown-content a {
+  color: $text_secondary;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-family: $font_sanspro_semibold;
+  align-items: center;
+}
+
+
+.dropdown-content a:hover {
+
+  color: $text;
+  align-items: center;
+  background-color: $background;
+
+}
+
+
+
+
+ul{
+  list-style-type: none;
+  padding: 0;
+}
+
+li{
+  list-style-type: none;
+}
+
+
+
+

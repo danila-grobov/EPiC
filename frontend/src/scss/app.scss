@@ -1,9 +1,10 @@
 @import "colors";
 @import "fonts";
 .app {
-  padding-top:100px;
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  row-gap: 50px;
 }
 body {
   background: $background;
@@ -31,4 +32,3 @@ body {
     background: $red_strong;
   }
 }
-
