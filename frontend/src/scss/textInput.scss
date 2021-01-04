@@ -12,7 +12,7 @@
   font-size: 16px;
   font-family: $font_sanspro;
 }
-.textInput, .textInput--error {
+.textInput {
   border: 3px solid $text_secondary;
   border-radius: 5px;
   height: 40px;
@@ -24,7 +24,10 @@
 .textInput--error {
   border-color: $red_strong;
 }
-.textInput__input, .textInput__helper {
+.textInput--active {
+  border-color: $blue;
+}
+.textInput__input, .textInput__input--active, .textInput__helper {
   width: max-content;
   min-width: 1px;
   height: 40px;
@@ -35,6 +38,9 @@
   outline: none;
   border: none;
   background: none;
+}
+.textInput__input--active {
+
 }
 .textInput__widthDonor {
   width: max-content;
@@ -51,7 +57,7 @@
   margin-left: -2px;
 }
 .textInput__label, .textInput__label--focused {
-  width: min-content;
+  width: max-content;
   color: $text_secondary;
   font-size: 20px;
   font-family: $font_sanspro;

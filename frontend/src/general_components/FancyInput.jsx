@@ -4,7 +4,10 @@ import useHelper from "../hooks/useHelper";
 import useValid from "../hooks/useValid";
 
 export default props => {
-    const {label, className, type = "text", onSubmit, charLimit} = props;
+    const {
+        label, className = "", type = "text", onSubmit = () => {},
+        charLimit = 40, autoWidth = false
+    } = props;
     const [focused, setFocused] = useState(false);
     const [width, setWidth] = useState(1);
     const textInput = useRef(null);
@@ -35,14 +38,16 @@ export default props => {
     }
     return (
         <div className={"textInput__wrapper " + className} onClick={() => textInput.current.focus()}>
-            <div className={`textInput${valid !== -1 ? "" : "--error"}`}>
+            <div className={`textInput
+             ${focused ? "textInput--active" : ""}
+             ${valid !== -1 ? "" : "textInput--error"}`}>
                 {label ? <span className={labelStyle}>{label}</span> : ""}
                 <form onSubmit={handleSubmit}>
                     <input type="text" className="textInput__input"
                            onFocus={() => setFocused(true)}
                            onBlur={() => setFocused(value !== "")}
                            ref={textInput}
-                           style={{width}}
+                           style={autoWidth ? {width} : {}}
                            onKeyDown={handleKeyDown}
                            maxLength={charLimit}
                            value={value}
