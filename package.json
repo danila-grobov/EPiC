@@ -11,5 +11,13 @@
     "frontend": "docker exec -it web npm run webpack"
   },
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "react": "^17.0.1"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.4",
+    "react-dom": "^17.0.1"
+  }
 }
