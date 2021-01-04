@@ -28,10 +28,10 @@
 }
 
 .dropdown-content{
-  display: none;
+  display: block;
   position: absolute;
   background-color: white;
-  top: 64px;
+  top: 72px;
   right: 2px;
   width: 151px;
   border-radius: 5px;
@@ -59,9 +59,7 @@
 }
 
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+
 
 ul{
   list-style-type: none;

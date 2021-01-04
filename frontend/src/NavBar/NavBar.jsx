@@ -17,7 +17,7 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 
 export default (props) => {
     const courses = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
-    const {pages, name, adminRole} = props;
+    const {pages, pagePaths, name, adminRole} = props;
     //const [currentCourse, setCurrentCourse] = useState("CSC2033")
     const [isAdmin, setisAdmin] = useState(false);
 
@@ -34,8 +34,8 @@ export default (props) => {
                 <div className="innerMenu">
                     <div className= "pages">
                         <ul className="ulStyle">
-                            {pages.map((page) =>
-                               <li className="liStyle"><a href="#" className="pageName middle">{page}</a></li>
+                            {pages.map((page,index) =>
+                               <li className="liStyle"><a href={pagePaths[index]} className="pageName middle">{page}</a></li>
                             )}
                         </ul>
                     </div>
