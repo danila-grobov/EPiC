@@ -4,7 +4,7 @@ import useHelper from "../hooks/useHelper";
 
 export default props => {
     const {
-        label, className = "", type = "text", onSubmit, valid
+        label, className = "", type = "text", onSubmit, valid, charLimit = 30
     } = props;
     const [focused, setFocused] = useState(false);
     const [width, setWidth] = useState(1);
@@ -13,9 +13,9 @@ export default props => {
     const widthDonor = useRef(null);
 
     const {setValue, value, reset} = useValue("");
-    const {helper = "", onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers);
+    const {helper = "", onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers, charLimit);
 
-    const labelStyle = (focused ? "textInput__label--focused" : "textInput__label") +
+    const labelStyle = (focused || value !== "" ? "textInput__label--focused" : "textInput__label") +
         (valid !== -1 ? "" : " textInput__label--error");
     useEffect(() => {
         setWidth(widthDonor.current.clientWidth + 2)
@@ -31,8 +31,10 @@ export default props => {
         e.preventDefault();
         if (onSubmit) {
             const errorIndex = onSubmit(value);
-            if(errorIndex === -1) { reset(); setErrorMessage("") }
-            else setErrorMessage(inputTypes[type].errorMessages[errorIndex])
+            if (errorIndex === -1) {
+                reset();
+                setErrorMessage("")
+            } else setErrorMessage(inputTypes[type].errorMessages[errorIndex])
         }
     }
     return (
@@ -42,14 +44,15 @@ export default props => {
                 <form onSubmit={handleSubmit}>
                     <input type={type === "password" ? "password" : "text"} className="textInput__input"
                            onFocus={() => setFocused(true)}
-                           onBlur={() => setFocused(value !== "")}
+                           onBlur={() => setFocused(false)}
                            ref={textInput}
                            style={type === "email" ? {width} : {}}
                            onKeyDown={handleKeyDown}
                            value={value}
                            onChange={onChange}
+                           maxLength={type === "email" ? "" : charLimit}
                     />
-                    {value && type === "email" ? <span className="textInput__helper">{helper}</span> : null}
+                    {focused && value && type === "email" ? <span className="textInput__helper">{helper}</span> : null}
                 </form>
             </div>
             {errorMessage.length === 0 ? "" :

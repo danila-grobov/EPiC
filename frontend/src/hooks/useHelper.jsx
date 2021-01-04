@@ -1,7 +1,8 @@
 import {useState} from "react";
 
-export default (setValue, helpers) => {
-    const [helper, setHelper] = useState(helpers[0]);
+export default (setValue, helpers, charLimit) => {
+    const defaultHelper = helpers.length > 0 ? helpers[0] : "";
+    const [helper, setHelper] = useState(defaultHelper);
     const reset = () => {
         setHelper("");
     }
@@ -10,7 +11,7 @@ export default (setValue, helpers) => {
         let noOverlap = true;
         for (let fullHelper of helpers) {
             let [firstHalf, overlap] = splitValue(fullHelper,value);
-            if (overlap !== undefined) {
+            if (overlap !== undefined && (firstHalf + fullHelper).length <= charLimit) {
                 noOverlap = false;
                 if (valueIsValid(fullHelper, overlap)) {
                     setValue(firstHalf + overlap);
@@ -20,8 +21,9 @@ export default (setValue, helpers) => {
             }
         }
         if (noOverlap) {
-            setValue(value);
-            setHelper(helpers[0])
+            if(value.length + defaultHelper.length <= charLimit)
+                setValue(value);
+            setHelper(defaultHelper)
         }
     }
     return {
@@ -39,7 +41,6 @@ function splitValue(helper, value) {
 }
 
 function valueIsValid(helper, overlap) {
-    console.log(overlap);
     return overlap.split("").reduce((valid, char, index) => valid && char === helper[index]);
 }
 
