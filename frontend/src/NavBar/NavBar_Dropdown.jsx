@@ -17,7 +17,7 @@ export default (props) => {
 
 
     return (
-        <div className="dropdown">
+        <div className="dropdown" tabIndex={-1} onBlur={() => setShow(false)}>
         <div onClick={ ()=> setShow(!isShown)} className="navDropdown">
             <button className="dropbtn">{currentCourse}</button>
 
