@@ -11,19 +11,21 @@ PRIMARY KEY(Username)
 );
 
 CREATE TABLE Students (
-Username varchar(50) NOT NULL,
-Pwd varchar(200) NOT NULL,
-Firstname varchar(50) NOT NULL,
-Lastname varchar(50) NOT NULL,
-Email varchar(50) NOT NULL,
-Skill varchar(15) NOT NULL,
-StudentType varchar(20) NOT NULL,
-Gender varchar(5) NOT NULL,
-PRIMARY KEY(Username)
+Username varchar(50) UNIQUE,
+Pwd varchar(200),
+Firstname varchar(50),
+Lastname varchar(50),
+Email varchar(50),
+Skill varchar(15),
+StudentType varchar(20),
+Gender varchar(5),
+InviteStatus varchar(50) NOT NULL,
+PRIMARY KEY(Email)
 );
 
 CREATE TABLE Courses(
 CourseName varchar(10) NOT NULL,
+Color varchar(20) NOT NULL,
 PRIMARY KEY(CourseName)
 );
 
@@ -42,13 +44,13 @@ FOREIGN KEY (ParentTaskID)
 
 CREATE TABLE Grades(
 CourseName varchar(10) NOT NULL,
-Username varchar(50),
+Email varchar(50) UNIQUE ,
 PercentDone float,
 Grade float,
 FOREIGN KEY (CourseName)
         REFERENCES Courses(CourseName),
-FOREIGN KEY (Username)
-        REFERENCES Students(Username)
+FOREIGN KEY (Email)
+        REFERENCES Students(Email)
 );
 
 CREATE TABLE TasksDone (

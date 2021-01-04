@@ -1,0 +1,77 @@
+@import "colors";
+@import "fonts";
+
+.textInput__wrapper {
+  width: auto;
+}
+.textInput__error {
+  color: $red_strong;
+  display: block;
+  padding-top: 5px;
+  padding-left: 15px;
+  font-size: 16px;
+  font-family: $font_sanspro;
+}
+.textInput, .textInput--error {
+  border: 3px solid $text_secondary;
+  border-radius: 5px;
+  height: 40px;
+  padding-left: 26px;
+  padding-right: 10px;
+  cursor: text;
+  position: relative;
+}
+.textInput--error {
+  border-color: $red_strong;
+}
+.textInput__input, .textInput__helper {
+  width: max-content;
+  min-width: 1px;
+  height: 40px;
+  line-height: 40px;
+  color: $text;
+  font-size: 20px;
+  font-family: $font_sanspro;
+  outline: none;
+  border: none;
+  background: none;
+}
+.textInput__widthDonor {
+  width: max-content;
+  line-height: 40px;
+  color: $text;
+  font-size: 20px;
+  visibility: hidden;
+  font-family: $font_sanspro;
+  position: absolute;
+  top: -100vh;
+}
+.textInput__helper {
+  opacity: 0.5;
+  margin-left: -2px;
+}
+.textInput__label, .textInput__label--focused {
+  width: min-content;
+  color: $text_secondary;
+  font-size: 20px;
+  font-family: $font_sanspro;
+  line-height: 40px;
+  height: 40px;
+  position: absolute;
+  background: white;
+  pointer-events: none;
+  transition: 0.1s;
+  transition-timing-function: ease-out;
+}
+.textInput__label--error {
+  color: $red_strong;
+}
+.textInput__label--focused {
+  font-size: 18px;
+  background: white;
+  line-height: 23px;
+  height: 23px;
+  top: -18px;
+  margin-left: -5px;
+  padding: 0 5px;
+}
