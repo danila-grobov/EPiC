@@ -21,6 +21,7 @@
 .registrationPage__description {
   display: grid;
   grid-template-rows: min-content auto;
+  row-gap: 10px;
   max-width: 430px;
 }
 .registrationPage__logo,.registrationPage__logo--secondary {

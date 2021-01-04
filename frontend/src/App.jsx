@@ -9,8 +9,8 @@ import RegistrationPage from "./registration_page/RegistrationPage";
 const App = () => {
     return (
         <div className="app">
-            {/*<Table course={"CSC2033"}/>*/}
-            <RegistrationPage username={"0396bb19a0d56aaf"}/>
+            <Table course={"CSC2033"}/>
+            <RegistrationPage token={"0396bb19a0d56aaf"}/>
             <ToastContainer />
         </div>
     );

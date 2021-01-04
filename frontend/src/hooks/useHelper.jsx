@@ -9,7 +9,7 @@ export default (setValue, helpers) => {
         const value = e.target.value ? e.target.value : e.target.innerText;
         let noOverlap = true;
         for (let fullHelper of helpers) {
-            const [firstHalf, overlap] = splitValue(fullHelper,value);
+            let [firstHalf, overlap] = splitValue(fullHelper,value);
             if (overlap !== undefined) {
                 noOverlap = false;
                 if (valueIsValid(fullHelper, overlap)) {

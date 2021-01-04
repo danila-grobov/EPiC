@@ -5,14 +5,21 @@ import Button from "../general_components/Button";
 import SearchPhrase from "./SearchPhrase";
 import FileInput from "../general_components/FileInput";
 import ScrollableContainer from "../general_components/ScrollableContainer";
-import FancyInput from "../general_components/FancyInput";
+import FancyInput, {inputTypes} from "../general_components/FancyInput";
 import axios from "axios";
 import {toast} from "react-toastify";
+import useValid from "../hooks/useValid";
 
 export default props => {
     const {closePopup, course} = props;
     const [invites, setInvites] = useState([]);
-    const addInvite = invite => setInvites([...invites, invite]);
+    const {valid, updateValid} = useValid(inputTypes["email"].regEx, 30);
+    const addInvite = invite => {
+        const errorIndex = updateValid(invite);
+        if( errorIndex === -1)
+            setInvites([...invites, invite]);
+        return errorIndex;
+    }
     const deleteInvite = index => setInvites([...invites.slice(0, index), ...invites.slice(index + 1)]);
     const resetInvites = () => setInvites([]);
     const getInviteElements = () => invites.map((invite, index) =>
@@ -44,7 +51,7 @@ export default props => {
                     <img src={remove_dark} alt="remove icon" onClick={closePopup} className="invitePopup__closeIcon"/>
                 </div>
                 <div className="invitePopup__content">
-                    <FancyInput label={"Email"} className={"invitePopup__input"}
+                    <FancyInput label={"Email"} className={"invitePopup__input"} valid={valid}
                                 type={"email"} onSubmit={addInvite} charLimit={30} autoWidth={true}/>
                     <FileInput setFileData={setInvites}
                                successMessage={"The emails have been successfully uploaded."}

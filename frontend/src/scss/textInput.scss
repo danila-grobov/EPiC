@@ -20,11 +20,15 @@
   padding-right: 10px;
   cursor: text;
   position: relative;
+  form{
+    overflow: hidden;
+    height: 100%;
+  }
 }
 .textInput--error {
-  border-color: $red_strong;
+  border-color: $red_strong!important;
 }
-.textInput--active {
+.textInput:focus-within {
   border-color: $blue;
 }
 .textInput__input, .textInput__input--active, .textInput__helper {
@@ -39,8 +43,8 @@
   border: none;
   background: none;
 }
-.textInput__input--active {
-
+.textInput__input {
+  max-width: 100%;
 }
 .textInput__widthDonor {
   width: max-content;

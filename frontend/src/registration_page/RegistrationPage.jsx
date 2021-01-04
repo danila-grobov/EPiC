@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useEffect} from "react"
 import RegistrationForm from "./RegistrationForm";
 import "../scss/registration_page/registrationPage.scss";
 export default () => {
@@ -15,7 +15,7 @@ export default () => {
                 </span>
                 <span className="registrationPage__descriptionText">
                     Welcome to EPiC's learning and engagement tool! EPiC, stands for
-                    "<b>Educational Practice in Computing</b>".
+                    "<b>Educational Practice in Computing</b>".<br/>
                     EPiC is a research group within the School of Computing that focus on improving the experience
                     for students and finding innovative teaching methods to aid learning.
                     The group is one of the biggest in the country that focuses on computer education research and they

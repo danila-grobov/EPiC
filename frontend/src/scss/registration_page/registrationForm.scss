@@ -1,0 +1,9 @@
+.registrationForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  grid-auto-rows: min-content;
+}
+.registrationForm__email {
+  grid-column: 1/3;
+}
