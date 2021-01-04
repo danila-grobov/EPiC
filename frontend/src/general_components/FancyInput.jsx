@@ -4,7 +4,7 @@ import useHelper from "../hooks/useHelper";
 
 export default props => {
     const {
-        label, className = "", type = "text", onSubmit, valid, charLimit = 30
+        label, className = "", type = "text", onSubmit, valid, charLimit
     } = props;
     const [focused, setFocused] = useState(false);
     const [width, setWidth] = useState(1);
@@ -50,7 +50,7 @@ export default props => {
                            onKeyDown={handleKeyDown}
                            value={value}
                            onChange={onChange}
-                           maxLength={type === "email" ? "" : charLimit}
+                           maxLength={type === "email" || !charLimit ? "" : charLimit}
                     />
                     {focused && value && type === "email" ? <span className="textInput__helper">{helper}</span> : null}
                 </form>
@@ -58,9 +58,14 @@ export default props => {
             {errorMessage.length === 0 ? "" :
                 <span className="textInput__error">{errorMessage}</span>}
             <span className="textInput__widthDonor" ref={widthDonor}>{value}</span>
+            {charLimit ?
+                <span className="textInput__charCounter">{`${value.length}/${charLimit}`}</span> :
+                ""
+            }
         </div>
     )
 }
+
 export const inputTypes = {
     email: {
         regEx: /^([a-zA-Z0-9_\-\.]+)@(ncl|newcastle).ac.uk$/,

@@ -3,6 +3,14 @@
 
 .textInput__wrapper {
   width: auto;
+  display: grid;
+}
+.textInput__charCounter {
+  font-size: 16px;
+  color: $text_secondary;
+  font-family: $font_sanspro;
+  justify-self: end;
+  margin-right: 15px;
 }
 .textInput__error {
   color: $red_strong;
@@ -67,7 +75,6 @@
   font-family: $font_sanspro;
   line-height: 40px;
   height: 40px;
-  position: absolute;
   background: white;
   pointer-events: none;
   transition: 0.1s;
@@ -80,6 +87,7 @@
   font-size: 18px;
   background: white;
   line-height: 23px;
+  position: absolute;
   height: 23px;
   top: -18px;
   margin-left: -5px;
