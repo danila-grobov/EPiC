@@ -8,7 +8,9 @@ import PieGraph from "./PieGraph";
 
 export default () => {
 
-    //For testing, returned from drop down menu
+    //For testing, value will be returned from drop down menu
+    //////////
+    //Change this to view different graphs
     const choice = 7;
 
     let graphTitle = "Here's a graph"
@@ -90,8 +92,6 @@ export default () => {
     return (
         <div>
             <h2>{graphTitle}</h2><br/>
-
-            {/* Graphs */}
 
             {displayBar === true &&
                 <BarGraph labels={labels} seriesLabel={seriesLabel} values={values} />
