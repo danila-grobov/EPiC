@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import BarGraph from "./BarGraph";
+import Options from "./Options";
 
 // Create canvas for graph to be displayed
 // Choose graph to display, with any filters
@@ -8,10 +9,22 @@ import BarGraph from "./BarGraph";
 export default () => {
 
 
+    let displayGraph = true;
+    const labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
+    const seriesLabel = 'A bar graph';
+    const values = [2, 19, 3, 5, 2, 3];
+
+
     return (
         <div>
             <h2>Here's a graph</h2><br/>
-            <BarGraph /* Pass data and filters */ /><br/>
+
+
+            {displayGraph === true &&
+                <BarGraph labels={labels} seriesLabel={seriesLabel} values={values} />
+            }
+
+            <Options />
 
 
 
