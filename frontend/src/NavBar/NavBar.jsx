@@ -33,14 +33,17 @@ export default (props) => {
 
                 <span className="epicLogo"> EPiC </span>
 
+
                 <div className="innerMenu">
+
                     <div className= "pages">
                         <ul className="ulStyle">
                             {pages.map((page,index) =>
-                               <li className="liStyle"><a href={pagePaths[index]} className="pageName middle">{page}</a></li>
+                                <li className="liStyle"><a href={pagePaths[index]} className="pageName middle">{page}</a></li>
                             )}
                         </ul>
                     </div>
+
 
                     <div className="separator"/>
 
