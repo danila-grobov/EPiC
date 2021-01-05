@@ -11,21 +11,22 @@ function buttonPush() {
 }
 
 export default (props) => {
-    const {dropOptions} = props;
-    const [currentOption, setCurrentOption] = useState("COURSES")
+    const {dropOptions, className="", currentOption, setCurrentOption} = props;
     const [isShown, setShow] = useState(false)
 
 
+
     return (
-        <div className="dropdown">
-        <div onClick={ ()=> setShow(!isShown)} className="navDropdown">
+        <div className={"dropdown " + className} onBlur={ ()=> setShow(false)} tabIndex='-1'>
+
+        <div onClick={ ()=> setShow(!isShown)} className="dropdownBase">
             <button className="dropbtn">{currentOption}</button>
 
             { isShown === true ? <div id= "dropdownContent" className="dropdown-content">
-
                 {dropOptions.map((dropOption) =>
-                    <li><a onClick={(event) => setCurrentOption(event.target.innerHTML)} href="#" >{dropOption}</a></li>
+                    <li><a onMouseDown={(event) => setCurrentOption(event.target.innerHTML)} href="#" >{dropOption}</a></li>
                     )}
+
 
             </div> : ""}
             <button className="dropbtn-2"><img src={dropDownArrow} alt="Dropdown menu icon" className="dropdown__icon"/></button>

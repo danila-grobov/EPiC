@@ -17,15 +17,16 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 
 export default (props) => {
     const dropOptions = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
+    const title = "COURSES";
     const {pages, pagePaths, name, adminRole} = props;
-    //const [currentCourse, setCurrentCourse] = useState("CSC2033")
+    const [currentOption, setCurrentOption] = useState(title);
     const [isAdmin, setisAdmin] = useState(false);
 
 
     return (
         <div className="menuBase">
 
-            <NavBar_Dropdown dropOptions={dropOptions}/>
+            <NavBar_Dropdown dropOptions={dropOptions} currentOption={currentOption} setCurrentOption={setCurrentOption} />
 
             <div className="navMainMenu">
 
