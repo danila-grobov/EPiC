@@ -15,12 +15,10 @@ export default (props) => {
     const [currentCourse, setCurrentCourse] = useState("COURSES")
     const [isShown, setShow] = useState(false)
 
-
     return (
-        <div className="dropdown" tabIndex={-1} onBlur={() => setShow(false)}>
+        <div className="dropdown">
         <div onClick={ ()=> setShow(!isShown)} className="navDropdown">
             <button className="dropbtn">{currentCourse}</button>
-
             { isShown === true ? <div id= "dropdownContent" className="dropdown-content">
 
                 {courses.map((course) =>
@@ -29,7 +27,7 @@ export default (props) => {
 
             </div> : ""}
             <button className="dropbtn-2"><img src={dropDownArrow} alt="Dropdown menu icon" className="dropdown__icon"/></button>
-            </div>
+        </div>
 
         </div>
     )}

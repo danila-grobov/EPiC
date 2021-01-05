@@ -1,15 +1,15 @@
 import {useState} from "react";
-export default (regEx, charLimit) => {
-    const [valid, setValid] = useState(0); // -1 invlaid; 0 unchecked; 1 valid
-    const updateValid = value => {
-        if(value.match(regEx) && value.length <= charLimit) {
-            setValid(1);
-            return -1;
+import {inputTypes} from "../general_components/FancyInput";
+
+export default (type) => {
+    const [errorMessage, setErrorMessage] = useState("");
+    const checkValidity = (value) => {
+        if (value.match(inputTypes[type].regEx)) {
+            setErrorMessage("")
+            return true;
         }
-        setValid(-1);
-        if(value.length > charLimit)
-            return 1;
-        return 0;
+        setErrorMessage(inputTypes[type].errorMessage)
+        return false;
     }
-    return {valid, updateValid}
+    return {errorMessage, checkValidity, setErrorMessage}
 }

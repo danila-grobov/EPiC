@@ -5,7 +5,6 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RegistrationPage from "./registration_page/RegistrationPage";
 import NavBar from "./NavBar/NavBar";
-import NavBar_Dropdown from "./NavBar/NavBar_Dropdown";
 
 const App = () => {
     const pages = ["HOME", "TASKS", "MANAGE"];

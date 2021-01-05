@@ -9,39 +9,16 @@ import FancyInput, {inputTypes} from "../general_components/FancyInput";
 import axios from "axios";
 import {toast} from "react-toastify";
 import useValid from "../hooks/useValid";
+import useInvite from "../hooks/useInvite";
+import useValue from "../hooks/useValue";
 
 export default props => {
     const {closePopup, course} = props;
-    const [invites, setInvites] = useState([]);
-    const {valid, updateValid} = useValid(inputTypes["email"].regEx, 30);
-    const addInvite = invite => {
-        const errorIndex = updateValid(invite);
-        if( errorIndex === -1)
-            setInvites([...invites, invite]);
-        return errorIndex;
-    }
-    const deleteInvite = index => setInvites([...invites.slice(0, index), ...invites.slice(index + 1)]);
-    const resetInvites = () => setInvites([]);
-    const getInviteElements = () => invites.map((invite, index) =>
-        <SearchPhrase index={index} key={index} value={invite} onDelete={deleteInvite}/>
-    ).reverse();
+    const {errorMessage, checkValidity} = useValid("email");
     const [loadState, setLoadState] = useState("idle");
-    const sendInvites = () => {
-        setLoadState("loading")
-        axios.post('/api/students', {invites, course})
-            .then(function ({data: errors}) {
-                setTimeout(() => {
-                    if (errors.length === 0) {
-                        setLoadState("done");
-                        resetInvites();
-                    } else {
-                        errors.map(error => toast.error(error));
-                        setLoadState("error");
-                    }
-                }, 500);
-                setTimeout(() => setLoadState("idle"), 1500);
-            })
-    }
+    const {reset:resetEmail,value:email,setValue:setEmail} = useValue("");
+    const {invites, sendInvites, setInvites, addInvite, getInviteElements} =
+        useInvite(course, checkValidity, resetEmail);
     return (
         <div className="invitePopup__wrapper">
             <div className="invitePopup__background" onClick={closePopup}/>
@@ -51,8 +28,10 @@ export default props => {
                     <img src={remove_dark} alt="remove icon" onClick={closePopup} className="invitePopup__closeIcon"/>
                 </div>
                 <div className="invitePopup__content">
-                    <FancyInput label={"Email"} className={"invitePopup__input"} valid={valid}
-                                type={"email"} onSubmit={addInvite} charLimit={30} autoWidth={true}/>
+                    <FancyInput label={"Email"} className={"invitePopup__input"} errorMessage={errorMessage}
+                                type={"email"} onSubmit={addInvite} charLimit={30} autoWidth={true}
+                                value={email} setValue={setEmail}
+                    />
                     <FileInput setFileData={setInvites}
                                successMessage={"The emails have been successfully uploaded."}
                                button={<Button height={32} className={"invitePopup__importButton"}
@@ -66,7 +45,7 @@ export default props => {
                         }
                     </ScrollableContainer>
                     <Button height={38} width={133} className={"invitePopup__inviteButton"} label={"Invite students"}
-                            type={"primary"} onClick={sendInvites} status={loadState}/>
+                            type={"primary"} onClick={() => sendInvites(setLoadState)} status={loadState}/>
                 </div>
             </div>
         </div>
