@@ -30,7 +30,7 @@ export function addStudentsToDB(data, course) {
                 })
                 .then(() => session.sql(`
                     INSERT INTO Grades (Email, CourseName)
-                    VALUES ("${escape(element.Email)}", "${escape(course)}")
+                    VALUES (${escape(element.Email)}, ${escape(course)})
                 `).execute())
                 .catch((error) => {
                     if (error.message ===
@@ -54,7 +54,7 @@ export function addStudentsToDB(data, course) {
 }
 
 function getSQLValues(values) {
-    return values.map(value => `"${escape(value)}"`).join(", ")
+    return values.map(value => `${escape(value)}`).join(", ")
 }
 
 function getSQLBody(course, whereClause) {
@@ -62,7 +62,7 @@ function getSQLBody(course, whereClause) {
         FROM Students AS s
         JOIN Grades g ON s.Email = g.Email
         JOIN Courses c ON g.CourseName= c.CourseName
-        WHERE c.CourseName = "${escape(course)}" ${whereClause}`;
+        WHERE c.CourseName = ${escape(course)} ${whereClause}`;
 }
 
 export function getStudentsFromDB({count, offset, course}, filters = []) {
@@ -97,7 +97,7 @@ export function getStudentsFromDB({count, offset, course}, filters = []) {
 export function removeStudentFromDB(emails) {
     return getDBSession(session => {
         const grades = session.getSchema("EPiC").getTable("Grades");
-        const whereClause = emails.map(email => `Email = "${escape(email)}"`).join(" OR ");
+        const whereClause = emails.map(email => `Email = ${escape(email)}`).join(" OR ");
         return grades
             .delete()
             .where(whereClause)
@@ -113,7 +113,7 @@ export function setStudentGrades({data, course}) {
             ({grade, email}) =>
                 updateObj
                     .set("Grade", grade)
-                    .where(`Email = "${escape(email)}"`)
+                    .where(`Email = ${escape(email)}`)
                     .execute()
         )
         return Promise.all(promises);
@@ -152,7 +152,7 @@ function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
             filter.split(" || ").map(
-                filter => `${columnName} LIKE "%${escape(filter)}%"`
+                filter => `${columnName} LIKE "%${escape(filter).slice(1,filter.length)}%"`
             ).join(" OR ")
         ).join(" OR ")
     ).join(") AND (");

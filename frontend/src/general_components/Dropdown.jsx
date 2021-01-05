@@ -14,8 +14,6 @@ export default (props) => {
     const {dropOptions, className="", currentOption, setCurrentOption} = props;
     const [isShown, setShow] = useState(false)
 
-
-
     return (
         <div className={"dropdown " + className} onBlur={ ()=> setShow(false)} tabIndex='-1'>
 
@@ -26,8 +24,6 @@ export default (props) => {
                     {dropOptions.map((dropOption) =>
                         <li><a onMouseDown={(event) => setCurrentOption(event.target.innerHTML)} href="#" >{dropOption}</a></li>
                     )}
-
-
                 </div> : ""}
                 <button className="dropbtn-2"><img src={dropDownArrow} alt="Dropdown menu icon" className="dropdown__icon"/></button>
             </div>

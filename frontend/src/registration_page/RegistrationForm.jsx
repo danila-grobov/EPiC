@@ -1,12 +1,12 @@
 import React from "react"
 import FancyInput from "../general_components/FancyInput";
 import "../scss/registration_page/registrationForm.scss";
-import NavBar_Dropdown from "../NavBar/NavBar_Dropdown";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";
 import axios from "axios";
 import {toast} from "react-toastify";
+import Dropdown from "../general_components/Dropdown";
 
 export default props => {
     const {inviteToken} = props;
@@ -17,9 +17,9 @@ export default props => {
         password: {...useValue(""), ...useValid("password")},
         confirmPassword: {...useValue(""), ...useValid("password")},
         email: {...useValue(""), ...useValid("email")},
-        skill: {...useValue(null)},
-        studentType: {...useValue(null)},
-        gender: {...useValue(null)},
+        skill: {...useValue("Skill Level")},
+        studentType: {...useValue("Student origin")},
+        gender: {...useValue("Gender")},
     }
     const handleSubmit = () => {
         const inputsValid = Object.values(inputStates).reduce((valid, input) => {
@@ -49,7 +49,7 @@ export default props => {
                 if (isEmpty(data))
                     toast.success("You have been registered!")
             });
-        else if(!passwordsMatch) {
+        else if (!passwordsMatch) {
             inputStates.password.setErrorMessage("The passwords do not match.");
             inputStates.confirmPassword.setErrorMessage("The passwords do not match.");
         }
@@ -59,9 +59,21 @@ export default props => {
             <FancyInput label={"First name"} {...inputStates.firstName}/>
             <FancyInput label={"Last name"} {...inputStates.lastName}/>
             <FancyInput label={"Username"} charLimit={20} {...inputStates.userName}/>
-            <NavBar_Dropdown courses={["Advanced", "Intermediate", "Beginner"]}/>
-            <NavBar_Dropdown courses={["Male", "Female", "Non-Binary"]}/>
-            <NavBar_Dropdown courses={["UK Students", "EU Students", "International Students"]}/>
+            <Dropdown currentOption={inputStates.skill.value}
+                      setCurrentOption={inputStates.skill.setValue}
+                      dropOptions={["Advanced", "Intermediate", "Beginner", "Prefer not to say"]}
+                      className={"registrationForm__dropdown"}
+            />
+            <Dropdown currentOption={inputStates.gender.value}
+                      setCurrentOption={inputStates.gender.setValue}
+                      dropOptions={["Male", "Female", "Non-Binary", "Prefer not to say"]}
+                      className={"registrationForm__dropdown"}
+            />
+            <Dropdown currentOption={inputStates.studentType.value}
+                      setCurrentOption={inputStates.studentType.setValue}
+                      dropOptions={["UK Students", "EU Students", "International Students", "Prefer not to say"]}
+                      className={"registrationForm__dropdown"}
+            />
             <FancyInput label={"Password"} type={"password"} charCounter={false} charLimit={30}
                         {...inputStates.password}/>
             <FancyInput label={"Confirm password"} type={"password"} charCounter={false} charLimit={30}
@@ -73,6 +85,7 @@ export default props => {
         </div>
     )
 }
+
 function isEmpty(object) {
     return Object.keys(object).length === 0 && object.constructor === Object;
 }

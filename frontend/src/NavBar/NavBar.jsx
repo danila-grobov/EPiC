@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import "../scss/navBar.scss"
-import NavBar_Dropdown from "./NavBar_Dropdown";
+import "../scss/navBar.scss";
 import dropDownArrow from "../imgs/downArrow.svg"
 import profilePhoto from "../imgs/profilePhoto.svg"
 import Dropdown from "../general_components/Dropdown";
