@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import hash from "crypto-random-string";
-import {addStudentsToDB, getStudentsFromDB, removeStudentFromDB, setStudentGrades} from "./students";
+import {addStudentsToDB, getStudentsFromDB, registerStudent, removeStudentFromDB, setStudentGrades} from "./students";
 import {testDBConnection} from "./database";
 
 const app = express()
@@ -31,7 +31,10 @@ app.put('/api/students/grade', (req, res) => {
     const {data, course} = req.body;
     setStudentGrades({data, course}).then(() => res.send());
 })
-
+app.put('/api/students', (req, res) => {
+    const data = req.body;
+    registerStudent(data).then(errors => res.send(errors));
+})
 function configExpress(app) {
     app.use(express.static(path.join(__dirname, '../dist')));
     app.engine('.html', require('ejs').__express);

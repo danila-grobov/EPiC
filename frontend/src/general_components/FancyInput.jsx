@@ -1,22 +1,20 @@
-import React, {useState, useRef, useEffect} from "react"
-import useValue from "../hooks/useValue";
+import React, {useState, useRef, useEffect} from "react";
 import useHelper from "../hooks/useHelper";
+import "../scss/textInput.scss";
 
 export default props => {
     const {
-        label, className = "", type = "text", onSubmit, valid, charLimit
+        label, className = "", type = "text", onSubmit, charLimit,
+        value, setValue, errorMessage = ""
     } = props;
     const [focused, setFocused] = useState(false);
     const [width, setWidth] = useState(1);
-    const [errorMessage, setErrorMessage] = useState("");
     const textInput = useRef(null);
     const widthDonor = useRef(null);
-
-    const {setValue, value, reset} = useValue("");
     const {helper = "", onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers, charLimit);
 
     const labelStyle = (focused || value !== "" ? "textInput__label--focused" : "textInput__label") +
-        (valid !== -1 ? "" : " textInput__label--error");
+        (errorMessage.length === 0 ? "" : " textInput__label--error");
     useEffect(() => {
         setWidth(widthDonor.current.clientWidth + 2)
     });
@@ -27,21 +25,14 @@ export default props => {
             setValue(value + helper);
         }
     }
-    const handleSubmit = e => {
-        e.preventDefault();
-        if (onSubmit) {
-            const errorIndex = onSubmit(value);
-            if (errorIndex === -1) {
-                reset();
-                setErrorMessage("")
-            } else setErrorMessage(inputTypes[type].errorMessages[errorIndex])
-        }
-    }
     return (
         <div className={"textInput__wrapper " + className} onClick={() => textInput.current.focus()}>
-            <div className={`textInput ${valid !== -1 ? "" : "textInput--error"}`}>
+            <div className={`textInput ${errorMessage.length === 0 ? "" : "textInput--error"}`}>
                 {label ? <span className={labelStyle}>{label}</span> : ""}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={e => {
+                    e.preventDefault();
+                    onSubmit ? onSubmit(value) : null
+                }}>
                     <input type={type === "password" ? "password" : "text"} className="textInput__input"
                            onFocus={() => setFocused(true)}
                            onBlur={() => setFocused(false)}
@@ -55,13 +46,12 @@ export default props => {
                     {focused && value && type === "email" ? <span className="textInput__helper">{helper}</span> : null}
                 </form>
             </div>
-            {errorMessage.length === 0 ? "" :
-                <span className="textInput__error">{errorMessage}</span>}
-            <span className="textInput__widthDonor" ref={widthDonor}>{value}</span>
             {charLimit ?
                 <span className="textInput__charCounter">{`${value.length}/${charLimit}`}</span> :
                 ""
             }
+            <span className="textInput__error">{errorMessage.length === 0 ? "" : errorMessage}</span>
+            <span className="textInput__widthDonor" ref={widthDonor}>{value}</span>
         </div>
     )
 }
@@ -69,26 +59,19 @@ export default props => {
 export const inputTypes = {
     email: {
         regEx: /^([a-zA-Z0-9_\-\.]+)@(ncl|newcastle).ac.uk$/,
-        errorMessages: [
-            "Please enter a valid newcastle university email address.",
-            "The email is too long."
-        ],
+        errorMessage: "Please enter a valid newcastle university email address.",
         helpers: ["@ncl.ac.uk", "@newcastle.ac.uk"]
     },
     text: {
-        regEx: /.*/,
-        errorMessages: [
-            "",
-            "The value is too long."
-        ],
+        regEx: /.+/,
+        errorMessage: "The field cannot be empty",
         helpers: []
     },
     password: {
-        regEx: /.*/,
-        errorMessages: [
-            "",
-            "The value is too long."
-        ],
+        regEx: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,30})/,
+        errorMessage:
+            "The password must be between 8 and 30 characters long and must contain at least one lower case letter, " +
+            "one upper case letter and a number",
         helpers: []
     }
 }

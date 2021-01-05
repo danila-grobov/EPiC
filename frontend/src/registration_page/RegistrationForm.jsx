@@ -6,37 +6,53 @@ import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";
 import axios from "axios";
+import {toast} from "react-toastify";
 
-export default () => {
+export default props => {
+    const {inviteToken} = props;
     const inputStates = {
         firstName: {...useValue(""), ...useValid("text")},
         lastName: {...useValue(""), ...useValid("text")},
         userName: {...useValue(""), ...useValid("text")},
         password: {...useValue(""), ...useValid("password")},
-        confirmPassword: {...useValue(""),...useValid("password")},
+        confirmPassword: {...useValue(""), ...useValid("password")},
         email: {...useValue(""), ...useValid("email")},
         skill: {...useValue(null)},
         studentType: {...useValue(null)},
         gender: {...useValue(null)},
     }
     const handleSubmit = () => {
-        const inputsValid = Object.values(inputStates).reduce((valid,input) =>
-        {
-            if(input.checkValidity)
-                return input.checkValidity(input.value) && valid
-            return true;
-        }, true
+        const inputsValid = Object.values(inputStates).reduce((valid, input) => {
+                if (input.checkValidity)
+                    return input.checkValidity(input.value) && valid
+                return true;
+            }, true
         );
-        if(inputsValid)
+        const passwordsMatch = inputStates.password.value === inputStates.confirmPassword.value;
+        if (inputsValid && passwordsMatch)
             axios.put("/api/students", {
-                Firstname:inputStates.firstName.value,
-                Lastname:inputStates.lastName.value,
-                Username:inputStates.userName.value,
-                Pwd:inputStates.password.value,
-                Skill:inputStates.skill.value,
-                StudentType:inputStates.studentType.value,
-                Gender:inputStates.gender.value
-            }).then(res => console.log("Done!"));
+                Firstname: inputStates.firstName.value,
+                Lastname: inputStates.lastName.value,
+                Username: inputStates.userName.value,
+                Pwd: inputStates.password.value,
+                Skill: inputStates.skill.value,
+                StudentType: inputStates.studentType.value,
+                Gender: inputStates.gender.value,
+                token: inviteToken
+            }).then(({data}) => {
+                Object.keys(data).map(
+                    errorType =>
+                        inputStates[errorType] ? inputStates[errorType].setErrorMessage(data[errorType]) : null
+                )
+                if (data.global)
+                    toast.error(data.global)
+                if (isEmpty(data))
+                    toast.success("You have been registered!")
+            });
+        else if(!passwordsMatch) {
+            inputStates.password.setErrorMessage("The passwords do not match.");
+            inputStates.confirmPassword.setErrorMessage("The passwords do not match.");
+        }
     }
     return (
         <div className="registrationForm">
@@ -56,4 +72,7 @@ export default () => {
                     onClick={handleSubmit}/>
         </div>
     )
+}
+function isEmpty(object) {
+    return Object.keys(object).length === 0 && object.constructor === Object;
 }

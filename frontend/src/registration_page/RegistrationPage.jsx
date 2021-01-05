@@ -1,11 +1,12 @@
 import React,{useEffect} from "react"
 import RegistrationForm from "./RegistrationForm";
 import "../scss/registration_page/registrationPage.scss";
-export default () => {
+export default props => {
+    const {token} = props;
     return (
         <div className="registrationPage">
             <span className="registrationPage__welcomeMessage">Welcome Student!</span>
-            <RegistrationForm />
+            <RegistrationForm inviteToken={token} />
             <div className="registrationPage__description">
                 <span className="registrationPage__logo">
                     EPiC

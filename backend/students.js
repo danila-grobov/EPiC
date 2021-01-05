@@ -1,6 +1,9 @@
 import {getDBSession} from "./database";
 import {emailMessage} from "./email";
 import React from "react";
+import md5 from "md5";
+import {v4 as uuidV4} from "uuid";
+import {escape} from "sqlstring";
 
 const domainName = "http://localhost/";
 
@@ -27,7 +30,7 @@ export function addStudentsToDB(data, course) {
                 })
                 .then(() => session.sql(`
                     INSERT INTO Grades (Email, CourseName)
-                    VALUES ("${element.Email}", "${course}")
+                    VALUES ("${escape(element.Email)}", "${escape(course)}")
                 `).execute())
                 .catch((error) => {
                     if (error.message ===
@@ -36,10 +39,9 @@ export function addStudentsToDB(data, course) {
                         " REFERENCES `Students` (`Email`))") {
                         errors.push(`Could not invite student with an email "${element.Email}."`);
                     }
-                    if(error.message.search("Duplicate") !== -1) {
+                    if (error.message.search("Duplicate") !== -1) {
                         errors.push(`The student with an email ${element.Email} has already been enrolled in the course.`)
-                    }
-                    else if(error.message) {
+                    } else if (error.message) {
                         errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
                     }
                     session.sql("ROLLBACK").execute()
@@ -52,7 +54,7 @@ export function addStudentsToDB(data, course) {
 }
 
 function getSQLValues(values) {
-    return values.map(value => `"${value}"`).join(", ")
+    return values.map(value => `"${escape(value)}"`).join(", ")
 }
 
 function getSQLBody(course, whereClause) {
@@ -60,7 +62,7 @@ function getSQLBody(course, whereClause) {
         FROM Students AS s
         JOIN Grades g ON s.Email = g.Email
         JOIN Courses c ON g.CourseName= c.CourseName
-        WHERE c.CourseName = "${course}" ${whereClause}`;
+        WHERE c.CourseName = "${escape(course)}" ${whereClause}`;
 }
 
 export function getStudentsFromDB({count, offset, course}, filters = []) {
@@ -95,7 +97,7 @@ export function getStudentsFromDB({count, offset, course}, filters = []) {
 export function removeStudentFromDB(emails) {
     return getDBSession(session => {
         const grades = session.getSchema("EPiC").getTable("Grades");
-        const whereClause = emails.map(email => `Email = "${email}"`).join(" OR ");
+        const whereClause = emails.map(email => `Email = "${escape(email)}"`).join(" OR ");
         return grades
             .delete()
             .where(whereClause)
@@ -111,10 +113,38 @@ export function setStudentGrades({data, course}) {
             ({grade, email}) =>
                 updateObj
                     .set("Grade", grade)
-                    .where(`Email = "${email}"`)
+                    .where(`Email = "${escape(email)}"`)
                     .execute()
         )
         return Promise.all(promises);
+    })
+}
+
+export function registerStudent(data) {
+    return getDBSession(session => {
+        const salt = md5(uuidV4());
+        const hash = md5(data.Pwd + salt);
+        const password = hash + salt;
+        session.sql("USE EPiC").execute();
+        let errors = {};
+        return session.sql(`
+            UPDATE Students
+            SET Username=${escape(data.Username)},
+                Pwd=${escape(password)},
+                Firstname=${escape(data.Firstname)},
+                Lastname=${escape(data.Lastname)},
+                Skill=${escape(data.Skill)},
+                StudentType=${escape(data.StudentType)},
+                Gender=${escape(data.Gender)},
+                InviteStatus='accepted'
+            WHERE Username=${escape(data.token)}
+        `).execute().then(() => errors).catch(
+            e => {
+                if(e.message.search("Duplicate entry") !== -1)
+                    return {...errors, userName:"This username was already taken."};
+                else return {...errors, global:"Unexpected error has occurred."}
+            }
+        );
     })
 }
 
@@ -122,7 +152,7 @@ function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
             filter.split(" || ").map(
-                filter => `${columnName} LIKE "%${filter}%"`
+                filter => `${columnName} LIKE "%${escape(filter)}%"`
             ).join(" OR ")
         ).join(" OR ")
     ).join(") AND (");
