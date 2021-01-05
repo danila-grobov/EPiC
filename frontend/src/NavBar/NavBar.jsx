@@ -3,6 +3,7 @@ import "../scss/navBar.scss"
 import NavBar_Dropdown from "./NavBar_Dropdown";
 import dropDownArrow from "../imgs/downArrow.svg"
 import profilePhoto from "../imgs/profilePhoto.svg"
+import Dropdown from "../general_components/Dropdown";
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
@@ -16,34 +17,38 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 //toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
 
 export default (props) => {
-    const courses = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
+    const dropOptions = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
+    const title = "COURSES";
     const {pages, pagePaths, name, adminRole} = props;
-    //const [currentCourse, setCurrentCourse] = useState("CSC2033")
+    const [currentOption, setCurrentOption] = useState(title);
     const [isAdmin, setisAdmin] = useState(false);
 
 
     return (
         <div className="menuBase">
 
-            <NavBar_Dropdown courses={courses}/>
+            <Dropdown dropOptions={dropOptions} currentOption={currentOption} setCurrentOption={setCurrentOption} />
 
             <div className="navMainMenu">
 
                 <span className="epicLogo"> EPiC </span>
 
+
                 <div className="innerMenu">
+
                     <div className= "pages">
                         <ul className="ulStyle">
                             {pages.map((page,index) =>
-                               <li className="liStyle"><a href={pagePaths[index]} className="pageName middle">{page}</a></li>
+                                <li className="liStyle"><a href={pagePaths[index]} className="pageName middle">{page}</a></li>
                             )}
                         </ul>
                     </div>
 
+
                     <div className="separator"/>
 
                     <a href="./profile.jsx" className="userName">{name}</a>
-                    <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
+                    <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     { adminRole === true ? <div className="toggleButton" >
                         <label className="switch">

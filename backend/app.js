@@ -8,9 +8,7 @@ const app = express()
 const port = 3000
 configExpress(app);
 
-app.get('/', (req, res) => {
-    res.render('index');
-});
+
 app.post('/api/students', (req, res) => {
     const {invites, course} = req.body;
     const invitesWithTokens = invites.map(invite => {
@@ -35,6 +33,11 @@ app.put('/api/students', (req, res) => {
     const data = req.body;
     registerStudent(data).then(errors => res.send(errors));
 })
+
+app.get('*', (req, res) => {
+    res.render('index');
+});
+
 function configExpress(app) {
     app.use(express.static(path.join(__dirname, '../dist')));
     app.engine('.html', require('ejs').__express);
