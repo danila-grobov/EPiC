@@ -8,10 +8,10 @@ function BarGraph({labels, seriesLabel, values}) {
         let graph = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: labels, // Array of labels
+                labels: labels,
                 datasets: [{
-                    label: seriesLabel, // Label var
-                    data: values, // Array of values
+                    label: seriesLabel,
+                    data: values,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)', // Colour for each in the array
                         'rgba(54, 162, 235, 0.2)', // Randomly generated?
