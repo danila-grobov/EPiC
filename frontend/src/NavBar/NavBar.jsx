@@ -3,6 +3,7 @@ import "../scss/navBar.scss"
 import NavBar_Dropdown from "./NavBar_Dropdown";
 import dropDownArrow from "../imgs/downArrow.svg"
 import profilePhoto from "../imgs/profilePhoto.svg"
+import Dropdown from "../general_components/Dropdown";
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
@@ -26,7 +27,7 @@ export default (props) => {
     return (
         <div className="menuBase">
 
-            <NavBar_Dropdown dropOptions={dropOptions} currentOption={currentOption} setCurrentOption={setCurrentOption} />
+            <Dropdown dropOptions={dropOptions} currentOption={currentOption} setCurrentOption={setCurrentOption} />
 
             <div className="navMainMenu">
 
