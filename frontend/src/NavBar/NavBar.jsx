@@ -16,7 +16,7 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 //toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
 
 export default (props) => {
-    const courses = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
+    const dropOptions = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
     const {pages, pagePaths, name, adminRole} = props;
     //const [currentCourse, setCurrentCourse] = useState("CSC2033")
     const [isAdmin, setisAdmin] = useState(false);
@@ -25,7 +25,7 @@ export default (props) => {
     return (
         <div className="menuBase">
 
-            <NavBar_Dropdown courses={courses}/>
+            <NavBar_Dropdown dropOptions={dropOptions}/>
 
             <div className="navMainMenu">
 

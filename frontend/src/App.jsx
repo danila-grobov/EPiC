@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./scss/app.scss";
-import Table from "./Table";
+import Table from "./table/Table";
 import NavBar from "./NavBar/NavBar";
 import NavBar_Dropdown from "./NavBar/NavBar_Dropdown";
 import {ToastContainer} from 'react-toastify';

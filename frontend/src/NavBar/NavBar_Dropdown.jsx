@@ -11,20 +11,20 @@ function buttonPush() {
 }
 
 export default (props) => {
-    const {courses} = props;
-    const [currentCourse, setCurrentCourse] = useState("COURSES")
+    const {dropOptions} = props;
+    const [currentOption, setCurrentOption] = useState("COURSES")
     const [isShown, setShow] = useState(false)
 
 
     return (
         <div className="dropdown">
         <div onClick={ ()=> setShow(!isShown)} className="navDropdown">
-            <button className="dropbtn">{currentCourse}</button>
+            <button className="dropbtn">{currentOption}</button>
 
             { isShown === true ? <div id= "dropdownContent" className="dropdown-content">
 
-                {courses.map((course) =>
-                    <li><a onClick={(event) => setCurrentCourse(event.target.innerHTML)} href="#" >{course}</a></li>
+                {dropOptions.map((dropOption) =>
+                    <li><a onClick={(event) => setCurrentOption(event.target.innerHTML)} href="#" >{dropOption}</a></li>
                     )}
 
             </div> : ""}
