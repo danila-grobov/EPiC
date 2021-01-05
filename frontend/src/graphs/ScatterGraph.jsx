@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import Chart from 'chart.js';
 
 
-function ScatterGraph({xValues, yValues}) {
+function ScatterGraph({xValues, yValues, seriesLabel}) {
 
     function generatePoints() {
         let pointsString = new Array(xValues.length);
@@ -23,10 +23,9 @@ function ScatterGraph({xValues, yValues}) {
             type: 'scatter',
             data: {
                 datasets: [{
-                    label: 'Scatter Dataset',
+                    label: seriesLabel,
                     data: generatePoints(),
-                    backgroundColor: new Array(xValues.length).fill('rgba('+randomColorNumber()+','+randomColorNumber()+','+randomColorNumber()+', 0.2)'),
-                    borderColor: new Array(xValues.length).fill('rgba('+randomColorNumber()+','+randomColorNumber()+','+randomColorNumber()+', 1)'),
+                    backgroundColor: new Array(xValues.length).fill('rgba('+randomColorNumber()+','+randomColorNumber()+','+randomColorNumber()+', 1)'),
                     borderWidth: 1
                 }]
             },

@@ -15,11 +15,11 @@ export default () => {
             - Bar - Number of tasks completed in a period
             - Bar - Current confidence (bounded)
             - Bar - Grade distribution
-            - Scatter - Confidence over a period
             - Scatter - Confidence V.S. Grade
             - Line - Average confidence over a period
             - Pie - Confidence for a specified date
             */}
+
             {/* Tick boxes to select filters
             -
             -

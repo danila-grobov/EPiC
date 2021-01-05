@@ -3,7 +3,18 @@ import Chart from 'chart.js';
 
 function BarGraph({labels, seriesLabel, values}) {
 
+    function GenColours() {
+        const colors = new Array(values.length)
+        for (let i = 0; i < values.length; i++){
+            colors[i] = 'rgba('+Math.floor(Math.random() * Math.floor(255))+','
+                +Math.floor(Math.random() * Math.floor(255))+','+Math.floor(Math.random() * Math.floor(255))+',1';
+        }
+
+        return colors;
+    }
+
     useEffect(() => {
+        const colors = GenColours;
         let ctx = document.getElementById('barGraph');
         let graph = new Chart(ctx, {
             type: 'bar',
@@ -12,22 +23,7 @@ function BarGraph({labels, seriesLabel, values}) {
                 datasets: [{
                     label: seriesLabel,
                     data: values,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)', // Colour for each in the array
-                        'rgba(54, 162, 235, 0.2)', // Randomly generated?
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgb(255,99,132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
+                    backgroundColor: colors,
                     borderWidth: 1
                 }]
             },
