@@ -10,7 +10,7 @@ export default () => {
         <div>
             <h4>Filters and Options</h4><br/>
 
-            {/* Drop down menu to choose graph
+            {/* Drop down menu to choose graph:
             - Bar - Raw Grade (bounded)
             - Bar - Number of tasks completed in a period
             - Bar - Current confidence (bounded)
@@ -19,6 +19,11 @@ export default () => {
             - Scatter - Confidence V.S. Grade
             - Line - Average confidence over a period
             - Pie - Confidence for a specified date
+            */}
+            {/* Tick boxes to select filters
+            -
+            -
+            -
             */}
         </div>
     )

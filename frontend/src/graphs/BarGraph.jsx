@@ -4,9 +4,6 @@ import Chart from 'chart.js';
 function BarGraph({labels, seriesLabel, values}) {
 
     useEffect(() => {
-        console.log(labels);
-        console.log(seriesLabel);
-        console.log(values);
         let ctx = document.getElementById('barGraph');
         let graph = new Chart(ctx, {
             type: 'bar',
