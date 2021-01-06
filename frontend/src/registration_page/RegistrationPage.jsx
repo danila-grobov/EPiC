@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import RegistrationForm from "./RegistrationForm";
 import "../scss/registration_page/registrationPage.scss";
 import axios from "axios";
-
+import sad_face from "../imgs/sad_face.svg";
 export default props => {
     const {token} = props;
     const [email, setEmail] = useState(null);
@@ -35,6 +35,12 @@ export default props => {
                     </span>
                 </div>
             </div>)
-    return "";
+    return (
+        <div className="registrationPage registrationPage--error">
+            <span className="registrationPage__oops">Oops!</span>
+            <img src={sad_face} alt="sad face" className="registrationPage__errorImg"/>
+            <span className="registrationPage__errorMessage">The registration link is not valid.</span>
+        </div>
+    )
 
 }
