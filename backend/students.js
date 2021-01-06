@@ -156,7 +156,7 @@ export function checkInviteToken(inviteToken) {
             FROM Students
             WHERE Username=${escape(inviteToken)}
         `).execute();
-    }).then(email => email.fetchOne()[0]);
+    }).then(email => email.fetchOne());
 }
 
 

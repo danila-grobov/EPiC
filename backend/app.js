@@ -1,6 +1,8 @@
 import express from "express";
 import path from "path";
 import hash from "crypto-random-string";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 import {
     addStudentsToDB,
     checkInviteToken,
@@ -38,14 +40,21 @@ app.put('/api/students/grade', (req, res) => {
 })
 app.put('/api/students', (req, res) => {
     const data = req.body;
-    registerStudent(data).then(errors => res.send(errors));
+    registerStudent(data).then(errors => {
+        if(isEmpty(errors)) {
+            req.session.email = data.Email;
+            req.session.role = "student";
+        }
+        res.send(errors)
+    });
 })
-app.get('/api/students/email',(((req, res) => {
-    const {token} = req.query;
-    checkInviteToken(token).then(email => res.send(email));
-})))
+app.get(['/register/:token', '/register'], (req, res) => {
+    const {token} = req.params;
+    checkInviteToken(token).then(email =>
+        res.render("register", {email: email ? email[0] : null,token}));
+})
 app.get('*', (req, res) => {
-    res.render('index');
+    res.render("teacher");
 });
 
 function configExpress(app) {
@@ -54,8 +63,13 @@ function configExpress(app) {
     app.set('views', path.join(__dirname, '../frontend/views'));
     app.set('view engine', 'html');
     app.use(express.json());
+    app.use(cookieParser());
+    app.use(session({secret:"777acfde385d77c06b83274bb4c50819",resave:false,saveUninitialized:false}));
     app.listen(port, () => {
         testDBConnection();
         console.log(`The app is listening at http://localhost`)
     })
+}
+function isEmpty(object) {
+    return Object.keys(object).length === 0 && object.constructor === Object;
 }

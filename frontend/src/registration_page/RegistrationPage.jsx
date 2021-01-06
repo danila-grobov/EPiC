@@ -1,16 +1,10 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import RegistrationForm from "./RegistrationForm";
 import "../scss/registration_page/registrationPage.scss";
-import axios from "axios";
 import sad_face from "../imgs/sad_face.svg";
-export default props => {
-    const {token} = props;
-    const [email, setEmail] = useState(null);
-    useEffect(() => {
-        axios.get("/api/students/email", {params: {token}}).then(({data: email}) => {
-            setEmail(email);
-        })
-    }, [])
+export default () => {
+    const email = window.email;
+    const token = window.token;
     if (email !== null)
         return (
             <div className="registrationPage">

@@ -16,9 +16,9 @@ const App = () => {
 
     return (
         <div className="app">
-            {/*<NavBar  pages={pages} pagePaths={pagePaths} name={name} adminRole={true}/>*/}
-            {/*<Table course={"CSC2033"}/>*/}
-            <RegistrationPage token={"f0c8231a0ad26d7d"}/>
+            <NavBar  pages={pages} pagePaths={pagePaths} name={name} adminRole={true}/>
+            <Table course={"CSC2033"}/>
+            {/*<RegistrationPage token={"f0c8231a0ad26d7d"}/>*/}
             <ToastContainer />
         </div>
     );

@@ -2,6 +2,8 @@
 @import "../colors";
 
 .registrationPage {
+  max-width: 1200px;
+  margin: 0 auto;
   margin-top: 10vh;
   background-color: white;
   border-radius: 15px;
@@ -17,7 +19,8 @@
 .registrationPage--error {
   grid-template-columns: max-content auto;
   row-gap: 0;
-  min-height: unset;
+  align-content: center;
+  justify-content: center;
 }
 
 .registrationPage__oops {

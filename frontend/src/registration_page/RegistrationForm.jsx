@@ -7,7 +7,7 @@ import useValid from "../hooks/useValid";
 import axios from "axios";
 import {toast} from "react-toastify";
 import Dropdown from "../general_components/Dropdown";
-
+import "../scss/app.scss";
 export default props => {
     const {inviteToken, email} = props;
     const inputStates = {
@@ -37,6 +37,7 @@ export default props => {
                 Skill: inputStates.skill.value.value,
                 StudentType: inputStates.studentType.value.value,
                 Gender: inputStates.gender.value.value,
+                Email: email,
                 token: inviteToken
             }).then(({data}) => {
                 Object.keys(data).map(
