@@ -1,12 +1,19 @@
 @import "colors";
 @import "fonts";
 
-.textInput__wrapper {
+.textInput__wrapper,.textInput__wrapper--disabled {
   width: auto;
   display: grid;
   grid-template-columns: auto 40px;
   column-gap: 20px;
   row-gap: 5px;
+}
+.textInput__wrapper--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  .textInput {
+    pointer-events: none;
+  }
 }
 .textInput__charCounter {
   font-size: 16px;

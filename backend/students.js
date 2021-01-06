@@ -148,6 +148,18 @@ export function registerStudent(data) {
     })
 }
 
+export function checkInviteToken(inviteToken) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        return session.sql(`
+            SELECT EMAIL
+            FROM Students
+            WHERE Username=${escape(inviteToken)}
+        `).execute();
+    }).then(email => email.fetchOne()[0]);
+}
+
+
 function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>

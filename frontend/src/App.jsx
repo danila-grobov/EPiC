@@ -13,8 +13,8 @@ const App = () => {
     return (
         <div className="app">
             <NavBar  pages={pages} pagePaths={pagePaths} name={name} adminRole={true}/>
-            <Table course={"CSC2033"}/>
-            <RegistrationPage token={"8682f97e26b859fc"}/>
+            {/*<Table course={"CSC2033"}/>*/}
+            <RegistrationPage token={"c12a987f021c7449"}/>
             <ToastContainer />
         </div>
     );

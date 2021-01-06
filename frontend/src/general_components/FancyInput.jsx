@@ -5,7 +5,7 @@ import "../scss/textInput.scss";
 export default props => {
     const {
         label, className = "", type = "text", onSubmit, charLimit,
-        value, setValue, errorMessage = ""
+        value, setValue, errorMessage = "", disabled = false
     } = props;
     const [focused, setFocused] = useState(false);
     const [width, setWidth] = useState(1);
@@ -26,7 +26,8 @@ export default props => {
         }
     }
     return (
-        <div className={"textInput__wrapper " + className} onClick={() => textInput.current.focus()}>
+        <div className={"textInput__wrapper " + className + (disabled ? " textInput__wrapper--disabled" : "")}
+             onClick={() => disabled ? null : textInput.current.focus()}>
             <div className={`textInput ${errorMessage.length === 0 ? "" : "textInput--error"}`}>
                 {label ? <span className={labelStyle}>{label}</span> : ""}
                 <form onSubmit={e => {

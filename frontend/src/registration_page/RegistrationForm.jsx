@@ -9,14 +9,13 @@ import {toast} from "react-toastify";
 import Dropdown from "../general_components/Dropdown";
 
 export default props => {
-    const {inviteToken} = props;
+    const {inviteToken, email} = props;
     const inputStates = {
         firstName: {...useValue(""), ...useValid("text")},
         lastName: {...useValue(""), ...useValid("text")},
         userName: {...useValue(""), ...useValid("text")},
         password: {...useValue(""), ...useValid("password")},
         confirmPassword: {...useValue(""), ...useValid("password")},
-        email: {...useValue(""), ...useValid("email")},
         skill: {...useValue("Skill Level")},
         studentType: {...useValue("Student origin")},
         gender: {...useValue("Gender")},
@@ -79,7 +78,7 @@ export default props => {
             <FancyInput label={"Confirm password"} type={"password"} charCounter={false} charLimit={30}
                         {...inputStates.confirmPassword}/>
             <FancyInput type={"email"} label={"Email address"} className={"registrationForm__email"} charLimit={40}
-                        {...inputStates.email}/>
+                        value={email} disabled={true}/>
             <Button type={"primary"} height={42} label={"REGISTER"} className={"registrationForm__button"}
                     onClick={handleSubmit}/>
         </div>

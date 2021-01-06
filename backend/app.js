@@ -1,7 +1,14 @@
 import express from "express";
 import path from "path";
 import hash from "crypto-random-string";
-import {addStudentsToDB, getStudentsFromDB, registerStudent, removeStudentFromDB, setStudentGrades} from "./students";
+import {
+    addStudentsToDB,
+    checkInviteToken,
+    getStudentsFromDB,
+    registerStudent,
+    removeStudentFromDB,
+    setStudentGrades
+} from "./students";
 import {testDBConnection} from "./database";
 
 const app = express()
@@ -33,7 +40,10 @@ app.put('/api/students', (req, res) => {
     const data = req.body;
     registerStudent(data).then(errors => res.send(errors));
 })
-
+app.get('/api/students/email',(((req, res) => {
+    const {token} = req.query;
+    checkInviteToken(token).then(email => res.send(email));
+})))
 app.get('*', (req, res) => {
     res.render('index');
 });
