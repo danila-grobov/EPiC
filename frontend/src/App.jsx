@@ -8,7 +8,7 @@ import NavBar from "./NavBar/NavBar";
 
 const App = () => {
     const pages = ["HOME", "TASKS", "MANAGE"];
-    const pagePaths = [<Link to="/">HOME</Link>, "./tasks.jsx", "./manage.jsx"];
+    const pagePaths = ["dsfasd", "./tasks.jsx", "./manage.jsx"];
     const name = "Hello, Dwight";
 
     //const [currentCourse, setCurrentCourse] = useState("CSC2033");

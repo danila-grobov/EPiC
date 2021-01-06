@@ -16,9 +16,9 @@ export default props => {
         userName: {...useValue(""), ...useValid("text")},
         password: {...useValue(""), ...useValid("password")},
         confirmPassword: {...useValue(""), ...useValid("password")},
-        skill: {...useValue("Skill Level")},
-        studentType: {...useValue("Student origin")},
-        gender: {...useValue("Gender")},
+        skill: {...useValue({label: "Skill Level", value: null})},
+        studentType: {...useValue({label: "Student origin", value: null})},
+        gender: {...useValue({label: "Gender", value:null})},
     }
     const handleSubmit = () => {
         const inputsValid = Object.values(inputStates).reduce((valid, input) => {
@@ -34,9 +34,9 @@ export default props => {
                 Lastname: inputStates.lastName.value,
                 Username: inputStates.userName.value,
                 Pwd: inputStates.password.value,
-                Skill: inputStates.skill.value,
-                StudentType: inputStates.studentType.value,
-                Gender: inputStates.gender.value,
+                Skill: inputStates.skill.value.value,
+                StudentType: inputStates.studentType.value.value,
+                Gender: inputStates.gender.value.value,
                 token: inviteToken
             }).then(({data}) => {
                 Object.keys(data).map(
@@ -60,17 +60,31 @@ export default props => {
             <FancyInput label={"Username"} charLimit={20} {...inputStates.userName}/>
             <Dropdown currentOption={inputStates.skill.value}
                       setCurrentOption={inputStates.skill.setValue}
-                      dropOptions={["Advanced", "Intermediate", "Beginner", "Prefer not to say"]}
+                      dropOptions={[
+                          {label:"Advanced", value: "Advanced"},
+                          {label:"Intermediate", value: "Intermediate"},
+                          {label:"Beginner", value: "Beginner"},
+                          {label:"Prefer not to say", value: null}]}
                       className={"registrationForm__dropdown"}
             />
             <Dropdown currentOption={inputStates.gender.value}
                       setCurrentOption={inputStates.gender.setValue}
-                      dropOptions={["Male", "Female", "Non-Binary", "Prefer not to say"]}
+                      dropOptions={[
+                          {label: "Male", value:"Male"},
+                          {label: "Female", value: "Female"},
+                          {label: "Non-Binary", value: "Non-Binary"},
+                          {label: "Prefer not to say", value: null}
+                      ]}
                       className={"registrationForm__dropdown"}
             />
             <Dropdown currentOption={inputStates.studentType.value}
                       setCurrentOption={inputStates.studentType.setValue}
-                      dropOptions={["UK Students", "EU Students", "International Students", "Prefer not to say"]}
+                      dropOptions={[
+                          {label:"UK Students", value: "UK Students"},
+                          {label:"EU Students", value: "EU Students"},
+                          {label:"International Students", value:"International Students"},
+                          {label:"Prefer not to say", value:null}
+                      ]}
                       className={"registrationForm__dropdown"}
             />
             <FancyInput label={"Password"} type={"password"} charCounter={false} charLimit={30}
