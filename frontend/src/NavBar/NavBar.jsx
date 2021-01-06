@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import "../scss/navBar.scss";
-import dropDownArrow from "../imgs/downArrow.svg"
+import "../scss/navBar.scss"
 import profilePhoto from "../imgs/profilePhoto.svg"
 import Dropdown from "../general_components/Dropdown";
 //controls all of the nav bar.
@@ -16,8 +15,9 @@ import Dropdown from "../general_components/Dropdown";
 //toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
 
 export default (props) => {
-    const dropOptions = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
-    const title = "COURSES";
+    const dropOptions = [{value: "CSC2031", label: "CSC2031"},{value:"CSC2032", label: "CSC2032"},
+        {value:"CSC2033", label:"CSC2033"},{value:"CSC2034", label:"CSC2034"},{value:"CSC2035", label:"CSC2035"}];
+    const title = {value : "COURSES", label : "COURSES"};
     const {pages, pagePaths, name, adminRole} = props;
     const [currentOption, setCurrentOption] = useState(title);
     const [isAdmin, setisAdmin] = useState(false);

@@ -14,16 +14,19 @@ export default (props) => {
     const {dropOptions, className="", currentOption, setCurrentOption} = props;
     const [isShown, setShow] = useState(false)
 
+
+
     return (
         <div className={"dropdown " + className} onBlur={ ()=> setShow(false)} tabIndex='-1'>
 
             <div onClick={ ()=> setShow(!isShown)} className="dropdownBase">
-                <button className="dropbtn">{currentOption}</button>
+                <button className="dropbtn">{currentOption.label}</button>
 
                 { isShown === true ? <div id= "dropdownContent" className="dropdown-content">
                     {dropOptions.map((dropOption) =>
-                        <li><a onMouseDown={(event) => setCurrentOption(event.target.innerHTML)} href="#" >{dropOption}</a></li>
+                        <li><a onMouseDown={(event) => setCurrentOption(dropOption)}>{dropOption.label}</a></li>
                     )}
+
                 </div> : ""}
                 <button className="dropbtn-2"><img src={dropDownArrow} alt="Dropdown menu icon" className="dropdown__icon"/></button>
             </div>
