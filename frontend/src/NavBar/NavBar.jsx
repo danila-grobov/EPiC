@@ -18,7 +18,7 @@ export default (props) => {
     const dropOptions = [{value: "CSC2031", label: "CSC2031"},{value:"CSC2032", label: "CSC2032"},
         {value:"CSC2033", label:"CSC2033"},{value:"CSC2034", label:"CSC2034"},{value:"CSC2035", label:"CSC2035"}];
     const title = {value : "COURSES", label : "COURSES"};
-    const {pages, pagePaths, name, adminRole} = props;
+    const {pagePaths, name, adminRole} = props;
     const [currentOption, setCurrentOption] = useState(title);
     const [isAdmin, setisAdmin] = useState(false);
 
@@ -37,8 +37,8 @@ export default (props) => {
 
                     <div className= "pages">
                         <ul className="ulStyle">
-                            {pages.map((page,index) =>
-                                <li className="liStyle"><a href={pagePaths[index]} className="pageName middle">{page}</a></li>
+                            {pagePaths.map((page) =>
+                                <li className="liStyle"><a className="pageName middle">{page}</a></li>
                             )}
                         </ul>
                     </div>

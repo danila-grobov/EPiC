@@ -8,12 +8,14 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
 } from "react-router-dom";
 
 const App = () => {
-    const pages = ["HOME", "TASKS", "MANAGE"];
-    const pagePaths = [<Link to="/">HOME</Link>, "./tasks.jsx", "./manage.jsx"];
+    const pagePaths = [<Link to="/">HOME</Link>,
+        <Link to="/tasks">TASKS</Link>,
+        <Link to="/manage">MANAGE</Link>];
     const name = "Hello, Dwight";
 
     //const [currentCourse, setCurrentCourse] = useState("CSC2033");
@@ -24,15 +26,24 @@ const App = () => {
             <div className="app">
 
                 <Switch>
+
+
                     <Route path="/">
-                        <NavBar pages={pages} pagePaths={pagePaths} name={name} adminRole={false}/>
+                        <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
                         <Table course={"CSC2033"}/>
                     </Route>
 
                     <Route path="/tasks">
-
-
+                        <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
                     </Route>
+
+                    <Route path="/manage">
+                        <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
+                        <Table course={"CSC2033"}/>
+                    </Route>
+
+
+                    <Redirect to="/"/>
 
                 </Switch>
 

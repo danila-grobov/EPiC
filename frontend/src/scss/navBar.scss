@@ -63,6 +63,13 @@ $animate: all 0.2s ease-in-out;
     text-align: center;
 }
 
+a:-webkit-any-link {
+    color: $text;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
 .ulStyle{
     list-style-type: none;
 
