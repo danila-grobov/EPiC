@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import FancyInput from "../general_components/FancyInput";
 import "../scss/registration_page/registrationForm.scss";
 import Button from "../general_components/Button";
@@ -8,8 +8,10 @@ import axios from "axios";
 import {toast} from "react-toastify";
 import Dropdown from "../general_components/Dropdown";
 import "../scss/app.scss";
+
 export default props => {
     const {inviteToken, email} = props;
+    const [loadingState, setLoadingState] = useState("idle");
     const inputStates = {
         firstName: {...useValue(""), ...useValid("text")},
         lastName: {...useValue(""), ...useValid("text")},
@@ -18,17 +20,18 @@ export default props => {
         confirmPassword: {...useValue(""), ...useValid("password")},
         skill: {...useValue({label: "Skill Level", value: null})},
         studentType: {...useValue({label: "Student origin", value: null})},
-        gender: {...useValue({label: "Gender", value:null})},
+        gender: {...useValue({label: "Gender", value: null})},
     }
     const handleSubmit = () => {
         const inputsValid = Object.values(inputStates).reduce((valid, input) => {
                 if (input.checkValidity)
                     return input.checkValidity(input.value) && valid
-                return true;
+                return valid
             }, true
         );
         const passwordsMatch = inputStates.password.value === inputStates.confirmPassword.value;
-        if (inputsValid && passwordsMatch)
+        if (inputsValid && passwordsMatch) {
+            setLoadingState("loading");
             axios.put("/api/students", {
                 Firstname: inputStates.firstName.value,
                 Lastname: inputStates.lastName.value,
@@ -46,12 +49,20 @@ export default props => {
                 )
                 if (data.global)
                     toast.error(data.global)
-                if (isEmpty(data))
-                    toast.success("You have been registered!")
+                if (!isEmpty(data)) {
+                    setLoadingState("error");
+                    setTimeout(() => setLoadingState("idle"), 1000);
+                } else {
+                    window.location = "/";
+                }
             });
-        else if (!passwordsMatch) {
-            inputStates.password.setErrorMessage("The passwords do not match.");
-            inputStates.confirmPassword.setErrorMessage("The passwords do not match.");
+        } else {
+            if (!passwordsMatch) {
+                inputStates.password.setErrorMessage("The passwords do not match.");
+                inputStates.confirmPassword.setErrorMessage("The passwords do not match.");
+            }
+            setLoadingState("error");
+            setTimeout(() => setLoadingState("idle"), 1000);
         }
     }
     return (
@@ -62,16 +73,16 @@ export default props => {
             <Dropdown currentOption={inputStates.skill.value}
                       setCurrentOption={inputStates.skill.setValue}
                       dropOptions={[
-                          {label:"Advanced", value: "Advanced"},
-                          {label:"Intermediate", value: "Intermediate"},
-                          {label:"Beginner", value: "Beginner"},
-                          {label:"Prefer not to say", value: null}]}
+                          {label: "Advanced", value: "Advanced"},
+                          {label: "Intermediate", value: "Intermediate"},
+                          {label: "Beginner", value: "Beginner"},
+                          {label: "Prefer not to say", value: null}]}
                       className={"registrationForm__dropdown"}
             />
             <Dropdown currentOption={inputStates.gender.value}
                       setCurrentOption={inputStates.gender.setValue}
                       dropOptions={[
-                          {label: "Male", value:"Male"},
+                          {label: "Male", value: "Male"},
                           {label: "Female", value: "Female"},
                           {label: "Non-Binary", value: "Non-Binary"},
                           {label: "Prefer not to say", value: null}
@@ -81,10 +92,10 @@ export default props => {
             <Dropdown currentOption={inputStates.studentType.value}
                       setCurrentOption={inputStates.studentType.setValue}
                       dropOptions={[
-                          {label:"UK Students", value: "UK Students"},
-                          {label:"EU Students", value: "EU Students"},
-                          {label:"International Students", value:"International Students"},
-                          {label:"Prefer not to say", value:null}
+                          {label: "UK Students", value: "UK Students"},
+                          {label: "EU Students", value: "EU Students"},
+                          {label: "International Students", value: "International Students"},
+                          {label: "Prefer not to say", value: null}
                       ]}
                       className={"registrationForm__dropdown"}
             />
@@ -95,7 +106,7 @@ export default props => {
             <FancyInput type={"email"} label={"Email address"} className={"registrationForm__email"} charLimit={40}
                         value={email} disabled={true}/>
             <Button type={"primary"} height={42} label={"REGISTER"} className={"registrationForm__button"}
-                    onClick={handleSubmit}/>
+                    onClick={handleSubmit} status={loadingState}/>
         </div>
     )
 }
