@@ -48,7 +48,7 @@ app.put('/api/students', (req, res) => {
         res.send(errors)
     });
 })
-app.get('/api/student',(req, res) => {
+app.get('/api/student/login',(req, res) => {
     const {username, password} = req.query;
     getStudent(username, password).then(success => res.send(success));
 })

@@ -22,7 +22,7 @@ export default () => {
         if (inputsValid) {
             setLoadingState("loading")
             axios
-                .get("/api/student", {
+                .get("/api/student/login", {
                     params: {
                         username: inputStates.userName.value,
                         password: md5(inputStates.password.value)
