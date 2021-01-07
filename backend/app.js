@@ -53,6 +53,9 @@ app.get(['/register/:token', '/register'], (req, res) => {
     checkInviteToken(token).then(email =>
         res.render("register", {email: email ? email[0] : null,token}));
 })
+app.get('/login', (req, res) => {
+    res.render("login");
+});
 app.get('*', (req, res) => {
     res.render("teacher");
 });

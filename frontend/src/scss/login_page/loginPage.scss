@@ -1,0 +1,24 @@
+@import "../fonts";
+@import "../colors";
+.loginPage {
+  max-width: 1200px;
+  background-color: white;
+  margin: 10vh auto;
+  border-radius: 15px;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  row-gap: 72px;
+  grid-template-columns: 260px;
+  min-height: 723px;
+}
+.loginPage__title {
+  color: $text;
+  font-family: $font_lack;
+  font-size: 48px;
+  text-align: center;
+}
+.loginPage__inputs {
+  display: grid;
+  grid-gap: 35px;
+}

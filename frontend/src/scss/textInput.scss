@@ -4,7 +4,7 @@
 .textInput__wrapper,.textInput__wrapper--disabled {
   width: auto;
   display: grid;
-  grid-template-columns: auto 40px;
+  grid-template-columns: 1fr 60px;
   column-gap: 20px;
   row-gap: 5px;
 }
@@ -89,6 +89,7 @@
   line-height: 40px;
   height: 40px;
   background: white;
+  position: absolute;
   pointer-events: none;
   transition: 0.1s;
   transition-timing-function: ease-out;
@@ -100,7 +101,6 @@
   font-size: 18px;
   background: white;
   line-height: 23px;
-  position: absolute;
   height: 23px;
   top: -18px;
   margin-left: -5px;

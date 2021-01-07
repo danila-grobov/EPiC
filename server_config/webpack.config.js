@@ -3,6 +3,7 @@ module.exports = {
     //The file to start interpretation from.
     entry: {
         teacher : "./frontend/src/teacher_index.jsx",
+        login : "./frontend/src/login_index.jsx",
         register: "./frontend/src/register_index.jsx"
     },
     mode: "development",
