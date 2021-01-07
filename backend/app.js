@@ -50,7 +50,13 @@ app.put('/api/students', (req, res) => {
 })
 app.get('/api/student/login',(req, res) => {
     const {username, password} = req.query;
-    getStudent(username, password).then(success => res.send(success));
+    getStudent(username, password).then(email => {
+        if(email) {
+            req.session.email = email;
+            req.session.role = "student";
+        }
+        res.send(email)
+    });
 })
 app.get(['/register/:token', '/register'], (req, res) => {
     const {token} = req.params;
@@ -61,7 +67,13 @@ app.get('/login', (req, res) => {
     res.render("login");
 });
 app.get('*', (req, res) => {
-    res.render("teacher");
+    if(req.session.role === "teacher") {
+        res.render("teacher");
+    } else if(req.session.role === "student") {
+        res.render("student");
+    } else {
+        res.redirect(303,"/login");
+    }
 });
 
 function configExpress(app) {

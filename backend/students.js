@@ -162,16 +162,16 @@ export function getStudent(username, password) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
         return session.sql(`
-            SELECT Pwd
+            SELECT Pwd, Email
             FROM Students
             WHERE Username=${escape(username)}
         `).execute()
     }).then(res => {
-        const actualPassword = res.fetchOne();
-        if(actualPassword) {
-            const salt = actualPassword[0].slice(32,64);
+        const data = res.fetchOne();
+        if(data) {
+            const salt = data[0].slice(32,64);
             const hashedPassword = hashPassword(password, salt);
-            return actualPassword[0] === hashedPassword;
+            return data[0] === hashedPassword ? data[1] : false;
         } return false;
     });
 }

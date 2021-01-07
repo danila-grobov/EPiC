@@ -4,7 +4,8 @@ module.exports = {
     entry: {
         teacher : "./frontend/src/teacher_index.jsx",
         login : "./frontend/src/login_index.jsx",
-        register: "./frontend/src/register_index.jsx"
+        register: "./frontend/src/register_index.jsx",
+        student: "./frontend/src/student_index.jsx"
     },
     mode: "development",
     devtool:"eval-source-map",
