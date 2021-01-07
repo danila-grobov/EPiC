@@ -51,7 +51,10 @@ module.exports = {
         //Extensions that can be used as modules
         //import "file.js" is an example of .js
         extensions: ["*", ".js", ".jsx"],
-        modules: [path.resolve(__dirname,"frontend/src"),"node_modules"]
+        modules: ["node_modules",path.resolve(__dirname,"frontend/src")],
+        alias: {
+            "axios_redirect": path.resolve(__dirname, "frontend/src/modified_axios.js")
+        }
     },
     output: {
         path: path.resolve(__dirname, "dist/"),

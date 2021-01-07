@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import SearchPhrase from "../table/SearchPhrase";
-import axios from "axios";
+import axios from "axios_redirect";
 import {toast} from "react-toastify";
 
 export default (course, checkValidity, reset) => {
@@ -18,7 +18,7 @@ export default (course, checkValidity, reset) => {
     ).reverse();
     const sendInvites = setLoadState => {
         setLoadState("loading")
-        axios.post('/api/students', {invites, course})
+        axios.post('/api/t/students', {invites, course})
             .then(function ({data: errors}) {
                 setTimeout(() => {
                     if (errors.length === 0) {

@@ -4,7 +4,7 @@ import "../scss/registration_page/registrationForm.scss";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";
-import axios from "axios";
+import axios from "axios_redirect";
 import {toast} from "react-toastify";
 import Dropdown from "../general_components/Dropdown";
 import "../scss/app.scss";
@@ -32,7 +32,7 @@ export default props => {
         const passwordsMatch = inputStates.password.value === inputStates.confirmPassword.value;
         if (inputsValid && passwordsMatch) {
             setLoadingState("loading");
-            axios.put("/api/students", {
+            axios.put("/api/register", {
                 Firstname: inputStates.firstName.value,
                 Lastname: inputStates.lastName.value,
                 Username: inputStates.userName.value,
@@ -42,19 +42,15 @@ export default props => {
                 Gender: inputStates.gender.value.value,
                 Email: email,
                 token: inviteToken
-            }).then(({data}) => {
-                Object.keys(data).map(
+            }).then(({errors}) => {
+                Object.keys(errors).map(
                     errorType =>
                         inputStates[errorType] ? inputStates[errorType].setErrorMessage(data[errorType]) : null
                 )
-                if (data.global)
+                if (errors.global)
                     toast.error(data.global)
-                if (!isEmpty(data)) {
-                    setLoadingState("error");
-                    setTimeout(() => setLoadingState("idle"), 1000);
-                } else {
-                    window.location = "/";
-                }
+                setLoadingState("error");
+                setTimeout(() => setLoadingState("idle"), 1000);
             });
         } else {
             if (!passwordsMatch) {

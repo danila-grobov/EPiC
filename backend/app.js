@@ -17,45 +17,49 @@ const app = express()
 const port = 3000
 configExpress(app);
 
-
-app.post('/api/students', (req, res) => {
+app.post('/api/t/students', (req, res) => {
     const {invites, course} = req.body;
+    // console.log()
     const invitesWithTokens = invites.map(invite => {
         return {Email: invite, Username: hash({length: 16}), InviteStatus: "waiting"}
     })
     addStudentsToDB(invitesWithTokens, course).then(errors => res.send(errors));
 })
-app.get('/api/students', ((req, res) => {
+app.get('/api/t/students', ((req, res) => {
     const {offset, count, filters, course} = req.query;
     getStudentsFromDB({count, offset, course}, filters)
         .then(dataObj => res.send(dataObj));
 }))
-app.delete('/api/students', (req, res) => {
+app.delete('/api/t/students', (req, res) => {
     const {emails = []} = req.query;
     removeStudentFromDB(emails).then(() => res.send());
 })
-app.put('/api/students/grade', (req, res) => {
+app.put('/api/t/students/grade', (req, res) => {
     const {data, course} = req.body;
     setStudentGrades({data, course}).then(() => res.send());
 })
-app.put('/api/students', (req, res) => {
+app.put('/api/register', (req, res) => {
     const data = req.body;
     registerStudent(data).then(errors => {
         if(isEmpty(errors)) {
             req.session.email = data.Email;
             req.session.role = "student";
+            res.status(303).send("/");
+        } else {
+            res.send(errors)
         }
-        res.send(errors)
     });
 })
-app.get('/api/student/login',(req, res) => {
+app.get('/api/login',(req, res) => {
     const {username, password} = req.query;
     getStudent(username, password).then(email => {
         if(email) {
             req.session.email = email;
             req.session.role = "student";
+            res.status(303).send("/");
+        } else {
+            res.send(false);
         }
-        res.send(email)
     });
 })
 app.get(['/register/:token', '/register'], (req, res) => {
@@ -84,6 +88,13 @@ function configExpress(app) {
     app.use(express.json());
     app.use(cookieParser());
     app.use(session({secret:"777acfde385d77c06b83274bb4c50819",resave:false,saveUninitialized:false}));
+    app.use("/api/t/", (req, res, next) => {
+        if(req.session.role === "teacher") {
+            next();
+        } else {
+            res.status(303).send("/login");
+        }
+    });
     app.listen(port, () => {
         testDBConnection();
         console.log(`The app is listening at http://localhost`)

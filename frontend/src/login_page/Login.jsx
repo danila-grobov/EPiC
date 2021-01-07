@@ -5,7 +5,7 @@ import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";
 import "../scss/login_page/loginPage.scss";
 import "../scss/app.scss";
-import axios from "axios";
+import axios from "axios_redirect";
 import md5 from "md5";
 
 export default () => {
@@ -22,20 +22,16 @@ export default () => {
         if (inputsValid) {
             setLoadingState("loading")
             axios
-                .get("/api/student/login", {
+                .get("/api/login", {
                     params: {
                         username: inputStates.userName.value,
                         password: md5(inputStates.password.value)
                     }
                 }).then(res => {
-                const {data} = res;
-                if (data) window.location = "/"
-                else {
                     inputStates.userName.setErrorMessage("The username or password is incorrect.")
                     inputStates.password.setErrorMessage("The username or password is incorrect.")
                     setLoadingState("error")
                     setTimeout(() => setLoadingState("idle"),1000);
-                }
             })
         }
     }

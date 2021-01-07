@@ -5,7 +5,7 @@ import TableContent from "./TableContent";
 import TableButtons from "./TableButtons";
 import TableNavigation from "./TableNavigation";
 import InvitePopup from "./InvitePopup";
-import axios from "axios";
+import axios from "axios_redirect";
 import {stringify} from "qs";
 
 export default ({course}) => {
@@ -49,7 +49,7 @@ export default ({course}) => {
 
 function getStudentData(params, callback) {
     axios
-        .get("/api/students", {
+        .get("/api/t/students", {
             params,
             // axios doesn't support arrays in params, that's a workaround
             paramsSerializer: params => stringify(params)
@@ -62,7 +62,7 @@ function getEmails(selectedCheckboxes, data) {
         .filter(id => id !== 0)
         .map(id => {
             const dataRow = data[id];
-            return dataRow ? dataRow[3].value : ""
+            return dataRow ? dataRow[3].value : "";
         })
         .filter(email => email !== "")
 }

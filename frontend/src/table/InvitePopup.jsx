@@ -1,13 +1,10 @@
-import React, {useState, useRef} from "react"
+import React, {useState} from "react"
 import "../scss/table/invitePopup.scss"
 import remove_dark from "../imgs/remove__dark.svg"
 import Button from "../general_components/Button";
-import SearchPhrase from "./SearchPhrase";
 import FileInput from "../general_components/FileInput";
 import ScrollableContainer from "../general_components/ScrollableContainer";
-import FancyInput, {inputTypes} from "../general_components/FancyInput";
-import axios from "axios";
-import {toast} from "react-toastify";
+import FancyInput from "../general_components/FancyInput";
 import useValid from "../hooks/useValid";
 import useInvite from "../hooks/useInvite";
 import useValue from "../hooks/useValue";
