@@ -1,13 +1,13 @@
 CREATE DATABASE IF NOT EXISTS EPiC;
 USE EPiC;
 CREATE TABLE Teachers (
-Username varchar(50) NOT NULL,
+Username varchar(50) NOT NULL UNIQUE,
 Pwd varchar(200) NOT NULL,
 Firstname varchar(50) NOT NULL,
 Lastname varchar(50) NOT NULL,
 Email varchar(50) NOT NULL,
 Admin boolean NOT NULL,
-PRIMARY KEY(Username)
+PRIMARY KEY(Email)
 );
 
 CREATE TABLE Students (
@@ -60,4 +60,13 @@ FOREIGN KEY (Username)
         REFERENCES Students(Username),
 FOREIGN KEY (TaskID)
         REFERENCES Tasks(TaskID)
+);
+
+CREATE TABLE Teaches(
+CourseName varchar(10) NOT NULL,
+Email varchar(50) UNIQUE ,
+FOREIGN KEY (CourseName)
+   REFERENCES Courses(CourseName),
+FOREIGN KEY (Email)
+   REFERENCES Teachers(Email)
 );
