@@ -13,7 +13,7 @@ import {
 } from "react-router-dom";
 
 const App = () => {
-    const pagePaths = [<Link to="/">HOME</Link>,
+    const pagePaths = [<Link to="/home">HOME</Link>,
         <Link to="/tasks">TASKS</Link>,
         <Link to="/manage">MANAGE</Link>];
     const name = "Hello, Dwight";
@@ -25,15 +25,7 @@ const App = () => {
         <Router>
             <div className="app">
 
-                <Switch>
-
-
-                    <Route path="/">
-                        <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
-                        <Table course={"CSC2033"}/>
-                    </Route>
-
-                    <Route path="/tasks">
+                    <Route path="/profile">
                         <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
                     </Route>
 
@@ -42,10 +34,19 @@ const App = () => {
                         <Table course={"CSC2033"}/>
                     </Route>
 
+                    <Route path="/tasks">
+                        <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
+                    </Route>
 
-                    <Redirect to="/"/>
+                    <Route path="/home">
+                        <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
+                    </Route>
 
-                </Switch>
+                    <Route path="/">
+                        <Redirect to="/home"/>
+                    </Route>
+
+
 
                 <ToastContainer/>
             </div>

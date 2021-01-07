@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import "../scss/navBar.scss"
 import profilePhoto from "../imgs/profilePhoto.svg"
 import Dropdown from "../general_components/Dropdown";
+import {Link} from "react-router-dom";
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
@@ -30,7 +31,7 @@ export default (props) => {
 
             <div className="navMainMenu">
 
-                <span className="epicLogo"> EPiC </span>
+                <Link to="/home" className="epicLogo">EPiC</Link>
 
 
                 <div className="innerMenu">
@@ -46,7 +47,8 @@ export default (props) => {
 
                     <div className="separator"/>
 
-                    <a href="./profile.jsx" className="userName">{name}</a>
+
+                    <Link to="/profile" className="userName">{name} </Link>
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     { adminRole === true ? <div className="toggleButton" >
