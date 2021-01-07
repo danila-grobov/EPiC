@@ -8,7 +8,7 @@ import axios from "axios";
 import {toast} from "react-toastify";
 import Dropdown from "../general_components/Dropdown";
 import "../scss/app.scss";
-
+import md5 from "md5";
 export default props => {
     const {inviteToken, email} = props;
     const [loadingState, setLoadingState] = useState("idle");
@@ -36,7 +36,7 @@ export default props => {
                 Firstname: inputStates.firstName.value,
                 Lastname: inputStates.lastName.value,
                 Username: inputStates.userName.value,
-                Pwd: inputStates.password.value,
+                Pwd: md5(inputStates.password.value),
                 Skill: inputStates.skill.value.value,
                 StudentType: inputStates.studentType.value.value,
                 Gender: inputStates.gender.value.value,
@@ -67,9 +67,9 @@ export default props => {
     }
     return (
         <div className="registrationForm">
-            <FancyInput label={"First name"} {...inputStates.firstName}/>
-            <FancyInput label={"Last name"} {...inputStates.lastName}/>
-            <FancyInput label={"Username"} charLimit={20} {...inputStates.userName}/>
+            <FancyInput onSubmit={handleSubmit} label={"First name"} {...inputStates.firstName}/>
+            <FancyInput onSubmit={handleSubmit} label={"Last name"} {...inputStates.lastName}/>
+            <FancyInput onSubmit={handleSubmit} label={"Username"} charLimit={20} {...inputStates.userName}/>
             <Dropdown currentOption={inputStates.skill.value}
                       setCurrentOption={inputStates.skill.setValue}
                       dropOptions={[
@@ -99,12 +99,12 @@ export default props => {
                       ]}
                       className={"registrationForm__dropdown"}
             />
-            <FancyInput label={"Password"} type={"password"} charCounter={false} charLimit={30}
-                        {...inputStates.password}/>
-            <FancyInput label={"Confirm password"} type={"password"} charCounter={false} charLimit={30}
-                        {...inputStates.confirmPassword}/>
-            <FancyInput type={"email"} label={"Email address"} className={"registrationForm__email"} charLimit={40}
-                        value={email} disabled={true}/>
+            <FancyInput onSubmit={handleSubmit} label={"Password"} type={"password"} charCounter={false}
+                        charLimit={30} {...inputStates.password}/>
+            <FancyInput onSubmit={handleSubmit} label={"Confirm password"} type={"password"} charCounter={false}
+                        charLimit={30} {...inputStates.confirmPassword}/>
+            <FancyInput onSubmit={handleSubmit} type={"email"} label={"Email address"}
+                        className={"registrationForm__email"} charLimit={40} value={email} disabled={true}/>
             <Button type={"primary"} height={42} label={"REGISTER"} className={"registrationForm__button"}
                     onClick={handleSubmit} status={loadingState}/>
         </div>

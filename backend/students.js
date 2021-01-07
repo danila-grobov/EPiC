@@ -123,8 +123,7 @@ export function setStudentGrades({data, course}) {
 export function registerStudent(data) {
     return getDBSession(session => {
         const salt = md5(uuidV4());
-        const hash = md5(data.Pwd + salt);
-        const password = hash + salt;
+        const password = hashPassword(data.Pwd, salt);
         session.sql("USE EPiC").execute();
         let errors = {};
         return session.sql(`
@@ -159,6 +158,23 @@ export function checkInviteToken(inviteToken) {
     }).then(email => email.fetchOne());
 }
 
+export function getStudent(username, password) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        return session.sql(`
+            SELECT Pwd
+            FROM Students
+            WHERE Username=${escape(username)}
+        `).execute()
+    }).then(res => {
+        const actualPassword = res.fetchOne();
+        if(actualPassword) {
+            const salt = actualPassword[0].slice(32,64);
+            const hashedPassword = hashPassword(password, salt);
+            return actualPassword[0] === hashedPassword;
+        } return false;
+    });
+}
 
 function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
@@ -188,4 +204,9 @@ function formatStudentArray(array) {
         return {value, type}
     }));
     return [header, ...valuesWithType]
+}
+
+function hashPassword(password, salt) {
+    const hash = md5(password + salt);
+    return hash + salt;
 }

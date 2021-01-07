@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import {
     addStudentsToDB,
-    checkInviteToken,
+    checkInviteToken, getStudent,
     getStudentsFromDB,
     registerStudent,
     removeStudentFromDB,
@@ -47,6 +47,10 @@ app.put('/api/students', (req, res) => {
         }
         res.send(errors)
     });
+})
+app.get('/api/student',(req, res) => {
+    const {username, password} = req.query;
+    getStudent(username, password).then(success => res.send(success));
 })
 app.get(['/register/:token', '/register'], (req, res) => {
     const {token} = req.params;
