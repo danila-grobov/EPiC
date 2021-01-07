@@ -20,11 +20,12 @@ export function addStudentsToDB(data, course) {
                 `)
                 .execute()
                 .then(
-                    () => emailMessage(
-                        domainName + "register/" + element.Username,
-                        element.Email)
+                    // () => emailMessage(
+                    //     domainName + "register/" + element.Username,
+                    //     element.Email)
                 )
                 .catch(e => {
+                    console.log(e.message);
                     //ignore any errors regarding student invite
                     session.sql("ROLLBACK").execute();
                 })
@@ -33,13 +34,13 @@ export function addStudentsToDB(data, course) {
                     VALUES (${escape(element.Email)}, ${escape(course)})
                 `).execute())
                 .catch((error) => {
+                    console.log(error.message);
                     if (error.message ===
                         "Cannot add or update a child row: a foreign key constraint fails" +
                         " (`EPiC`.`Grades`, CONSTRAINT `Grades_ibfk_2` FOREIGN KEY (`Email`)" +
                         " REFERENCES `Students` (`Email`))") {
                         errors.push(`Could not invite student with an email "${element.Email}."`);
-                    }
-                    if (error.message.search("Duplicate") !== -1) {
+                    } else if (error.message.search("Duplicate") !== -1) {
                         errors.push(`The student with an email ${element.Email} has already been enrolled in the course.`)
                     } else if (error.message) {
                         errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
@@ -206,7 +207,7 @@ function formatStudentArray(array) {
     return [header, ...valuesWithType]
 }
 
-function hashPassword(password, salt) {
+export function hashPassword(password, salt) {
     const hash = md5(password + salt);
     return hash + salt;
 }

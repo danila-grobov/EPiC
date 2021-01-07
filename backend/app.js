@@ -12,6 +12,7 @@ import {
     setStudentGrades
 } from "./students";
 import {testDBConnection} from "./database";
+import {getTeacher} from "./teacher";
 
 const app = express()
 const port = 3000
@@ -19,7 +20,6 @@ configExpress(app);
 
 app.post('/api/t/students', (req, res) => {
     const {invites, course} = req.body;
-    // console.log()
     const invitesWithTokens = invites.map(invite => {
         return {Email: invite, Username: hash({length: 16}), InviteStatus: "waiting"}
     })
@@ -58,7 +58,15 @@ app.get('/api/login',(req, res) => {
             req.session.role = "student";
             res.status(303).send("/");
         } else {
-            res.send(false);
+            getTeacher(username, password).then(email => {
+                if(email) {
+                    req.session.email = email;
+                    req.session.role = "teacher";
+                    res.status(303).send("/");
+                } else {
+                    res.send(false);
+                }
+            })
         }
     });
 })

@@ -28,10 +28,12 @@ export default () => {
                         password: md5(inputStates.password.value)
                     }
                 }).then(res => {
-                    inputStates.userName.setErrorMessage("The username or password is incorrect.")
-                    inputStates.password.setErrorMessage("The username or password is incorrect.")
-                    setLoadingState("error")
-                    setTimeout(() => setLoadingState("idle"),1000);
+                    if(res) {
+                        inputStates.userName.setErrorMessage("The username or password is incorrect.")
+                        inputStates.password.setErrorMessage("The username or password is incorrect.")
+                        setLoadingState("error")
+                        setTimeout(() => setLoadingState("idle"),1000);
+                    }
             })
         }
     }

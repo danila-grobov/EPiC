@@ -61,3 +61,20 @@ FOREIGN KEY (Username)
 FOREIGN KEY (TaskID)
         REFERENCES Tasks(TaskID)
 );
+INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin)
+VALUES ('Teacher1',
+        'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec',
+        'Nick',
+        'Cook',
+        'teacher@ncl.ac.uk',
+        1);
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2033','#7A306C');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2031','#F28F38');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2032','#F28F38');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2034','#C8553D');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2035','#7A306C');
