@@ -1,0 +1,21 @@
+@import "../fonts";
+.courseCard {
+  min-width: 216px - 40px;
+  min-height: 127px - 40px;
+  width: min-content;
+  padding: 20px;
+  border-radius: 5px;
+  background: white;
+  display: grid;
+  justify-content: start;
+}
+.courseCard__courseName {
+  margin-top: -11px;
+  font-size: 36px;
+  font-family: $font_sanspro_bold;
+  width: max-content;
+  align-self: start;
+}
+.courseCard__progress {
+  align-self: end;
+}

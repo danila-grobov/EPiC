@@ -1,0 +1,12 @@
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr;
+}
+.dashboard__courseCards {
+  display: flex;
+  justify-content: center;
+  column-gap: 30px;
+}
