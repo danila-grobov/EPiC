@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import {
     addStudentsToDB,
-    checkInviteToken, getStudent,
+    checkInviteToken, getDeadlines, getStudent,
     getStudentsFromDB,
     registerStudent,
     removeStudentFromDB,
@@ -38,6 +38,12 @@ app.put('/api/t/students/grade', (req, res) => {
     const {data, course} = req.body;
     setStudentGrades({data, course}).then(() => res.send());
 })
+
+app.get('/api/s/deadlines', (req, res) => {
+    const {email} = req.session;
+    getDeadlines(email).then(deadlines => res.send(deadlines));
+})
+
 app.put('/api/register', (req, res) => {
     const data = req.body;
     registerStudent(data).then(errors => {
@@ -98,6 +104,13 @@ function configExpress(app) {
     app.use(session({secret:"777acfde385d77c06b83274bb4c50819",resave:false,saveUninitialized:false}));
     app.use("/api/t/", (req, res, next) => {
         if(req.session.role === "teacher") {
+            next();
+        } else {
+            res.status(303).send("/login");
+        }
+    });
+    app.use("/api/s/", (req, res, next) => {
+        if(req.session.role === "student") {
             next();
         } else {
             res.status(303).send("/login");

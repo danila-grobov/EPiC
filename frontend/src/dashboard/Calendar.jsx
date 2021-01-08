@@ -1,22 +1,21 @@
-import React from "react"
+import React, {useLayoutEffect, useState} from "react"
 import "../scss/app.scss"
 import "../scss/dashboard/calendar.scss";
 import winter_image from "../imgs/winter_calendar.png";
 import CalendarTask from "./CalendarTask";
 import moment from "moment";
+import axios from "axios_redirect";
 export default () => {
-    const tasks = [
-        {
-            name: "Task 1",
-            deadline: "January 20",
-            color: "#F28F38"
-        },
-        {
-            name: "Task 2",
-            deadline: "January 26",
-            color: "#7A306C"
-        }
-    ]
+    const [tasks, setTasks] = useState([]);
+    useLayoutEffect(
+        () => {
+            axios
+                .get("/api/s/deadlines")
+                .then(({data:deadlines}) => {
+                    setTasks(deadlines)
+                })
+        },[]
+    );
     const currMonth = moment().format("MMMM");
     const currDay = moment().format("D");
     return (

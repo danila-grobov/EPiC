@@ -4,8 +4,38 @@ import React from "react";
 import md5 from "md5";
 import {v4 as uuidV4} from "uuid";
 import {escape} from "sqlstring";
+import moment from "moment";
 
 const domainName = "http://localhost/";
+
+export function getDeadlines(email) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        const dateInAMonth = moment().add(30, 'days').format('YYYY-MM-DD');
+        const SQL = `
+            SELECT t.Deadline, c.Color, t.TaskTitle
+            FROM Grades AS g
+            JOIN Tasks t ON t.CourseName = g.CourseName
+            JOIN Courses c ON c.CourseName = t.CourseName
+            LEFT JOIN TasksDone td ON td.TaskID = t.TaskID AND td.Email = ${escape(email)}
+            WHERE  
+                g.Email = ${escape(email)} 
+                AND t.Deadline IS NOT NULL 
+                AND td.TaskID IS NULL
+                AND t.Deadline <= ${escape(dateInAMonth)}
+        `;
+        return session.sql(SQL).execute();
+    }).then(result => formatDeadlines(result.fetchAll()))
+}
+
+function formatDeadlines(deadlines) {
+    return deadlines.map(deadline => ({
+        name: deadline[2],
+        deadline: moment(deadline[0]).format("MMMM D"),
+        color: deadline[1]
+    }))
+}
+
 
 export function addStudentsToDB(data, course) {
     return getDBSession(session => {
@@ -140,9 +170,9 @@ export function registerStudent(data) {
             WHERE Username=${escape(data.token)}
         `).execute().then(() => errors).catch(
             e => {
-                if(e.message.search("Duplicate entry") !== -1)
-                    return {...errors, userName:"This username was already taken."};
-                else return {...errors, global:"Unexpected error has occurred."}
+                if (e.message.search("Duplicate entry") !== -1)
+                    return {...errors, userName: "This username was already taken."};
+                else return {...errors, global: "Unexpected error has occurred."}
             }
         );
     })
@@ -169,11 +199,12 @@ export function getStudent(username, password) {
         `).execute()
     }).then(res => {
         const data = res.fetchOne();
-        if(data) {
-            const salt = data[0].slice(32,64);
+        if (data) {
+            const salt = data[0].slice(32, 64);
             const hashedPassword = hashPassword(password, salt);
             return data[0] === hashedPassword ? data[1] : false;
-        } return false;
+        }
+        return false;
     });
 }
 
@@ -181,7 +212,7 @@ function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
             filter.split(" || ").map(
-                filter => `${columnName} LIKE "%${escape(filter).slice(1,filter.length)}%"`
+                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length)}%"`
             ).join(" OR ")
         ).join(" OR ")
     ).join(") AND (");

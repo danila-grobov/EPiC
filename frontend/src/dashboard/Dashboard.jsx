@@ -29,6 +29,16 @@ export default () => {
             name: "CSC2035",
             color: "#7A306C",
             progress: 99
+        },
+        {
+            name: "CSC2035",
+            color: "#7A306C",
+            progress: 99
+        },
+        {
+            name: "CSC2035",
+            color: "#7A306C",
+            progress: 99
         }
     ]
     return (
