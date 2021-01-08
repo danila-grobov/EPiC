@@ -42,10 +42,11 @@ export default props => {
                 Gender: inputStates.gender.value.value,
                 Email: email,
                 token: inviteToken
-            }).then(({errors}) => {
+            }).then(({data:errors}) => {
+                console.log(errors);
                 Object.keys(errors).map(
                     errorType =>
-                        inputStates[errorType] ? inputStates[errorType].setErrorMessage(data[errorType]) : null
+                        inputStates[errorType] ? inputStates[errorType].setErrorMessage(errors[errorType]) : null
                 )
                 if (errors.global)
                     toast.error(data.global)
