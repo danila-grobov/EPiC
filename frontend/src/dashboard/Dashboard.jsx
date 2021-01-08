@@ -32,6 +32,7 @@ export default () => {
     ]
     return (
         <div className="dashboard">
+
             <div className="dashboard__courseCards">
                 {courses.map(course =>
                     <CourseCard {...course}/>

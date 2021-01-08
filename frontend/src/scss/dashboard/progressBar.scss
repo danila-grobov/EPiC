@@ -1,0 +1,15 @@
+.progressBar {
+  display: flex;
+  column-gap: 2px;
+}
+@for $size from 1 through 50{
+  .progressBar__dot--size-#{$size} {
+    width: $size + px;
+    height: $size + px;
+    border-radius: 50%;
+  }
+}
+.progressBar__dot--empty {
+  opacity: 0.5;
+}
+
