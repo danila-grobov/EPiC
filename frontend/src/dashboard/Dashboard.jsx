@@ -1,7 +1,8 @@
-import React from "react"
+import React, {} from "react"
 import CourseCard from "./CourseCard";
 import "../scss/app.scss";
 import "../scss/dashboard/dashboard.scss";
+import Calendar from "./Calendar";
 export default () => {
     const courses = [
         {
@@ -32,7 +33,7 @@ export default () => {
     ]
     return (
         <div className="dashboard">
-
+            <Calendar />
             <div className="dashboard__courseCards">
                 {courses.map(course =>
                     <CourseCard {...course}/>
