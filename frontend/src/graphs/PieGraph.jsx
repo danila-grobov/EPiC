@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import Chart from 'chart.js';
 
-function BarGraph({dataLabels, data}) {
+function PieGraph({dataLabels, data}) {
 
     useEffect(() => {
         let ctx = document.getElementById('pieChart');

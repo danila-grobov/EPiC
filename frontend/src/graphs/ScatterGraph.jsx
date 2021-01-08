@@ -33,7 +33,11 @@ function ScatterGraph({xValues, yValues, seriesLabel}) {
                 scales: {
                     xAxes: [{
                         type: 'linear',
-                        position: 'bottom'
+                        position: 'bottom',
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
                     }]
                 }
             }
