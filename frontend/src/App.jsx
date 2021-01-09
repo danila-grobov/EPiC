@@ -10,7 +10,7 @@ const App = () => {
     return (
         <div className="app">
             {/*{<Table course={"CSC2033"}/>}*/}
-            <PieGraph/>
+            <PieGraph data={[10, 30, 80, 110, 9]} />
             <ToastContainer />
         </div>
     );
