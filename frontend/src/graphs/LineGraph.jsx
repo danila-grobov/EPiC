@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import Chart from 'chart.js';
 
-function LineGraph({labels, yValues}) {
+export default ({labels, values}) => {
 
     useEffect(() => {
         let ctx = document.getElementById('lineGraph');
@@ -11,29 +11,18 @@ function LineGraph({labels, yValues}) {
                 labels: labels,
                 datasets: [{
                     label: 'Average Confidence',
-                    data: yValues,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgb(3,3,3, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)'
-                    ],
-                    borderWidth: 2
+                    data: values,
+                    backgroundColor: new Array(values.length).fill('rgba(197,109,181, 0.5)'),
+                    borderColor: new Array(values.length).fill('rgba(197,109,181, 0.5)'),
+                    borderWidth: 1,
                 }]
             },
             options: {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            max: 5
                         }
                     }]
                 }
@@ -43,9 +32,7 @@ function LineGraph({labels, yValues}) {
 
     return (
         <div>
-            <canvas id="lineGraph" width="400" height="100"/>
+            <canvas id="lineGraph" width="400" height="150"/>
         </div>
     );
 }
-
-export default LineGraph;

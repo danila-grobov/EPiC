@@ -2,30 +2,39 @@ import React, {useEffect} from "react";
 import Chart from 'chart.js';
 
 
-function ScatterGraph({xValues, yValues, seriesLabel}) {
+function ScatterGraph({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals}) {
 
-    function generatePoints() {
-        let pointsString = new Array(xValues.length);
-        for (let i = 0; i < xValues.length; i++){
-            pointsString[i] = {x: xValues[i], y: yValues[i]};
+    function generatePoints(xVals, yVals) {
+        let pointsString = new Array(xVals.length);
+        for (let i = 0; i < xVals.length; i++){
+            pointsString[i] = {x: xVals[i], y: yVals[i]};
         }
 
         return pointsString;
-    }
-
-    function randomColorNumber() {
-        return Math.floor(Math.random() * Math.floor(255));
     }
 
     useEffect(() => {
         let ctx = document.getElementById('scatterGraph');
         let scatterChart = new Chart(ctx, {
             type: 'scatter',
+            title: true,
             data: {
                 datasets: [{
-                    label: seriesLabel,
-                    data: generatePoints(),
-                    backgroundColor: new Array(xValues.length).fill('rgba('+randomColorNumber()+','+randomColorNumber()+','+randomColorNumber()+', 1)'),
+                    label: "UK",
+                    data: generatePoints(ukXVals, ukYVals),
+                    backgroundColor: new Array(ukXVals.length).fill('rgba(110,179,206, 1)'),
+                    borderWidth: 1
+                },
+                {
+                    label: "EU",
+                    data: generatePoints(euXVals, euYVals),
+                    backgroundColor: new Array(euXVals.length).fill('rgba(142,201,154, 1)'),
+                    borderWidth: 1
+                },
+                {
+                    label: "International",
+                    data: generatePoints(inXVals, inYVals),
+                    backgroundColor: new Array(inXVals.length).fill('rgba(122,48,108, 1)'),
                     borderWidth: 1
                 }]
             },
@@ -35,9 +44,17 @@ function ScatterGraph({xValues, yValues, seriesLabel}) {
                         type: 'linear',
                         position: 'bottom',
                         ticks: {
-                            beginAtZero: true,
+                            beginAtZero: false,
                             stepSize: 1
                         }
+                    }],
+                    yAxes: [{
+                       type: 'linear',
+                       position: 'bottom',
+                       ticks: {
+                           beginAtZero: true,
+                           stepSize: 5
+                       }
                     }]
                 }
             }
@@ -46,7 +63,7 @@ function ScatterGraph({xValues, yValues, seriesLabel}) {
 
     return (
         <div>
-            <canvas id="scatterGraph" width="400" height="100"/>
+            <canvas id="scatterGraph" width="400" height="150"/>
         </div>
     );
 }
