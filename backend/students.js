@@ -36,6 +36,30 @@ function formatDeadlines(deadlines) {
     }))
 }
 
+export function getCourses(email) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        const SQL = `
+           SELECT c.CourseName, c.Color ,COUNT(td.TaskID) * 100 / COUNT(t.TaskID)
+           FROM Grades g
+                    JOIN Courses c on g.CourseName = c.CourseName
+                    JOIN Tasks t ON c.CourseName = t.CourseName
+                    LEFT JOIN TasksDone td on t.TaskID = td.TaskID AND td.Email = ${escape(email)}
+           WHERE g.Email = ${escape(email)}
+           GROUP BY c.CourseName
+       `;
+        return session.sql(SQL).execute();
+    }).then(result => formatCourses(result.fetchAll()));
+}
+
+function formatCourses(courses) {
+    return courses.map(course => ({
+        name: course[0],
+        color: course[1],
+        progress: parseFloat(course[2])
+    }))
+}
+
 
 export function addStudentsToDB(data, course) {
     return getDBSession(session => {

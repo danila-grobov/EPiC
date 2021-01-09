@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import {
     addStudentsToDB,
-    checkInviteToken, getDeadlines, getStudent,
+    checkInviteToken, getCourses, getDeadlines, getStudent,
     getStudentsFromDB,
     registerStudent,
     removeStudentFromDB,
@@ -43,6 +43,11 @@ app.get('/api/s/deadlines', (req, res) => {
     const {email} = req.session;
     getDeadlines(email).then(deadlines => res.send(deadlines));
 })
+
+app.get('/api/s/courses', ((req, res) => {
+    const {email} = req.session;
+    getCourses(email).then(courses => res.send(courses));
+}))
 
 app.put('/api/register', (req, res) => {
     const data = req.body;
