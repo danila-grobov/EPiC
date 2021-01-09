@@ -64,52 +64,47 @@ function formatCourses(courses) {
 export function addStudentsToDB(data, course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
-        session.sql("START TRANSACTION").execute();
-        session.sql("SET autocommit=0").execute();
         const errors = [];
         return Promise.all(data.map(element => {
             return session.sql(`
-                    INSERT INTO Students (${Object.keys(element).join(", ")})
-                    VALUES (${getSQLValues(Object.values(element))})
-                `)
-                .execute()
-                .then(
-                    // () => emailMessage(
-                    //     domainName + "register/" + element.Username,
-                    //     element.Email)
-                )
-                .catch(e => {
-                    console.log(e.message);
-                    //ignore any errors regarding student invite
-                    session.sql("ROLLBACK").execute();
-                })
-                .then(() => session.sql(`
-                    INSERT INTO Grades (Email, CourseName)
-                    VALUES (${escape(element.Email)}, ${escape(course)})
-                `).execute())
-                .catch((error) => {
-                    console.log(error.message);
-                    if (error.message ===
-                        "Cannot add or update a child row: a foreign key constraint fails" +
-                        " (`EPiC`.`Grades`, CONSTRAINT `Grades_ibfk_2` FOREIGN KEY (`Email`)" +
-                        " REFERENCES `Students` (`Email`))") {
-                        errors.push(`Could not invite student with an email "${element.Email}."`);
-                    } else if (error.message.search("Duplicate") !== -1) {
-                        errors.push(`The student with an email ${element.Email} has already been enrolled in the course.`)
-                    } else if (error.message) {
-                        errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
-                    }
-                    session.sql("ROLLBACK").execute()
-                })
-        })).then(() => {
-            session.sql("COMMIT").execute();
-            return errors;
-        })
+                SELECT InviteStatus, Username
+                FROM Students
+                WHERE Email = ${escape(element.Email)}
+            `).execute()
+            .then(result => {
+                const studentData = result.fetchOne();
+                if(studentData) {
+                    const [inviteStatus, username] = studentData;
+                    if(inviteStatus === 'waiting')
+                        return emailMessage(domainName + "register/" + username, element.Email)
+                } else if(!studentData) {
+                    return Promise.all([
+                        session.sql(`
+                            INSERT INTO Students (${Object.keys(element).join(", ")})
+                            VALUES (${getSQLValues(Object.values(element))})
+                        `).execute(),
+                        emailMessage(
+                            domainName + "register/" + element.Username,
+                            element.Email
+                        )
+                ])}
+            })
+            .then(() => session.sql(`
+                INSERT INTO Grades (Email, CourseName)
+                VALUES (${escape(element.Email)}, ${escape(course)})
+            `).execute())
+            .catch(
+                e => {
+                    if(!e.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
+                        errors.push(`An unexpected error has occurred when trying to invite ${data.Email}.`)
+                }
+            )
+        })).then(() => errors)
     })
 }
 
 function getSQLValues(values) {
-    return values.map(value => `${escape(value)}`).join(", ")
+    return values.map(value => escape(value)).join(", ")
 }
 
 function getSQLBody(course, whereClause) {
@@ -236,7 +231,7 @@ function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
             filter.split(" || ").map(
-                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length)}%"`
+                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length+1)}%"`
             ).join(" OR ")
         ).join(" OR ")
     ).join(") AND (");
