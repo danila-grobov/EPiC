@@ -1,5 +1,24 @@
 CREATE DATABASE IF NOT EXISTS EPiC;
 USE EPiC;
+
+CREATE TABLE SessionStore
+(
+    SId varchar(128) NOT NULL,
+    Data mediumtext,
+    PRIMARY KEY (SId)
+);
+
+CREATE TABLE Teachers
+(
+    Username  varchar(50)  NOT NULL,
+    Pwd       varchar(200) NOT NULL,
+    Firstname varchar(50)  NOT NULL,
+    Lastname  varchar(50)  NOT NULL,
+    Email     varchar(50)  NOT NULL,
+    Admin     boolean      NOT NULL,
+    PRIMARY KEY (Username)
+);
+
 CREATE TABLE Teachers
 (
     Username  varchar(50)  NOT NULL,

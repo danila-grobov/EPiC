@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import hash from "crypto-random-string";
-import cookieParser from "cookie-parser";
 import session from "express-session";
 import {
     addStudentsToDB,
@@ -13,6 +12,7 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
+import SessionStore from "./SessionStore";
 
 const app = express()
 const port = 3000
@@ -105,8 +105,12 @@ function configExpress(app) {
     app.set('views', path.join(__dirname, '../frontend/views'));
     app.set('view engine', 'html');
     app.use(express.json());
-    app.use(cookieParser());
-    app.use(session({secret:"777acfde385d77c06b83274bb4c50819",resave:false,saveUninitialized:false}));
+    app.use(session({
+        secret:"777acfde385d77c06b83274bb4c50819",
+        resave:false,
+        saveUninitialized:false,
+        store: new SessionStore()
+    }));
     app.use("/api/t/", (req, res, next) => {
         if(req.session.role === "teacher") {
             next();
