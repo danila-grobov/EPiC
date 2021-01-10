@@ -19,7 +19,7 @@ Email varchar(50) NOT NULL,
 Skill varchar(15) NOT NULL,
 StudentType varchar(20) NOT NULL,
 Gender varchar(5) NOT NULL,
-PRIMARY KEY(Username)
+PRIMARY KEY(Email)
 );
 
 CREATE TABLE Courses(
@@ -28,7 +28,7 @@ PRIMARY KEY(CourseName)
 );
 
 CREATE TABLE Tasks(
-TaskID varchar(5) NOT NULL,
+TaskID varchar(20) NOT NULL,
 TaskName varchar(100) NOT NULL,
 CourseName varchar(10) NOT NULL,
 ParentTaskID varchar(5),

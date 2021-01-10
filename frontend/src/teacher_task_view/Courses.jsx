@@ -6,7 +6,12 @@ import data from './testCourseData';
 import {ButtonGroup} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default () => {
+export default (props) => {
+
+    const handleClick = (courseName) => {
+        props.setCourse(courseName);
+    }
+
     return(
         <div className="courses">
             <p>Courses: </p>
@@ -17,10 +22,14 @@ export default () => {
                         key={index}
                         id={'dropdown-button-drop-${idx}'}
                         size="lg"
-                        title="Select Course"
+                        title={props.course}
                     >
                         {data.map(course => (
-                            <Dropdown.Item key={course.value}>{course.value}</Dropdown.Item>
+                            <Dropdown.Item key={course.value}
+                                           onClick={() => handleClick(course.value)}
+                            >
+                                {course.value}
+                            </Dropdown.Item>
                         ))}
                     </DropdownType>
                 ))}
