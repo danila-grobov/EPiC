@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import Chart from 'chart.js';
 
-export default ({labels, values}) => {
+export default ({title, labels, values}) => {
 
     useEffect(() => {
         let ctx = document.getElementById('lineGraph');
@@ -10,7 +10,7 @@ export default ({labels, values}) => {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Average Confidence',
+                    label: title,
                     data: values,
                     backgroundColor: new Array(values.length).fill('rgba(197,109,181, 0.5)'),
                     borderColor: new Array(values.length).fill('rgba(197,109,181, 0.5)'),
