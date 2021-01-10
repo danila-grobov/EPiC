@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import hash from "crypto-random-string";
 import {addStudentsToDB, getStudentsFromDB, removeStudentFromDB, setStudentGrades} from "./students";
+import {getTeacherName} from "./teachers";
 import {testDBConnection} from "./database";
 
 const app = express()
@@ -34,7 +35,9 @@ app.get('*', (req, res) => {
     res.render('index');
 });
 
-app.get('/api/teachers',(req, res) => {
+app.get('/api/t/teachers',(req, res) => {
+    const{email} = req.query;
+    getTeacherName(email);
 
 })
 

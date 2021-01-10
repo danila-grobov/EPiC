@@ -51,16 +51,11 @@ export default (props) => {
                     <Link to="/profile" className="userName">{name} </Link>
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
-                    { adminRole === true ? <div className="toggleButton" >
-                        <label className="switch">
-                            <input type="checkbox"  onClick={ ()=> setisAdmin(!isAdmin)}></input>
-                            <span className="slider round"></span>
-                        </label>
-                        <div className="links">
-                            <span className={!isAdmin ? "linkActive": "linkNotActive"}>TEACHER</span>
-                            <span className={!isAdmin ? "linkNotActive": "linkActive"}>ADMIN</span>
-                        </div>
-                    </div>: ""}
+                    <div>
+
+                    </div>
+
+                    <div className="logOut"></div>
 
                 </div>
 
