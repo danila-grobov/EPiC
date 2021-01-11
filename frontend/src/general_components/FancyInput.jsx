@@ -1,23 +1,22 @@
-import React, {useState, useRef, useEffect} from "react"
-import useValue from "../hooks/useValue";
+import React, {useState, useRef, useEffect} from "react";
 import useHelper from "../hooks/useHelper";
-import useValid from "../hooks/useValid";
+import "../scss/textInput.scss";
 
 export default props => {
-    const {label, className, type = "text", onSubmit, charLimit} = props;
+    const {
+        label, className = "", type = "text", onSubmit, charLimit,
+        value, setValue, errorMessage = "", disabled = false
+    } = props;
     const [focused, setFocused] = useState(false);
     const [width, setWidth] = useState(1);
     const textInput = useRef(null);
     const widthDonor = useRef(null);
+    const {helper = "", onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers, charLimit);
 
-    const {setValue, value, reset} = useValue("");
-    const {helper, onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers);
-    const {valid, updateValid} = useValid(value, inputTypes[type].regEx);
-
-    const labelStyle = (focused ? "textInput__label--focused" : "textInput__label") +
-        (valid !== -1 ? "" : " textInput__label--error");
-    useEffect(() => () => {
-        setWidth(widthDonor.current.clientWidth)
+    const labelStyle = (focused || value !== "" ? "textInput__label--focused" : "textInput__label") +
+        (errorMessage.length === 0 ? "" : " textInput__label--error");
+    useEffect(() => {
+        setWidth(widthDonor.current.clientWidth + 2)
     });
     const handleKeyDown = e => {
         if (value !== "" && e.code === "ArrowRight" &&
@@ -26,46 +25,54 @@ export default props => {
             setValue(value + helper);
         }
     }
-    const handleSubmit = e => {
-        e.preventDefault();
-        if (updateValid() === 1) {
-            onSubmit(value);
-            reset();
-        }
-    }
     return (
-        <div className={"textInput__wrapper " + className} onClick={() => textInput.current.focus()}>
-            <div className={`textInput${valid !== -1 ? "" : "--error"}`}>
+        <div className={"textInput__wrapper " + className + (disabled ? " textInput__wrapper--disabled" : "")}
+             onClick={() => disabled ? null : textInput.current.focus()}>
+            <div className={`textInput ${errorMessage.length === 0 ? "" : "textInput--error"}`}>
                 {label ? <span className={labelStyle}>{label}</span> : ""}
-                <form onSubmit={handleSubmit}>
-                    <input type="text" className="textInput__input"
+                <form onSubmit={e => {
+                    e.preventDefault();
+                    onSubmit ? onSubmit(value) : null
+                }}>
+                    <input type={type === "password" ? "password" : "text"} className="textInput__input"
                            onFocus={() => setFocused(true)}
-                           onBlur={() => setFocused(value !== "")}
+                           onBlur={() => setFocused(false)}
                            ref={textInput}
-                           style={{width}}
+                           style={type === "email" ? {width} : {}}
                            onKeyDown={handleKeyDown}
-                           maxLength={charLimit}
                            value={value}
                            onChange={onChange}
+                           maxLength={type === "email" || !charLimit ? "" : charLimit}
                     />
-                    {value ? <span className="textInput__helper">{helper}</span> : null}
+                    {focused && value && type === "email" ? <span className="textInput__helper">{helper}</span> : null}
                 </form>
             </div>
-            {valid !== -1 ? "" :
-                <span className="textInput__error">{inputTypes[type].error}</span>}
+            {charLimit ?
+                <span className="textInput__charCounter">{`${value.length}/${charLimit}`}</span> :
+                ""
+            }
+            <span className="textInput__error">{errorMessage.length === 0 ? "" : errorMessage}</span>
             <span className="textInput__widthDonor" ref={widthDonor}>{value}</span>
         </div>
     )
 }
+
 export const inputTypes = {
     email: {
         regEx: /^([a-zA-Z0-9_\-\.]+)@(ncl|newcastle).ac.uk$/,
-        error: "Please enter a valid newcastle university email address.",
+        errorMessage: "Please enter a valid newcastle university email address.",
         helpers: ["@ncl.ac.uk", "@newcastle.ac.uk"]
     },
     text: {
-        regEx: /.*/,
-        error: "",
+        regEx: /.+/,
+        errorMessage: "The field cannot be empty",
+        helpers: []
+    },
+    password: {
+        regEx: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,30})/,
+        errorMessage:
+            "The password must be between 8 and 30 characters long and must contain at least one lower case letter, " +
+            "one upper case letter and a number",
         helpers: []
     }
 }

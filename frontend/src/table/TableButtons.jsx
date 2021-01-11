@@ -5,7 +5,7 @@ import add from "../imgs/add.svg";
 import upload from "../imgs/upload.svg";
 import "../scss/table/tableButtons.scss";
 import FileInput from "../general_components/FileInput";
-import axios from "axios";
+import axios from "axios_redirect";
 import {stringify} from "qs";
 import {toast} from "react-toastify";
 
@@ -41,7 +41,7 @@ function removeFromCourse(emails, updateTable, reset) {
 
 function setGrades(data, course) {
     if (data.length !== 0)
-        axios.put("/api/students/grade", {data,course}).then(
+        axios.put("/api/t/students/grade", {data,course}).then(
             () => toast.success("The grades were successfully updated!")
         )
 }

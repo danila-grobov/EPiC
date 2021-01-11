@@ -1,7 +1,8 @@
 import {useState} from "react";
 
-export default (setValue, helpers) => {
-    const [helper, setHelper] = useState(helpers[0]);
+export default (setValue, helpers, charLimit) => {
+    const defaultHelper = helpers.length > 0 ? helpers[0] : "";
+    const [helper, setHelper] = useState("");
     const reset = () => {
         setHelper("");
     }
@@ -9,8 +10,8 @@ export default (setValue, helpers) => {
         const value = e.target.value ? e.target.value : e.target.innerText;
         let noOverlap = true;
         for (let fullHelper of helpers) {
-            const [firstHalf, overlap] = splitValue(fullHelper,value);
-            if (overlap !== undefined) {
+            let [firstHalf, overlap] = splitValue(fullHelper,value);
+            if (overlap !== undefined && (!charLimit || (firstHalf + fullHelper).length <= charLimit)) {
                 noOverlap = false;
                 if (valueIsValid(fullHelper, overlap)) {
                     setValue(firstHalf + overlap);
@@ -20,8 +21,11 @@ export default (setValue, helpers) => {
             }
         }
         if (noOverlap) {
-            setValue(value);
-            setHelper(helpers[0])
+            if(!charLimit || value.length <= charLimit)
+                setValue(value);
+            if(!charLimit || (value !== "" && value.length + defaultHelper.length <= charLimit) )
+                setHelper(defaultHelper)
+            else setHelper("")
         }
     }
     return {
@@ -39,7 +43,6 @@ function splitValue(helper, value) {
 }
 
 function valueIsValid(helper, overlap) {
-    console.log(overlap);
     return overlap.split("").reduce((valid, char, index) => valid && char === helper[index]);
 }
 

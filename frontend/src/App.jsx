@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import "./scss/app.scss";
 import Table from "./table/Table";
-import NavBar from "./NavBar/NavBar";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
