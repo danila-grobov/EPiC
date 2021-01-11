@@ -64,11 +64,12 @@ FOREIGN KEY (TaskID)
 
 CREATE TABLE Teaches(
 CourseName varchar(10) NOT NULL,
-Email varchar(50) UNIQUE ,
+Email varchar(50) ,
 FOREIGN KEY (CourseName)
    REFERENCES Courses(CourseName),
 FOREIGN KEY (Email)
-   REFERENCES Teachers(Email)
+   REFERENCES Teachers(Email),
+UNIQUE (CourseName, Email)
 );
 INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin)
 VALUES ('Teacher1',

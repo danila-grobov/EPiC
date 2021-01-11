@@ -3,6 +3,7 @@ import "../scss/navBar.scss"
 import profilePhoto from "../imgs/profilePhoto.svg"
 import Dropdown from "../general_components/Dropdown";
 import {Link} from "react-router-dom";
+import axios from "axios";
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
@@ -16,12 +17,21 @@ import {Link} from "react-router-dom";
 //toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
 
 export default (props) => {
-    const dropOptions = [{value: "CSC2031", label: "CSC2031"},{value:"CSC2032", label: "CSC2032"},
-        {value:"CSC2033", label:"CSC2033"},{value:"CSC2034", label:"CSC2034"},{value:"CSC2035", label:"CSC2035"}];
+    const [courses, setCourses] = useState([]);
     const title = {value : "COURSES", label : "COURSES"};
-    const {pagePaths, name, adminRole} = props;
+    const {pagePaths, adminRole} = props;
     const [currentOption, setCurrentOption] = useState(title);
     const [isAdmin, setisAdmin] = useState(false);
+    const[firstName,setFirstName] = useState("");
+    useEffect(()=> {
+        axios.get('/api/t/teachers').then(({data}) => {
+            console.log(data.firstName);
+            setFirstName(data.firstName);
+            setCourses(data.courses);
+        })
+    }, [])
+    const name = `Hello, ${firstName}`;
+    const dropOptions = courses.map((course) =>({label:course,value:course}));
 
 
     return (

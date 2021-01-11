@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import hash from "crypto-random-string";
-import {getTeacherName} from "./teachers";
+import {getTeacherData} from "./teachers";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import {
@@ -79,6 +79,18 @@ app.get(['/register/:token', '/register'], (req, res) => {
 app.get('/login', (req, res) => {
     res.render("login");
 });
+
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.status(303).send("/login");
+});
+
+app.get('/api/t/teachers',(req, res) => {
+    const{email} = req.session;
+    getTeacherData(email).then(data => res.send(data));
+
+})
+
 app.get('*', (req, res) => {
     if(req.session.role === "teacher") {
         res.render("teacher");
@@ -89,11 +101,7 @@ app.get('*', (req, res) => {
     }
 });
 
-app.get('/api/t/teachers',(req, res) => {
-    const{email} = req.session;
-    getTeacherName(email).then(firstName => res.send(firstName));
 
-})
 
 function configExpress(app) {
     app.use(express.static(path.join(__dirname, '../dist')));
@@ -104,6 +112,7 @@ function configExpress(app) {
     app.use(cookieParser());
     app.use(session({secret:"777acfde385d77c06b83274bb4c50819",resave:false,saveUninitialized:false}));
     app.use("/api/t/", (req, res, next) => {
+
         if(req.session.role === "teacher") {
             next();
         } else {

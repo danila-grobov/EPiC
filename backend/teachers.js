@@ -6,7 +6,7 @@ import React from "react";
 const domainName = "http://localhost/";
 
 //Gets teacher's name
-function getTeacherName(email){
+export function getTeacherData(email){
     return getDBSession(session => {
 
         //const teachers = session.getSchema("EPiC").getTable("Teachers").get
@@ -16,14 +16,24 @@ function getTeacherName(email){
         const teacherNameSQL = `
             SELECT Firstname
             FROM Teachers
-            WHERE Email= ${escape(email)}
-            
+            WHERE Email= ${escape(email)} 
         `
-        return session.sql(teacherNameSQL).execute();
-    }) .then(result => {
-           const[firstName] = result.fetchOne()
-           return firstName;
+        const coursesSQL = `
+            SELECT CourseName
+            FROM Teaches
+            WHERE Email= ${escape(email)}
+        
+        `
+        return Promise.all(
+            [session.sql(teacherNameSQL).execute(), session.sql(coursesSQL).execute()]
+        )
+
+    }) .then(results => {
+           const[firstName] = results[0].fetchOne();
+           const courses = results[1].fetchAll().map(course => course[0]);
+           return {firstName, courses};
+
         })
 
-
 }
+

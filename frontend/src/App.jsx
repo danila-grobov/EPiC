@@ -1,8 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./scss/app.scss";
 import Table from "./table/Table";
+import NavBar from "./NavBar/NavBar";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
 import {
     BrowserRouter as Router,
     Switch,
@@ -10,26 +12,22 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
-import axios from "axios";
+
 
 const App = () => {
     const pagePaths = [<Link to="/home">HOME</Link>,
         <Link to="/tasks">TASKS</Link>,
         <Link to="/manage">MANAGE</Link>];
-    const name = "Hello, Dwight";
-    useEffect(()=> {
+    const[firstName,setFirstName] = useState("");
 
-    }, [])
 
-    //const [currentCourse, setCurrentCourse] = useState("CSC2033");
-    //currentCourse={currentCourse} setCurrentCourse={setCurrentCourse}
 
     return (
         <Router>
             <div className="app">
 
                     <Route path="/profile">
-                        <NavBar pagePaths={pagePaths} name={name} adminRole={false}/>
+                        <NavBar pagePaths={pagePaths}  adminRole={false}/>
                     </Route>
 
                     <Route path="/manage">
