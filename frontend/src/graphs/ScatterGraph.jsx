@@ -1,27 +1,34 @@
 import React, {useEffect} from "react";
 import Chart from 'chart.js';
 
+// Parameters: X and Y values for three datasets.
+export default ({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals})  => {
 
-function ScatterGraph({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals}) {
-
+    // Function to generate the points on the graph using the data passed in as parameters.
     function generatePoints(xVals, yVals) {
-        let pointsString = new Array(xVals.length);
+        // Initialise empty array with length of the passed in arrays.
+        let points = new Array(xVals.length);
         for (let i = 0; i < xVals.length; i++){
-            pointsString[i] = {x: xVals[i], y: yVals[i]};
+            // Update array with an object for each point.
+            points[i] = {x: xVals[i], y: yVals[i]};
         }
 
-        return pointsString;
+        return points;
     }
 
     useEffect(() => {
-        let ctx = document.getElementById('scatterGraph');
-        let scatterChart = new Chart(ctx, {
+        // Initialise chart object, passing in the canvas element.
+        const scatterChart = new Chart(document.getElementById('scatterGraph'), {
+            // Set type of graph.
             type: 'scatter',
-            title: true,
             data: {
+                // Three datasets one for each set of parameters.
                 datasets: [{
+                    // Sets series label
                     label: "UK",
+                    // Call function to generate points.
                     data: generatePoints(ukXVals, ukYVals),
+                    // Set colour for each point.
                     backgroundColor: new Array(ukXVals.length).fill('rgba(110,179,206, 1)'),
                     borderWidth: 1
                 },
@@ -44,6 +51,7 @@ function ScatterGraph({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals}) {
                         type: 'linear',
                         position: 'bottom',
                         ticks: {
+                            // Start at one (first confidence level).
                             beginAtZero: false,
                             stepSize: 1
                         }
@@ -53,6 +61,7 @@ function ScatterGraph({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals}) {
                        position: 'bottom',
                        ticks: {
                            beginAtZero: true,
+                           // Ascend in steps of 5.
                            stepSize: 5
                        }
                     }]
@@ -62,10 +71,9 @@ function ScatterGraph({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals}) {
     })
 
     return (
+        // Define canvas element to contain the graph.
         <div>
             <canvas id="scatterGraph" width="400" height="150"/>
         </div>
     );
 }
-
-export default ScatterGraph;
