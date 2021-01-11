@@ -33,8 +33,8 @@ export default () => {
                 <div className="calendar__tasks">
                     <span className="calendar__text">To-Do</span>
                     {
-                        tasks.map(task =>
-                            <CalendarTask {...task} />
+                        tasks.map((task,index) =>
+                            <CalendarTask key={`calendarTask__${index}`} {...task} />
                         )
                     }
                 </div>

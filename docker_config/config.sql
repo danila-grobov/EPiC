@@ -47,8 +47,9 @@ CREATE TABLE Students
 
 CREATE TABLE Courses
 (
-    CourseName varchar(10) NOT NULL,
-    Color      varchar(20) NOT NULL,
+    CourseName     varchar(10)  NOT NULL,
+    FullCourseName varchar(200) NOT NULL,
+    Color          varchar(20)  NOT NULL,
     PRIMARY KEY (CourseName)
 );
 
@@ -111,16 +112,16 @@ VALUES ('Test1',
         'accepted');
 
 # Create sample course data
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2033', '#7A306C');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2031', '#F28F38');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2032', '#F28F38');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2034', '#C8553D');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2035', '#7A306C');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2033', '#7A306C', 'Software Engineering Team Project');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2031', '#F28F38', 'Security and Programming Paradigms');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2032', '#F28F38', 'Algorithm Design and Analysis');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2034', '#C8553D', 'Introducing Contemporary Topics in Computing');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2035', '#7A306C','Operating Systems and Networks');
 
 #Create sample grades data
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)

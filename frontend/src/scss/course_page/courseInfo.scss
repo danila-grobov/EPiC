@@ -1,0 +1,23 @@
+@import "../colors";
+@import "../fonts";
+.courseInfo {
+  background: white;
+  border-radius: 15px;
+  padding: 60px;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  min-height: 328px - 120px;
+  min-width: 703px - 120px;
+}
+.courseInfo__courseName {
+  font-family: $font_sanspro_bold;
+  font-size: 72px;
+  line-height: 55px;
+  margin-bottom: 10px;
+  margin-left: -4px;
+}
+.courseInfo__fullCourseName {
+  font-family: $font_sanspro_bold;
+  font-size: 32px;
+  opacity: 0.5;
+}

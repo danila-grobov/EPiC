@@ -1,6 +1,5 @@
 .progressBar {
   display: flex;
-  column-gap: 2px;
 }
 @for $size from 1 through 50{
   .progressBar__dot--size-#{$size} {
