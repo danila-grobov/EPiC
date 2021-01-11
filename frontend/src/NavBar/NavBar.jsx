@@ -52,10 +52,8 @@ export default (props) => {
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     <div>
-
+                        <button className="logout">LOGOUT </button>
                     </div>
-
-                    <div className="logOut"></div>
 
                 </div>
 

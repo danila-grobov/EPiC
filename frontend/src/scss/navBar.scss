@@ -224,5 +224,21 @@ input:checked + .slider:before {
     color: $text_secondary;
     font-size: 12px;
 
+}
 
+.logout {
+    background-color: #B3D7E5;
+    font-family: $font_lack;
+    color: white;
+    font-size: 12px;
+    height: 32px;
+    width: 100px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+
+}
+
+.logout:hover{
+    background-color: #6EB3CB;
 }
