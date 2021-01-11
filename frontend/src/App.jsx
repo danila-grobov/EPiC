@@ -18,8 +18,6 @@ const App = () => {
     const pagePaths = [<Link to="/home">HOME</Link>,
         <Link to="/tasks">TASKS</Link>,
         <Link to="/manage">MANAGE</Link>];
-    const[firstName,setFirstName] = useState("");
-
 
 
     return (

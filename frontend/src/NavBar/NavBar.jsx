@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import "../scss/navBar.scss"
 import profilePhoto from "../imgs/profilePhoto.svg"
 import Dropdown from "../general_components/Dropdown";
+import Button from "../general_components/Button";
 import {Link} from "react-router-dom";
-import axios from "axios";
+import axios from "axios_redirect";
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
@@ -25,7 +26,7 @@ export default (props) => {
     const[firstName,setFirstName] = useState("");
     useEffect(()=> {
         axios.get('/api/t/teachers').then(({data}) => {
-            console.log(data.firstName);
+            //console.log(data.firstName);
             setFirstName(data.firstName);
             setCourses(data.courses);
         })
@@ -54,16 +55,12 @@ export default (props) => {
                         </ul>
                     </div>
 
-
                     <div className="separator"/>
-
 
                     <Link to="/profile" className="userName">{name} </Link>
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
-                    <div>
-                        <button className="logout">LOGOUT </button>
-                    </div>
+                    <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')} type="primary" width={100}></Button>
 
                 </div>
 
