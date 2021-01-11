@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {useEffect} from "react";
 import "./scss/app.scss";
 import Table from "./table/Table";
 import NavBar from "./NavBar/NavBar";
@@ -11,12 +11,16 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
+import axios from "axios";
 
 const App = () => {
     const pagePaths = [<Link to="/home">HOME</Link>,
         <Link to="/tasks">TASKS</Link>,
         <Link to="/manage">MANAGE</Link>];
     const name = "Hello, Dwight";
+    useEffect(()=> {
+
+    }, [])
 
     //const [currentCourse, setCurrentCourse] = useState("CSC2033");
     //currentCourse={currentCourse} setCurrentCourse={setCurrentCourse}

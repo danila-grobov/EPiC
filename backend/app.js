@@ -36,8 +36,8 @@ app.get('*', (req, res) => {
 });
 
 app.get('/api/t/teachers',(req, res) => {
-    const{email} = req.query;
-    getTeacherName(email);
+    const{email} = req.session;
+    getTeacherName(email).then(firstName => res.send(firstName));
 
 })
 

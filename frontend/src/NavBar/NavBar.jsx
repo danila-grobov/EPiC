@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "../scss/navBar.scss"
 import profilePhoto from "../imgs/profilePhoto.svg"
 import Dropdown from "../general_components/Dropdown";

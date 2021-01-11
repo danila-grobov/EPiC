@@ -44,6 +44,7 @@
     "react-router-dom": "^5.2.0",
     "react-toastify": "^6.2.0",
     "sass-loader": "^10.1.0",
+    "sqlstring": "^2.3.2",
     "style-loader": "^2.0.0",
     "webpack": "^5.10.1",
     "webpack-cli": "^4.2.0"
