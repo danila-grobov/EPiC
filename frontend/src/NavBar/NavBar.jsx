@@ -60,7 +60,8 @@ export default (props) => {
                     <Link to="/profile" className="userName">{name} </Link>
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
-                    <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')} type="primary" width={100}></Button>
+                    <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')}
+                            type="primary" width={100} className="logout"></Button>
 
                 </div>
 
