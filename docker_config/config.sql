@@ -3,8 +3,9 @@ USE EPiC;
 
 CREATE TABLE SessionStore
 (
-    SId varchar(128) NOT NULL,
-    Data mediumtext,
+    SId     varchar(128)     NOT NULL,
+    Expires int(11) UNSIGNED NOT NULL,
+    Data    mediumtext,
     PRIMARY KEY (SId)
 );
 
