@@ -18,8 +18,7 @@ const App = () => {
     const pagePaths= [<Link to="/home">HOME</Link>,
         <Link to="/tasks">TASKS</Link>,
         <Link to="/manage">MANAGE</Link>];
-    const studentPagePaths = [<Link to="/home">HOME</Link>];
-    const teacherRole = false;
+
 
 
     return (
@@ -27,20 +26,20 @@ const App = () => {
             <div className="app">
 
                     <Route path="/profile">
-                        <NavBar pagePaths={pagePaths} name={name} teacherRole={teacherRole}/>
+                        <NavBar pagePaths={pagePaths} name={name} />
                     </Route>
 
                     <Route path="/manage">
-                        <NavBar pagePaths={pagePaths} name={name} teacherRole={teacherRole}/>
+                        <NavBar pagePaths={pagePaths} name={name} />
                         <Table course={"CSC2033"}/>
                     </Route>
 
                     <Route path="/tasks">
-                        <NavBar pagePaths={pagePaths} name={name} teacherRole={teacherRole}/>
+                        <NavBar pagePaths={pagePaths} name={name} />
                     </Route>
 
                     <Route path="/home">
-                        <NavBar pagePaths={pagePaths} name={name} teacherRole={teacherRole}/>
+                        <NavBar pagePaths={pagePaths} name={name} />
                     </Route>
 
                     <Route path="/">

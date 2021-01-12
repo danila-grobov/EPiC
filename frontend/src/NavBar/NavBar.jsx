@@ -29,6 +29,7 @@ export default (props) => {
             //console.log(data.firstName);
             setFirstName(data.firstName);
             setCourses(data.courses);
+            setisTeacher(true);
         })
     }, [])
     const name = `Hello, ${firstName}`;
@@ -38,10 +39,10 @@ export default (props) => {
     return (
         <div className="menuBase">
 
-            { teacherRole === true ? <Dropdown dropOptions={dropOptions} currentOption={currentOption}
+            { isTeacher === true ? <Dropdown dropOptions={dropOptions} currentOption={currentOption}
                                                setCurrentOption={setCurrentOption} /> : ""}
 
-            <div className={ "navMainMenu" + (teacherRole === false ? " navMainMenu--Student": "")}>
+            <div className={ "navMainMenu" + (isTeacher === false ? " navMainMenu--Student": "")}>
 
                 <Link to="/home" className="epicLogo">EPiC</Link>
 
@@ -49,7 +50,7 @@ export default (props) => {
                 <div className="innerMenu">
 
                     <div className= "pages">
-                        {teacherRole === true ?  <ul className="ulStyle">
+                        {isTeacher === true ?  <ul className="ulStyle">
                             {pagePaths.map((page) =>
                                 <li className="liStyle"><a className="pageName middle">{page}</a></li>
                             )}
