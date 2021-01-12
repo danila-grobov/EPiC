@@ -20,9 +20,9 @@ import axios from "axios_redirect";
 export default (props) => {
     const [courses, setCourses] = useState([]);
     const title = {value : "COURSES", label : "COURSES"};
-    const {pagePaths, adminRole} = props;
+    const {pagePaths, teacherRole} = props;
     const [currentOption, setCurrentOption] = useState(title);
-    const [isAdmin, setisAdmin] = useState(false);
+    const [isTeacher, setisTeacher] = useState(false);
     const[firstName,setFirstName] = useState("");
     useEffect(()=> {
         axios.get('/api/t/teachers').then(({data}) => {
@@ -38,9 +38,10 @@ export default (props) => {
     return (
         <div className="menuBase">
 
-            <Dropdown dropOptions={dropOptions} currentOption={currentOption} setCurrentOption={setCurrentOption} />
+            { teacherRole === true ? <Dropdown dropOptions={dropOptions} currentOption={currentOption}
+                                               setCurrentOption={setCurrentOption} /> : ""}
 
-            <div className="navMainMenu">
+            <div className={ "navMainMenu" + (teacherRole === false ? " navMainMenu--Student": "")}>
 
                 <Link to="/home" className="epicLogo">EPiC</Link>
 
@@ -48,11 +49,14 @@ export default (props) => {
                 <div className="innerMenu">
 
                     <div className= "pages">
-                        <ul className="ulStyle">
+                        {teacherRole === true ?  <ul className="ulStyle">
                             {pagePaths.map((page) =>
                                 <li className="liStyle"><a className="pageName middle">{page}</a></li>
                             )}
-                        </ul>
+                        </ul> :  <ul className="ulStyle">
+                            <li className="liStyle"><a className="pageName middle">{pagePaths[0]}</a></li>
+                        </ul> }
+
                     </div>
 
                     <div className="separator"/>
@@ -61,7 +65,7 @@ export default (props) => {
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')}
-                            type="primary" width={100} className="logout"></Button>
+                            type="primary" width={60} className="logout"></Button>
 
                 </div>
 
