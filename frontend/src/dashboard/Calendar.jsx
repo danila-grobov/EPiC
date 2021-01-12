@@ -10,7 +10,7 @@ export default () => {
     useLayoutEffect(
         () => {
             axios
-                .get("/api/s/deadlines")
+                .get("/api/s/deadlines/all")
                 .then(({data:deadlines}) => {
                     setTasks(deadlines)
                 })

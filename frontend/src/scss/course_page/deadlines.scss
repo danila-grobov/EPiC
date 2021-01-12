@@ -4,7 +4,7 @@
   height: 328 - 60px;
   width: 426 - 60px;
   display: grid;
-  grid-auto-rows: min-content;
+  grid-template-rows: min-content 1fr;
   grid-template-columns: 1fr;
   border-radius: 15px;
   row-gap: 30px;

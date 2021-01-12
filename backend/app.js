@@ -4,7 +4,8 @@ import hash from "crypto-random-string";
 import session from "express-session";
 import {
     addStudentsToDB,
-    checkInviteToken, getCourses, getDeadlines, getStudent,
+    checkInviteToken,
+    getStudent,
     getStudentsFromDB,
     registerStudent,
     removeStudentFromDB,
@@ -13,6 +14,7 @@ import {
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
 import SessionStore from "./SessionStore";
+import {getCourses, getDeadlines, getDeadlinesByCourse} from "./coursePage";
 
 const app = express()
 const port = 3000
@@ -39,7 +41,7 @@ app.put('/api/t/students/grade', (req, res) => {
     setStudentGrades({data, course}).then(() => res.send());
 })
 
-app.get('/api/s/deadlines', (req, res) => {
+app.get('/api/s/deadlines/all', (req, res) => {
     const {email} = req.session;
     getDeadlines(email).then(deadlines => res.send(deadlines));
 })
@@ -48,6 +50,12 @@ app.get('/api/s/courses', ((req, res) => {
     const {email} = req.session;
     getCourses(email).then(courses => res.send(courses));
 }))
+
+app.get('/api/s/deadlines', (req, res) => {
+    const {email} = req.session;
+    const {course} = req.query;
+    getDeadlinesByCourse(email,course).then(deadlines => res.send(deadlines));
+})
 
 app.put('/api/register', (req, res) => {
     const data = req.body;

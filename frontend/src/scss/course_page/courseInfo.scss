@@ -7,7 +7,7 @@
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   min-height: 328px - 120px;
-  min-width: 703px - 120px;
+  max-width: 703px - 120px;
 }
 .courseInfo__courseName {
   font-family: $font_sanspro_bold;
@@ -20,4 +20,7 @@
   font-family: $font_sanspro_bold;
   font-size: 32px;
   opacity: 0.5;
+}
+.courseInfo__progress {
+  margin-top: 60px;
 }
