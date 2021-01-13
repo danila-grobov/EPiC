@@ -8,9 +8,20 @@ import ScatterGraph from "./graphs/ScatterGraph";
 import LineGraph from "./graphs/LineGraph";
 // App stores and displays all of the top level components in the page.
 // ToastContainer is need to display alert messages.
+import Table from "./Table";
+import NavBar from "./NavBar/NavBar";
+import NavBar_Dropdown from "./NavBar/NavBar_Dropdown";
 const App = () => {
+    const pages = ["HOME", "TASKS", "MANAGE"];
+    const name = "Hello, Dwight";
+
+    //const [currentCourse, setCurrentCourse] = useState("CSC2033");
+    //currentCourse={currentCourse} setCurrentCourse={setCurrentCourse}
+
     return (
         <div className="app">
+            <NavBar  pages={pages} name={name} adminRole={false}/>
+            <Table/>;
             {/*{<Table course={"CSC2033"}/>}*/}
 
             <div className="flex-container">
