@@ -90,6 +90,18 @@ CREATE TABLE TasksDone
     FOREIGN KEY (TaskID)
         REFERENCES Tasks (TaskID)
 );
+CREATE TABLE Confidence
+(
+    Email           varchar(50) NOT NULL,
+    CourseName      varchar(10) NOT NULL,
+    ConfidenceLevel int         NOT NULL,
+    Date            date        NOT NULL,
+    FOREIGN KEY (Email)
+        REFERENCES Students (Email),
+    FOREIGN KEY (CourseName)
+        REFERENCES Courses (CourseName),
+    UNIQUE (CourseName, Email, Date)
+);
 # Create sample teacher data
 INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin)
 VALUES ('Teacher1',
@@ -121,7 +133,7 @@ VALUES ('CSC2032', '#F28F38', 'Algorithm Design and Analysis');
 INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
 VALUES ('CSC2034', '#C8553D', 'Introducing Contemporary Topics in Computing');
 INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
-VALUES ('CSC2035', '#7A306C','Operating Systems and Networks');
+VALUES ('CSC2035', '#7A306C', 'Operating Systems and Networks');
 
 #Create sample grades data
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)

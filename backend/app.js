@@ -14,7 +14,7 @@ import {
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
 import SessionStore from "./SessionStore";
-import {getCourses, getDeadlines, getDeadlinesByCourse} from "./coursePage";
+import {getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
 
 const app = express()
 const port = 3000
@@ -55,6 +55,12 @@ app.get('/api/s/deadlines', (req, res) => {
     const {email} = req.session;
     const {course} = req.query;
     getDeadlinesByCourse(email,course).then(deadlines => res.send(deadlines));
+})
+
+app.post('/api/s/confidence', (req, res) => {
+    const {email} = req.session;
+    const {course, confidence} = req.body;
+    setConfidence(course, email, confidence).then(() => res.send());
 })
 
 app.put('/api/register', (req, res) => {

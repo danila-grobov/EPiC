@@ -1,5 +1,6 @@
 @import "../colors";
 @import "../fonts";
+
 .confidenceCard {
   width: 486px - 120px;
   height: 456px - 60px;
@@ -9,20 +10,34 @@
   display: grid;
   align-content: space-between;
 }
+
 .confidenceCard__title {
   font-size: 24px;
   color: $text;
   font-family: $font_lack;
   text-align: center;
 }
-.confidenceCard__submitButton{
+
+.confidenceCard__submitButton.button--secondary {
+  box-sizing: border-box;
   justify-self: center;
+
   .button__label {
-    color: $text!important;
+    color: $text;
   }
-  border-color: $text!important;
-  border-radius: 5px!important;
+
+  border-color: $text;
+  border-radius: 5px;
 }
+
+.confidenceCard__submitButton.button--secondary--done {
+  background-color: $text;
+
+  .button__label {
+    color: white;
+  }
+}
+
 .confidenceCard__selectedOption {
   padding: 10px;
   border: solid 3px $blue;

@@ -74,3 +74,15 @@ function formatCourseDeadlines(tasks) {
         completed: task[2] !== null
     }))
 }
+
+export function setConfidence(course, email, confidence) {
+    return getDBSession(session => {
+        session.sql('USE EPiC').execute();
+        const date = moment().format("YYYY-MM-DD");
+        return session.sql(`
+            INSERT INTO Confidence (Email,CourseName,Date,ConfidenceLevel)
+            VALUES(${escape(email)}, ${escape(course)}, ${escape(date)}, ${escape(confidence)})
+            ON DUPLICATE KEY UPDATE ConfidenceLevel=${escape(confidence)}
+        `).execute();
+    })
+}

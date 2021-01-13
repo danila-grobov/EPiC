@@ -9,7 +9,7 @@ export default props => {
         <div className="coursePage">
             <CourseInfo {...props} />
             <Deadlines {...props}/>
-            <ConfidenceCard />
+            <ConfidenceCard {...props} />
         </div>
     )
 }
