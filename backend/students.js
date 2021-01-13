@@ -4,58 +4,107 @@ import React from "react";
 import md5 from "md5";
 import {v4 as uuidV4} from "uuid";
 import {escape} from "sqlstring";
+import moment from "moment";
 
 const domainName = "http://localhost/";
+
+export function getDeadlines(email) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        const dateInAMonth = moment().add(30, 'days').format('YYYY-MM-DD');
+        const SQL = `
+            SELECT t.Deadline, c.Color, t.TaskTitle
+            FROM Grades AS g
+            JOIN Tasks t ON t.CourseName = g.CourseName
+            JOIN Courses c ON c.CourseName = t.CourseName
+            LEFT JOIN TasksDone td ON td.TaskID = t.TaskID AND td.Email = ${escape(email)}
+            WHERE  
+                g.Email = ${escape(email)} 
+                AND t.Deadline IS NOT NULL 
+                AND td.TaskID IS NULL
+                AND t.Deadline <= ${escape(dateInAMonth)}
+        `;
+        return session.sql(SQL).execute();
+    }).then(result => formatDeadlines(result.fetchAll()))
+}
+
+function formatDeadlines(deadlines) {
+    return deadlines.map(deadline => ({
+        name: deadline[2],
+        deadline: moment(deadline[0]).format("MMMM D"),
+        color: deadline[1]
+    }))
+}
+
+export function getCourses(email) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        const SQL = `
+           SELECT c.CourseName, c.Color ,COUNT(td.TaskID) * 100 / COUNT(t.TaskID)
+           FROM Grades g
+                    JOIN Courses c on g.CourseName = c.CourseName
+                    JOIN Tasks t ON c.CourseName = t.CourseName
+                    LEFT JOIN TasksDone td on t.TaskID = td.TaskID AND td.Email = ${escape(email)}
+           WHERE g.Email = ${escape(email)}
+           GROUP BY c.CourseName
+       `;
+        return session.sql(SQL).execute();
+    }).then(result => formatCourses(result.fetchAll()));
+}
+
+function formatCourses(courses) {
+    return courses.map(course => ({
+        name: course[0],
+        color: course[1],
+        progress: parseFloat(course[2])
+    }))
+}
+
 
 export function addStudentsToDB(data, course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
-        session.sql("START TRANSACTION").execute();
-        session.sql("SET autocommit=0").execute();
         const errors = [];
         return Promise.all(data.map(element => {
             return session.sql(`
-                    INSERT INTO Students (${Object.keys(element).join(", ")})
-                    VALUES (${getSQLValues(Object.values(element))})
-                `)
-                .execute()
-                .then(
-                    // () => emailMessage(
-                    //     domainName + "register/" + element.Username,
-                    //     element.Email)
-                )
-                .catch(e => {
-                    console.log(e.message);
-                    //ignore any errors regarding student invite
-                    session.sql("ROLLBACK").execute();
-                })
-                .then(() => session.sql(`
-                    INSERT INTO Grades (Email, CourseName)
-                    VALUES (${escape(element.Email)}, ${escape(course)})
-                `).execute())
-                .catch((error) => {
-                    console.log(error.message);
-                    if (error.message ===
-                        "Cannot add or update a child row: a foreign key constraint fails" +
-                        " (`EPiC`.`Grades`, CONSTRAINT `Grades_ibfk_2` FOREIGN KEY (`Email`)" +
-                        " REFERENCES `Students` (`Email`))") {
-                        errors.push(`Could not invite student with an email "${element.Email}."`);
-                    } else if (error.message.search("Duplicate") !== -1) {
-                        errors.push(`The student with an email ${element.Email} has already been enrolled in the course.`)
-                    } else if (error.message) {
-                        errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
-                    }
-                    session.sql("ROLLBACK").execute()
-                })
-        })).then(() => {
-            session.sql("COMMIT").execute();
-            return errors;
-        })
+                SELECT InviteStatus, Username
+                FROM Students
+                WHERE Email = ${escape(element.Email)}
+            `).execute()
+            .then(result => {
+                const studentData = result.fetchOne();
+                if(studentData) {
+                    const [inviteStatus, username] = studentData;
+                    if(inviteStatus === 'waiting')
+                        return emailMessage(domainName + "register/" + username, element.Email)
+                } else if(!studentData) {
+                    return Promise.all([
+                        session.sql(`
+                            INSERT INTO Students (${Object.keys(element).join(", ")})
+                            VALUES (${getSQLValues(Object.values(element))})
+                        `).execute(),
+                        emailMessage(
+                            domainName + "register/" + element.Username,
+                            element.Email
+                        )
+                ])}
+            })
+            .then(() => session.sql(`
+                INSERT INTO Grades (Email, CourseName)
+                VALUES (${escape(element.Email)}, ${escape(course)})
+            `).execute())
+            .catch(
+                e => {
+                    if(!e.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
+                        errors.push(`An unexpected error has occurred when trying to invite ${data.Email}.`)
+                }
+            )
+        })).then(() => errors)
     })
 }
 
 function getSQLValues(values) {
-    return values.map(value => `${escape(value)}`).join(", ")
+    return values.map(value => escape(value)).join(", ")
 }
 
 function getSQLBody(course, whereClause) {
@@ -140,9 +189,9 @@ export function registerStudent(data) {
             WHERE Username=${escape(data.token)}
         `).execute().then(() => errors).catch(
             e => {
-                if(e.message.search("Duplicate entry") !== -1)
-                    return {...errors, userName:"This username was already taken."};
-                else return {...errors, global:"Unexpected error has occurred."}
+                if (e.message.search("Duplicate entry") !== -1)
+                    return {...errors, userName: "This username was already taken."};
+                else return {...errors, global: "Unexpected error has occurred."}
             }
         );
     })
@@ -169,11 +218,12 @@ export function getStudent(username, password) {
         `).execute()
     }).then(res => {
         const data = res.fetchOne();
-        if(data) {
-            const salt = data[0].slice(32,64);
+        if (data) {
+            const salt = data[0].slice(32, 64);
             const hashedPassword = hashPassword(password, salt);
             return data[0] === hashedPassword ? data[1] : false;
-        } return false;
+        }
+        return false;
     });
 }
 
@@ -181,7 +231,7 @@ function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
             filter.split(" || ").map(
-                filter => `${columnName} LIKE "%${escape(filter).slice(1,filter.length)}%"`
+                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length+1)}%"`
             ).join(" OR ")
         ).join(" OR ")
     ).join(") AND (");

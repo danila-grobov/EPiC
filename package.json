@@ -36,6 +36,7 @@
     "express-session": "^1.17.1",
     "file-loader": "^6.2.0",
     "md5": "^2.3.0",
+    "moment": "^2.29.1",
     "node-sass": "^5.0.0",
     "nodemailer": "^6.4.17",
     "nodemon": "^2.0.6",
