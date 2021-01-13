@@ -29,9 +29,9 @@ export default (props) => {
             setCourses(data.courses);
             setisTeacher(true);
             setCurrentOption({value : data.courses[0], label : data.courses[0] });
-            console.log(data);
         })
     }, [])
+    console.log(isTeacher)
     const name = `Hello, ${firstName}`;
     const dropOptions = courses.map((course) =>({label:course,value:course}));
 
@@ -54,9 +54,10 @@ export default (props) => {
                             {pagePaths.map((page) =>
                                 <li className="liStyle"><a className="pageName middle">{page}</a></li>
                             )}
-                        </ul> :  <ul className="ulStyle">
-                            <li className="liStyle"><a className="pageName middle">{pagePaths[0]}</a></li>
-                        </ul> }
+                        </ul>: <ul className="ulStyle">
+                            <li className="liStyle"><a href="Dashboard.jsx" className="pageName middle">HOME</a></li>
+                        </ul>  }
+
 
                     </div>
 

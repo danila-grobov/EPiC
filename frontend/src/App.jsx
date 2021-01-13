@@ -27,20 +27,20 @@ const App = () => {
 
                 <ToastContainer/>
                     <Route path="/profile">
-                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption} />
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption}/>
                     </Route>
 
                     <Route path="/manage">
-                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption}  />
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption}/>
                         <Table course={currentOption.value}/>
                     </Route>
 
                     <Route path="/tasks">
-                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption} />
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption}/>
                     </Route>
 
                     <Route path="/home">
-                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption} />
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption}/>
                     </Route>
 
                     <Route path="/">
