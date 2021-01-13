@@ -66,7 +66,7 @@ export default (props) => {
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')}
-                            type="primary" width={60} className="logout"></Button>
+                            type="primary" width={60}></Button>
 
                 </div>
 
