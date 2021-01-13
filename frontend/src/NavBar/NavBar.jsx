@@ -19,19 +19,23 @@ import axios from "axios_redirect";
 
 export default (props) => {
     const [courses, setCourses] = useState([]);
-    const {pagePaths, currentOption, setCurrentOption} = props;
+    const {pagePaths, currentOption, setCurrentOption, userRole} = props;
     const [isTeacher, setisTeacher] = useState(false);
     const[firstName,setFirstName] = useState("");
-    useEffect(()=> {
-        axios.get('/api/t/teachers').then(({data}) => {
-            //console.log(data.firstName);
-            setFirstName(data.firstName);
-            setCourses(data.courses);
-            setisTeacher(true);
-            setCurrentOption({value : data.courses[0], label : data.courses[0] });
-        })
-    }, [])
-    console.log(isTeacher)
+
+    if(userRole === "teacher"){
+        useEffect(()=> {
+            axios.get('/api/t/teachers').then(({data}) => {
+                //console.log(data.firstName);
+                setFirstName(data.firstName);
+                setCourses(data.courses);
+                setisTeacher(true);
+                setCurrentOption({value : data.courses[0], label : data.courses[0] });
+            })
+        }, [])
+    }
+
+
     const name = `Hello, ${firstName}`;
     const dropOptions = courses.map((course) =>({label:course,value:course}));
 
@@ -55,7 +59,8 @@ export default (props) => {
                                 <li className="liStyle"><a className="pageName middle">{page}</a></li>
                             )}
                         </ul>: <ul className="ulStyle">
-                            <li className="liStyle"><a href="Dashboard.jsx" className="pageName middle">HOME</a></li>
+                            <li className="liStyle"><a className="pageName middle">
+                                <Link to="/dashboard">HOME</Link></a></li>
                         </ul>  }
 
 
