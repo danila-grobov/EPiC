@@ -1,7 +1,37 @@
+@import "../colors";
+@import "../fonts";
 .confidenceCard {
-  width: 456px - 120px;
+  width: 486px - 120px;
   height: 456px - 60px;
   padding: 30px 60px;
   background: white;
   border-radius: 15px;
+  display: grid;
+  align-content: space-between;
+}
+.confidenceCard__title {
+  font-size: 24px;
+  color: $text;
+  font-family: $font_lack;
+  text-align: center;
+}
+.confidenceCard__submitButton{
+  justify-self: center;
+  .button__label {
+    color: $text!important;
+  }
+  border-color: $text!important;
+  border-radius: 5px!important;
+}
+.confidenceCard__selectedOption {
+  padding: 10px;
+  border: solid 3px $blue;
+  justify-self: center;
+  border-radius: 5px;
+  color: $blue;
+  font-family: $font_sanspro_semibold;
+  font-size: 18px;
+  width: 180px;
+  text-align: center;
+  opacity: 0.5;
 }

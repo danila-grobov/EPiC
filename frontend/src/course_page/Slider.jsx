@@ -7,10 +7,10 @@ import confused from "../imgs/confused.svg";
 import sad from "../imgs/sad.svg";
 import unhappy from "../imgs/unhappy.svg";
 
-export default () => {
+export default props => {
     const [trackProps, setTrackProps] = useState(null);
     const sliderTrack = useRef(null);
-    const [selectedOption, setSelectedOption] = useState(0);
+    const {selectedOption, setSelectedOption} = props;
     const [dragging, setDragging] = useState(false);
     useEffect(() => {
         setTrackProps(sliderTrack.current.getClientRects()[0]);
