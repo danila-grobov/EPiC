@@ -41,7 +41,7 @@ export default ({data}) => {
     return (
         // Define canvas element to contain graph.
         <div>
-            <canvas id="PieChart" width="400" height="100"/>
+            <canvas id="PieChart" width="400" height="250"/>
         </div>
     );
 }
