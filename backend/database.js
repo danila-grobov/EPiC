@@ -12,7 +12,7 @@ export const testDBConnection = () => {
             console.log("Connected!");
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         });
 }
 export function getDBSession(callback) {
@@ -25,6 +25,6 @@ export function getDBSession(callback) {
             });
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         });
 }

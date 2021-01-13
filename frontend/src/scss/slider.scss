@@ -1,0 +1,57 @@
+@import "colors";
+@import "fonts";
+
+.slider {
+  position: relative;
+}
+
+.slider__track {
+  background-color: $blue;
+  opacity: 0.5;
+  border-radius: 5px;
+  height: 10px;
+  width: calc(100% - 20px);
+  margin: 0 auto;
+}
+
+.slider__bar {
+  position: absolute;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $blue;
+  top: 0;
+  left: 10px;
+}
+
+.slider__handle {
+  position: absolute;
+  top: -5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+}
+
+.slider__wrapper {
+  display: grid;
+  row-gap: 15px;
+  cursor: pointer;
+}
+.slider__wrapper--dragging {
+  cursor: grabbing !important;
+  .slider__handle {
+    cursor: grabbing !important;
+  }
+  .slider__track {
+    cursor: grabbing !important;
+  }
+}
+
+.slider__icons {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% + 6px);
+  margin-left: -3px;
+}
