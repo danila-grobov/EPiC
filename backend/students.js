@@ -189,6 +189,7 @@ export function registerStudent(data) {
             WHERE Username=${escape(data.token)}
         `).execute().then(() => errors).catch(
             e => {
+                console.log(e);
                 if (e.message.search("Duplicate entry") !== -1)
                     return {...errors, userName: "This username was already taken."};
                 else return {...errors, global: "Unexpected error has occurred."}

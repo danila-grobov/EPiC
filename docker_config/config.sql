@@ -17,9 +17,9 @@ CREATE TABLE Students
     Firstname    varchar(50),
     Lastname     varchar(50),
     Email        varchar(50),
-    Skill        varchar(15),
-    StudentType  varchar(20),
-    Gender       varchar(5),
+    Skill        varchar(50),
+    StudentType  varchar(50),
+    Gender       varchar(50),
     InviteStatus varchar(50) NOT NULL,
     PRIMARY KEY (Email)
 );

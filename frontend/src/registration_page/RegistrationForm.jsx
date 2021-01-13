@@ -49,7 +49,7 @@ export default props => {
                         inputStates[errorType] ? inputStates[errorType].setErrorMessage(errors[errorType]) : null
                 )
                 if (errors.global)
-                    toast.error(data.global)
+                    toast.error(errors.global)
                 setLoadingState("error");
                 setTimeout(() => setLoadingState("idle"), 1000);
             });

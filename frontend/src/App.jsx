@@ -18,28 +18,29 @@ const App = () => {
     const pagePaths= [<Link to="/home">HOME</Link>,
         <Link to="/tasks">TASKS</Link>,
         <Link to="/manage">MANAGE</Link>];
-
+    const [currentOption, setCurrentOption] = useState({value: null, label: "COURSES"});
 
 
     return (
         <Router>
             <div className="app">
 
+                <ToastContainer/>
                     <Route path="/profile">
-                        <NavBar pagePaths={pagePaths} name={name} />
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption} />
                     </Route>
 
                     <Route path="/manage">
-                        <NavBar pagePaths={pagePaths} name={name} />
-                        <Table course={"CSC2033"}/>
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption}  />
+                        <Table course={currentOption.value}/>
                     </Route>
 
                     <Route path="/tasks">
-                        <NavBar pagePaths={pagePaths} name={name} />
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption} />
                     </Route>
 
                     <Route path="/home">
-                        <NavBar pagePaths={pagePaths} name={name} />
+                        <NavBar pagePaths={pagePaths} currentOption={currentOption} setCurrentOption={setCurrentOption} />
                     </Route>
 
                     <Route path="/">
@@ -48,7 +49,6 @@ const App = () => {
 
 
 
-                <ToastContainer/>
             </div>
         </Router>
     );

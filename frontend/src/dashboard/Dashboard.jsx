@@ -16,6 +16,7 @@ export default () => {
     ,[]);
     return (
         <div className="dashboard">
+
             <Calendar />
             <div className="dashboard__courseCards">
                 {courses.map(course =>

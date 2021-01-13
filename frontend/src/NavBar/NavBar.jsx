@@ -19,9 +19,7 @@ import axios from "axios_redirect";
 
 export default (props) => {
     const [courses, setCourses] = useState([]);
-    const title = {value : "COURSES", label : "COURSES"};
-    const {pagePaths, teacherRole} = props;
-    const [currentOption, setCurrentOption] = useState(title);
+    const {pagePaths, currentOption, setCurrentOption} = props;
     const [isTeacher, setisTeacher] = useState(false);
     const[firstName,setFirstName] = useState("");
     useEffect(()=> {
@@ -30,6 +28,8 @@ export default (props) => {
             setFirstName(data.firstName);
             setCourses(data.courses);
             setisTeacher(true);
+            setCurrentOption({value : data.courses[0], label : data.courses[0] });
+            console.log(data);
         })
     }, [])
     const name = `Hello, ${firstName}`;

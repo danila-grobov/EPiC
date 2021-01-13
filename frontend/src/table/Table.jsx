@@ -27,7 +27,7 @@ export default ({course}) => {
     }
     useEffect(
         updateTable,
-        [rowCount, currentPage, filters, popupState]
+        [rowCount, currentPage, course, filters, popupState]
     );
     return (
         <div className="table">
