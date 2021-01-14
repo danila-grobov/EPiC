@@ -3,6 +3,7 @@
 
 .slider {
   position: relative;
+  cursor: pointer;
 }
 
 .slider__track {
@@ -37,16 +38,6 @@
 .slider__wrapper {
   display: grid;
   row-gap: 15px;
-  cursor: pointer;
-}
-.slider__wrapper--dragging {
-  cursor: grabbing !important;
-  .slider__handle {
-    cursor: grabbing !important;
-  }
-  .slider__track {
-    cursor: grabbing !important;
-  }
 }
 
 .slider__icons {

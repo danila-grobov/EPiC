@@ -11,24 +11,19 @@ export default props => {
     const [trackProps, setTrackProps] = useState(null);
     const sliderTrack = useRef(null);
     const {selectedOption, setSelectedOption} = props;
-    const [dragging, setDragging] = useState(false);
     useEffect(() => {
         setTrackProps(sliderTrack.current.getClientRects()[0]);
     }, []);
     const gridSize = trackProps ? trackProps.width * 0.25 : 0;
     return (
-        <div className={`slider__wrapper ${dragging ? "slider__wrapper--dragging" : ""}`}
-             onClick={e => {
-                 setSelectedOption(Math.round((e.clientX - trackProps.left) / gridSize));
-             }}>
-            <div className="slider">
-                <div className="slider__track" ref={sliderTrack}/>
+        <div className={`slider__wrapper`}>
+            <div className="slider" onClick={e => {
+                const option = Math.round((e.clientX - trackProps.left) / gridSize);
+                setSelectedOption(Math.max(0,Math.min(option, 4)));
+            }}>
+                <div className="slider__track" ref={sliderTrack} />
                 <div className="slider__bar" style={{width: selectedOption * gridSize}}/>
                 <Draggable axis={"x"} bounds={"parent"} grid={[gridSize, 0]}
-                           onStart={() => setDragging(true)}
-                           onStop={() => {
-                               setDragging(false);
-                           }}
                            position={{x:selectedOption * gridSize,y:0}}
                            onDrag={(e, data) => setSelectedOption(data.x / gridSize)}>
                     <div className="slider__handle"/>
