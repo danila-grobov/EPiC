@@ -80,6 +80,13 @@
 .textInput__helper {
   opacity: 0.5;
   margin-left: -2px;
+  display: inline-grid;
+  grid-template-columns: 1fr min-content;
+  align-items: center;
+  column-gap: 10px;
+}
+.textInput__helperImg {
+  width: 15px;
 }
 .textInput__label, .textInput__label--focused {
   width: max-content;

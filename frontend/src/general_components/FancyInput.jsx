@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import useHelper from "../hooks/useHelper";
 import "../scss/textInput.scss";
+import right_button from "../imgs/right_button.svg";
 
 export default props => {
     const {
@@ -44,7 +45,12 @@ export default props => {
                            onChange={onChange}
                            maxLength={type === "email" || !charLimit ? "" : charLimit}
                     />
-                    {focused && value && type === "email" ? <span className="textInput__helper">{helper}</span> : null}
+                    {focused && value && type === "email" && helper
+                        ? <span className="textInput__helper">
+                            {helper}
+                            <img src={right_button} alt="right key" className="textInput__helperImg"/>
+                        </span>
+                        : null}
                 </form>
             </div>
             {charLimit ?
