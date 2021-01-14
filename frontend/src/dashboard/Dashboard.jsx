@@ -19,12 +19,13 @@ export default () => {
     ,[]);
     return (
         <Router>
+
+            <ToastContainer/>
+
             <div className="dashboard">
 
-                <ToastContainer/>
-
                 <Route path="/dashboard">
-                    <NavBar userRole={"student"}/>
+                    <NavBar className="navwidth" userRole={"student"}/>
                     <Calendar/>
                     <div className="dashboard__courseCards">
                         {courses.map(course =>
