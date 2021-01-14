@@ -4,7 +4,7 @@ import Table from "./table/Table";
 import NavBar from "./NavBar/NavBar";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
+
 import {
     BrowserRouter as Router,
     Switch,

@@ -14,6 +14,7 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
+import {getStudentData} from "./student";
 
 const app = express()
 const port = 3000
@@ -100,6 +101,11 @@ app.get('/api/t/teachers',(req, res) => {
     const{email} = req.session;
     getTeacherData(email).then(data => res.send(data));
 
+})
+
+app.get('/api/s/student',(req,res) =>{
+    const{email} = req.session;
+    getStudentData(email).then(data => res.send(data));
 })
 
 app.get('*', (req, res) => {
