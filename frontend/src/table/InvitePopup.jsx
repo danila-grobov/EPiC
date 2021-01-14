@@ -29,6 +29,7 @@ export default props => {
                                 type={"email"} onSubmit={addInvite} charLimit={30} autoWidth={true}
                                 value={email} setValue={setEmail}
                     />
+                    <div className="invitePopup__addButton" onClick={() => addInvite(email)}>ADD</div>
                     <FileInput setFileData={setInvites}
                                successMessage={"The emails have been successfully uploaded."}
                                button={<Button height={32} className={"invitePopup__importButton"}

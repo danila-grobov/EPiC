@@ -56,6 +56,7 @@
   width: auto;
   display: grid;
   grid-gap: 27px;
+  grid-template-columns: 1fr 86px;
 }
 
 .invitePopup__addButton {
@@ -69,7 +70,6 @@
 
 .invitePopup__input {
   grid-row: 1;
-  grid-column: 1/3;
 }
 
 .invitePopup__inviteList {
@@ -108,3 +108,18 @@
   max-width: 232px;
   padding: 4px 25px!important;
 }
+.invitePopup__addButton {
+  font-family: $font_sanspro_bold;
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  background-color: $text_secondary;
+  width: 100%;
+  height: 44px;
+  align-self: start;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
