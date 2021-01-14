@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "../scss/course_page/confidenceCard.scss";
-import Slider from "./Slider";
+import Trackbar from "./Trackbar";
 import Button from "../general_components/Button";
 import axios from "axios_redirect";
 
@@ -23,7 +23,7 @@ export default props => {
             <div className="confidenceCard__selectedOption">
                 {confidenceLevels[selectedOption]}
             </div>
-            <Slider selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
+            <Trackbar selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>
             <Button type={"secondary"} label={"SUBMIT"} height={40} width={175}
                     className={"confidenceCard__submitButton"}
                     status={loadingState}

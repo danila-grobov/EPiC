@@ -1,12 +1,12 @@
 @import "colors";
 @import "fonts";
 
-.slider {
+.trackbar {
   position: relative;
   cursor: pointer;
 }
 
-.slider__track {
+.trackbar__track {
   background-color: $blue;
   opacity: 0.5;
   border-radius: 5px;
@@ -15,7 +15,7 @@
   margin: 0 auto;
 }
 
-.slider__bar {
+.trackbar__bar {
   position: absolute;
   height: 10px;
   border-radius: 5px;
@@ -24,7 +24,7 @@
   left: 10px;
 }
 
-.slider__handle {
+.trackbar__handle {
   position: absolute;
   top: -5px;
   height: 20px;
@@ -35,12 +35,12 @@
   cursor: grab;
 }
 
-.slider__wrapper {
+.trackbar__wrapper {
   display: grid;
   row-gap: 15px;
 }
 
-.slider__icons {
+.trackbar__icons {
   display: flex;
   justify-content: space-between;
   width: calc(100% + 6px);

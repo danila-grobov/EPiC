@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from "react";
-import "../scss/slider.scss";
+import "../scss/trackbar.scss";
 import Draggable from 'react-draggable';
 import happy from "../imgs/happy.svg";
 import smiling from "../imgs/smiling.svg";
@@ -16,25 +16,25 @@ export default props => {
     }, []);
     const gridSize = trackProps ? trackProps.width * 0.25 : 0;
     return (
-        <div className={`slider__wrapper`}>
-            <div className="slider" onClick={e => {
+        <div className={`trackbar__wrapper`}>
+            <div className="trackbar" onClick={e => {
                 const option = Math.round((e.clientX - trackProps.left) / gridSize);
                 setSelectedOption(Math.max(0,Math.min(option, 4)));
             }}>
-                <div className="slider__track" ref={sliderTrack} />
-                <div className="slider__bar" style={{width: selectedOption * gridSize}}/>
+                <div className="trackbar__track" ref={sliderTrack} />
+                <div className="trackbar__bar" style={{width: selectedOption * gridSize}}/>
                 <Draggable axis={"x"} bounds={"parent"} grid={[gridSize, 0]}
                            position={{x:selectedOption * gridSize,y:0}}
                            onDrag={(e, data) => setSelectedOption(data.x / gridSize)}>
-                    <div className="slider__handle"/>
+                    <div className="trackbar__handle"/>
                 </Draggable>
             </div>
-            <div className="slider__icons">
-                <img src={unhappy} alt="unhappy face" className="slider__icon"/>
-                <img src={sad} alt="sad face" className="slider__icon"/>
-                <img src={confused} alt="confused face" className="slider__icon"/>
-                <img src={smiling} alt="smiling face" className="slider__icon"/>
-                <img src={happy} alt="happy face" className="slider__icon"/>
+            <div className="trackbar__icons">
+                <img src={unhappy} alt="unhappy face"/>
+                <img src={sad} alt="sad face"/>
+                <img src={confused} alt="confused face"/>
+                <img src={smiling} alt="smiling face"/>
+                <img src={happy} alt="happy face"/>
             </div>
         </div>
 
