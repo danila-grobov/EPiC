@@ -1,5 +1,5 @@
 import {getDBSession} from "./database";
-import {emailMessage} from "./email";
+import {emailMessage, sendMessagesInBulk} from "./email";
 import React from "react";
 import md5 from "md5";
 import {v4 as uuidV4} from "uuid";
@@ -8,9 +8,10 @@ import {escape} from "sqlstring";
 const domainName = "http://localhost/";
 
 export function addStudentsToDB(data, course) {
+    const emailsToSend = [];
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
-        const errors = [];
+        let errors = [];
         return Promise.all(data.map(element => {
             return session.sql(`
                 SELECT InviteStatus, Username
@@ -22,17 +23,14 @@ export function addStudentsToDB(data, course) {
                 if(studentData) {
                     const [inviteStatus, username] = studentData;
                     if(inviteStatus === 'waiting')
-                        return emailMessage(domainName + "register/" + username, element.Email)
+                        emailsToSend.push({email: element.Email, message: domainName + "register/" + username});
                 } else if(!studentData) {
                     return Promise.all([
                         session.sql(`
                             INSERT INTO Students (${Object.keys(element).join(", ")})
                             VALUES (${getSQLValues(Object.values(element))})
                         `).execute(),
-                        emailMessage(
-                            domainName + "register/" + element.Username,
-                            element.Email
-                        )
+                        emailsToSend.push({email: element.Email, message: domainName + "register/" + element.userName})
                 ])}
             })
             .then(() => session.sql(`
@@ -42,10 +40,16 @@ export function addStudentsToDB(data, course) {
             .catch(
                 e => {
                     if(!e.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
-                        errors.push(`An unexpected error has occurred when trying to invite ${data.Email}.`)
+                        console.log(e);
+                    // errors.push(`An unexpected error has occurred when trying to invite ${data.Email}.`)
                 }
             )
-        })).then(() => errors)
+        })).then(
+            () => sendMessagesInBulk(emailsToSend)
+        ).catch(error => {
+            if(error.responseCode === 550)
+                errors = ["Daily email limit exceeded."]
+        }).then(() => errors)
     })
 }
 
