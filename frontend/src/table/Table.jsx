@@ -14,11 +14,12 @@ export default ({course}) => {
     const [rowCount, setRowCount] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
     const [filters, setFilters] = useState([]);
+    const [sortState, setSortState] = useState({index:-1, ascending: true});
     const [studentData, setStudentData] = useState([]);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
     const updateTable = () => {
         const offset = (currentPage - 1) * rowCount;
-        return getStudentData({count: rowCount, offset, course, filters},
+        return getStudentData({count: rowCount, offset, course, filters, sortState},
             res => {
                 const {students, count} = res.data;
                 setStudentData(students);
@@ -27,14 +28,14 @@ export default ({course}) => {
     }
     useEffect(
         updateTable,
-        [rowCount, currentPage, filters, popupState, course]
+        [rowCount, currentPage, filters, popupState, course,sortState]
     );
     return (
         <div className="table">
             {popupState ? <InvitePopup course={course} closePopup={() => setPopupState(false)}/> : ""}
             <SearchArea filters={filters} setFilters={setFilters}/>
-            <TableContent data={studentData} selectedCheckboxes={selectedCheckboxes}
-                          setSelectedCheckboxes={setSelectedCheckboxes}/>
+            <TableContent sortState={sortState} setSortState={setSortState} data={studentData}
+                          selectedCheckboxes={selectedCheckboxes} setSelectedCheckboxes={setSelectedCheckboxes}/>
             <TableButtons openPopup={() => setPopupState(true)}
                           emails={getEmails(selectedCheckboxes, studentData)}
                           updateTable={updateTable}

@@ -28,8 +28,8 @@ app.post('/api/t/students', (req, res) => {
     addStudentsToDB(invitesWithTokens, course).then(errors => res.send(errors));
 })
 app.get('/api/t/students', ((req, res) => {
-    const {offset, count, filters, course} = req.query;
-    getStudentsFromDB({count, offset, course}, filters)
+    const {offset, count, filters, course, sortState} = req.query;
+    getStudentsFromDB({count, offset, course}, filters, sortState)
         .then(dataObj => res.send(dataObj));
 }))
 app.delete('/api/t/students', (req, res) => {

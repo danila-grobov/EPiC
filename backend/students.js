@@ -21,18 +21,18 @@ export function addStudentsToDB(data, course) {
                 const studentData = result.fetchOne();
                 if(studentData) {
                     const [inviteStatus, username] = studentData;
-                    if(inviteStatus === 'waiting')
-                        return emailMessage(domainName + "register/" + username, element.Email)
+                    // if(inviteStatus === 'waiting')
+                    //     return emailMessage(domainName + "register/" + username, element.Email)
                 } else if(!studentData) {
                     return Promise.all([
                         session.sql(`
                             INSERT INTO Students (${Object.keys(element).join(", ")})
                             VALUES (${getSQLValues(Object.values(element))})
                         `).execute(),
-                        emailMessage(
-                            domainName + "register/" + element.Username,
-                            element.Email
-                        )
+                        // emailMessage(
+                        //     domainName + "register/" + element.Username,
+                        //     element.Email
+                        // )
                 ])}
             })
             .then(() => session.sql(`
@@ -42,7 +42,7 @@ export function addStudentsToDB(data, course) {
             .catch(
                 e => {
                     if(!e.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
-                        errors.push(`An unexpected error has occurred when trying to invite ${data.Email}.`)
+                        errors.push(`An unexpected error has occurred when trying to invite ${element.Email}.`)
                 }
             )
         })).then(() => errors)
@@ -61,18 +61,21 @@ function getSQLBody(course, whereClause) {
         WHERE c.CourseName = ${escape(course)} ${whereClause}`;
 }
 
-export function getStudentsFromDB({count, offset, course}, filters = []) {
+export function getStudentsFromDB({count, offset, course}, filters = [], sortState) {
     return getDBSession(session => {
         const columnNames = [
             "s.Firstname", "s.Lastname", "s.Username",
             "s.Email", "s.InviteStatus"
         ];
         const whereClause = getFilterWhereClause(filters, columnNames);
+        const sortIndex = parseInt(sortState.index);
+        const descending = sortState.ascending === "false";
         session.sql("USE EPiC").execute();
         const dataSQL = `
             SELECT ${columnNames.join(", ")}
             ${getSQLBody(course, whereClause)}
-            LIMIT ${count} OFFSET ${offset} `;
+            ${sortIndex !== -1 ? "ORDER BY " + columnNames[sortIndex] + (descending ? " DESC" : ""): ""}
+            LIMIT ${count} OFFSET ${offset}`;
         const countSQL = `
             SELECT COUNT(s.Email)
             ${getSQLBody(course, whereClause)}`;
