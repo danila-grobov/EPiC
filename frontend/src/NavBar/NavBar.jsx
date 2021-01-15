@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import "../scss/navBar.scss"
-import NavBar_Dropdown from "./NavBar_Dropdown";
-import dropDownArrow from "../imgs/downArrow.svg"
 import profilePhoto from "../imgs/profilePhoto.svg"
+import Dropdown from "../general_components/Dropdown";
+import Button from "../general_components/Button";
+import {Link} from "react-router-dom";
+import axios from "axios_redirect";
 //controls all of the nav bar.
 
 //MenuBase = the entire nav bar
@@ -16,47 +18,55 @@ import profilePhoto from "../imgs/profilePhoto.svg"
 //toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
 
 export default (props) => {
-    const courses = ["CSC2031","CSC2032","CSC2033","CSC2034","CSC2035"];
-    const epic = "EPiC";
-    const teacher = "TEACHER";
-    const admin = "ADMIN";
-    const {pages, name, adminRole} = props;
-    //const [currentCourse, setCurrentCourse] = useState("CSC2033")
-    const [isAdmin, setisAdmin] = useState(false);
+    const [courses, setCourses] = useState([]);
+    const title = {value : "COURSES", label : "COURSES"};
+    const {pagePaths, teacherRole} = props;
+    const [currentOption, setCurrentOption] = useState(title);
+    const [isTeacher, setisTeacher] = useState(false);
+    const[firstName,setFirstName] = useState("");
+    useEffect(()=> {
+        axios.get('/api/t/teachers').then(({data}) => {
+            //console.log(data.firstName);
+            setFirstName(data.firstName);
+            setCourses(data.courses);
+            setisTeacher(true);
+        })
+    }, [])
+    const name = `Hello, ${firstName}`;
+    const dropOptions = courses.map((course) =>({label:course,value:course}));
+
 
     return (
         <div className="menuBase">
 
-            <NavBar_Dropdown courses={courses}/>
+            { isTeacher === true ? <Dropdown dropOptions={dropOptions} currentOption={currentOption}
+                                               setCurrentOption={setCurrentOption} /> : ""}
 
-            <div className="navMainMenu">
+            <div className={ "navMainMenu" + (isTeacher === false ? " navMainMenu--Student": "")}>
 
-                <span className="epicLogo"> EPiC </span>
+                <Link to="/home" className="epicLogo">EPiC</Link>
+
 
                 <div className="innerMenu">
+
                     <div className= "pages">
-                        <ul className="ulStyle">
-                            {pages.map((page) =>
-                               <li className="liStyle"><a href="#" className="pageName middle">{page}</a></li>
+                        {isTeacher === true ?  <ul className="ulStyle">
+                            {pagePaths.map((page) =>
+                                <li className="liStyle"><a className="pageName middle">{page}</a></li>
                             )}
-                        </ul>
+                        </ul> :  <ul className="ulStyle">
+                            <li className="liStyle"><a className="pageName middle">{pagePaths[0]}</a></li>
+                        </ul> }
+
                     </div>
 
                     <div className="separator"/>
 
-                    <a href="#" className="userName">{name}</a>
-                    <img src={profilePhoto} alt="Profile photo" className="profile__icon"/>
+                    <Link to="/profile" className="userName">{name} </Link>
+                    <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
-                    { adminRole === true ? <div className="toggleButton" >
-                        <label className="switch">
-                            <input type="checkbox"  onClick={ ()=> setisAdmin(!isAdmin)}></input>
-                            <span className="slider round"></span>
-                        </label>
-                        <div className="links">
-                            <span className={!isAdmin ? "linkActive": "linkNotActive"}>"TEACHER"</span>
-                            <span className={!isAdmin ? "linkNotActive": "linkActive"}>"ADMIN"</span>
-                        </div>
-                    </div>: ""}
+                    <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')}
+                            type="primary" width={60} className="logout"></Button>
 
                 </div>
 

@@ -4,9 +4,24 @@
 .dropdown{
   position: relative;
   display: inline-block;
+  outline: none;
+  width: 151px;
 
 
 }
+
+.dropdownBase{
+  background: white;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: auto 20px;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 18px;
+  border: none;
+  cursor: pointer;
+}
+
 .dropbtn {
   color: #475356;
   font-family: $font_sanspro_semibold;
@@ -28,12 +43,12 @@
 }
 
 .dropdown-content{
-  display: none;
+  display: block;
   position: absolute;
   background-color: white;
   font-size: 20px;
-  top: 64px;
-  right: 2px;
+  top: 72px;
+  right: 1px;
   width: 151px;
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -54,22 +69,21 @@
 .dropdown-content a:hover {
 
   color: $text;
-  border-radius: 8px;
   align-items: center;
+  background-color: $background;
 
 }
 
 
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+
 
 ul{
   list-style-type: none;
+  padding: 0;
 }
 
 li{
-  margin: 0 1px;
+  list-style-type: none;
 }
 
 

@@ -1,13 +1,13 @@
 CREATE DATABASE IF NOT EXISTS EPiC;
 USE EPiC;
 CREATE TABLE Teachers (
-Username varchar(50) NOT NULL,
+Username varchar(50) NOT NULL UNIQUE,
 Pwd varchar(200) NOT NULL,
 Firstname varchar(50) NOT NULL,
 Lastname varchar(50) NOT NULL,
 Email varchar(50) NOT NULL,
 Admin boolean NOT NULL,
-PRIMARY KEY(Username)
+PRIMARY KEY(Email)
 );
 
 CREATE TABLE Students (
@@ -61,3 +61,30 @@ FOREIGN KEY (Username)
 FOREIGN KEY (TaskID)
         REFERENCES Tasks(TaskID)
 );
+
+CREATE TABLE Teaches(
+CourseName varchar(10) NOT NULL,
+Email varchar(50) ,
+FOREIGN KEY (CourseName)
+   REFERENCES Courses(CourseName),
+FOREIGN KEY (Email)
+   REFERENCES Teachers(Email),
+UNIQUE (CourseName, Email)
+);
+INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin)
+VALUES ('Teacher1',
+        'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec',
+        'Nick',
+        'Cook',
+        'teacher@ncl.ac.uk',
+        1);
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2033','#7A306C');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2031','#F28F38');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2032','#F28F38');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2034','#C8553D');
+INSERT INTO EPiC.Courses (CourseName, Color)
+VALUES ('CSC2035','#7A306C');
