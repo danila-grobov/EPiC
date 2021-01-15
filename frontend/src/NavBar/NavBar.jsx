@@ -69,7 +69,7 @@ export default (props) => {
                             )}
                         </ul>: <ul className="ulStyle">
                             <li className="liStyle"><a className="pageName middle">
-                                <Link to="/dashboard">HOME</Link></a></li>
+                                <Link to="/home">HOME</Link></a></li>
                         </ul>  }
 
 

@@ -24,7 +24,7 @@ export default () => {
 
             <div className="dashboard">
 
-                <Route path="/dashboard">
+                <Route path="/home">
                     <NavBar className="navwidth" userRole={"student"}/>
                     <Calendar/>
                     <div className="dashboard__courseCards">
@@ -34,8 +34,14 @@ export default () => {
                     </div>
                 </Route>
 
+                <Route path="/profile">
+                    
+                    <NavBar className="navwidth" userRole={"student"}/>
+                    
+                </Route>
+
                 <Route path="/">
-                    <Redirect to="/dashboard"/>
+                    <Redirect to="/home"/>
                 </Route>
 
             </div>

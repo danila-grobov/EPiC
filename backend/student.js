@@ -15,11 +15,11 @@ export function getStudentData(email) {
             FROM Students
             WHERE Email= ${escape(email)} 
         `
-        return Promise.all[session.sql(studentNameSQL).execute()]
+        return session.sql(studentNameSQL).execute();
 
 
     }).then(result => {
-        const firstName = result.fetchAll();
+        const [firstName] = result.fetchOne();
         return firstName;
 
     })
