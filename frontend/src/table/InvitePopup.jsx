@@ -17,8 +17,8 @@ export default props => {
     const {invites, sendInvites, setInvites, addInvite, getInviteElements} =
         useInvite(course, checkValidity, resetEmail);
     return (
-        <div className="invitePopup__wrapper">
-            <div className="invitePopup__background" onClick={closePopup}/>
+        <div className="invitePopup__wrapper" data-testid={"invitePopup"}>
+            <div className="invitePopup__background" onClick={closePopup} data-testid={"invitePopup__background"}/>
             <div className="invitePopup">
                 <div className="invitePopup__header">
                     <span className="invitePopup__title">Invite new students to the system</span>

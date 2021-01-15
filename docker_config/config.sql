@@ -20,17 +20,6 @@ CREATE TABLE Teachers
     PRIMARY KEY (Username)
 );
 
-CREATE TABLE Teachers
-(
-    Username  varchar(50)  NOT NULL,
-    Pwd       varchar(200) NOT NULL,
-    Firstname varchar(50)  NOT NULL,
-    Lastname  varchar(50)  NOT NULL,
-    Email     varchar(50)  NOT NULL,
-    Admin     boolean      NOT NULL,
-    PRIMARY KEY (Username)
-);
-
 CREATE TABLE Students
 (
     Username     varchar(50) UNIQUE,
