@@ -33,9 +33,10 @@ export default () => {
                 <div className="calendar__tasks">
                     <span className="calendar__text">To-Do</span>
                     {
+                        tasks.length > 0 ?
                         tasks.map((task,index) =>
                             <CalendarTask key={`calendarTask__${index}`} {...task} />
-                        )
+                        ) : <span className="calendar__noTasks">No deadlines this month.</span>
                     }
                 </div>
             </div>

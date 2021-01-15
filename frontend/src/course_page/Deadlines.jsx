@@ -12,12 +12,13 @@ export default props => {
             .then(({data: deadlines}) => {
                 setDeadlines(deadlines)
             })
-    }, [])
+    }, []);
     return (
         <div className="deadlines">
             <span className="deadlines__title">Deadlines</span>
             <ScrollableContainer className={"deadlines__taskWrapper"}>
                 {
+                    deadlines.length > 0 ?
                     deadlines.map((deadline, index) => (
                         <div key={`deadlines__${index}`} className="deadlines__task">
                             <div className={
@@ -26,7 +27,7 @@ export default props => {
                             <span className="deadlines__taskTitle">{deadline.title}</span>
                             <span className="deadlines__date">{deadline.date}</span>
                         </div>
-                    ))
+                    )) : <span className="deadlines__noDeadlines">There are no deadlines for this course.</span>
                 }
             </ScrollableContainer>
         </div>
