@@ -7,7 +7,8 @@ function buttonPush() {
     document.getElementById("dropdownContent").classList.toggle("show");
 }
 
-export default (props) => {
+
+export default () => {
 
     return (
         <div className="dropdown">
