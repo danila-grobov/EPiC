@@ -13,29 +13,15 @@ export function sendMessagesInBulk(emails) {
         auth: emailCredentials,
         pool: true
     });
-    const chunkSize = 10;
-    const emailsInChunks = [];
-    let temp = [];
-    emails.map(
-        (email, index) => {
-            if(index % chunkSize === 0 && index !== 0) {
-                emailsInChunks.push(temp)
-                temp = [];
-            }
-            temp.push(email);
-        }
-    )
-    emailsInChunks.push(temp);
-    return emailsInChunks.reduce((promise,chunk) => {
-        return promise.then(() =>
-            Promise.all(
-                chunk.map(({email, message}) =>
-                    emailMessage(message,email, emailTransporter)
-                ))
-            .then(() => new Promise(resolve => setTimeout(() => resolve(),2000)))
+    return emails.reduce((promise, {email, message}) => {
+        return promise.then(
+            () => emailMessage(message, email, emailTransporter).then(
+                () => new Promise(resolve => setTimeout(() => resolve(), 1000))
+            )
         )
-    },Promise.resolve()).then(() => emailTransporter.close());
+    }, Promise.resolve()).then(() => emailTransporter.close());
 }
+
 export function emailMessage(message, email, emailTransporter) {
     return new Promise((resolve, reject) =>
         emailTransporter.sendMail({
