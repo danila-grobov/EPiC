@@ -23,7 +23,12 @@
       "axios_redirect": "<rootDir>/frontend/src/modified_axios.js"
     },
     "transform": {
-      "\\.[jt]sx?$": ["babel-jest", { "configFile": "./server_config/babel.config.json" }]
+      "\\.[jt]sx?$": [
+        "babel-jest",
+        {
+          "configFile": "./server_config/babel.config.json"
+        }
+      ]
     }
   },
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
@@ -33,6 +38,7 @@
     "@babel/core": "^7.12.10",
     "@babel/node": "^7.12.10",
     "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.12.10",
     "@mysql/xdevapi": "^8.0.22",
