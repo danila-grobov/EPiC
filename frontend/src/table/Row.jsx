@@ -12,7 +12,7 @@ export default props => {
     const cells = values.map(({value, type}, index) => {
             const visibility = values.length - 1 === index || type === "title" ? "--hidden" : "";
             return [
-                <span key={"row_cell" + index} className={`row__cell row__cell--${type}`}>
+                <span data-testid={`row--${type}`} key={"row_cell" + index} className={`row__cell row__cell--${type}`}>
                     {value === null ? "--" : value}
                     {rowType === "header" ?
                         <div key={"row_cellSort" + index} className="row__sort" onClick={
@@ -20,12 +20,12 @@ export default props => {
                         }>
                             {
                                 sortState.index !== index ? [
-                                <img src={sort_up} alt="" className="row__sortIcon"/>,
-                                <img src={sort_down} alt="" className="row__sortIcon"/>
+                                <img key={"sort_up" + index} src={sort_up} alt="" className="row__sortIcon"/>,
+                                <img key={"sort_down" + index} src={sort_down} alt="" className="row__sortIcon"/>
                                 ] : sortState.index === index && sortState.ascending
-                                ? <img src={sort_down_active} alt="" className="row__sortIcon"/>
+                                ? <img key={"sort_down" + index} src={sort_down_active} alt="" className="row__sortIcon"/>
                                 : sortState.index === index && !sortState.ascending
-                                ? <img src={sort_up_active} alt="" className="row__sortIcon"/>
+                                ? <img key={"sort_up" + index} src={sort_up_active} alt="" className="row__sortIcon"/>
                                 : ""
                             }
                         </div>

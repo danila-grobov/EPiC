@@ -4,13 +4,28 @@ import {render, fireEvent, screen, waitFor} from '@testing-library/react';
 import {rest} from 'msw'
 import {setupServer} from 'msw/node'
 import {parse} from "qs";
-
-const server = setupServer();
-
+import TableContent from "../frontend/src/table/TableContent";
+import '@testing-library/jest-dom';
+const header = [
+    {value: "First name", type: "title"},
+    {value: "Last name", type: "title"},
+    {value: "Username", type: "title"},
+    {value: "Email", type: "title"},
+    {value: "Status", type: "title"}
+];
+const dataRow = [
+    {value: "Nick", type: "text"},
+    {value: "Cook", type: "text"},
+    {value: "nickcook", type: "text"},
+    {value: "nick.cook@ncl.ac.uk", type: "text"},
+    {value: "waiting", type: "warning"}
+];
+const server = setupServer(rest.get("*", (req, res, ctx) => {
+    console.log("Please a request handler!");
+}));
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
-
 test('opens and closes invite popup', () => {
     render(<Table course={"CSC2033"}/>);
     expect(screen.queryByTestId("invitePopup")).toBe(null);
@@ -61,3 +76,29 @@ test('sends request with filter', async () => {
     fireEvent.change(searchInput, {target: {value: "test2"}});
     fireEvent.submit(searchInput);
 });
+test('displays header row', async () => {
+    server.use(
+        rest.get('/api/t/students', (req, res, ctx) => {
+            return res(ctx.json({
+                students: [header, dataRow],
+                count: 0
+            }));
+        })
+    );
+    render(<Table course={"CSC2033"}/>);
+    await waitFor(() => {
+            const titles = screen.getAllByTestId("row--title");
+            expect(titles.length).toBe(5);
+        }
+    );
+})
+test('displays no students message', async () => {
+    const {rerender} = render(<TableContent data={[]}/>)
+    expect(screen.getByText(/No students in the system/i)).toBeInTheDocument();
+    rerender(<TableContent selectedCheckboxes={[]} setSelectedCheckboxes={jest.fn()} setSortState={jest.fn()}
+                           data={[header]} sortState={{}}/>);
+    expect(screen.getByText(/No students in the system/i)).toBeInTheDocument();
+    rerender(<TableContent selectedCheckboxes={[]} setSelectedCheckboxes={jest.fn()} setSortState={jest.fn()}
+                           data={[header, dataRow]} sortState={{}}/>);
+    expect(screen.queryByText(/No students in the system/i)).not.toBeInTheDocument();
+})
