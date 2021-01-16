@@ -19,7 +19,7 @@ test('opens and closes invite popup', () => {
     fireEvent.click(screen.getByTestId("invitePopup__background"));
     expect(screen.queryByTestId("invitePopup")).toBe(null);
 })
-test('adds search phrase', () => {
+test('adds and removes search phrase', () => {
     const {container} = render(<Table course={"CSC2033"}/>);
     const [searchInput] = container.getElementsByClassName("searchInput__input");
     fireEvent.change(searchInput, {target: {value: "test1"}});
@@ -33,6 +33,9 @@ test('adds search phrase', () => {
     screen.getByText("test1");
     screen.getByText("test2");
     screen.getByText("test3");
+    const [removeButton] = searchPhrases[0].getElementsByClassName("searchPhrase__remove");
+    fireEvent.click(removeButton);
+    expect(screen.queryByText("test1")).toBe(null);
 })
 test('or filter formatting', () => {
     const {container} = render(<Table course={"CSC2033"}/>);
@@ -42,17 +45,19 @@ test('or filter formatting', () => {
     const [phrase] = container.getElementsByClassName("searchPhrase__title");
     expect(phrase.innerHTML).toBe(`test1<span class="searchPhrase__or">or</span>test2`);
 });
-
 test('sends request with filter', async () => {
-    const {container} = await waitFor(() => render(<Table course={"CSC2033"}/>))
+    const {container} = await waitFor(() => render(<Table course={"CSC2033"}/>));
     const [searchInput] = container.getElementsByClassName("searchInput__input");
+    let requestCounter = 0;
+    const filters = new Promise(resolve => server.use(
+        rest.get('/api/t/students', (req, res, ctx) => {
+            requestCounter++;
+            const {filters} = parse(req.url.searchParams.toString());
+            requestCounter === 2 ? resolve(filters) : null;
+        })
+    )).then(filters => expect(filters.length).toBe(2));
     fireEvent.change(searchInput, {target: {value: "test1"}});
     fireEvent.submit(searchInput);
-    const filters = await new Promise(resolve => server.use(
-        rest.get('/api/t/students', (req, res, ctx) => {
-            const {filters} = parse(req.url.searchParams.toString());
-            resolve(filters);
-        })
-    ));
-    expect(filters.length).toBe(1);
+    fireEvent.change(searchInput, {target: {value: "test2"}});
+    fireEvent.submit(searchInput);
 });
