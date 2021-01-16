@@ -6,6 +6,7 @@ import {setupServer} from 'msw/node'
 import {parse} from "qs";
 import TableContent from "../frontend/src/table/TableContent";
 import '@testing-library/jest-dom';
+
 const header = [
     {value: "First name", type: "title"},
     {value: "Last name", type: "title"},
@@ -18,6 +19,13 @@ const dataRow = [
     {value: "Cook", type: "text"},
     {value: "nickcook", type: "text"},
     {value: "nick.cook@ncl.ac.uk", type: "text"},
+    {value: "waiting", type: "warning"}
+];
+const dataRow2 = [
+    {value: "Chris", type: "text"},
+    {value: "Napier", type: "text"},
+    {value: "chrisnapier", type: "text"},
+    {value: "c.napier@ncl.ac.uk", type: "text"},
     {value: "waiting", type: "warning"}
 ];
 const server = setupServer(rest.get("*", (req, res, ctx) => {
@@ -101,4 +109,15 @@ test('displays no students message', async () => {
     rerender(<TableContent selectedCheckboxes={[]} setSelectedCheckboxes={jest.fn()} setSortState={jest.fn()}
                            data={[header, dataRow]} sortState={{}}/>);
     expect(screen.queryByText(/No students in the system/i)).not.toBeInTheDocument();
-})
+});
+test('arranges data correctly in the table', () => {
+    const {container} = render(<TableContent selectedCheckboxes={[]} setSelectedCheckboxes={jest.fn()}
+                                             setSortState={jest.fn()}
+                                             data={[header, dataRow, dataRow2]} sortState={{}}/>);
+    const firstDataRow = screen.queryByText(/^Nick$/).parentElement;
+    expect(firstDataRow).toHaveTextContent(dataRow.map(({value}) => value).join(""));
+    const secondDataRow = screen.queryByText(/^Chris$/).parentElement;
+    expect(secondDataRow).toHaveTextContent(dataRow2.map(({value}) => value).join(""));
+    expect(firstDataRow).toHaveClass("row--odd");
+    expect(secondDataRow).toHaveClass("row--even");
+});
