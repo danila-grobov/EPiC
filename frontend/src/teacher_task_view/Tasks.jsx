@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import data from './testTaskData';
 import TaskMain from "./TaskMain";
+import '../scss/tasks.scss'
 
 export default (courseName) => {
     // array of all tasks for specific course -
