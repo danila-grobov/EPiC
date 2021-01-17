@@ -8,6 +8,7 @@ import TableContent from "../frontend/src/table/TableContent";
 import '@testing-library/jest-dom';
 import SearchArea from "../frontend/src/table/SearchArea";
 import userEvent from "@testing-library/user-event";
+import Row from "../frontend/src/table/Row";
 
 const header = [
     {value: "First name", type: "title"},
@@ -30,8 +31,6 @@ const dataRow2 = [
     {value: "c.napier@ncl.ac.uk", type: "text"},
     {value: "waiting", type: "warning"}
 ];
-
-afterEach(() => cleanup())
 describe("InvitePopup", () => {
     test('opens and closes invite popup', () => {
         render(<Table course={"CSC2033"}/>);
@@ -121,27 +120,27 @@ describe("Checkboxes", () => {
                              setSelectedCheckboxes={index => expect(index).toEqual([1])}
                              setSortState={jest.fn()}
                              data={[header, dataRow, dataRow2]} sortState={{}}/>);
-        userEvent.click(screen.getAllByRole(/checkbox/i)[1]);
+        userEvent.click(screen.getAllByRole(/checkbox/i, {name:/selects a row/i})[1]);
     });
     test('tick master checkbox', () => {
         render(<TableContent selectedCheckboxes={[]}
                              setSelectedCheckboxes={index => expect(index).toEqual([0, 1, 2])}
                              setSortState={jest.fn()}
                              data={[header, dataRow, dataRow2]} sortState={{}}/>);
-        userEvent.click(screen.getAllByRole(/checkbox/i)[0]);
+        userEvent.click(screen.getAllByRole(/checkbox/i,{name:/selects a row/i})[0]);
     });
     test('un-tick checkbox', () => {
         render(<TableContent selectedCheckboxes={[1]}
                              setSelectedCheckboxes={index => expect(index).toEqual([])}
                              setSortState={jest.fn()}
                              data={[header, dataRow, dataRow2]} sortState={{}}/>);
-        userEvent.click(screen.getAllByRole(/checkbox/i)[1]);
+        userEvent.click(screen.getAllByRole(/checkbox/i,{name:/selects a row/i})[1]);
     });
     test('displays partially checked master checkbox', () => {
         render(<TableContent selectedCheckboxes={[1]} setSelectedCheckboxes={jest.fn()}
                              setSortState={jest.fn()}
                              data={[header, dataRow, dataRow2]} sortState={{}}/>);
-        const [masterCheckbox, checkbox1, checkbox2] = screen.getAllByRole(/checkbox/i);
+        const [masterCheckbox, checkbox1, checkbox2] = screen.getAllByRole(/checkbox/i, {name:/selects a row/i});
         expect(masterCheckbox).toBePartiallyChecked();
         expect(checkbox1).toBeChecked();
         expect(checkbox2).not.toBeChecked();
@@ -150,9 +149,46 @@ describe("Checkboxes", () => {
         render(<TableContent selectedCheckboxes={[0, 1, 2]} setSelectedCheckboxes={jest.fn()}
                              setSortState={jest.fn()}
                              data={[header, dataRow, dataRow2]} sortState={{}}/>);
-        const [masterCheckbox, checkbox1, checkbox2] = screen.getAllByRole(/checkbox/i);
+        const [masterCheckbox, checkbox1, checkbox2] = screen.getAllByRole(/checkbox/i,{name:/selects a row/i});
         expect(masterCheckbox).toBeChecked();
         expect(checkbox1).toBeChecked();
         expect(checkbox2).toBeChecked();
+    })
+})
+describe("Status label", () => {
+    test("display accepted label", () => {
+        render(<Row values={[...dataRow.slice(0,-1),{value:"accepted", type:"info"}]}/>);
+        expect(screen.getByRole(/cell/i, {name: /accepted/i})).toHaveClass("row__cell--info");
+    })
+    test("display waiting label", () => {
+        render(<Row values={[...dataRow.slice(0,-1),{value:"waiting", type:"warning"}]}/>);
+        expect(screen.getByRole(/cell/i, {name: /waiting/i})).toHaveClass("row__cell--warning");
+    })
+    test("display canceled label", () => {
+        render(<Row values={[...dataRow.slice(0,-1),{value:"canceled", type:"danger"}]}/>);
+        expect(screen.getByRole(/cell/i, {name: /canceled/i})).toHaveClass("row__cell--danger");
+    })
+})
+describe("Sorting buttons", () => {
+    test("display ascending button", () => {
+        render(<Row values={header} rowType={"header"} sortState={{index:0,ascending:true}}
+                    setSortState={state => expect(state.ascending).toBe(false)}/>);
+        const firstSortCheckbox = screen.getAllByRole("checkbox", {name:/changes sort state/i})[0];
+        expect(firstSortCheckbox).toBeChecked();
+        userEvent.click(firstSortCheckbox);
+    })
+    test("display descending button", () => {
+        render(<Row values={header} rowType={"header"} sortState={{index:0,ascending:false}}
+                    setSortState={state => expect(state.ascending).toBe(true)}/>);
+        const firstSortCheckbox = screen.getAllByRole("checkbox", {name:/changes sort state/i})[0];
+        expect(firstSortCheckbox).not.toBeChecked();
+        userEvent.click(firstSortCheckbox);
+    })
+    test("display idle button", () => {
+        render(<Row values={header} rowType={"header"} sortState={{index:-1,ascending:true}}
+                    setSortState={state => expect(state.ascending).toBe(false)}/>);
+        const firstSortCheckbox = screen.getAllByRole("checkbox", {name:/changes sort state/i})[0];
+        expect(firstSortCheckbox).toBePartiallyChecked();
+        userEvent.click(firstSortCheckbox);
     })
 })
