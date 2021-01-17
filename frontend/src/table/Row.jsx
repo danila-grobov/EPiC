@@ -44,7 +44,8 @@ export default props => {
         icon = checkbox__partial
     return (
         <div className={`row--${rowType}`} role={"row"} aria-label={rowType === "header" ? "header row" : "table row"}>
-            <img onClick={tickCheckbox} src={icon} alt="checkbox" className="row__cell--checkbox"/>
+            <img onClick={tickCheckbox} src={icon} alt="checkbox" className="row__cell--checkbox" role={"checkbox"}
+            aria-checked={selected === "full" ? "true" : selected === "partial" ? "mixed" : "false"}/>
             <div className={`row__cellSeparator${visibility}`}/>
             {cells}
         </div>
