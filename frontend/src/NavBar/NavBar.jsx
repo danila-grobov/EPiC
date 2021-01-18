@@ -14,15 +14,14 @@ import axios from "axios_redirect";
 //a toggle button
 
 //innerMenu = section to the farther right, contains user's available pages, separator, profile, profile picture, and
-//toggle button for teachers/admins
 
-//toggleButton = toggle button can be removed (anything within the toggleButton class tag), and it is only for teachers.
 
 export default (props) => {
     const {currentOption, setCurrentOption, userRole, pagePaths} = props;
-    const [courses, setCourses] = useState([]);
-    const[firstName,setFirstName] = useState("");
-    let currentPath = useLocation();
+    const [courses, setCourses] = useState([]); //courses for the dropdown menu on teacher nav-bars
+    const dropOptions = courses.map((course) =>({label:course,value:course}));
+    const[firstName,setFirstName] = useState(""); //sets the user's first name in the nav-bar
+    let currentPath = useLocation(); //gets the current path/route
 
     //retrieving data from the backend
     if(userRole === "teacher"){
@@ -45,7 +44,6 @@ export default (props) => {
     }
 
     const name = `Hello, ${firstName}`;
-    const dropOptions = courses.map((course) =>({label:course,value:course}));
 
 
     return (
@@ -58,15 +56,13 @@ export default (props) => {
 
                 <Link to="/home" className="epicLogo">EPiC</Link>
 
-
                 <div className="innerMenu">
 
                     <div className= "pages">
                         <ul className="ulStyle">
                             {pagePaths.map((page) =>
                                 <li className={(page.path === currentPath.pathname ? "pageName pageNameActive liStyle":"pageName liStyle")}>
-                                    {page.link}</li>
-                            )}
+                                    {page.link}</li>)}
                         </ul>
                     </div>
 
