@@ -7,6 +7,7 @@ import LineGraph from "./LineGraph";
 import Dropdown from "../general_components/Dropdown";
 import axios from "axios";
 import {ToastContainer} from "react-toastify";
+import TasksComplete from "./TasksComplete";
 
 export default () => {
     const pages = ["CSC2031", "CSC2032", "CSC2033", "CSC2034"];
@@ -73,7 +74,7 @@ export default () => {
                               {label: "Date 2", value: "Date 2"}
                           ]}
                     />
-                    <h1>250/300 have completed tasks this week</h1>
+                    <TasksComplete task={chosenTask} date={chosenDate}/>
                 </div>
 
                 <div className="flex-item-full">

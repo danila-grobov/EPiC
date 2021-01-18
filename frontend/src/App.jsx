@@ -1,8 +1,6 @@
 import "./scss/app.scss";
 import React from "react";
-
-import Table from "./table/Table";
-import NavBar from "./NavBar/NavBar";
+import TeacherPage from "./teacher_page/TeacherPage";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar_Dropdown from "./NavBar/NavBar_Dropdown";
@@ -15,9 +13,6 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
-import TeacherPage from "./teacher_page/TeacherPage";
-
-
 
 const App = () => {
     // const pagePaths= [<Link to="/home">HOME</Link>,
@@ -26,8 +21,8 @@ const App = () => {
 
     return (
         <div className="app">
-            <TeacherPage />
             {/*<NavBar pages={pages} name={name} pagePaths={pagePaths} adminRole={false}/>*/}
+            <TeacherPage />
 
         </div>
     );
