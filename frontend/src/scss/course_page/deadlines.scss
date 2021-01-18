@@ -1,0 +1,62 @@
+@import "../colors";
+@import "../fonts";
+.deadlines {
+  height: 328 - 60px;
+  width: 426 - 60px;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr;
+  border-radius: 15px;
+  row-gap: 30px;
+  background: white;
+  padding: 30px;
+}
+.deadlines__taskWrapper .scrollable__container{
+  max-height: 200px;
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-template-columns: 1fr;
+  row-gap: 30px;
+  padding-right: 21px;
+}
+.deadlines__title {
+  font-family: $font_lack;
+  color: $text;
+  font-size: 24px;
+}
+.deadlines__task {
+  grid-template-columns: min-content 1fr max-content;
+  column-gap: 20px;
+  display: grid;
+}
+.deadlines__statusCircle {
+  margin-top: 5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 3px solid $blue;
+  box-sizing: border-box;
+}
+.deadlines__statusCircle--filled {
+  border: none;
+  background: $blue;
+}
+.deadlines__taskTitle {
+  font-family: $font_sanspro_bold;
+  min-height: 15px;
+  color: $text;
+  font-size: 18px;
+}
+.deadlines__date {
+  font-family: $font_sanspro_bold;
+  color: $blue;
+  opacity: 0.5;
+  font-size: 18px;
+  min-height: 15px;
+}
+.deadlines__noDeadlines {
+  font-size: 18px;
+  font-family: $font_sanspro;
+  font-style: italic;
+  color: $text_secondary;
+}

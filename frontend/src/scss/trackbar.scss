@@ -1,0 +1,48 @@
+@import "colors";
+@import "fonts";
+
+.trackbar {
+  position: relative;
+  cursor: pointer;
+}
+
+.trackbar__track {
+  background-color: $blue;
+  opacity: 0.5;
+  border-radius: 5px;
+  height: 10px;
+  width: calc(100% - 20px);
+  margin: 0 auto;
+}
+
+.trackbar__bar {
+  position: absolute;
+  height: 10px;
+  border-radius: 5px;
+  background-color: $blue;
+  top: 0;
+  left: 10px;
+}
+
+.trackbar__handle {
+  position: absolute;
+  top: -5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+}
+
+.trackbar__wrapper {
+  display: grid;
+  row-gap: 15px;
+}
+
+.trackbar__icons {
+  display: flex;
+  justify-content: space-between;
+  width: calc(100% + 6px);
+  margin-left: -3px;
+}

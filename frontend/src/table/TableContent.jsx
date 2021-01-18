@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import Row from "./Row";
 
-export default ({data, selectedCheckboxes, setSelectedCheckboxes}) => {
+export default ({data, selectedCheckboxes, setSelectedCheckboxes, sortState, setSortState}) => {
     const tickCheckbox = index => {
         if (selectedCheckboxes.includes(index)) {
             setSelectedCheckboxes(
@@ -28,9 +28,8 @@ export default ({data, selectedCheckboxes, setSelectedCheckboxes}) => {
     }
     const dataRows = data.map((rowData, index) => {
         if (index === 0)
-            return (<Row key={index} rowType={"header"} values={rowData}
-                         tickCheckbox={tickAll}
-                         selected={getCheckboxStatus()}/>)
+            return (<Row sortState={sortState} setSortState={setSortState} key={index} rowType={"header"}
+                         values={rowData} tickCheckbox={tickAll} selected={getCheckboxStatus()}/>)
         else
             return (<Row key={index} id={index} rowType={index % 2 === 0 ? "even" : "odd"} values={rowData}
                          tickCheckbox={() => tickCheckbox(index)}

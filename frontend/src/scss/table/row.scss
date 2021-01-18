@@ -22,6 +22,8 @@
 }
 %row_cell {
   margin: 0 12px;
+  display: grid;
+  grid-template-columns: 1fr min-content;
 }
 %row_tag {
   text-align: center;
@@ -74,4 +76,11 @@
   border-right: solid 2px $light_grey;
   height: 100%;
   opacity: 50%;
+}
+.row__sort {
+  display: grid;
+  row-gap: 5px;
+  cursor: pointer;
+  user-select: none;
+  align-content: center;
 }

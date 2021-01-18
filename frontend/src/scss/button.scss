@@ -57,6 +57,10 @@
   background: none;
   cursor: auto;
 }
+.button--secondary--loading {
+  cursor: auto;
+  border: none;
+}
 .button--primary--loading:after, .button--primary--error:after {
   background: none;
 }
@@ -65,7 +69,7 @@
   justify-self: center;
   z-index: 2;
 }
-.button--primary--done {
+.button--primary--done, .button--secondary--done {
   display: grid;
   grid-template-columns: auto 18px;
   padding-right:15px;

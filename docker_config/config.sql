@@ -8,6 +8,35 @@ Lastname varchar(50) NOT NULL,
 Email varchar(50) NOT NULL,
 Admin boolean NOT NULL,
 PRIMARY KEY(Email)
+
+CREATE TABLE SessionStore
+(
+    SId     varchar(128)     NOT NULL,
+    Expires int(11) UNSIGNED NOT NULL,
+    Data    mediumtext,
+    PRIMARY KEY (SId)
+);
+
+CREATE TABLE Teachers
+(
+    Username  varchar(50)  NOT NULL,
+    Pwd       varchar(200) NOT NULL,
+    Firstname varchar(50)  NOT NULL,
+    Lastname  varchar(50)  NOT NULL,
+    Email     varchar(50)  NOT NULL,
+    Admin     boolean      NOT NULL,
+    PRIMARY KEY (Username)
+);
+
+CREATE TABLE Teachers
+(
+    Username  varchar(50)  NOT NULL,
+    Pwd       varchar(200) NOT NULL,
+    Firstname varchar(50)  NOT NULL,
+    Lastname  varchar(50)  NOT NULL,
+    Email     varchar(50)  NOT NULL,
+    Admin     boolean      NOT NULL,
+    PRIMARY KEY (Username)
 );
 
 CREATE TABLE Students
@@ -26,8 +55,9 @@ CREATE TABLE Students
 
 CREATE TABLE Courses
 (
-    CourseName varchar(10) NOT NULL,
-    Color      varchar(20) NOT NULL,
+    CourseName     varchar(10)  NOT NULL,
+    FullCourseName varchar(200) NOT NULL,
+    Color          varchar(20)  NOT NULL,
     PRIMARY KEY (CourseName)
 );
 
@@ -78,6 +108,19 @@ FOREIGN KEY (Email)
    REFERENCES Teachers(Email),
 UNIQUE (CourseName, Email)
 );
+
+CREATE TABLE Confidence
+(
+    Email           varchar(50) NOT NULL,
+    CourseName      varchar(10) NOT NULL,
+    ConfidenceLevel int         NOT NULL,
+    Date            date        NOT NULL,
+    FOREIGN KEY (Email)
+        REFERENCES Students (Email),
+    FOREIGN KEY (CourseName)
+        REFERENCES Courses (CourseName),
+    UNIQUE (CourseName, Email, Date)
+);
 # Create sample teacher data
 
 INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin)
@@ -101,16 +144,16 @@ VALUES ('Test1',
         'accepted');
 
 # Create sample course data
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2033', '#7A306C');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2031', '#F28F38');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2032', '#F28F38');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2034', '#C8553D');
-INSERT INTO EPiC.Courses (CourseName, Color)
-VALUES ('CSC2035', '#7A306C');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2033', '#7A306C', 'Software Engineering Team Project');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2031', '#F28F38', 'Security and Programming Paradigms');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2032', '#F28F38', 'Algorithm Design and Analysis');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2034', '#C8553D', 'Introducing Contemporary Topics in Computing');
+INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
+VALUES ('CSC2035', '#7A306C', 'Operating Systems and Networks');
 
 #Create sample grades data
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)

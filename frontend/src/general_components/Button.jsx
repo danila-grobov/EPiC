@@ -1,13 +1,15 @@
 import React from "react"
 import "../scss/button.scss"
-import loadingAnimation from "../imgs/loading.svg";
+import loading__orange from "../imgs/loading_orange.svg";
+import loading__grey from "../imgs/loading_grey.svg";
 import checkmark from "../imgs/checkmark.svg";
 export default props => {
-    const {height, label, onClick, type, status = "idle", width = "auto"} = props;
+    const {height, label, onClick, type, status = "idle", width = "auto", loadingColor = "orange"} = props;
     const className = `button--${type} ` + props.className + ` button--${type}--${status}`;
     const content =
         status === "idle" ? <span className="button__label">{label}</span> :
-        status === "loading" ? <img src={loadingAnimation} className={"button__loading"} alt="loading icon"/> :
+        status === "loading" ? <img src={loadingColor === "grey" ? loading__grey : loading__orange}
+                                    className={"button__loading"} alt="loading icon"/> :
         status === "done" ?
             <>
                 <span className="button__label">{"Success!"}</span>

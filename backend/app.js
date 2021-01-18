@@ -6,7 +6,8 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import {
     addStudentsToDB,
-    checkInviteToken, getCourses, getDeadlines, getStudent,
+    checkInviteToken,
+    getStudent,
     getStudentsFromDB,
     registerStudent,
     removeStudentFromDB,
@@ -15,6 +16,8 @@ import {
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
 import {getStudentData} from "./student";
+import SessionStore from "./SessionStore";
+import {getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
 
 const app = express()
 const port = 3000
@@ -28,8 +31,8 @@ app.post('/api/t/students', (req, res) => {
     addStudentsToDB(invitesWithTokens, course).then(errors => res.send(errors));
 })
 app.get('/api/t/students', ((req, res) => {
-    const {offset, count, filters, course} = req.query;
-    getStudentsFromDB({count, offset, course}, filters)
+    const {offset, count, filters, course, sortState} = req.query;
+    getStudentsFromDB({count, offset, course}, filters, sortState)
         .then(dataObj => res.send(dataObj));
 }))
 app.delete('/api/t/students', (req, res) => {
@@ -41,7 +44,7 @@ app.put('/api/t/students/grade', (req, res) => {
     setStudentGrades({data, course}).then(() => res.send());
 })
 
-app.get('/api/s/deadlines', (req, res) => {
+app.get('/api/s/deadlines/all', (req, res) => {
     const {email} = req.session;
     getDeadlines(email).then(deadlines => res.send(deadlines));
 })
@@ -50,6 +53,18 @@ app.get('/api/s/courses', ((req, res) => {
     const {email} = req.session;
     getCourses(email).then(courses => res.send(courses));
 }))
+
+app.get('/api/s/deadlines', (req, res) => {
+    const {email} = req.session;
+    const {course} = req.query;
+    getDeadlinesByCourse(email,course).then(deadlines => res.send(deadlines));
+})
+
+app.post('/api/s/confidence', (req, res) => {
+    const {email} = req.session;
+    const {course, confidence} = req.body;
+    setConfidence(course, email, confidence).then(() => res.send());
+})
 
 app.put('/api/register', (req, res) => {
     const data = req.body;
@@ -126,8 +141,12 @@ function configExpress(app) {
     app.set('views', path.join(__dirname, '../frontend/views'));
     app.set('view engine', 'html');
     app.use(express.json());
-    app.use(cookieParser());
-    app.use(session({secret:"777acfde385d77c06b83274bb4c50819",resave:false,saveUninitialized:false}));
+    app.use(session({
+        secret:"777acfde385d77c06b83274bb4c50819",
+        resave:false,
+        saveUninitialized:false,
+        store: new SessionStore()
+    }));
     app.use("/api/t/", (req, res, next) => {
 
         if(req.session.role === "teacher") {

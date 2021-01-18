@@ -4,62 +4,8 @@ import React from "react";
 import md5 from "md5";
 import {v4 as uuidV4} from "uuid";
 import {escape} from "sqlstring";
-import moment from "moment";
 
 const domainName = "http://localhost/";
-
-export function getDeadlines(email) {
-    return getDBSession(session => {
-        session.sql("USE EPiC").execute();
-        const dateInAMonth = moment().add(30, 'days').format('YYYY-MM-DD');
-        const SQL = `
-            SELECT t.Deadline, c.Color, t.TaskTitle
-            FROM Grades AS g
-            JOIN Tasks t ON t.CourseName = g.CourseName
-            JOIN Courses c ON c.CourseName = t.CourseName
-            LEFT JOIN TasksDone td ON td.TaskID = t.TaskID AND td.Email = ${escape(email)}
-            WHERE  
-                g.Email = ${escape(email)} 
-                AND t.Deadline IS NOT NULL 
-                AND td.TaskID IS NULL
-                AND t.Deadline <= ${escape(dateInAMonth)}
-        `;
-        return session.sql(SQL).execute();
-    }).then(result => formatDeadlines(result.fetchAll()))
-}
-
-function formatDeadlines(deadlines) {
-    return deadlines.map(deadline => ({
-        name: deadline[2],
-        deadline: moment(deadline[0]).format("MMMM D"),
-        color: deadline[1]
-    }))
-}
-
-export function getCourses(email) {
-    return getDBSession(session => {
-        session.sql("USE EPiC").execute();
-        const SQL = `
-           SELECT c.CourseName, c.Color ,COUNT(td.TaskID) * 100 / COUNT(t.TaskID)
-           FROM Grades g
-                    JOIN Courses c on g.CourseName = c.CourseName
-                    JOIN Tasks t ON c.CourseName = t.CourseName
-                    LEFT JOIN TasksDone td on t.TaskID = td.TaskID AND td.Email = ${escape(email)}
-           WHERE g.Email = ${escape(email)}
-           GROUP BY c.CourseName
-       `;
-        return session.sql(SQL).execute();
-    }).then(result => formatCourses(result.fetchAll()));
-}
-
-function formatCourses(courses) {
-    return courses.map(course => ({
-        name: course[0],
-        color: course[1],
-        progress: parseFloat(course[2])
-    }))
-}
-
 
 export function addStudentsToDB(data, course) {
     return getDBSession(session => {
@@ -75,18 +21,18 @@ export function addStudentsToDB(data, course) {
                 const studentData = result.fetchOne();
                 if(studentData) {
                     const [inviteStatus, username] = studentData;
-                    if(inviteStatus === 'waiting')
-                        return emailMessage(domainName + "register/" + username, element.Email)
+                    // if(inviteStatus === 'waiting')
+                    //     return emailMessage(domainName + "register/" + username, element.Email)
                 } else if(!studentData) {
                     return Promise.all([
                         session.sql(`
                             INSERT INTO Students (${Object.keys(element).join(", ")})
                             VALUES (${getSQLValues(Object.values(element))})
                         `).execute(),
-                        emailMessage(
-                            domainName + "register/" + element.Username,
-                            element.Email
-                        )
+                        // emailMessage(
+                        //     domainName + "register/" + element.Username,
+                        //     element.Email
+                        // )
                 ])}
             })
             .then(() => session.sql(`
@@ -96,7 +42,7 @@ export function addStudentsToDB(data, course) {
             .catch(
                 e => {
                     if(!e.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
-                        errors.push(`An unexpected error has occurred when trying to invite ${data.Email}.`)
+                        errors.push(`An unexpected error has occurred when trying to invite ${element.Email}.`)
                 }
             )
         })).then(() => errors)
@@ -115,18 +61,21 @@ function getSQLBody(course, whereClause) {
         WHERE c.CourseName = ${escape(course)} ${whereClause}`;
 }
 
-export function getStudentsFromDB({count, offset, course}, filters = []) {
+export function getStudentsFromDB({count, offset, course}, filters = [], sortState) {
     return getDBSession(session => {
         const columnNames = [
             "s.Firstname", "s.Lastname", "s.Username",
             "s.Email", "s.InviteStatus"
         ];
         const whereClause = getFilterWhereClause(filters, columnNames);
+        const sortIndex = parseInt(sortState.index);
+        const descending = sortState.ascending === "false";
         session.sql("USE EPiC").execute();
         const dataSQL = `
             SELECT ${columnNames.join(", ")}
             ${getSQLBody(course, whereClause)}
-            LIMIT ${count} OFFSET ${offset} `;
+            ${sortIndex !== -1 ? "ORDER BY " + columnNames[sortIndex] + (descending ? " DESC" : ""): ""}
+            LIMIT ${count} OFFSET ${offset}`;
         const countSQL = `
             SELECT COUNT(s.Email)
             ${getSQLBody(course, whereClause)}`;

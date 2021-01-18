@@ -12,16 +12,19 @@ export const testDBConnection = () => {
             console.log("Connected!");
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         });
 }
 export function getDBSession(callback) {
     return mysqlx
         .getSession(dbCredentials)
         .then(session => {
-            return callback(session);
+            return callback(session).then(async data => {
+                await session.close();
+                return data;
+            });
         })
         .catch(err => {
-            console.log(err)
+            console.log(err);
         });
 }
