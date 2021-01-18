@@ -23,7 +23,7 @@ export default (props) => {
     const {pagePaths, teacherRole} = props;
     const [currentOption, setCurrentOption] = useState(title);
     const [isTeacher, setisTeacher] = useState(false);
-    const[firstName,setFirstName] = useState("");
+    const [firstName,setFirstName] = useState("");
     useEffect(()=> {
         axios.get('/api/t/teachers').then(({data}) => {
             //console.log(data.firstName);
@@ -66,7 +66,7 @@ export default (props) => {
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')}
-                            type="primary" width={60} className="logout"></Button>
+                            type="primary" width={60} className="logout" />
 
                 </div>
 

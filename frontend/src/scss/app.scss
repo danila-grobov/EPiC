@@ -1,10 +1,10 @@
 @import "colors";
 @import "fonts";
 .app {
-<<<<<<<<< Temporary merge branch 1
+//<<<<<<<<< Temporary merge branch 1
   padding-top:100px;
-=========
->>>>>>>>> Temporary merge branch 2
+//=========
+//>>>>>>>>> Temporary merge branch 2
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -37,31 +37,5 @@ body {
   }
 }
 
-.flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: $background;
-  justify-content: center;
-}
 
-.flex-item-half {
-  justify-content: center;
-  background-color: #FFFFFF;
-  width: 45%;
-  padding: 10px;
-  margin: 15px;
-  text-align: -moz-left;
-  font-size: 30px;
-  border-radius: 15px;
-}
-
-.flex-item-full {
-  background-color: #FFFFFF;
-  width: 95%;
-  padding: 5px;
-  margin: 15px;
-  text-align: center;
-  line-height: 75px;
-  border-radius: 15px;
-}
 
