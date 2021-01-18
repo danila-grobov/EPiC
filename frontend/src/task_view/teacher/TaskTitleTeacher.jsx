@@ -1,10 +1,10 @@
 import React from 'react';
-import '../scss/taskTitle.scss'
+import '../../scss/taskTitle.scss'
 
 export default (taskName) => {
-
+    // need validation, when task name left empty reset it to previous task name (fix this to be on loss of focus)
     const changeTitle = () => {
-        if(document.getElementById("task-title").value === " "){
+        if(document.getElementById("task-title").value === ""){
             document.getElementById("task-title").value = taskName.taskName
         }
     }
