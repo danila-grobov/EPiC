@@ -9,6 +9,7 @@ import axios from "axios_redirect";
 import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
 export default () => {
     const [courses, setCourses] = useState([]);
+    const pagePaths = [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"}];
     useLayoutEffect(() => {
             axios
                 .get("/api/s/courses")
@@ -25,7 +26,7 @@ export default () => {
             <div className="dashboard">
 
                 <Route path="/home">
-                    <NavBar className="navwidth" userRole={"student"}/>
+                    <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
                     <Calendar/>
                     <div className="dashboard__courseCards">
                         {courses.map(course =>
@@ -35,9 +36,7 @@ export default () => {
                 </Route>
 
                 <Route path="/profile">
-                    
-                    <NavBar className="navwidth" userRole={"student"}/>
-                    
+                    <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
                 </Route>
 
                 <Route path="/">

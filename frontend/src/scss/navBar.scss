@@ -60,15 +60,26 @@ $animate: all 0.2s ease-in-out;
 
 .pageName {
     font-family: $font_sanspro_bold;
-    color: $text;
     font-size: 15px;
     text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 14px;
+
 }
 
-a:-webkit-any-link {
+.pageName a{
     color: $text;
-    cursor: pointer;
-    text-decoration: none;
+}
+
+.pageNameActive a{
+    color: #6EB3CB;
+
+}
+
+.liStyle{
+    display: inline-block;
+    margin: 0 14px;
 }
 
 
@@ -76,13 +87,11 @@ a:-webkit-any-link {
     list-style-type: none;
 
 }
-.liStyle {
-    display: inline-block;
-    margin: 0 14px;
-}
+
 a:link {
     text-decoration: none;
 }
+
 
 a.middle
 {
