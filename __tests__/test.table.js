@@ -1,6 +1,6 @@
 import Table from "../frontend/src/table/Table";
 import React, {useState} from "react";
-import {render, fireEvent, screen, waitFor, cleanup} from '@testing-library/react';
+import {render, fireEvent, screen, waitFor, cleanup, waitForElementToBeRemoved} from '@testing-library/react';
 import {rest, setupWorker} from 'msw'
 import {setupServer} from 'msw/node'
 import {parse} from "qs";
@@ -58,22 +58,6 @@ describe("SearchArea", () => {
     test('or filter formatting', () => {
         render(<SearchArea filters={["test1 || test2"]}/>);
         expect(screen.getByRole("listitem", {name: /filter/i})).toHaveTextContent(/test1ortest2/i);
-    });
-    test('sends request with filter', async () => {
-        const server = setupServer(
-            rest.get('/api/t/students', (req, res, ctx) => {
-                const {filters} = parse(req.url.searchParams.toString());
-                expect(filters).toHaveLength(2);
-            })
-        );
-        await render(<Table course={"CSC2033"}/>);
-        const searchInput = screen.getByRole("search");
-        userEvent.type(searchInput, "test1");
-        fireEvent.submit(searchInput);
-        userEvent.type(searchInput, "test2");
-        await server.listen();
-        fireEvent.submit(searchInput);
-        await server.close();
     });
 })
 describe("TableContent", () => {
