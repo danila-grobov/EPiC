@@ -19,6 +19,9 @@ import userEvent from "@testing-library/user-event";
 import Row from "../frontend/src/table/Row";
 import TablePagination from "../frontend/src/table/TablePagination";
 import path from "path";
+import TableButtons from "../frontend/src/table/TableButtons";
+import FileInput from "../frontend/src/general_components/FileInput";
+import {ToastContainer} from "react-toastify";
 
 const header = [
     {value: "First name", type: "title"},
@@ -256,25 +259,79 @@ describe("Pagintaion", () => {
     })
     test("manipulates pagination with buttons", () => {
         const {rerender} = render(<TablePagination rowCount={5} total={60} currentPage={1}
-                                                   setCurrentPage={ currentPage => expect(currentPage).toBe(2)}/>);
+                                                   setCurrentPage={currentPage => expect(currentPage).toBe(2)}/>);
         const {nextPageArrow} = getPaginationElements(screen);
         userEvent.click(nextPageArrow);
         rerender(<TablePagination rowCount={5} total={60} currentPage={3}
-                                  setCurrentPage={ currentPage => expect(currentPage).toBe(2)}/>);
+                                  setCurrentPage={currentPage => expect(currentPage).toBe(2)}/>);
         const {prevPageArrow} = getPaginationElements(screen);
         userEvent.click(prevPageArrow);
         rerender(<TablePagination rowCount={5} total={60} currentPage={9}
-                                  setCurrentPage={ currentPage => expect(currentPage).toBe(1)}/>);
+                                  setCurrentPage={currentPage => expect(currentPage).toBe(1)}/>);
         const {firstPageArrow} = getPaginationElements(screen);
         userEvent.click(firstPageArrow);
         rerender(<TablePagination rowCount={5} total={60} currentPage={9}
-                                  setCurrentPage={ currentPage => expect(currentPage).toBe(12)}/>);
+                                  setCurrentPage={currentPage => expect(currentPage).toBe(12)}/>);
         const {lastPageArrow} = getPaginationElements(screen);
         userEvent.click(lastPageArrow);
         rerender(<TablePagination rowCount={5} total={60} currentPage={5}
-                                  setCurrentPage={ currentPage => expect(currentPage).toBe(3)}/>);
+                                  setCurrentPage={currentPage => expect(currentPage).toBe(3)}/>);
         const {pageNumbers} = getPaginationElements(screen);
         userEvent.click(pageNumbers[0]);
     })
 
+})
+describe("Grade import", () => {
+    test("uploads a valid file with grades",async () => {
+        const sentData = {
+            data: [
+                {
+                    email: "test1@ncl.ac.uk",
+                    grade:33
+                },
+                {
+                    email: "test2@ncl.ac.uk",
+                    grade:100
+                }
+            ]
+        };
+        let parsedData = {};
+        render(<FileInput type={"grades"} setFileData={data => parsedData = data} button={<button/>}
+                          successMessage={"test success"}/>);
+        render(<ToastContainer />)
+        const gradesInput = screen.getByLabelText("file input");
+        userEvent.upload(gradesInput,
+            new File([JSON.stringify(sentData)], "grades.json", {type: "application/json"}));
+        await screen.findByText("test success");
+        expect(parsedData).toEqual(sentData.data);
+    })
+
+    test("uploads incorrectly formatted file",async () => {
+        const sentData = {
+            data: [
+                {
+                    notEmail: "James",
+                    lastName: "Bond"
+                }
+            ]
+        };
+        let parsedData = {};
+        render(<FileInput type={"grades"} setFileData={data => parsedData = data} button={<button/>}
+                          successMessage={"test success"}/>);
+        render(<ToastContainer />)
+        const gradesInput = screen.getByLabelText("file input");
+        userEvent.upload(gradesInput,
+            new File([JSON.stringify(sentData)], "grades.json", {type: "application/json"}));
+        await screen.findByText("The file format is not valid.");
+    })
+
+    test("uploads unsupported file format",async () => {
+        render(<FileInput type={"grades"} setFileData={() => {}} button={<button/>}
+                          successMessage={"test success"}/>);
+        render(<ToastContainer />)
+        const gradesInput = screen.getByLabelText("file input");
+        userEvent.upload(gradesInput,
+            new File(["echo 'Agent 007';"], "index.php", {type: "application/x-httpd-php"}));
+        await screen.findByText("Please upload a json file.");
+    })
 })

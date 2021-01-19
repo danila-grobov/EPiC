@@ -10,7 +10,7 @@ export default props => {
     return (
         <>
             {button}
-            <input ref={fileInput} type="file" style={{display: "none"}} accept={".json"}
+            <input aria-label={"file input"} ref={fileInput} type="file" style={{display: "none"}} accept={".json"}
                    onChange={event => processFile(event, {...props, fileInput})}/>
         </>
     )
