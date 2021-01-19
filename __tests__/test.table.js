@@ -4,7 +4,7 @@ import {
     render,
     fireEvent,
     screen,
-    act
+    act, cleanup
 } from '@testing-library/react';
 import {rest, setupWorker} from 'msw'
 import {setupServer} from 'msw/node'
@@ -21,6 +21,17 @@ import FileInput from "../frontend/src/general_components/FileInput";
 import {ToastContainer} from "react-toastify";
 import InvitePopup from "../frontend/src/table/InvitePopup";
 import FancyInput from "../frontend/src/general_components/FancyInput";
+
+const server = setupServer(rest.get('/api/t/students',
+    (req, res, ctx) => {
+        return res(ctx.json({
+            students: [header, dataRow],
+            count: 0
+        }));
+    }))
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 const header = [
     {value: "First name", type: "title"},
     {value: "Last name", type: "title"},
@@ -43,12 +54,16 @@ const dataRow2 = [
     {value: "waiting", type: "warning"}
 ];
 describe("InvitePopup", () => {
-    test('opens and closes invite popup', () => {
-        render(<Table course={"CSC2033"}/>);
+    test('opens and closes invite popup', async () => {
+        server.use(rest.get('/api/t/students',
+            (req, res, ctx) => {
+                return res(ctx.status(500));
+            }));
+        await render(<Table course={"CSC2033"}/>);
         expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
-        userEvent.click(screen.getByRole("button", {name: /invite student/i}));
+        act(() => userEvent.click(screen.getByRole("button", {name: /invite student/i})));
         expect(screen.queryByRole("dialog")).toBeInTheDocument();
-        userEvent.click(screen.getByLabelText("Close dialog"));
+        act(() => userEvent.click(screen.getByLabelText("Close dialog")));
         expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     })
 })
@@ -73,18 +88,7 @@ describe("SearchArea", () => {
 })
 describe("TableContent", () => {
     test('displays header row', async () => {
-        const server = setupServer(
-            rest.get('/api/t/students',
-                (req, res, ctx) => {
-                    return res(ctx.json({
-                        students: [header, dataRow],
-                        count: 0
-                    }));
-                })
-        );
-        await server.listen();
         await render(<Table course={"CSC2033"}/>);
-        await server.close();
         const headers = await screen.findAllByRole("columnheader");
         expect(headers).toHaveLength(5);
     })
@@ -335,7 +339,7 @@ describe("Grade import", () => {
     })
 })
 describe("Invite Popup", () => {
-    test("email input helper",async () => {
+    test("email input helper", async () => {
         let currentValue = "value";
         render(<FancyInput type={"email"} value={currentValue} setValue={newValue => currentValue = newValue}/>);
         const emailInput = screen.getByRole("textbox");
@@ -350,7 +354,7 @@ describe("Invite Popup", () => {
         expect(currentValue).toBe("value@ncl.ac.uk");
     })
     test("email validation", async () => {
-        render(<InvitePopup />);
+        render(<InvitePopup/>);
         const emailInput = screen.getByRole("textbox");
         expect(screen.queryByText("Please enter a valid newcastle university email address.")).not.toBeInTheDocument();
         fireEvent.change(emailInput, {target: {value: 'email'}})
