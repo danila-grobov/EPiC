@@ -53,10 +53,12 @@ FOREIGN KEY (Username)
 );
 
 CREATE TABLE TasksDone (
-Username varchar(50),
+Email varchar(50),
 TaskID varchar(5),
-FOREIGN KEY (Username)
+DateDone date,
+FOREIGN KEY (Email)
         REFERENCES Students(Username),
 FOREIGN KEY (TaskID)
-        REFERENCES Tasks(TaskID)
+        REFERENCES Tasks(TaskID),
+UNIQUE (Email, TaskID)
 );

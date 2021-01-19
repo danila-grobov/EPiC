@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import TaskTitleStudent from "./TaskTitleStudent";
 import TaskDeadlineStudent from "./TaskDeadlineStudent";
 import TaskDescStudent from "./TaskDescStudent";

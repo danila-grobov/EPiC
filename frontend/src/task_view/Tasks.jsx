@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import data from './testTaskData';
-import '../scss/tasks.scss'
+import '../scss/tasks.scss';
 import StudentTask from "./student/StudentTask";
 import TeacherTask from "./teacher/TeacherTask";
+//import axios from "axios_redirect";
 
 export default (props) => {
     // array of all tasks for specific course - this will be loaded from db
@@ -17,6 +18,13 @@ export default (props) => {
         }
     ))
     console.log(tasks);
+
+    // get tasks for selected course from backend
+    /*useEffect(() => {
+        axios.get('api/tasks').then(({data}) => {
+            console.log(data.taskName);
+        })
+    }, [])*/
 
     return (
         <div className="tasks-list">
