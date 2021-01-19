@@ -12,44 +12,47 @@ export function addStudentsToDB(data, course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
         let errors = [];
-        return Promise.all(data.map(element => {
-            return session.sql(`
-                SELECT InviteStatus, Username
-                FROM Students
-                WHERE Email = ${escape(element.Email)}
-            `).execute()
-            .then(result => {
-                const studentData = result.fetchOne();
-                if(studentData) {
-                    const [inviteStatus, username] = studentData;
-                    if(inviteStatus === 'waiting')
-                        emailsToSend.push({email: element.Email, message: domainName + "register/" + username});
-                } else if(!studentData) {
-                    return Promise.all([
-                        session.sql(`
-                            INSERT INTO Students (${Object.keys(element).join(", ")})
-                            VALUES (${getSQLValues(Object.values(element))})
-                        `).execute(),
-                        emailsToSend.push({email: element.Email, message: domainName + "register/" + element.userName})
-                ])}
-            })
-            .then(() => session.sql(`
-                INSERT INTO Grades (Email, CourseName)
-                VALUES (${escape(element.Email)}, ${escape(course)})
-            `).execute())
-            .catch(
-                e => {
-                    if(!e.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
-                        console.log(e);
-                    // errors.push(`An unexpected error has occurred when trying to invite ${data.Email}.`)
+        return data.reduce(async (prevPromise, element) =>
+            prevPromise.then(() => new Promise(async resolve => {
+                try {
+                    const result = await session.sql(`
+                    SELECT InviteStatus, Username
+                    FROM Students
+                    WHERE Email = ${escape(element.Email)}`
+                    ).execute();
+                    const studentData = result.fetchOne();
+                    if (studentData) {
+                        const [inviteStatus, username] = studentData;
+                        if (inviteStatus === 'waiting')
+                            emailsToSend.push({
+                                email: element.Email,
+                                message: domainName + "register/" + username
+                            });
+                    } else if (!studentData) {
+                        emailsToSend.push({
+                            email: element.Email,
+                            message: domainName + "register/" + element.userName
+                        })
+                        await session.sql(`
+                        INSERT INTO Students (${Object.keys(element).join(", ")})
+                        VALUES (${getSQLValues(Object.values(element))})
+                    `).execute()
+                    }
+                } catch (error) {
+                    if(!error.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
+                        errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
                 }
-            )
-        })).then(
-            () => sendMessagesInBulk(emailsToSend)
+                resolve();
+            })),Promise.resolve()
+        ).then(() =>
+            sendMessagesInBulk(emailsToSend)
         ).catch(error => {
-            if(error.responseCode === 550)
+            if (error.responseCode === 550)
                 errors = ["Daily email limit exceeded."]
+            if (error.responseCode === 421)
+                errors = ["Too many emails sent at once."]
         }).then(() => errors)
+
     })
 }
 
@@ -181,7 +184,7 @@ function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
             filter.split(" || ").map(
-                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length+1)}%"`
+                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length + 1)}%"`
             ).join(" OR ")
         ).join(" OR ")
     ).join(") AND (");

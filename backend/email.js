@@ -10,16 +10,14 @@ export function sendMessagesInBulk(emails) {
         host: "smtp.gmail.com",
         port: 587,
         secure: false,
-        auth: emailCredentials,
-        pool: true
+        auth: emailCredentials
     });
-    return emails.reduce((promise, {email, message}) => {
+    return emails.reduce((promise, {email,message}) => {
         return promise.then(
-            () => emailMessage(message, email, emailTransporter).then(
-                () => new Promise(resolve => setTimeout(() => resolve(), 1000))
-            )
+            () => emailMessage(message, email, emailTransporter)
+                .then(() => new Promise(resolve => setTimeout(() => resolve(), 1000)))
         )
-    }, Promise.resolve()).then(() => emailTransporter.close());
+    }, Promise.resolve()).then(() => emailTransporter.close())
 }
 
 export function emailMessage(message, email, emailTransporter) {
