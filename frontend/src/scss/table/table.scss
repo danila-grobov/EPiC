@@ -1,0 +1,16 @@
+@import "../fonts";
+@import "../colors";
+.table {
+  width: 100%;
+  display: grid;
+  grid-gap: 15px;
+}
+.tableContent {
+  display: grid;
+}
+.tableContent__empty {
+  font-size: 18px;
+  font-family: $font_lack;
+  color:$text;
+  justify-self: center;
+}

@@ -1,11 +1,35 @@
 @import "colors";
-
+@import "fonts";
 .app {
+  padding-top:200px;
   max-width: 1200px;
   margin: 0 auto;
-  row-gap: 50px;
   display: grid;
+  row-gap: 50px;
 }
 body {
-  background-color: $background !important;
+  background: $background;
+  .ps__thumb-y {
+    background-color: $text !important;;
+    width: 6px !important;
+    opacity: 0.75 !important;
+    right: 0;
+    border-radius: 6px;
+  }
+  .ps--active-x > .ps__rail-x, .ps--active-y > .ps__rail-y {
+    background-color: $background;
+    opacity: 1 !important;
+    width: 6px;
+    border-radius: 6px;
+  }
+  .Toastify__toast-body {
+    padding-left: 10px;
+    font-family: $font_sanspro_semibold;
+  }
+  .Toastify__toast--success {
+    background: $green_strong;
+  }
+  .Toastify__toast--error {
+    background: $red_strong;
+  }
 }

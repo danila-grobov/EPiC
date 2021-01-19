@@ -20,11 +20,13 @@ services:
     #Expose port 3000 to host as port 80
     ports:
       - "80:3000"
+      - "3001:3001"
+      - "3002:3002"
     #Volume is a persistent place for docker to store files of the container
     #Basicaly here I'm just syncing local files with the container.
     volumes:
       - logvolume01:/var/log
-      - ../server_config/docker.package.json:/app/package.json
+      - ../package.json:/app/package.json
       - ../backend:/app/backend
       - ../frontend:/app/frontend
       - ../server_config/babel.config.json:/app/babel.config.json
