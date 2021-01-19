@@ -4,10 +4,7 @@ import {
     render,
     fireEvent,
     screen,
-    waitFor,
-    cleanup,
-    waitForElementToBeRemoved,
-    getByRole
+    act
 } from '@testing-library/react';
 import {rest, setupWorker} from 'msw'
 import {setupServer} from 'msw/node'
@@ -22,7 +19,8 @@ import path from "path";
 import TableButtons from "../frontend/src/table/TableButtons";
 import FileInput from "../frontend/src/general_components/FileInput";
 import {ToastContainer} from "react-toastify";
-
+import InvitePopup from "../frontend/src/table/InvitePopup";
+import FancyInput from "../frontend/src/general_components/FancyInput";
 const header = [
     {value: "First name", type: "title"},
     {value: "Last name", type: "title"},
@@ -282,23 +280,23 @@ describe("Pagintaion", () => {
 
 })
 describe("Grade import", () => {
-    test("uploads a valid file with grades",async () => {
+    test("uploads a valid file with grades", async () => {
         const sentData = {
             data: [
                 {
                     email: "test1@ncl.ac.uk",
-                    grade:33
+                    grade: 33
                 },
                 {
                     email: "test2@ncl.ac.uk",
-                    grade:100
+                    grade: 100
                 }
             ]
         };
         let parsedData = {};
         render(<FileInput type={"grades"} setFileData={data => parsedData = data} button={<button/>}
                           successMessage={"test success"}/>);
-        render(<ToastContainer />)
+        render(<ToastContainer/>)
         const gradesInput = screen.getByLabelText("file input");
         userEvent.upload(gradesInput,
             new File([JSON.stringify(sentData)], "grades.json", {type: "application/json"}));
@@ -306,7 +304,7 @@ describe("Grade import", () => {
         expect(parsedData).toEqual(sentData.data);
     })
 
-    test("uploads incorrectly formatted file",async () => {
+    test("uploads incorrectly formatted file", async () => {
         const sentData = {
             data: [
                 {
@@ -318,20 +316,48 @@ describe("Grade import", () => {
         let parsedData = {};
         render(<FileInput type={"grades"} setFileData={data => parsedData = data} button={<button/>}
                           successMessage={"test success"}/>);
-        render(<ToastContainer />)
+        render(<ToastContainer/>)
         const gradesInput = screen.getByLabelText("file input");
         userEvent.upload(gradesInput,
             new File([JSON.stringify(sentData)], "grades.json", {type: "application/json"}));
         await screen.findByText("The file format is not valid.");
     })
 
-    test("uploads unsupported file format",async () => {
-        render(<FileInput type={"grades"} setFileData={() => {}} button={<button/>}
+    test("uploads unsupported file format", async () => {
+        render(<FileInput type={"grades"} setFileData={() => {
+        }} button={<button/>}
                           successMessage={"test success"}/>);
-        render(<ToastContainer />)
+        render(<ToastContainer/>)
         const gradesInput = screen.getByLabelText("file input");
         userEvent.upload(gradesInput,
             new File(["echo 'Agent 007';"], "index.php", {type: "application/x-httpd-php"}));
         await screen.findByText("Please upload a json file.");
+    })
+})
+describe("Invite Popup", () => {
+    test("email input helper",async () => {
+        let currentValue = "value";
+        render(<FancyInput type={"email"} value={currentValue} setValue={newValue => currentValue = newValue}/>);
+        const emailInput = screen.getByRole("textbox");
+        emailInput.focus();
+        fireEvent.change(emailInput, {target: {value: 'email'}})
+        expect(screen.queryByText("@ncl.ac.uk")).toBeInTheDocument();
+        fireEvent.change(emailInput, {target: {value: 'email@'}})
+        expect(screen.queryByText("@ncl.ac.uk")).not.toBeInTheDocument();
+        expect(screen.queryByText("ncl.ac.uk")).toBeInTheDocument();
+        fireEvent.change(emailInput, {target: {value: 'email'}})
+        fireEvent.keyDown(emailInput, {code: "ArrowRight"});
+        expect(currentValue).toBe("value@ncl.ac.uk");
+    })
+    test("email validation", async () => {
+        render(<InvitePopup />);
+        const emailInput = screen.getByRole("textbox");
+        expect(screen.queryByText("Please enter a valid newcastle university email address.")).not.toBeInTheDocument();
+        fireEvent.change(emailInput, {target: {value: 'email'}})
+        fireEvent.submit(emailInput);
+        expect(screen.queryByText("Please enter a valid newcastle university email address.")).toBeInTheDocument();
+        fireEvent.change(emailInput, {target: {value: 'email@ncl.ac.uk'}})
+        fireEvent.submit(emailInput);
+        expect(screen.queryByText("Please enter a valid newcastle university email address.")).not.toBeInTheDocument();
     })
 })

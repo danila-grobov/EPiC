@@ -1,6 +1,5 @@
 import axios from 'axios';
 axios.interceptors.response.use(res => {
-    console.log(res.status);
     return res;
 }, error => {
     if(error.response) {

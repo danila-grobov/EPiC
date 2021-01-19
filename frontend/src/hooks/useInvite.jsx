@@ -20,7 +20,6 @@ export default (course, checkValidity, reset) => {
         setLoadState("loading")
         axios.post('/api/t/students', {invites, course})
             .then(function ({data: errors}) {
-                console.log(errors);
                 setTimeout(() => {
                     if (errors.length === 0) {
                         setLoadState("done");
