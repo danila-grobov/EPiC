@@ -23,28 +23,26 @@ export default (props) => {
     const[firstName,setFirstName] = useState(""); //sets the user's first name in the nav-bar
     let currentPath = useLocation(); //gets the current path/route
 
-    //retrieving data from the backend
+    //retrieving data from the backend for teachers (their first name, as well as the modules they teach).
     if(userRole === "teacher"){
         useEffect(()=> {
             axios.get('/api/t/teachers').then(({data}) => {
-                console.log(data.firstName);
                 setFirstName(data.firstName);
                 setCourses(data.courses);
                 setCurrentOption({value : data.courses[0], label : data.courses[0] });
             })
         }, [])
     }
+    //retrieving data from the backed for students (their first name).
     if(userRole === "student"){
         useEffect(()=> {
             axios.get('/api/s/student').then(({data}) => {
                 setFirstName(data);
-
             })
         }, [])
     }
 
     const name = `Hello, ${firstName}`;
-
 
     return (
         <div className="menuBase">

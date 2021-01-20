@@ -8,21 +8,22 @@ import {ToastContainer} from 'react-toastify';
 import axios from "axios_redirect";
 import {BrowserRouter as Router, Link, Redirect, Route} from "react-router-dom";
 import CoursePage from "../course_page/CoursePage";
+
+//Controls the student view
+
 export default () => {
     const [courses, setCourses] = useState([]);
     const pagePaths = [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"}];
-    const [currentCourse, setCurrentCourse] = useState(null);
-    console.log(courses);
 
+    //retrieves courses that the current student is enrolled in.
     useEffect(() => {
             axios
                 .get("/api/s/courses")
                 .then(({data:courses}) =>
                     setCourses(courses)
                 )
-    }
+    },[]);
 
-    ,[]);
     return (
         <Router>
 
@@ -48,8 +49,7 @@ export default () => {
                     <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
                     <CoursePage courses={courses}/>
                 </Route>
-
-
+                
                 <Route path="/">
                     <Redirect to="/home"/>
                 </Route>
