@@ -36,10 +36,14 @@ export function addStudentsToDB(data, course) {
                             message: domainName + "register/" + element.userName
                         })
                         await session.sql(`
-                        INSERT INTO Students (${Object.keys(element).join(", ")})
-                        VALUES (${getSQLValues(Object.values(element))})
-                    `).execute()
+                            INSERT INTO Students (${Object.keys(element).join(", ")})
+                            VALUES (${getSQLValues(Object.values(element))})
+                        `).execute()
                     }
+                    await session.sql(`
+                        INSERT INTO Grades (Email, CourseName)
+                        VALUES (${escape(element.Email)}, ${escape(course)})
+                    `).execute()
                 } catch (error) {
                     if(!error.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
                         errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
@@ -96,7 +100,7 @@ export function getStudentsFromDB({count, offset, course}, filters = [], sortSta
         ([students, count]) => {
             return {
                 students: formatStudentArray(students.fetchAll()),
-                count: count.fetchOne()
+                count: count.fetchOne()[0]
             }
         }
     )
