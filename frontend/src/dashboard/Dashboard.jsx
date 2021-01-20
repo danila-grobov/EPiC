@@ -29,6 +29,9 @@ export default () => {
                     <Route path="/coursePage/:course">
                         <CoursePage courses={courses}/>
                     </Route>
+                    <Route path="/home">
+                        <Redirect to={"/"} />
+                    </Route>
                     <Route path="/">
                         <Calendar/>
                         <div className="dashboard__courseCards">
@@ -36,9 +39,6 @@ export default () => {
                                 <CourseCard key={`courseCard__${index}`} {...course} />
                             )}
                         </div>
-                    </Route>
-                    <Route path="/home">
-                        <Redirect to={"/"} />
                     </Route>
                 </Switch>
             </div>

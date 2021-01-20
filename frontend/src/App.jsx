@@ -4,7 +4,6 @@ import Table from "./table/Table";
 import NavBar from "./NavBar/NavBar";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -13,50 +12,34 @@ import {
     Redirect
 } from "react-router-dom";
 
-
 const App = () => {
     const pagePaths= [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"},
         {link:<Link to="/tasks" className="middle">TASKS</Link>, path: "/tasks"},
         {link:<Link to="/manage" className="middle">MANAGE</Link>, path: "/manage"}];
     const [currentOption, setCurrentOption] = useState({value: null, label: "COURSES"});
-
-
     return (
         <Router>
             <div className="app">
-
                 <ToastContainer/>
+                <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
+                        userRole="teacher"/>
+                <Switch>
                     <Route path="/profile">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
                     </Route>
-
                     <Route path="/manage">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
                         <Table course={currentOption.value}/>
                     </Route>
-
                     <Route path="/tasks">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
                     </Route>
-
                     <Route path="/home">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
+                        <Redirect to="/"/>
                     </Route>
-
                     <Route path="/">
-                        <Redirect to="/home"/>
                     </Route>
-
-
+                </Switch>
 
             </div>
         </Router>
     );
 }
-
-
 export default App;
