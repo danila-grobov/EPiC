@@ -13,7 +13,6 @@ export default props => {
     const textInput = useRef(null);
     const widthDonor = useRef(null);
     const {helper = "", onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers, charLimit);
-
     const labelStyle = (focused || value !== "" ? "textInput__label--focused" : "textInput__label") +
         (errorMessage.length === 0 ? "" : " textInput__label--error");
     useEffect(() => {

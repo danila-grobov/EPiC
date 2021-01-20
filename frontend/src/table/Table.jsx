@@ -55,7 +55,8 @@ function getStudentData(params, callback) {
             // axios doesn't support arrays in params, that's a workaround
             paramsSerializer: params => stringify(params)
         })
-        .then(callback);
+        .then(callback)
+        .catch(error => {})
 }
 
 function getEmails(selectedCheckboxes, data) {

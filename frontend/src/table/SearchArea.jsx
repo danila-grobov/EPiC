@@ -12,8 +12,8 @@ export default ({filters, setFilters}) => {
         ]);
     }
     return (
-        <div className="searchArea">
-            <div className="searchInput">
+        <div className="searchArea" role={"list"}>
+            <div className="searchInput" role={"search"}>
                 <img src={searchIcon} alt="search icon" className="searchInput__icon"/>
                 <Input className={"searchInput__input"}
                        onSubmit={value => setFilters([...filters, value])} charLimit={80}/>

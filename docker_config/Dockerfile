@@ -7,6 +7,8 @@ EXPOSE 3000:3000
 #Copy all of the files required for container from host
 COPY ./package.json ./package.json
 COPY ./backend ./backend
+COPY ./__tests__ ./__tests__
+COPY ./__mocks__ ./__mocks__
 COPY ./frontend ./frontend
 COPY ./server_config/babel.config.json ./babel.config.json
 COPY ./server_config/webpack.config.js ./webpack.config.js

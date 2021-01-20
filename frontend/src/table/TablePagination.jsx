@@ -58,6 +58,8 @@ export default props => {
                 getOrderedPages(currentPage, pageCount).map((pageN, index) =>
                     <span key={index}
                           className={`tablePagination__pageNumber${pageN === currentPage ? "--current" : ""}`}
+                          role={"button"}
+                          aria-label={"page-number"}
                           onClick={() => setCurrentPage(pageN)}>
                         {pageN}
                     </span>

@@ -26,6 +26,8 @@ services:
     #Basicaly here I'm just syncing local files with the container.
     volumes:
       - logvolume01:/var/log
+      - ../__tests__:/app/__tests__
+      - ../__mocks__:/app/__mocks__
       - ../package.json:/app/package.json
       - ../backend:/app/backend
       - ../frontend:/app/frontend
