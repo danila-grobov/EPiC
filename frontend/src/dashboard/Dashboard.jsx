@@ -1,4 +1,4 @@
-import React, {useState,useLayoutEffect} from "react"
+import React, {useState,useEffect} from "react"
 import CourseCard from "./CourseCard";
 import "../scss/app.scss";
 import "../scss/dashboard/dashboard.scss";
@@ -12,13 +12,16 @@ export default () => {
     const [courses, setCourses] = useState([]);
     const pagePaths = [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"}];
     const [currentCourse, setCurrentCourse] = useState(null);
-    useLayoutEffect(() => {
+    console.log(courses);
+
+    useEffect(() => {
             axios
                 .get("/api/s/courses")
                 .then(({data:courses}) =>
                     setCourses(courses)
                 )
     }
+
     ,[]);
     return (
         <Router>
@@ -27,19 +30,25 @@ export default () => {
 
             <div className="dashboard">
 
+                <Route path="/profile">
+                    <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
+                </Route>
+
                 <Route path="/home">
                     <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
                     <Calendar/>
                     <div className="dashboard__courseCards">
-                        {courses.map(course =>
-                            <CourseCard {...course}/>
+                        {courses.map((course,index) =>
+                            <CourseCard key={`courseCard__${index}`} {...course} />
                         )}
                     </div>
                 </Route>
 
-                <Route path="/profile">
+                <Route path="/coursePage/:course">
                     <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
+                    <CoursePage courses={courses}/>
                 </Route>
+
 
                 <Route path="/">
                     <Redirect to="/home"/>
@@ -48,16 +57,5 @@ export default () => {
             </div>
         </Router>
     )
-    if(currentCourse === null)
-        return (
-            <div className="dashboard">
-                <Calendar />
-                <div className="dashboard__courseCards">
-                    {courses.map((course,index) =>
-                        <CourseCard key={`courseCard__${index}`} {...course} onClick={() => setCurrentCourse(course)}/>
-                    )}
-                </div>
-            </div>
-        )
-    else return <CoursePage {...currentCourse} />
+
 }

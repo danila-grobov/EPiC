@@ -7,7 +7,7 @@ Firstname varchar(50) NOT NULL,
 Lastname varchar(50) NOT NULL,
 Email varchar(50) NOT NULL,
 Admin boolean NOT NULL,
-PRIMARY KEY(Email)
+PRIMARY KEY(Email));
 
 CREATE TABLE SessionStore
 (
@@ -17,27 +17,6 @@ CREATE TABLE SessionStore
     PRIMARY KEY (SId)
 );
 
-CREATE TABLE Teachers
-(
-    Username  varchar(50)  NOT NULL,
-    Pwd       varchar(200) NOT NULL,
-    Firstname varchar(50)  NOT NULL,
-    Lastname  varchar(50)  NOT NULL,
-    Email     varchar(50)  NOT NULL,
-    Admin     boolean      NOT NULL,
-    PRIMARY KEY (Username)
-);
-
-CREATE TABLE Teachers
-(
-    Username  varchar(50)  NOT NULL,
-    Pwd       varchar(200) NOT NULL,
-    Firstname varchar(50)  NOT NULL,
-    Lastname  varchar(50)  NOT NULL,
-    Email     varchar(50)  NOT NULL,
-    Admin     boolean      NOT NULL,
-    PRIMARY KEY (Username)
-);
 
 CREATE TABLE Students
 (
@@ -257,3 +236,9 @@ INSERT INTO EPiC.TasksDone (Email, TaskID)
 VALUES ('test1@ncl.ac.uk', 25);
 INSERT INTO EPiC.TasksDone (Email, TaskID)
 VALUES ('test1@ncl.ac.uk', 26);
+
+#Create sample teaches data
+INSERT INTO EPiC.Teaches (CourseName, Email)
+VALUES ('CSC2033', 'teacher@ncl.ac.uk');
+INSERT INTO EPiC.Teaches (CourseName, Email)
+VALUES ('CSC2031', 'teacher@ncl.ac.uk');
