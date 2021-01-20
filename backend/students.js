@@ -12,6 +12,8 @@ export function addStudentsToDB(data, course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
         let errors = [];
+        if(data.length > 100)
+            return Promise.resolve(["Cannot send more than 100 emails at once."])
         return data.reduce(async (prevPromise, element) =>
             prevPromise.then(() => new Promise(async resolve => {
                 try {
