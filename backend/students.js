@@ -126,7 +126,7 @@ export function setStudentGrades({data, course}) {
             ({grade, email}) =>
                 updateObj
                     .set("Grade", grade)
-                    .where(`Email = ${escape(email)}`)
+                    .where(`Email = ${escape(email)} AND CourseName = ${escape(course)}`)
                     .execute()
         )
         return Promise.all(promises);
