@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from "react"
-import "../scss/table/table.scss"
+import React from "react"
 import SearchArea from "./SearchArea";
 import TableContent from "./TableContent";
 import TableButtons from "./TableButtons";
 import TableNavigation from "./TableNavigation";
 import InvitePopup from "./InvitePopup";
 import useTable from "../hooks/useTable";
+import "../scss/table/table.scss"
 
 export default ({course}) => {
-    const tableState = useTable(course);
+    const tableState = useTable(course); // get states for table component
     return (
         <div className="table">
             {tableState.popupIsOpen ? <InvitePopup course={course} closePopup={tableState.closePopup}/> : ""}

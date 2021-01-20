@@ -6,28 +6,36 @@ import right_button from "../imgs/right_button.svg";
 export default props => {
     const {
         label, className = "", type = "text", onSubmit, charLimit,
-        value, setValue, errorMessage = "", disabled = false
+        value, setValue, errorMessage = "", disabled = false, inputRef = useRef(null)
     } = props;
     const [focused, setFocused] = useState(false);
     const [width, setWidth] = useState(1);
-    const textInput = useRef(null);
     const widthDonor = useRef(null);
     const {helper = "", onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers, charLimit);
     const labelStyle = (focused || value !== "" ? "textInput__label--focused" : "textInput__label") +
         (errorMessage.length === 0 ? "" : " textInput__label--error");
     useEffect(() => {
-        setWidth(widthDonor.current.clientWidth + 2)
+        setWidth(widthDonor.current.clientWidth + 2);
+        const onMouseDown = e => {
+            const inputWrapper = inputRef.current.parentElement.parentElement.parentElement;
+            if(inputWrapper.contains(e.target))
+                setFocused(true);
+            else setFocused(false);
+        };
+        document.addEventListener("mousedown", onMouseDown);
+        return () => document.removeEventListener("mousedown", onMouseDown);
     });
+    const autoComplete = () => {
+        emptyHelper();
+        setValue(value + helper);
+    }
     const handleKeyDown = e => {
-        if (value !== "" && e.code === "ArrowRight" &&
-            textInput.current.selectionStart === value.length) {
-            emptyHelper();
-            setValue(value + helper);
-        }
+        if (value !== "" && e.code === "ArrowRight" && inputRef.current.selectionStart === value.length)
+            autoComplete()
     }
     return (
         <div className={"textInput__wrapper " + className + (disabled ? " textInput__wrapper--disabled" : "")}
-             onClick={() => disabled ? null : textInput.current.focus()}>
+             onClick={() => !disabled ? inputRef.current.focus() : null}>
             <div className={`textInput ${errorMessage.length === 0 ? "" : "textInput--error"}`}>
                 {label ? <span className={labelStyle}>{label}</span> : ""}
                 <form onSubmit={e => {
@@ -35,11 +43,10 @@ export default props => {
                     onSubmit ? onSubmit(value) : null
                 }}>
                     <input type={type === "password" ? "password" : "text"} className="textInput__input"
-                           onFocus={() => setFocused(true)}
-                           onBlur={() => setFocused(false)}
-                           ref={textInput}
+                           ref={inputRef}
                            style={type === "email" ? {width} : {}}
                            onKeyDown={handleKeyDown}
+                           onFocus={() => setFocused(true)}
                            value={value}
                            onChange={onChange}
                            maxLength={type === "email" || !charLimit ? "" : charLimit}
@@ -47,7 +54,8 @@ export default props => {
                     {focused && value && type === "email" && helper
                         ? <span className="textInput__helper">
                             {helper}
-                            <img src={right_button} alt="right key" className="textInput__helperImg"/>
+                            <img src={right_button} alt="right key" onClick={autoComplete}
+                                 className="textInput__helperImg"/>
                         </span>
                         : null}
                 </form>

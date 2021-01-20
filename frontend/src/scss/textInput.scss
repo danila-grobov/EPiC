@@ -87,6 +87,8 @@
 }
 .textInput__helperImg {
   width: 15px;
+  cursor: pointer;
+  z-index: 5;
 }
 .textInput__label, .textInput__label--focused {
   width: max-content;
