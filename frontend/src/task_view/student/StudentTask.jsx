@@ -11,13 +11,13 @@ export default (props)=> {
     return(
         <div key={task.taskID}>
             <div className="task-body">
-                <TaskTitleStudent taskName={task.taskName}/>
+                <TaskTitleStudent taskName={task.taskTitle}/>
                 <TaskDeadlineStudent taskDeadline={task.deadline}/>
                 <TaskDescStudent taskDesc={task.desc}/>
             </div>
             {/* subtasks rendered when they exist for current task */}
-            {task.hasSubtasks ? tasksArr.map(subtask => {
-                if(subtask.parentID === task.taskID){
+            {task.hasSubtask ? tasksArr.map(subtask => {
+                if(subtask.parentTaskID === task.taskID){
                     return (
                         <div className="task-row-subtask" key={subtask.taskID}>
                             <StudentTask task={subtask} tasks={tasksArr}/>

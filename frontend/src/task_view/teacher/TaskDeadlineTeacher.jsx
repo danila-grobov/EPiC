@@ -8,5 +8,5 @@ export default (taskDeadline) => {
 
     return <input type="text" id="task-deadline"
                   defaultValue={taskDeadline.taskDeadline} onChange={changeDeadline}
-                  placeholder="yyyy-mm-dd hour:min:sec"/>
+                  placeholder="dd-mm-yyyy hh:mm:ss"/>
 }

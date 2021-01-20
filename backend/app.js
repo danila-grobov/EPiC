@@ -13,10 +13,21 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
+import {getTasks} from './tasks'
 
 const app = express()
 const port = 3000
 configExpress(app);
+
+/* gets all tasks for specified course */
+app.get(['/api/tasks'], (req, res) => {
+    const {course} = req.query;
+    console.log(course);
+    getTasks(course).then(dataObj => res.send(dataObj));
+})
+
+
+
 
 app.post('/api/t/students', (req, res) => {
     const {invites, course} = req.body;

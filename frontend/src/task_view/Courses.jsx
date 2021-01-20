@@ -1,5 +1,4 @@
 import React from "react";
-//import LoadCourses from './LoadCourses';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import data from './testCourseData';

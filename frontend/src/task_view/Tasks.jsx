@@ -1,42 +1,34 @@
-import React, {useEffect} from 'react';
-import data from './testTaskData';
+import React, {useEffect, useState} from 'react';
 import '../scss/tasks.scss';
 import StudentTask from "./student/StudentTask";
 import TeacherTask from "./teacher/TeacherTask";
-//import axios from "axios_redirect";
+import axios from "axios_redirect";
 
 export default (props) => {
-    // array of all tasks for specific course - this will be loaded from db
-    const tasks = data.map(task => (
-        {taskID:task.taskID,
-            taskName:task.taskName,
-            course:task.course,
-            parentID:task.parentID,
-            hasSubtasks: task.hasSubtasks,
-            desc:task.desc,
-            deadline:task.deadline
-        }
-    ))
-    console.log(tasks);
+    console.log(props.course);
+
+    const [taskData, setTaskData] = useState([]);
 
     // get tasks for selected course from backend
-    /*useEffect(() => {
-        axios.get('api/tasks').then(({data}) => {
-            console.log(data.taskName);
+    useEffect(() => {
+        axios.get('/api/tasks', {params:{course:props.course}}).then(({data}) => {
+            setTaskData(data);
         })
-    }, [])*/
+    }, [props.course])
 
     return (
         <div className="tasks-list">
-            {tasks.map(task => {
+            {taskData.map(task => {
+                console.log(task);
+                console.log(task.taskID, task.taskTitle, task.parentTaskID);
                 // displays main tasks from selected course for current user
-                if(task.course === props.course && task.parentID===""){
+                if(task.parentTaskID==="" || task.parentTaskID === null){
                     return(
                         <div className="task-row-main" key={task.taskID}>
                             {props.user === "teacher" ?
-                                <TeacherTask task={task} tasks={tasks}/>:
+                                <TeacherTask task={task} tasks={taskData}/>:
                                 props.user === "student" ?
-                                <StudentTask task={task} tasks={tasks}/>: "Not a recognised user"
+                                    <StudentTask task={task} tasks={taskData}/>: "Not a recognised user"
                             }
                         </div>
                     )

@@ -1,5 +1,5 @@
 export default [
-    {value: "Course1"},
+    {value: "CSC2031"},
     {value: "Course2"},
     {value: "Course3"},
     {value: "Course4"},

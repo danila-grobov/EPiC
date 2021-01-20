@@ -17,8 +17,8 @@ Firstname varchar(50),
 Lastname varchar(50),
 Email varchar(50),
 Skill varchar(15),
-StudentType varchar(20),
-Gender varchar(5),
+StudentType varchar(25),
+Gender varchar(15),
 InviteStatus varchar(50) NOT NULL,
 PRIMARY KEY(Email)
 );
@@ -33,7 +33,8 @@ CREATE TABLE Tasks(
 TaskID int NOT NULL AUTO_INCREMENT,
 TaskName varchar(100) NOT NULL,
 CourseName varchar(10) NOT NULL,
-ParentTaskID varchar(5),
+ParentTaskID int,
+hasSubtasks boolean,
 Description text NOT NULL,
 Deadline datetime,
 PRIMARY KEY (TaskID),
@@ -64,6 +65,7 @@ FOREIGN KEY (TaskID)
         REFERENCES Tasks(TaskID),
 UNIQUE (Email, TaskID)
 );
+
 INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin)
 VALUES ('Teacher1',
         'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec',
