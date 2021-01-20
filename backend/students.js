@@ -106,13 +106,14 @@ export function getStudentsFromDB({count, offset, course}, filters = [], sortSta
     )
 }
 
-export function removeStudentFromDB(emails) {
+export function removeStudentFromDB(emails, course) {
     return getDBSession(session => {
-        const grades = session.getSchema("EPiC").getTable("Grades");
-        const whereClause = emails.map(email => `Email = ${escape(email)}`).join(" OR ");
-        return grades
-            .delete()
-            .where(whereClause)
+        session.sql("USE EPiC").execute();
+        const whereClause = emails.map(
+            email => `(Email = ${escape(email)} AND CourseName=${escape(course)})`
+        ).join(" OR ");
+        return session
+            .sql(`DELETE FROM Grades WHERE ${whereClause}`)
             .execute()
     })
 }

@@ -27,26 +27,25 @@ export default course => {
             return {};
         }
     }
-    useEffect(() => {
-            fetchData().then(({students, count}) => {
-                setStudentData(students);
-                setTotal(count);
-            })
-        },
+    const updateTable = () => {
+        fetchData().then(({students, count}) => {
+            setStudentData(students);
+            setTotal(count);
+        })
+    };
+    useEffect(
+        updateTable,
         [rowCount, currentPage, filters, popupState, course, sortState]
     );
     const getSelectedEmails = () => {
         return selectedCheckboxes
             .filter(id => id !== 0)
-            .map(id => {
-                const dataRow = studentData[id];
-                return dataRow ? studentData[3].value : "";
-            })
+            .map(id => studentData[id][3].value)
             .filter(email => email !== "")
     }
     return {
         getSelectedEmails,
-        fetchData,
+        updateTable,
         popupIsOpen: popupState,
         closePopup: () => setPopupState(false),
         openPopup: () => setPopupState(true),

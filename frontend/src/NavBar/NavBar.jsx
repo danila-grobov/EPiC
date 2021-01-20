@@ -27,7 +27,6 @@ export default (props) => {
     if(userRole === "teacher"){
         useEffect(()=> {
             axios.get('/api/t/teachers').then(({data}) => {
-                console.log(data.firstName);
                 setFirstName(data.firstName);
                 setCourses(data.courses);
                 setCurrentOption({value : data.courses[0], label : data.courses[0] });

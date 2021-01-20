@@ -17,7 +17,7 @@ export default ({course}) => {
                           data={tableState.studentData} selectedCheckboxes={tableState.selectedCheckboxes}
                           setSelectedCheckboxes={tableState.setSelectedCheckboxes}/>
             <TableButtons openPopup={tableState.openPopup} emails={tableState.getSelectedEmails()}
-                          updateTable={tableState.fetchData} course={course}
+                          updateTable={tableState.updateTable} course={course}
                           reset={tableState.resetCheckboxes}
             />
             <TableNavigation total={tableState.total} rowCount={tableState.rowCount}
