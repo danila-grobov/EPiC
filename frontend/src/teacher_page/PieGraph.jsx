@@ -1,10 +1,33 @@
 import React, {useEffect} from "react";
 import Chart from 'chart.js';
+import axios from "axios";
 
 // Parameters passed in: data to populate chart.
-export default ({data}) => {
+export default ({course, filter, date}) => {
 
     useEffect(() => {
+
+        axios.get('/api/t/pie', {
+            params: {
+                course: course,
+                filter: filter,
+                date: date
+            }
+        }).then(res => {
+            // GET DATA
+
+        })
+
+        const retrievedData = [];
+        const data = [0,0,0,0,0];
+        // USE DATA
+        const countOccurrences = (values, value) => retrievedData.reduce((a,v) => (v === value ? a + 1 : a), 1);
+
+        for (let i = 0; i < 5; i++){
+            data[i] = countOccurrences(retrievedData, i);
+        }
+
+
         // Initialise chart object, passing in canvas element.
         const PieChart = new Chart(document.getElementById('PieChart'), {
             // Set type of graph.

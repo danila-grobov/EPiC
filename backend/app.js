@@ -14,7 +14,7 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
-import {getTaskStatementData} from "./graphs";
+import {getPieData, getTaskStatementData} from "./graphs";
 
 const app = express()
 const port = 3000
@@ -105,6 +105,11 @@ app.get('*', (req, res) => {
 app.get('/api/t/tasks', ((req, res) => {
     const {course, taskID, date} = req.query;
     getTaskStatementData(course, taskID, date).then(data => res.send(data));
+}));
+
+app.get('/api/t/pie', ((req, res) => {
+    const {course, filter, date} = req.query;
+    getPieData(course, filter, date).then(data => res.send(data));
 }));
 
 

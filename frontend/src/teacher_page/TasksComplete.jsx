@@ -13,12 +13,6 @@ export default({passedCourse, passedTask, passedDate}) => {
     // y --> Number of students associated with current course.
     // period --> in the last ___ days, weeks months etc. from date in tasksDone table
 
-    // moment.js for dates
-
-    // const [course, setCourse] = useState(passedCourse);
-    // const [task, setTask] = useState(passedTask);
-    // const [date, setDate] = useState(passedDate)
-
     const [tasksDone,setTasksDone] = useState(0);
     const [numStudents,setNumStudents] = useState(0);
 

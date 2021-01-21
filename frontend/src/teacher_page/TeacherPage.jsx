@@ -57,7 +57,7 @@ export default () => {
                               {label: "Date 2", value: "Date 2"}
                           ]}
                     />
-                    <PieGraph data={[10, 30, 80, 110, 9]} />
+                    <PieGraph />
                 </div>
 
                 <div className="flex-item-half">

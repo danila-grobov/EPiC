@@ -20,3 +20,23 @@ export function getTaskStatementData(course, taskID, date) {
         return {thisData};
     })
 }
+
+export function getPieData(course, filter, date) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+
+        const query = "SELECT Confidence.ConfidenceLevel" +
+            "FROM Confidence" +
+            "INNER JOIN Students" +
+            "ON Confidence.Email = Students.Email" +
+            "WHERE CourseName = " + course +
+            " AND Date < " + date +
+            " AND " + filter;
+
+        return (session.sql(query).execute());
+
+    }).then(res => {
+        // const[thisData] = res.fetchOne();
+        // return {thisData};
+    })
+}
