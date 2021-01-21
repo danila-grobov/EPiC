@@ -1,8 +1,9 @@
 import React, {useEffect} from "react";
 import Chart from 'chart.js';
+import axios from "axios";
 
 // Parameters: X and Y values for three datasets.
-export default ({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals})  => {
+export default ({course, filter})  => {
 
     // Function to generate the points on the graph using the data passed in as parameters.
     function generatePoints(xVals, yVals) {
@@ -17,6 +18,18 @@ export default ({ukXVals, ukYVals, euXVals, euYVals, inXVals, inYVals})  => {
     }
 
     useEffect(() => {
+
+        axios.get('/api/t/scatter', {
+            params: {
+                course: course,
+                filter: filter,
+            }
+        }).then(res => {
+            // GET DATA
+
+        })
+
+
         // Initialise chart object, passing in the canvas element.
         const scatterChart = new Chart(document.getElementById('scatterGraph'), {
             // Set type of graph.

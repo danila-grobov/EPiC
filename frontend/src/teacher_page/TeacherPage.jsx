@@ -89,10 +89,7 @@ export default () => {
                               {label: "Confidence", value: "Confidence"}
                           ]}
                     />
-                    <ScatterGraph
-                        ukXVals={[1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4,4,5,5,5,5]} ukYVals={[10,15,40,20,29,60,54,43,54,65,38,58,62,70,75,67,80,45,89,91,100]}
-                        euXVals={[1,2,2,2,2,3,3,4,4,4,4,4,4,5,5,5,5,5,5]} euYVals={[20,28,39,48,45,49,41,56,68,81,50,47,42,90,87,99,72,79,72]}
-                        inXVals={[2,2,3,3,3,4,4,4,4,4,4,4,5,5,5,5,5]} inYVals={[45,34,47,39,43,69,76,68,56,80,72,78,90,98,84,77,100]} />
+                    <ScatterGraph />
                 </div>
                 <div className="flex-item-full">
                     <h3>Average Confidence Over Time</h3>

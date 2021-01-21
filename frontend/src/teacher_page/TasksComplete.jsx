@@ -7,7 +7,7 @@ const momentRange = require('moment-range');
 momentRange.extendMoment(moment);
 
 
-export default({passedCourse, passedTask, passedDate}) => {
+export default({course, task, date}) => {
     // Call to DB using 'task' and date as parameters.
     // x --> number of times given task ID appears in tasksDone table.
     // y --> Number of students associated with current course.
@@ -20,9 +20,9 @@ export default({passedCourse, passedTask, passedDate}) => {
     useEffect(()=> {
         axios.get('/api/t/tasks', {
                 params: {
-                    course: "CSC2031",
-                    taskID: 5,
-                    date: "2021-09-05"
+                    course: course,
+                    taskID: task,
+                    date: date
                 }
             }).then(res => {
                 console.log(res.data.thisData);

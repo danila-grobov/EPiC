@@ -22,7 +22,6 @@ export default ({course, filter, date}) => {
         const data = [0,0,0,0,0];
         // USE DATA
         const countOccurrences = (values, value) => retrievedData.reduce((a,v) => (v === value ? a + 1 : a), 1);
-
         for (let i = 0; i < 5; i++){
             data[i] = countOccurrences(retrievedData, i);
         }

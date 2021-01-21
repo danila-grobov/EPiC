@@ -112,6 +112,11 @@ app.get('/api/t/pie', ((req, res) => {
     getPieData(course, filter, date).then(data => res.send(data));
 }));
 
+app.get('/api/t/scatter', ((req, res) => {
+    const {course, filter} = req.query;
+    getScatterData(course, filter).then(data => res.send(data));
+}));
+
 
 
 function configExpress(app) {
