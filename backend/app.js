@@ -14,6 +14,7 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
+import {getTaskStatementData} from "./graphs";
 
 const app = express()
 const port = 3000
@@ -86,7 +87,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/api/t/teachers',(req, res) => {
-    const{email} = req.session;
+    const{email: email} = req.session;
     getTeacherData(email).then(data => res.send(data));
 
 })
@@ -99,7 +100,12 @@ app.get('*', (req, res) => {
     } else {
         res.redirect(303,"/login");
     }
-});
+})
+
+app.get('/api/t/tasks', ((req, res) => {
+    const {course, taskID, date} = req.query;
+    getTaskStatementData(course, taskID, date).then(data => res.send(data));
+}));
 
 
 

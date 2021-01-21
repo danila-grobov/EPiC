@@ -59,6 +59,7 @@ export default () => {
                     />
                     <PieGraph data={[10, 30, 80, 110, 9]} />
                 </div>
+
                 <div className="flex-item-half">
                     <Dropdown currentOption={currentOptionTaskFilter}
                           setCurrentOption={setCurrentOptionTaskFilter}
@@ -74,7 +75,7 @@ export default () => {
                               {label: "Date 2", value: "Date 2"}
                           ]}
                     />
-                    <TasksComplete task={chosenTask} date={chosenDate}/>
+                    <TasksComplete />
                 </div>
 
                 <div className="flex-item-full">
