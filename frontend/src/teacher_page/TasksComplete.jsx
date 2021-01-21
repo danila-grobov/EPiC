@@ -1,17 +1,8 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import moment from "moment";
-import { extendMoment } from 'moment-range';
-
-const momentRange = require('moment-range');
-momentRange.extendMoment(moment);
-
+import "../scss/teacherPage.scss";
 
 export default({course, task, date}) => {
-    // Call to DB using 'task' and date as parameters.
-    // x --> number of times given task ID appears in tasksDone table.
-    // y --> Number of students associated with current course.
-    // period --> in the last ___ days, weeks months etc. from date in tasksDone table
 
     const [tasksDone,setTasksDone] = useState(0);
     const [numStudents,setNumStudents] = useState(0);
@@ -25,16 +16,11 @@ export default({course, task, date}) => {
                     date: date
                 }
             }).then(res => {
-                console.log(res.data.thisData);
-                setTasksDone(res.data.thisData)
+                setTasksDone(res.data.tasksDone);
+                setNumStudents(res.data.totalTasks);
             }
         )
-
-            // setTasksDone(data.completeTasks);
-            // setNumStudents(data.numStudents);
-            // console.log("Yeet" + data);
-        })
-
+    })
 
     return (
         <h1>{tasksDone}/{numStudents} have completed tasks in this period</h1>

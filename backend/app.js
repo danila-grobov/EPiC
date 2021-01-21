@@ -14,7 +14,7 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
-import {getPieData, getTaskStatementData} from "./graphs";
+import {getLineData, getPieData, getScatterData, getTasks, getTaskStatementData} from "./graphs";
 
 const app = express()
 const port = 3000
@@ -51,7 +51,7 @@ app.put('/api/register', (req, res) => {
             res.send(errors)
         }
     });
-})
+});
 app.get('/api/login',(req, res) => {
     const {username, password} = req.query;
     getStudent(username, password).then(email => {
@@ -71,12 +71,12 @@ app.get('/api/login',(req, res) => {
             })
         }
     });
-})
+});
 app.get(['/register/:token', '/register'], (req, res) => {
     const {token} = req.params;
     checkInviteToken(token).then(email =>
         res.render("register", {email: email ? email[0] : null,token}));
-})
+});
 app.get('/login', (req, res) => {
     res.render("login");
 });
@@ -90,7 +90,32 @@ app.get('/api/t/teachers',(req, res) => {
     const{email: email} = req.session;
     getTeacherData(email).then(data => res.send(data));
 
-})
+});
+
+app.get('/api/t/tasks', ((req, res) => {
+    const {course, taskID, date} = req.query;
+    getTaskStatementData(course, taskID, date).then(data => res.send(data));
+}));
+
+// app.get('/api/t/pie', ((req, res) => {
+//     const {course, filter, date} = req.query;
+//     getPieData(course, filter, date).then(data => res.send(data));
+// }));
+//
+// // app.get('/api/t/scatter', ((req, res) => {
+// //     const {course, filter} = req.query;
+// //     getScatterData(course, filter).then(data => res.send(data));
+// // }));
+//
+// app.get('/api/t/line', ((req, res) => {
+//     const {course, date} = req.query;
+//     getLineData(course, date).then(data => res.send(data));
+// }));
+
+app.get('/api/t/droptasks', ((req, res) => {
+    const {course} = req.query;
+    getTasks(course).then(data => res.send(data));
+}));
 
 app.get('*', (req, res) => {
     if(req.session.role === "teacher") {
@@ -101,23 +126,6 @@ app.get('*', (req, res) => {
         res.redirect(303,"/login");
     }
 })
-
-app.get('/api/t/tasks', ((req, res) => {
-    const {course, taskID, date} = req.query;
-    getTaskStatementData(course, taskID, date).then(data => res.send(data));
-}));
-
-app.get('/api/t/pie', ((req, res) => {
-    const {course, filter, date} = req.query;
-    getPieData(course, filter, date).then(data => res.send(data));
-}));
-
-app.get('/api/t/scatter', ((req, res) => {
-    const {course, filter} = req.query;
-    getScatterData(course, filter).then(data => res.send(data));
-}));
-
-
 
 function configExpress(app) {
     app.use(express.static(path.join(__dirname, '../dist')));

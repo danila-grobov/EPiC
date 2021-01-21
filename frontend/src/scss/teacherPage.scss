@@ -1,4 +1,5 @@
 @import "colors";
+@import "fonts";
 
 .flex-container {
   display: flex;
@@ -15,6 +16,20 @@
   margin: 15px;
   text-align: center;
   border-radius: 15px;
+  font-family: $font_sanspro_bold;
+}
+
+.flex-item-half-stat {
+  justify-content: center;
+  background-color: #FFFFFF;
+  width: 45%;
+  padding: 10px;
+  margin: 15px;
+  text-align: center;
+  border-radius: 15px;
+  //line-height: 75px !important;
+  font-size: 35px !important;
+  font-family: $font_sanspro_bold;
 }
 
 .flex-item-full {

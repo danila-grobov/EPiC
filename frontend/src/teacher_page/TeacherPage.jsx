@@ -8,6 +8,7 @@ import Dropdown from "../general_components/Dropdown";
 import axios from "axios";
 import {ToastContainer} from "react-toastify";
 import TasksComplete from "./TasksComplete";
+import moment from "moment";
 
 export default () => {
     const pages = ["CSC2031", "CSC2032", "CSC2033", "CSC2034"];
@@ -22,6 +23,35 @@ export default () => {
 
     const titleLimitedFilter = {label: "Filter", value: "Filter"};
     const [currentOptionLimitedFilter, setCurrentOptionLimitedFilter] = useState(titleLimitedFilter);
+
+    const [stateTasks, setTasks] = useState([]);
+    const [taskIDs, setTaskIDs] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/t/droptasks', {
+            params: {
+                course: "CSC2031"
+            }
+        }).then(res => {
+            setTasks(res.data.tasks);
+            setTaskIDs(res.data.taskIDs);
+        })
+    }, [])
+
+    let taskDropOptions = [];
+    for (let i = 0; i < stateTasks.length; i++){
+        taskDropOptions.push({label:stateTasks[i], value:taskIDs[i]});
+    }
+
+    const dateOptions = [
+        {label: "Last 7 Days", value: moment().subtract(7, 'd').format('YYYY-MM-DD')},
+        {label: "Last 14 Days", value: moment().subtract(14, 'd').format('YYYY-MM-DD')},
+        {label: "Last 4 Weeks", value: moment().subtract(28, 'd').format('YYYY-MM-DD')},
+        {label: "Last 8 Weeks", value: moment().subtract(56, 'd').format('YYYY-MM-DD')}]
+
+    console.log(taskDropOptions);
+
+
 
     return (
         <div className="app">
@@ -60,22 +90,19 @@ export default () => {
                     <PieGraph />
                 </div>
 
-                <div className="flex-item-half">
+                <div className="flex-item-half-stat">
                     <Dropdown currentOption={currentOptionTaskFilter}
                           setCurrentOption={setCurrentOptionTaskFilter}
-                          dropOptions={[
-                              {label: "Task 1", value: "Task 1"},
-                              {label: "Task 2", value: "Task 2"}
-                          ]}
+                          dropOptions={taskDropOptions}
                     />
+
                     <Dropdown currentOption={currentOptionDateFilter}
                           setCurrentOption={setCurrentOptionDateFilter}
-                          dropOptions={[
-                              {label: "Date 1", value: "Date 1"},
-                              {label: "Date 2", value: "Date 2"}
-                          ]}
+                          dropOptions={dateOptions}
                     />
-                    <TasksComplete />
+                    <TasksComplete course={/*Get from NavBar*/"CSC2031"}
+                                   date={currentOptionDateFilter.value}
+                                   task={currentOptionTaskFilter.value}/>
                 </div>
 
                 <div className="flex-item-full">
@@ -100,13 +127,9 @@ export default () => {
                                   {label: "Date 2", value: "Date 2"}
                               ]}
                     />
-                    <LineGraph title={'Average Confidence'}
-                               labels={['28/12/2020', '29/12/2020', '30/12/2020', '31/12/2020', '01/01/2021', '04/01/2021', '05/01/2021', '06/01/2021', '07/01/2021', '08/01/2021']}
-                               values={[2.2, 4.1, 3.9, 1.2, 2, 3.3, 1.5, 3.5, 4.2, 4.5]} />
+                    <LineGraph />
                 </div>
             </div>
-
-
             <ToastContainer />
         </div>
     );

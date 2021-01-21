@@ -17,6 +17,7 @@ export default ({course, filter})  => {
         return points;
     }
 
+    /*
     useEffect(() => {
 
         axios.get('/api/t/scatter', {
@@ -28,6 +29,7 @@ export default ({course, filter})  => {
             // GET DATA
 
         })
+
 
 
         // Initialise chart object, passing in the canvas element.
@@ -81,7 +83,10 @@ export default ({course, filter})  => {
                 }
             }
         });
+
+
     })
+     */
 
     return (
         // Define canvas element to contain the graph.
