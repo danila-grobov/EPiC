@@ -1,5 +1,5 @@
 import {getDBSession} from "./database";
-import {emailMessage} from "./email";
+import {emailMessage, sendMessagesInBulk} from "./email";
 import React from "react";
 import md5 from "md5";
 import {v4 as uuidV4} from "uuid";
@@ -8,44 +8,57 @@ import {escape} from "sqlstring";
 const domainName = "http://localhost/";
 
 export function addStudentsToDB(data, course) {
+    const emailsToSend = [];
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
-        const errors = [];
-        return Promise.all(data.map(element => {
-            return session.sql(`
-                SELECT InviteStatus, Username
-                FROM Students
-                WHERE Email = ${escape(element.Email)}
-            `).execute()
-            .then(result => {
-                const studentData = result.fetchOne();
-                if(studentData) {
-                    const [inviteStatus, username] = studentData;
-                    // if(inviteStatus === 'waiting')
-                    //     return emailMessage(domainName + "register/" + username, element.Email)
-                } else if(!studentData) {
-                    return Promise.all([
-                        session.sql(`
+        let errors = [];
+        if(data.length > 100)
+            return Promise.resolve(["Cannot send more than 100 emails at once."])
+        return data.reduce(async (prevPromise, element) =>
+            prevPromise.then(() => new Promise(async resolve => {
+                try {
+                    const result = await session.sql(`
+                    SELECT InviteStatus, Username
+                    FROM Students
+                    WHERE Email = ${escape(element.Email)}`
+                    ).execute();
+                    const studentData = result.fetchOne();
+                    if (studentData) {
+                        const [inviteStatus, username] = studentData;
+                        if (inviteStatus === 'waiting')
+                            emailsToSend.push({
+                                email: element.Email,
+                                message: domainName + "register/" + username
+                            });
+                    } else if (!studentData) {
+                        emailsToSend.push({
+                            email: element.Email,
+                            message: domainName + "register/" + element.userName
+                        })
+                        await session.sql(`
                             INSERT INTO Students (${Object.keys(element).join(", ")})
                             VALUES (${getSQLValues(Object.values(element))})
-                        `).execute(),
-                        // emailMessage(
-                        //     domainName + "register/" + element.Username,
-                        //     element.Email
-                        // )
-                ])}
-            })
-            .then(() => session.sql(`
-                INSERT INTO Grades (Email, CourseName)
-                VALUES (${escape(element.Email)}, ${escape(course)})
-            `).execute())
-            .catch(
-                e => {
-                    if(!e.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
-                        errors.push(`An unexpected error has occurred when trying to invite ${element.Email}.`)
+                        `).execute()
+                    }
+                    await session.sql(`
+                        INSERT INTO Grades (Email, CourseName)
+                        VALUES (${escape(element.Email)}, ${escape(course)})
+                    `).execute()
+                } catch (error) {
+                    if(!error.message.match(/Duplicate entry '.*' for key 'Grades.(CourseName|Email)'/))
+                        errors.push(`Unexpected error occurred, when trying to invite ${element.Email}.`)
                 }
-            )
-        })).then(() => errors)
+                resolve();
+            })),Promise.resolve()
+        ).then(() =>
+            sendMessagesInBulk(emailsToSend)
+        ).catch(error => {
+            if (error.responseCode === 550)
+                errors = ["Daily email limit exceeded."]
+            if (error.responseCode === 421)
+                errors = ["Too many emails sent at once."]
+        }).then(() => errors)
+
     })
 }
 
@@ -87,19 +100,20 @@ export function getStudentsFromDB({count, offset, course}, filters = [], sortSta
         ([students, count]) => {
             return {
                 students: formatStudentArray(students.fetchAll()),
-                count: count.fetchOne()
+                count: count.fetchOne()[0]
             }
         }
     )
 }
 
-export function removeStudentFromDB(emails) {
+export function removeStudentFromDB(emails, course) {
     return getDBSession(session => {
-        const grades = session.getSchema("EPiC").getTable("Grades");
-        const whereClause = emails.map(email => `Email = ${escape(email)}`).join(" OR ");
-        return grades
-            .delete()
-            .where(whereClause)
+        session.sql("USE EPiC").execute();
+        const whereClause = emails.map(
+            email => `(Email = ${escape(email)} AND CourseName=${escape(course)})`
+        ).join(" OR ");
+        return session
+            .sql(`DELETE FROM Grades WHERE ${whereClause}`)
             .execute()
     })
 }
@@ -112,7 +126,7 @@ export function setStudentGrades({data, course}) {
             ({grade, email}) =>
                 updateObj
                     .set("Grade", grade)
-                    .where(`Email = ${escape(email)}`)
+                    .where(`Email = ${escape(email)} AND CourseName = ${escape(course)}`)
                     .execute()
         )
         return Promise.all(promises);
@@ -138,7 +152,6 @@ export function registerStudent(data) {
             WHERE Username=${escape(data.token)}
         `).execute().then(() => errors).catch(
             e => {
-                console.log(e);
                 if (e.message.search("Duplicate entry") !== -1)
                     return {...errors, userName: "This username was already taken."};
                 else return {...errors, global: "Unexpected error has occurred."}
@@ -181,7 +194,7 @@ function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
             filter.split(" || ").map(
-                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length+1)}%"`
+                filter => `${columnName} LIKE "%${escape(filter).slice(1, filter.length + 1)}%"`
             ).join(" OR ")
         ).join(" OR ")
     ).join(") AND (");

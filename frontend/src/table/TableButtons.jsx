@@ -13,10 +13,11 @@ export default props => {
     const {openPopup, emails, updateTable, reset, course} = props;
     const [fileData, setFileData] = useState([]);
     useEffect(() => setGrades(fileData, course), [fileData])
+    // console.log(emails);
     return (
         <div className="tableButtons">
             <TableButton icon={remove} title={"remove selected"}
-                         onClick={() => removeFromCourse(emails, updateTable, reset)}/>
+                         onClick={() => removeFromCourse(course,emails, updateTable, reset)}/>
             <TableButton onClick={openPopup} icon={add} title={"invite student"}/>
             <FileInput setFileData={setFileData}
                        button={<TableButton icon={upload} title={"import grades"}/>}
@@ -26,11 +27,11 @@ export default props => {
     )
 }
 
-function removeFromCourse(emails, updateTable, reset) {
+function removeFromCourse(course, emails, updateTable, reset) {
     if (emails.length !== 0)
         axios
-            .delete('api/students', {
-                params: {emails},
+            .delete('/api/t/students', {
+                params: {emails,course},
                 paramsSerializer: params => stringify(params)
             })
             .then(() => {

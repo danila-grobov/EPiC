@@ -1,69 +1,28 @@
-import React, {useState, useEffect} from "react"
-import "../scss/table/table.scss"
+import React from "react"
 import SearchArea from "./SearchArea";
 import TableContent from "./TableContent";
 import TableButtons from "./TableButtons";
 import TableNavigation from "./TableNavigation";
 import InvitePopup from "./InvitePopup";
-import axios from "axios_redirect";
-import {stringify} from "qs";
+import useTable from "../hooks/useTable";
+import "../scss/table/table.scss"
 
 export default ({course}) => {
-    const [popupState, setPopupState] = useState(false);
-    const [total, setTotal] = useState(0);
-    const [rowCount, setRowCount] = useState(5);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [filters, setFilters] = useState([]);
-    const [sortState, setSortState] = useState({index:-1, ascending: true});
-    const [studentData, setStudentData] = useState([]);
-    const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
-    const updateTable = () => {
-        const offset = (currentPage - 1) * rowCount;
-        return getStudentData({count: rowCount, offset, course, filters, sortState},
-            res => {
-                const {students, count} = res.data;
-                setStudentData(students);
-                setTotal(count[0]);
-            });
-    }
-    useEffect(
-        updateTable,
-        [rowCount, currentPage, filters, popupState, course,sortState]
-    );
+    const tableState = useTable(course); // get states for table component
     return (
         <div className="table">
-            {popupState ? <InvitePopup course={course} closePopup={() => setPopupState(false)}/> : ""}
-            <SearchArea filters={filters} setFilters={setFilters}/>
-            <TableContent sortState={sortState} setSortState={setSortState} data={studentData}
-                          selectedCheckboxes={selectedCheckboxes} setSelectedCheckboxes={setSelectedCheckboxes}/>
-            <TableButtons openPopup={() => setPopupState(true)}
-                          emails={getEmails(selectedCheckboxes, studentData)}
-                          updateTable={updateTable}
-                          course={course}
-                          reset={() => setSelectedCheckboxes([])}
+            {tableState.popupIsOpen ? <InvitePopup course={course} closePopup={tableState.closePopup}/> : ""}
+            <SearchArea filters={tableState.filters} setFilters={tableState.setFilters}/>
+            <TableContent sortState={tableState.sortState} setSortState={tableState.setSortState}
+                          data={tableState.studentData} selectedCheckboxes={tableState.selectedCheckboxes}
+                          setSelectedCheckboxes={tableState.setSelectedCheckboxes}/>
+            <TableButtons openPopup={tableState.openPopup} emails={tableState.getSelectedEmails()}
+                          updateTable={tableState.updateTable} course={course}
+                          reset={tableState.resetCheckboxes}
             />
-            <TableNavigation total={total} rowCount={rowCount} setRowCount={setRowCount}
-                             currentPage={currentPage} setCurrentPage={setCurrentPage}/>
+            <TableNavigation total={tableState.total} rowCount={tableState.rowCount}
+                             setRowCount={tableState.setRowCount} currentPage={tableState.currentPage}
+                             setCurrentPage={tableState.setCurrentPage}/>
         </div>
     )
-}
-
-function getStudentData(params, callback) {
-    axios
-        .get("/api/t/students", {
-            params,
-            // axios doesn't support arrays in params, that's a workaround
-            paramsSerializer: params => stringify(params)
-        })
-        .then(callback);
-}
-
-function getEmails(selectedCheckboxes, data) {
-    return selectedCheckboxes
-        .filter(id => id !== 0)
-        .map(id => {
-            const dataRow = data[id];
-            return dataRow ? dataRow[3].value : "";
-        })
-        .filter(email => email !== "")
 }

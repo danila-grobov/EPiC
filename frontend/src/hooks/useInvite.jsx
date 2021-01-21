@@ -3,14 +3,8 @@ import SearchPhrase from "../table/SearchPhrase";
 import axios from "axios_redirect";
 import {toast} from "react-toastify";
 
-export default (course, checkValidity, reset) => {
+export default (course) => {
     const [invites, setInvites] = useState([]);
-    const addInvite = invite => {
-        if(checkValidity(invite)) {
-            setInvites([...invites, invite]);
-            reset();
-        }
-    }
     const deleteInvite = index => setInvites([...invites.slice(0, index), ...invites.slice(index + 1)]);
     const resetInvites = () => setInvites([]);
     const getInviteElements = () => invites.map((invite, index) =>
@@ -20,7 +14,6 @@ export default (course, checkValidity, reset) => {
         setLoadState("loading")
         axios.post('/api/t/students', {invites, course})
             .then(function ({data: errors}) {
-                console.log(errors);
                 setTimeout(() => {
                     if (errors.length === 0) {
                         setLoadState("done");
@@ -36,7 +29,6 @@ export default (course, checkValidity, reset) => {
     return {
         invites,
         setInvites,
-        addInvite,
         sendInvites,
         deleteInvite,
         resetInvites,

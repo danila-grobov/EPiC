@@ -36,8 +36,8 @@ app.get('/api/t/students', ((req, res) => {
         .then(dataObj => res.send(dataObj));
 }))
 app.delete('/api/t/students', (req, res) => {
-    const {emails = []} = req.query;
-    removeStudentFromDB(emails).then(() => res.send());
+    const {emails, course} = req.query;
+    removeStudentFromDB(emails, course).then(() => res.send());
 })
 app.put('/api/t/students/grade', (req, res) => {
     const {data, course} = req.body;

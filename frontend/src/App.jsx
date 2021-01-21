@@ -4,7 +4,6 @@ import Table from "./table/Table";
 import NavBar from "./NavBar/NavBar";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 import {
     BrowserRouter as Router,
     Switch,
@@ -24,39 +23,26 @@ const App = () => {
     return (
         <Router>
             <div className="app">
-
                 <ToastContainer/>
+                <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
+                        userRole="teacher"/>
+                <Switch>
                     <Route path="/profile">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
                     </Route>
-
                     <Route path="/manage">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
                         <Table course={currentOption.value}/>
                     </Route>
-
                     <Route path="/tasks">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
                     </Route>
-
                     <Route path="/home">
-                        <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
-                                userRole="teacher"/>
+                        <Redirect to="/"/>
                     </Route>
-
                     <Route path="/">
-                        <Redirect to="/home"/>
                     </Route>
-
-
+                </Switch>
 
             </div>
         </Router>
     );
 }
-
-
 export default App;

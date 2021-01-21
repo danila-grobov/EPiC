@@ -36,7 +36,7 @@ export default ({data, selectedCheckboxes, setSelectedCheckboxes, sortState, set
                          selected={selectedCheckboxes.includes(index) ? "full" : "none"}/>)
     });
     return (
-        <div className="tableContent">
+        <div className="tableContent" role={"table"}>
             {
                 dataRows.length > 1 ? dataRows :
                     <span className="tableContent__empty">
