@@ -2,25 +2,22 @@ import React from 'react';
 import TaskTitleStudent from "./TaskTitleStudent";
 import TaskDeadlineStudent from "./TaskDeadlineStudent";
 import TaskDescStudent from "./TaskDescStudent";
-import StudentTask from "./StudentTask";
+import TaskStudent from "./TaskStudent";
 
-export default (props)=> {
-    const task = props.task;
-    const tasksArr = props.tasks;
+export default ({task, tasks, index})=> {
 
     return(
         <div key={task.taskID}>
-            <div className="task-body">
-                <TaskTitleStudent taskName={task.taskTitle}/>
+            <div className="taskContent">
+                <TaskTitleStudent task={task}/>
                 <TaskDeadlineStudent taskDeadline={task.deadline}/>
                 <TaskDescStudent taskDesc={task.desc}/>
             </div>
-            {/* subtasks rendered when they exist for current task */}
-            {task.hasSubtask ? tasksArr.map(subtask => {
+            {task.hasSubtask ? tasks.map((subtask, index )=> {
                 if(subtask.parentTaskID === task.taskID){
                     return (
                         <div className="task-row-subtask" key={subtask.taskID}>
-                            <StudentTask task={subtask} tasks={tasksArr}/>
+                            <TaskStudent task={subtask} tasks={tasks} index={index}/>
                         </div>
                     )
                 }

@@ -18,8 +18,7 @@ export default (props) => {
     const dropOptions = [{value: "CSC2031", label: "CSC2031"},{value:"CSC2032", label: "CSC2032"},
         {value:"CSC2033", label:"CSC2033"},{value:"CSC2034", label:"CSC2034"},{value:"CSC2035", label:"CSC2035"}];
     const title = {value : "COURSES", label : "COURSES"};
-    const {pages, pagePaths, name, adminRole} = props;
-    const [currentOption, setCurrentOption] = useState(title);
+    const {pages, pagePaths, name, adminRole, currentOption, setCurrentOption} = props;
     const [isAdmin, setisAdmin] = useState(false);
 
 

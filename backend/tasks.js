@@ -3,12 +3,14 @@ import {getDBSession} from "./database";
 import {escape} from "sqlstring";
 import moment from 'moment';
 
-export function getTasks(course) {
-    console.log(course);
+export function getSTasks(course, email) {
+    console.log(email);
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
         return session.sql(`SELECT * FROM Tasks
-                                WHERE CourseName=${escape(course)}`
+                                LEFT JOIN TasksDone
+                                ON Tasks.TaskID = TasksDone.TaskID
+                                WHERE CourseName=${escape(course)} AND Email=${escape(email)}`
         ).execute();
     }).then(res =>
         res.fetchAll().map(task => ({
@@ -17,9 +19,9 @@ export function getTasks(course) {
                 parentTaskID: task[3],
                 hasSubtask: task[4],
                 desc: task[5],
-                deadline: moment(task[6]).format("DD-MM-YYYY HH:mm:ss")
+                deadline: moment(task[6]).format("DD-MM-YYYY HH:mm:ss"),
+                TaskDoneTaskID: task[8]
         }))
     )
 }
-
-// join tasks done left join, to check if tasks done req.session.email cascade delete
+// cascade delete

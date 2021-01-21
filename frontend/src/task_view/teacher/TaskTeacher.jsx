@@ -2,7 +2,7 @@ import React from 'react'
 import TaskTitleTeacher from "./TaskTitleTeacher";
 import TaskDeadlineTeacher from "./TaskDeadlineTeacher";
 import TaskDescTeacher from "./TaskDescTeacher";
-import TeacherTask from "./TeacherTask";
+import TaskTeacher from "./TaskTeacher";
 
 export default (props)=> {
     const task = props.task;
@@ -10,7 +10,7 @@ export default (props)=> {
 
     return(
         <div key={task.taskID}>
-            <div className="task-body">
+            <div className="taskContent">
                 <TaskTitleTeacher taskTitle={task.taskTitle}/>
                 <TaskDeadlineTeacher taskDeadline={task.deadline}/>
                 <TaskDescTeacher taskDesc={task.desc}/>
@@ -20,7 +20,7 @@ export default (props)=> {
                 if(subtask.parentTaskID === task.taskID){
                     return (
                         <div className="task-row-subtask" key={subtask.taskID}>
-                            <TeacherTask task={subtask} tasks={tasksArr}/>
+                            <TaskTeacher task={subtask} tasks={tasksArr}/>
                         </div>
                     )
                 }

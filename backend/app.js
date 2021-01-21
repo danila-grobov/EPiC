@@ -13,17 +13,18 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
-import {getTasks} from './tasks'
+import {getSTasks} from './tasks'
 
 const app = express()
 const port = 3000
 configExpress(app);
 
 /* gets all tasks for specified course */
-app.get(['/api/tasks'], (req, res) => {
+app.get(['/api/s/tasks'], (req, res) => {
+    console.log("Searching for tasks\nEmail is: "+ req.session.email);
     const {course} = req.query;
-    console.log(course);
-    getTasks(course).then(dataObj => res.send(dataObj));
+    const email = req.session.email;
+    getSTasks(course, email).then(dataObj => res.send(dataObj));
 })
 
 
