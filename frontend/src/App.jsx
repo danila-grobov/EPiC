@@ -1,3 +1,6 @@
+/**
+ * @author Sofia Trevino
+ */
 import React, {useEffect, useState} from "react";
 import "./scss/app.scss";
 import Table from "./table/Table";
@@ -12,7 +15,10 @@ import {
     Redirect
 } from "react-router-dom";
 
-//Controls the teacher-view.
+/**
+ * This component controls all of the teacher-view. The router holds the routes/paths to each of the pages available to
+ * them.
+ */
 
 const App = () => {
     const pagePaths= [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"},

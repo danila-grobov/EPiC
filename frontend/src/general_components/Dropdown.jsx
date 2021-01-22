@@ -1,3 +1,6 @@
+/**
+ * @author Sofia Trevino
+ */
 import React, {useState} from 'react';
 import "../scss/dropdown.scss"
 import "../scss/navBar.scss"
@@ -7,9 +10,11 @@ import dropDownArrow from "../imgs/downArrow.svg";
 //Takes an array of value/label objects called "dropOptions", and displays them in a list, when the dropdownBase is
 //clicked. currentOption displays the last-clicked object, which can be set with setCurrentOption.
 
-function buttonPush() {
-    document.getElementById("dropdownContent").classList.toggle("show");
-}
+/**
+ * This component controls dropdown menus. It Takes an array of value/label objects called "dropOptions", and displays
+ * them in a list, when the dropdownBase is clicked. CurrentOption displays the last-clicked object, which can be set
+ * with setCurrentOption.
+ */
 
 export default (props) => {
     const {dropOptions, className="", currentOption, setCurrentOption} = props;
