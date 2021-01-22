@@ -43,6 +43,8 @@
   grid-column: 1/3;
   form{
     overflow: hidden;
+    width: min-content;
+    display: inline;
     height: 100%;
   }
 }
@@ -68,6 +70,8 @@
   max-width: 100%;
 }
 .textInput__widthDonor {
+  max-width: 100vw;
+  overflow: hidden;
   width: max-content;
   line-height: 40px;
   color: $text;
@@ -76,10 +80,11 @@
   font-family: $font_sanspro;
   position: absolute;
   top: -100vh;
+  left: 0;
 }
 .textInput__helper {
   opacity: 0.5;
-  margin-left: -2px;
+  margin-left: -4px;
   display: inline-grid;
   grid-template-columns: 1fr min-content;
   align-items: center;

@@ -20,7 +20,7 @@ import TableButtons from "../frontend/src/table/TableButtons";
 import FileInput from "../frontend/src/general_components/FileInput";
 import {ToastContainer} from "react-toastify";
 import InvitePopup from "../frontend/src/table/InvitePopup";
-import FancyInput from "../frontend/src/general_components/FancyInput";
+import FancyInput from "../frontend/src/general_components/TextInput/FancyInput";
 
 const server = setupServer(rest.get('/api/t/students',
     (req, res, ctx) => {

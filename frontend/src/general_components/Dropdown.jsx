@@ -6,11 +6,6 @@ import dropDownArrow from "../imgs/downArrow.svg";
 //Controls the drop down, will include all of the functionality for that and what not.
 //Takes an array of value/label objects called "dropOptions", and displays them in a list, when the dropdownBase is
 //clicked. currentOption displays the last-clicked object, which can be set with setCurrentOption.
-
-function buttonPush() {
-    document.getElementById("dropdownContent").classList.toggle("show");
-}
-
 export default (props) => {
     const {dropOptions, className="", currentOption, setCurrentOption} = props;
     const [isShown, setShow] = useState(false)
