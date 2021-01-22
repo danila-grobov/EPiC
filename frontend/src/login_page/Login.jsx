@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import FancyInput from "../general_components/FancyInput";
+import FancyInput from "../general_components/TextInput/FancyInput";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";

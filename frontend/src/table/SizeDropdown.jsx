@@ -6,10 +6,8 @@ export default props => {
     useEffect(() => {
         setValue(rowCount);
     },[rowCount])
-    const handleChange = event => {
+    const handleChange = () => {
         let value = inputValue;
-        // console.log(total);
-        // console.log(value);
         if(isNaN(value)) value = 3
         if(value < 3) value = 3
         if(value > total) value = total
@@ -22,7 +20,7 @@ export default props => {
                 {"Listings per page"}
             </span>
             <form onSubmit={e => {e.preventDefault(); handleChange(e)}} className="sizeDropdown__dropdown">
-                <input {...bind} onBlur={handleChange} maxLength={2}
+                <input {...bind} onBlur={handleChange} maxLength={2} width={"auto"}
                        type={"text"} className="sizeDropdown__dropdown"/>
             </form>
         </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import "./scss/app.scss";
 import Table from "./table/Table";
 import NavBar from "./NavBar/NavBar";
@@ -40,7 +40,6 @@ const App = () => {
                     <Route path="/">
                     </Route>
                 </Switch>
-
             </div>
         </Router>
     );
