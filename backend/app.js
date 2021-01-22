@@ -18,10 +18,38 @@ import {getTeacher} from "./teacher";
 import {getStudentData} from "./student";
 import SessionStore from "./SessionStore";
 import {getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
+import {getSTasks, deleteTaskDone, addTaskDone, getTasksDone} from './tasks'
 
 const app = express()
 const port = 3000
 configExpress(app);
+
+/* gets all tasks for specified course */
+app.get(['/api/s/tasks'], (req, res) => {
+    const {course} = req.query;
+    getSTasks(course).then(dataObj => res.send(dataObj));
+})
+/* gets all tasks done for a student */
+app.get(['/api/s/tasks/tasksDone'], (req, res)=>{
+    console.log("getting tasks done")
+    const {course} = req.query;
+    const email = req.session.email;
+    getTasksDone(course, email).then(dataObj => res.send(dataObj));
+})
+/* remove task done for a student */
+app.delete('/api/s/tasks/tasksDone', (req, res) => {
+    const {taskID} = req.query;
+    const email = req.session.email;
+    deleteTaskDone(taskID, email).then(()=> res.send());
+})
+/* add task done for a student */
+app.post('/api/s/tasks/tasksDone', (req, res) => {
+    const {taskID} = req.body;
+    const email = req.session.email;
+    addTaskDone(taskID, email).then(errors=> res.send(errors));
+})
+
+
 
 app.post('/api/t/students', (req, res) => {
     const {invites, course} = req.body;
@@ -133,8 +161,6 @@ app.get('*', (req, res) => {
     }
 });
 
-
-
 function configExpress(app) {
     app.use(express.static(path.join(__dirname, '../dist')));
     app.engine('.html', require('ejs').__express);
@@ -148,7 +174,6 @@ function configExpress(app) {
         store: new SessionStore()
     }));
     app.use("/api/t/", (req, res, next) => {
-
         if(req.session.role === "teacher") {
             next();
         } else {

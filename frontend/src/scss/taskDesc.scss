@@ -1,0 +1,19 @@
+@import 'colors';
+@import 'fonts';
+
+#task-desc{
+  //background: orange; // to see size for grid layout
+  margin-left: 20px;
+  margin-top: 5px;
+  font-family: $font_sanspro;
+  color: $text_secondary;
+  border: 0;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  padding: 5px;
+}
+
+#task-desc:focus{
+  border: 1px solid $text_secondary;
+  border-radius: 5px;
+}

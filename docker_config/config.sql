@@ -40,19 +40,19 @@ CREATE TABLE Courses
     PRIMARY KEY (CourseName)
 );
 
-CREATE TABLE Tasks
-(
-    TaskID       int          NOT NULL AUTO_INCREMENT,
-    TaskTitle    varchar(200) NOT NULL,
-    CourseName   varchar(10),
-    ParentTaskID int,
-    Description  text,
-    Deadline     datetime,
-    PRIMARY KEY (TaskID),
-    FOREIGN KEY (CourseName)
-        REFERENCES Courses (CourseName),
-    FOREIGN KEY (ParentTaskID)
-        REFERENCES Tasks (TaskID)
+CREATE TABLE Tasks(
+TaskID int NOT NULL AUTO_INCREMENT,
+TaskName varchar(100) NOT NULL,
+CourseName varchar(10) NOT NULL,
+ParentTaskID int,
+hasSubtasks boolean,
+Description text NOT NULL,
+Deadline datetime,
+PRIMARY KEY (TaskID),
+FOREIGN KEY (CourseName)
+        REFERENCES Courses(CourseName),
+FOREIGN KEY (ParentTaskID)
+        REFERENCES Tasks(TaskID)
 );
 
 CREATE TABLE Grades
@@ -68,14 +68,15 @@ CREATE TABLE Grades
     UNIQUE (CourseName, Email)
 );
 
-CREATE TABLE TasksDone
-(
-    Email  varchar(50),
-    TaskID int,
+CREATE TABLE TasksDone (
+    Email varchar(50),
+    TaskID varchar(5),
+    DateDone date,
     FOREIGN KEY (Email)
-        REFERENCES Students (Email),
+        REFERENCES Students(Username),
     FOREIGN KEY (TaskID)
-        REFERENCES Tasks (TaskID)
+        REFERENCES Tasks(TaskID),
+    UNIQUE (Email, TaskID)
 );
 
 CREATE TABLE Teaches(
