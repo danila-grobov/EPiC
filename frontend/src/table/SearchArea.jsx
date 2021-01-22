@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React from "react"
 import "../scss/table/searchArea.scss"
 import searchIcon from "../imgs/search.svg"
 import SearchPhrase from "./SearchPhrase";

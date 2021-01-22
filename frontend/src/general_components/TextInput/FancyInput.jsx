@@ -1,10 +1,12 @@
+/**
+ * @author Danila Grobov, Sofia Trevino
+ */
 import React, {useRef} from "react";
 import "../../scss/textInput.scss";
 import Input from "./Input";
 import Helper from "./Helper";
 import Label from "./Label";
 import InputStateProvider from "./InputStateProvider";
-//Responsible for displaying input textbox
 export default props => {
     const {
         className = "", maxLength, value, errorMessage = "", disabled = false,
