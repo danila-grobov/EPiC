@@ -12,7 +12,7 @@ export default props => {
             .then(({data: deadlines}) => {
                 setDeadlines(deadlines)
             })
-    }, []);
+    }, [name]);
     return (
         <div className="deadlines">
             <span className="deadlines__title">Deadlines</span>

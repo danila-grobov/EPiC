@@ -21,18 +21,17 @@
 .confidenceCard__submitButton.button--secondary {
   box-sizing: border-box;
   justify-self: center;
-
+  display: grid;
+  justify-content: center;
   .button__label {
     color: $text;
   }
-
   border-color: $text;
   border-radius: 5px;
 }
 
 .confidenceCard__submitButton.button--secondary--done {
   background-color: $text;
-
   .button__label {
     color: white;
   }

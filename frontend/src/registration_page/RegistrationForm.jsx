@@ -64,9 +64,10 @@ export default props => {
     }
     return (
         <div className="registrationForm">
-            <FancyInput onSubmit={handleSubmit} label={"First name"} {...inputStates.firstName}/>
-            <FancyInput onSubmit={handleSubmit} label={"Last name"} {...inputStates.lastName}/>
-            <FancyInput onSubmit={handleSubmit} label={"Username"} maxLength={20} {...inputStates.userName}/>
+            <FancyInput onSubmit={handleSubmit} label={"First name"} {...inputStates.firstName} width={"auto"}/>
+            <FancyInput onSubmit={handleSubmit} label={"Last name"} {...inputStates.lastName} width={"auto"}/>
+            <FancyInput onSubmit={handleSubmit} label={"Username"} maxLength={20}
+                        {...inputStates.userName} width={"auto"}/>
             <Dropdown currentOption={inputStates.skill.value}
                       setCurrentOption={inputStates.skill.setValue}
                       dropOptions={[
@@ -96,9 +97,9 @@ export default props => {
                       ]}
                       className={"registrationForm__dropdown"}
             />
-            <FancyInput onSubmit={handleSubmit} label={"Password"} type={"password"}
+            <FancyInput onSubmit={handleSubmit} label={"Password"} type={"password"} width={"auto"}
                         maxLength={30} {...inputStates.password}/>
-            <FancyInput onSubmit={handleSubmit} label={"Confirm password"} type={"password"}
+            <FancyInput onSubmit={handleSubmit} label={"Confirm password"} type={"password"} width={"auto"}
                         maxLength={30} {...inputStates.confirmPassword}/>
             <FancyInput onSubmit={handleSubmit} type={"email"} label={"Email address"}
                         className={"registrationForm__email"} maxLength={40} value={email} disabled={true}/>
