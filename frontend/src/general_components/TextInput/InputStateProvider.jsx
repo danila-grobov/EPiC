@@ -12,8 +12,11 @@ export default props => {
         setValue(value + helper);
     }
     const handleKeyDown = e => {
-        if (value !== "" && e.code === "ArrowRight" && inputRef.current.selectionStart === value.length)
-            autoComplete()
+        if (value !== "" && (e.code === "ArrowRight" || e.code === "Tab")
+            && inputRef.current.selectionStart === value.length) {
+            e.preventDefault();
+            autoComplete();
+        }
     }
     return children.map((child,index) =>
         React.cloneElement(child, {
