@@ -13,7 +13,7 @@ import {
 } from "./students";
 import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
-import {getSTasks} from './tasks'
+import {getSTasks, deleteTaskDone, addTaskDone, getTasksDone} from './tasks'
 
 const app = express()
 const port = 3000
@@ -21,12 +21,28 @@ configExpress(app);
 
 /* gets all tasks for specified course */
 app.get(['/api/s/tasks'], (req, res) => {
-    console.log("Searching for tasks\nEmail is: "+ req.session.email);
+    const {course} = req.query;
+    getSTasks(course).then(dataObj => res.send(dataObj));
+})
+/* gets all tasks done for a student */
+app.get(['/api/s/tasks/tasksDone'], (req, res)=>{
+    console.log("getting tasks done")
     const {course} = req.query;
     const email = req.session.email;
-    getSTasks(course, email).then(dataObj => res.send(dataObj));
+    getTasksDone(course, email).then(dataObj => res.send(dataObj));
 })
-
+/* remove task done for a student */
+app.delete('/api/s/tasks/tasksDone', (req, res) => {
+    const {taskID} = req.query;
+    const email = req.session.email;
+    deleteTaskDone(taskID, email).then(()=> res.send());
+})
+/* add task done for a student */
+app.post('/api/s/tasks/tasksDone', (req, res) => {
+    const {taskID} = req.body;
+    const email = req.session.email;
+    addTaskDone(taskID, email).then(errors=> res.send(errors));
+})
 
 
 

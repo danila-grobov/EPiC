@@ -14,11 +14,11 @@ export default (props) => {
 
     return (
         <div className="tasks-list">
-            {taskData.map((task, index) => {
+            {taskData.map((task) => {
                 if(task.parentTaskID==="" || task.parentTaskID === null){
                     return(
                         <div className="task-row-main" key={task.taskID}>
-                            <TaskTeacher task={task} tasks={taskData} index={index}/>
+                            <TaskTeacher task={task} tasks={taskData}/>
                         </div>
                     )
                 }
