@@ -18,20 +18,19 @@ import {getTeacher} from "./teacher";
 import {getStudentData} from "./student";
 import SessionStore from "./SessionStore";
 import {getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
-import {getSTasks, deleteTaskDone, addTaskDone, getTasksDone} from './tasks'
+import {getTasks, deleteTaskDone, addTaskDone, getTasksDone} from './tasks'
 
 const app = express()
 const port = 3000
 configExpress(app);
 
 /* gets all tasks for specified course */
-app.get(['/api/s/tasks'], (req, res) => {
+app.get(['/api/tasks'], (req, res) => {
     const {course} = req.query;
-    getSTasks(course).then(dataObj => res.send(dataObj));
+    getTasks(course).then(dataObj => res.send(dataObj));
 })
 /* gets all tasks done for a student */
 app.get(['/api/s/tasks/tasksDone'], (req, res)=>{
-    console.log("getting tasks done")
     const {course} = req.query;
     const email = req.session.email;
     getTasksDone(course, email).then(dataObj => res.send(dataObj));

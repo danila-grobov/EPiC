@@ -3,7 +3,7 @@ import {getDBSession} from "./database";
 import {escape} from "sqlstring";
 import moment from 'moment';
 
-export function getSTasks(course) {
+export function getTasks(course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
         return session.sql(`SELECT * FROM Tasks
@@ -22,7 +22,6 @@ export function getSTasks(course) {
     )
 }
 export function getTasksDone(course, email){
-    console.log(course, email);
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
         return session.sql(`SELECT Tasks.TaskID FROM Tasks

@@ -1,15 +1,17 @@
 @import 'colors';
 @import 'fonts';
 
+.tasks-list {
+  width: 100%;
+}
+
 .task-row-main{
   display: grid;
-  //background: $light_grey; //will need to be background
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
 .task-row-subtask{
-  //background: $background;
   margin-bottom: 30px;
   margin-left: 50px;
   margin-top: 30px;

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import TaskTeacher from "./TaskTeacher";
+import '../../scss/tasks.scss';
 import axios from "axios_redirect";
 
 export default (props) => {
@@ -7,7 +8,7 @@ export default (props) => {
 
     // get tasks for selected course from backend
     useEffect(() => {
-        axios.get('/api/t/tasks', {params:{course:props.course}}).then(({data}) => {
+        axios.get('/api/tasks', {params:{course:props.course}}).then(({data}) => {
             setTaskData(data);
         })
     }, [props.course]);

@@ -1,13 +1,13 @@
 CREATE DATABASE IF NOT EXISTS EPiC;
 USE EPiC;
 CREATE TABLE Teachers (
-  Username varchar(50) NOT NULL UNIQUE,
-  Pwd varchar(200) NOT NULL,
-  Firstname varchar(50) NOT NULL,
-  Lastname varchar(50) NOT NULL,
-  Email varchar(50) NOT NULL,
-  Admin boolean NOT NULL,
-  PRIMARY KEY(Email)
+                          Username varchar(50) NOT NULL UNIQUE,
+                          Pwd varchar(200) NOT NULL,
+                          Firstname varchar(50) NOT NULL,
+                          Lastname varchar(50) NOT NULL,
+                          Email varchar(50) NOT NULL,
+                          Admin boolean NOT NULL,
+                          PRIMARY KEY(Email)
 );
 
 CREATE TABLE SessionStore
@@ -42,18 +42,18 @@ CREATE TABLE Courses
 );
 
 CREATE TABLE Tasks(
-  TaskID int NOT NULL AUTO_INCREMENT,
-  TaskName varchar(100) NOT NULL,
-  CourseName varchar(10) NOT NULL,
-  ParentTaskID int,
-  hasSubtasks boolean,
-  Description text,
-  Deadline datetime,
-  PRIMARY KEY (TaskID),
-  FOREIGN KEY (CourseName)
-      REFERENCES Courses(CourseName),
-  FOREIGN KEY (ParentTaskID)
-      REFERENCES Tasks(TaskID)
+                      TaskID int NOT NULL AUTO_INCREMENT,
+                      TaskName varchar(100) NOT NULL,
+                      CourseName varchar(10) NOT NULL,
+                      ParentTaskID int,
+                      hasSubtasks boolean,
+                      Description text,
+                      Deadline datetime,
+                      PRIMARY KEY (TaskID),
+                      FOREIGN KEY (CourseName)
+                          REFERENCES Courses(CourseName),
+                      FOREIGN KEY (ParentTaskID)
+                          REFERENCES Tasks(TaskID)
 );
 
 CREATE TABLE Grades
@@ -70,24 +70,24 @@ CREATE TABLE Grades
 );
 
 CREATE TABLE TasksDone (
-       Email varchar(50),
-       TaskID int,
-       DateDone date,
-       FOREIGN KEY (Email)
-           REFERENCES Students(Email),
-       FOREIGN KEY (TaskID)
-           REFERENCES Tasks(TaskID),
-       UNIQUE (Email, TaskID)
+                           Email varchar(50),
+                           TaskID int,
+                           DateDone date,
+                           FOREIGN KEY (Email)
+                               REFERENCES Students(Email),
+                           FOREIGN KEY (TaskID)
+                               REFERENCES Tasks(TaskID),
+                           UNIQUE (Email, TaskID)
 );
 
 CREATE TABLE Teaches(
-    CourseName varchar(10) NOT NULL,
-    Email varchar(50) ,
-    FOREIGN KEY (CourseName)
-        REFERENCES Courses(CourseName),
-    FOREIGN KEY (Email)
-        REFERENCES Teachers(Email),
-    UNIQUE (CourseName, Email)
+                        CourseName varchar(10) NOT NULL,
+                        Email varchar(50) ,
+                        FOREIGN KEY (CourseName)
+                            REFERENCES Courses(CourseName),
+                        FOREIGN KEY (Email)
+                            REFERENCES Teachers(Email),
+                        UNIQUE (CourseName, Email)
 );
 
 CREATE TABLE Confidence
@@ -150,60 +150,60 @@ VALUES ('CSC2035', 'test1@ncl.ac.uk', null, null);
 
 
 # Create sample task data
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task1', 'CSC2031', null, null, '2021-01-22 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task2', 'CSC2031', 1, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task3', 'CSC2031', 1, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task4', 'CSC2031', 3, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task5', 'CSC2031', 1, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task6', 'CSC2031', null, null, '2021-03-03 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task7', 'CSC2032', null, null, '2021-09-30 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task8', 'CSC2032', null, null, '2021-09-17 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task9', 'CSC2032', null, null, '2021-09-30 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task10', 'CSC2032', 9, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task11', 'CSC2032', 9, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task12', 'CSC2033', null, null, '2021-09-09 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task13', 'CSC2033', null, null, '2021-09-16 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task14', 'CSC2033', null, null, '2021-09-23 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task15', 'CSC2033', 14, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task16', 'CSC2033', null, null, '2021-09-30 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task17', 'CSC2034', null, null, '2021-01-20 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task18', 'CSC2034', null, null, '2021-01-20 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task19', 'CSC2035', null, null, '2021-02-01 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task20', 'CSC2035', 19, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task21', 'CSC2035', 19, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task22', 'CSC2035', null, null, '2021-02-10 15:00:00');
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task23', 'CSC2035', 22, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task24', 'CSC2035', 22, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task25', 'CSC2035', 22, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task26', 'CSC2035', 22, null, null);
-INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, Description, Deadline)
-VALUES ('Task27', 'CSC2035', 22, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task1', 'CSC2031', null, true, null, '2021-01-22 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task2', 'CSC2031', 1, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task3', 'CSC2031', 1, true, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task4', 'CSC2031', 3, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task5', 'CSC2031', 1, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task6', 'CSC2031', null, false, null, '2021-03-03 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task7', 'CSC2032', null, false, null, '2021-09-30 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task8', 'CSC2032', null, false, null, '2021-09-17 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task9', 'CSC2032', null, true, null, '2021-09-30 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task10', 'CSC2032', 9, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task11', 'CSC2032', 9, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task12', 'CSC2033', null, false, null, '2021-09-09 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task13', 'CSC2033', null, false, null, '2021-09-16 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task14', 'CSC2033', null, true, null, '2021-09-23 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task15', 'CSC2033', 14, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task16', 'CSC2033', null, false, null, '2021-09-30 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task17', 'CSC2034', null, false, null, '2021-01-20 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task18', 'CSC2034', null, false, null, '2021-01-20 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task19', 'CSC2035', null, true, null, '2021-02-01 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task20', 'CSC2035', 19, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task21', 'CSC2035', 19, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task22', 'CSC2035', null, true, null, '2021-02-10 15:00:00');
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task23', 'CSC2035', 22, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task24', 'CSC2035', 22, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task25', 'CSC2035', 22, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task26', 'CSC2035', 22, false, null, null);
+INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
+VALUES ('Task27', 'CSC2035', 22, false, null, null);
 
 #Sample data for tasksDone
 INSERT INTO EPiC.TasksDone (Email, TaskID)

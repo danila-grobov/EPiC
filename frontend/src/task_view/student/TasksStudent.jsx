@@ -10,13 +10,12 @@ export default (props) => {
 
     // get tasks for selected course from backend
     useEffect(() => {
-        axios.get('/api/s/tasks', {params:{course:props.course}}).then(({data}) => {
+        axios.get('/api/tasks', {params:{course:props.course}}).then(({data}) => {
             return data;
         }).then((tasksData)=> {
             axios.get('/api/s/tasks/tasksDone', {params:{course:props.course}}).then(({data}) => {
                 setTaskData(tasksData);
                 setTasksDone(data);
-                console.log(data);
         })})
     }, [props.course]);
 
