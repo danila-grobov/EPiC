@@ -9,7 +9,6 @@ export default ({course}) => {
         axios
             .get('/api/s/deadlines', {params: {course}})
             .then(({data: deadlines}) => {
-                console.log(deadlines);
                 setDeadlines(deadlines)
             })
     }, [course]);

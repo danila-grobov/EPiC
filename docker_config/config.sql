@@ -1,13 +1,14 @@
 CREATE DATABASE IF NOT EXISTS EPiC;
 USE EPiC;
-CREATE TABLE Teachers (
-                          Username varchar(50) NOT NULL UNIQUE,
-                          Pwd varchar(200) NOT NULL,
-                          Firstname varchar(50) NOT NULL,
-                          Lastname varchar(50) NOT NULL,
-                          Email varchar(50) NOT NULL,
-                          Admin boolean NOT NULL,
-                          PRIMARY KEY(Email)
+CREATE TABLE Teachers
+(
+    Username  varchar(50)  NOT NULL UNIQUE,
+    Pwd       varchar(200) NOT NULL,
+    Firstname varchar(50)  NOT NULL,
+    Lastname  varchar(50)  NOT NULL,
+    Email     varchar(50)  NOT NULL,
+    Admin     boolean      NOT NULL,
+    PRIMARY KEY (Email)
 );
 
 CREATE TABLE SessionStore
@@ -41,19 +42,20 @@ CREATE TABLE Courses
     PRIMARY KEY (CourseName)
 );
 
-CREATE TABLE Tasks(
-                      TaskID int NOT NULL AUTO_INCREMENT,
-                      TaskName varchar(100) NOT NULL,
-                      CourseName varchar(10) NOT NULL,
-                      ParentTaskID int,
-                      hasSubtasks boolean,
-                      Description text,
-                      Deadline datetime,
-                      PRIMARY KEY (TaskID),
-                      FOREIGN KEY (CourseName)
-                          REFERENCES Courses(CourseName),
-                      FOREIGN KEY (ParentTaskID)
-                          REFERENCES Tasks(TaskID)
+CREATE TABLE Tasks
+(
+    TaskID       int          NOT NULL AUTO_INCREMENT,
+    TaskName     varchar(100) NOT NULL,
+    CourseName   varchar(10)  NOT NULL,
+    ParentTaskID int,
+    hasSubtasks  boolean,
+    Description  text,
+    Deadline     datetime,
+    PRIMARY KEY (TaskID),
+    FOREIGN KEY (CourseName)
+        REFERENCES Courses (CourseName),
+    FOREIGN KEY (ParentTaskID)
+        REFERENCES Tasks (TaskID)
 );
 
 CREATE TABLE Grades
@@ -69,25 +71,27 @@ CREATE TABLE Grades
     UNIQUE (CourseName, Email)
 );
 
-CREATE TABLE TasksDone (
-                           Email varchar(50),
-                           TaskID int,
-                           DateDone date,
-                           FOREIGN KEY (Email)
-                               REFERENCES Students(Email),
-                           FOREIGN KEY (TaskID)
-                               REFERENCES Tasks(TaskID),
-                           UNIQUE (Email, TaskID)
+CREATE TABLE TasksDone
+(
+    Email    varchar(50),
+    TaskID   int,
+    DateDone date,
+    FOREIGN KEY (Email)
+        REFERENCES Students (Email),
+    FOREIGN KEY (TaskID)
+        REFERENCES Tasks (TaskID),
+    UNIQUE (Email, TaskID)
 );
 
-CREATE TABLE Teaches(
-                        CourseName varchar(10) NOT NULL,
-                        Email varchar(50) ,
-                        FOREIGN KEY (CourseName)
-                            REFERENCES Courses(CourseName),
-                        FOREIGN KEY (Email)
-                            REFERENCES Teachers(Email),
-                        UNIQUE (CourseName, Email)
+CREATE TABLE Teaches
+(
+    CourseName varchar(10) NOT NULL,
+    Email      varchar(50),
+    FOREIGN KEY (CourseName)
+        REFERENCES Courses (CourseName),
+    FOREIGN KEY (Email)
+        REFERENCES Teachers (Email),
+    UNIQUE (CourseName, Email)
 );
 
 CREATE TABLE Confidence

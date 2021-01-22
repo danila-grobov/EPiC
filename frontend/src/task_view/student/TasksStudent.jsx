@@ -18,7 +18,6 @@ export default (props) => {
                 setTasksDone(data);
         })})
     }, [props.course]);
-
     return (
         <div className="tasks-list">
             {taskData.map((task) => {

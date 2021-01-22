@@ -12,28 +12,28 @@ export default props => {
         setValue(value + helper);
     }
     const handleKeyDown = e => {
-        if (value !== "" && (e.code === "ArrowRight" || e.code === "Tab")
+        if (helper !== "" && value !== "" && (e.code === "ArrowRight" || e.code === "Tab")
             && inputRef.current.selectionStart === value.length) {
             e.preventDefault();
             autoComplete();
         }
     }
-    return children.map((child,index) =>
+    return children.map((child, index) =>
         React.cloneElement(child, {
-            ...otherProps,
-            key: `providerClone-${index}`,
-            type,
-            value,
-            setValue,
-            inputRef,
-            helper,
-            emptyHelper,
-            focused,
-            setFocused,
-            onChange,
-            onKeyDown: handleKeyDown,
-            autoComplete,
-            onFocus
-        }
-    ));
+                ...otherProps,
+                key: `providerClone-${index}`,
+                type,
+                value,
+                setValue,
+                inputRef,
+                helper,
+                emptyHelper,
+                focused,
+                setFocused,
+                onChange,
+                onKeyDown: handleKeyDown,
+                autoComplete,
+                onFocus
+            }
+        ));
 }
