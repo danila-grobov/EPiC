@@ -17,7 +17,7 @@ import {testDBConnection} from "./database";
 import {getTeacher} from "./teacher";
 import {getStudentData} from "./student";
 import SessionStore from "./SessionStore";
-import {getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
+import {getConfidence, getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
 import {getTasks, deleteTaskDone, addTaskDone, getTasksDone} from './tasks'
 
 const app = express()
@@ -93,6 +93,12 @@ app.post('/api/s/confidence', (req, res) => {
     setConfidence(course, email, confidence).then(() => res.send());
 })
 
+app.get('/api/s/confidence', ((req, res) => {
+    const {email} = req.session;
+    const {course} = req.query;
+    getConfidence(email, course).then(confidence => res.send({confidence}));
+}))
+
 app.put('/api/register', (req, res) => {
     const data = req.body;
     registerStudent(data).then(errors => {
@@ -142,7 +148,6 @@ app.get('/logout', (req, res) => {
 app.get('/api/t/teachers',(req, res) => {
     const{email} = req.session;
     getTeacherData(email).then(data => res.send(data));
-
 })
 
 app.get('/api/s/student',(req,res) =>{

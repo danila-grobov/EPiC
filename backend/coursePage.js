@@ -86,3 +86,15 @@ export function setConfidence(course, email, confidence) {
         `).execute();
     })
 }
+
+export function getConfidence(email, course) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        const date = moment().format("YYYY-MM-DD");
+        return session.sql(`
+            SELECT ConfidenceLevel
+            FROM Confidence
+            WHERE Date=${escape(date)} AND Email=${escape(email)} AND CourseName=${escape(course)}
+        `).execute();
+    }).then(res => res.fetchOne()[0])
+}
