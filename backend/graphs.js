@@ -1,6 +1,5 @@
 import {getDBSession} from "./database";
 import React from "react";
-import axios from "axios";
 
 const domainName = "http://localhost/";
 
@@ -48,8 +47,8 @@ export function getTasks(course) {
 
 export function getLineData(course, date) {
     return getDBSession(session => {
-        session.sql("USE EPiC").execute();
 
+        session.sql("USE EPiC").execute();
         const query = "SELECT ConfidenceLevel " +
             " FROM Confidence " +
             " WHERE Date > '" + date + "' AND CourseName = '"+course+"'";
@@ -68,26 +67,24 @@ export function getLineData(course, date) {
     })
 }
 
-// export function getPieData(course, filter, date) {
-//     return getDBSession(session => {
-//         session.sql("USE EPiC").execute();
-//
-//         const query = "SELECT Confidence.ConfidenceLevel " +
-//             " FROM Confidence " +
-//             " INNER JOIN Students " +
-//             " ON Confidence.Email = Students.Email " +
-//             " WHERE CourseName = " + course +
-//             " AND Date < " + date +
-//             " AND " + filter;
-//
-//         return (session.sql(query).execute());
-//
-//     }).then(res => {
-//         // const[thisData] = res.fetchOne();
-//         // return {thisData};
-//     })
-// }
-//
+export function getPieData(course, filter, date) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+
+        const query = "SELECT Confidence.ConfidenceLevel " +
+        " FROM Confidence " +
+        " INNER JOIN Students " +
+        " ON Confidence.Email = Students.Email " +
+        " WHERE Confidence.CourseName = '" + course + "'" +
+        " AND Date = '" + date + "' " + filter;
+
+        return (session.sql(query).execute());
+
+    }).then(res => {
+        return res.fetchAll().map(con => con[0]);
+    })
+}
+
 // // export function getScatterData(course, filter, date) {
 // //     return getDBSession(session => {
 // //         session.sql("USE EPiC").execute();

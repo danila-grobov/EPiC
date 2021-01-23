@@ -97,11 +97,11 @@ app.get('/api/t/tasks', ((req, res) => {
     getTaskStatementData(course, taskID, date).then(data => res.send(data));
 }));
 
-// app.get('/api/t/pie', ((req, res) => {
-//     const {course, filter, date} = req.query;
-//     getPieData(course, filter, date).then(data => res.send(data));
-// }));
-//
+app.get('/api/t/pie', ((req, res) => {
+    const {course, filter, date} = req.query;
+    getPieData(course, filter, date).then(data => res.send(data));
+}));
+
 // // app.get('/api/t/scatter', ((req, res) => {
 // //     const {course, filter} = req.query;
 // //     getScatterData(course, filter).then(data => res.send(data));

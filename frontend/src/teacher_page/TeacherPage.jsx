@@ -12,10 +12,10 @@ import moment from "moment";
 
 export default () => {
     const pages = ["CSC2031", "CSC2032", "CSC2033", "CSC2034"];
-    const titleFilter = {label: "Filter", value: "Filter"};
+    const titleFilter = {label: "Filter", value: ""};
     const [currentOptionFilter, setCurrentOptionFilter] = useState(titleFilter);
 
-    const [currentOptionDateFilter, setCurrentOptionDateFilter] = useState({label: "Filter", value: moment().format("YYYY-MM-DD")});
+    const [currentOptionDateFilter, setCurrentOptionDateFilter] = useState({label: "Date", value: moment().format("YYYY-MM-DD")});
 
     const [currentOptionTaskFilter, setCurrentOptionTaskFilter] = useState({label: "Filter", value: 0});
 
@@ -48,8 +48,6 @@ export default () => {
         {label: "Last 8 Weeks", value: moment().subtract(56, 'd').format('YYYY-MM-DD')}]
 
 
-
-
     return (
         <div className="app">
             {/*<NavBar pages={pages} name={name} pagePaths={pagePaths} adminRole={false}/>*/}
@@ -65,26 +63,31 @@ export default () => {
                     <Dropdown currentOption={currentOptionFilter}
                           setCurrentOption={setCurrentOptionFilter}
                           dropOptions={[
-                              {label: "All Students", value: "All Students"},
-                              {label: "UK Students", value: "UK Students"},
-                              {label: "EU Students", value: "EU Students"},
-                              {label: "International Students", value: "International Students"},
-                              {label: "Men", value: "Men"},
-                              {label: "Women", value: "Women"},
-                              {label: "Non-Binary", value: "Non-Binary"},
-                              {label: "Advanced Ability", value: "Advanced Ability"},
-                              {label: "Intermediate Ability", value: "Intermediate Ability"},
-                              {label: "Beginner Ability", value: "Beginner Ability"}
+                              {label: "All Students", value: " "},
+                              {label: "UK Students", value: "AND Students.StudentType = 'UK Students'"},
+                              {label: "EU Students", value: "AND Students.StudentType = 'EU Students'"},
+                              {label: "International Students", value: "AND Students.StudentType = 'International Students'"},
+                              {label: "Men", value: "AND Students.Gender = 'Male'"},
+                              {label: "Women", value: "AND Students.Gender = 'Female'"},
+                              {label: "Non-Binary", value: "AND Students.Gender = 'Non-Binary'"},
+                              {label: "Advanced Ability", value: "AND Students.Skill = 'Advanced'"},
+                              {label: "Intermediate Ability", value: "AND Students.Skill = 'Intermediate'"},
+                              {label: "Beginner Ability", value: "AND Students.Skill = 'Beginner'"}
                           ]}
                     />
                     <Dropdown currentOption={currentOptionDateFilter}
                           setCurrentOption={setCurrentOptionDateFilter}
                           dropOptions={[
-                              {label: "Date 1", value: "Date 1"},
-                              {label: "Date 2", value: "Date 2"}
+                              {label: moment().format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
+                              {label: moment().subtract(1, 'd').format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
+                              {label: moment().subtract(2, 'd').format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
+                              {label: moment().subtract(3, 'd').format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
+                              {label: moment().subtract(4, 'd').format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
+                              {label: moment().subtract(5, 'd').format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
+                              {label: moment().subtract(6, 'd').format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
                           ]}
                     />
-                    <PieGraph />
+                    <PieGraph course={"CSC2031"} filter={currentOptionFilter.value} date={currentOptionDateFilter.value}/>
                 </div>
 
                 <div className="flex-item-half-stat">
@@ -116,14 +119,14 @@ export default () => {
                 {/*    <ScatterGraph />*/}
                 {/*</div>*/}
 
-                {/*<div className="flex-item-full">*/}
-                {/*    <h3>Average Confidence Over Time</h3>*/}
-                {/*    <Dropdown currentOption={currentOptionDateFilter}*/}
-                {/*              setCurrentOption={setCurrentOptionDateFilter}*/}
-                {/*              dropOptions={dateOptions}*/}
-                {/*    />*/}
-                {/*    <LineGraph course={"CSC2031"} date={"2021-01-14"}/>*/}
-                {/*</div>*/}
+                <div className="flex-item-full">
+                    <h3>Average Confidence Over Time</h3>
+                    <Dropdown currentOption={currentOptionDateFilter}
+                              setCurrentOption={setCurrentOptionDateFilter}
+                              dropOptions={dateOptions}
+                    />
+                    <LineGraph course={"CSC2031"} date={"2021-01-14"}/>
+                </div>
 
             </div>
             <ToastContainer />

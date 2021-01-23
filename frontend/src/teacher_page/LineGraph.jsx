@@ -14,36 +14,38 @@ export default ({course, date}) => {
                 course: "CSC2031",
                 date: "2021-01-01"
             }
-        }).then(res => {
-            setConfidence(res.data.confidenceVals);
-            setDates(res.data.CDates);
+        }).then(({data}) => {
+            console.log("JUST RETRIEVED CON: " + data.confidenceVals);
+            console.log("JUST RETRIEVED DAT: " + data.CDates);
+            setConfidence(data.confidenceVals);
+            setDates(data.CDates);
         })
 
-        console.log("Dates from DB: " + dates);
-        console.log("Confidence from DB: " + confidence);
+        console.log("TRY TO USE CON: " + confidence);
+        console.log("TRY TO USE CON: " + dates);
 
         const valuesDict = {};
-        const conCount = [0,0,0,0,0];
+        const conCount = [0, 0, 0, 0, 0];
 
-        for (let i = 0; i < dates.length; i++){
-            if (!(dates[i] in valuesDict)){
+        for (let i = 0; i < dates.length; i++) {
+            if (!(dates[i] in valuesDict)) {
                 valuesDict[dates[i]] = confidence[i];
-                conCount[confidence[i]] ++;
+                conCount[confidence[i]]++;
             } else {
                 valuesDict[dates[i]] = valuesDict[dates[i]] + (confidence[i]);
-                conCount[confidence[i]] ++;
+                conCount[confidence[i]]++;
             }
         }
 
         const valuesArr = [];
         const labelsArr = [];
-        for (let i = 0; i < valuesDict.length; i++){
+        for (let i = 0; i < valuesDict.length; i++) {
             valuesArr.push(valuesDict[i] / conCount[i]);
             labelsArr.push(valuesDict.key);
         }
 
-        console.log(valuesArr);
-        console.log(labelsArr);
+        console.log("VALUES ARR: " + valuesArr);
+        console.log("LABELS ARR: " + labelsArr);
 
         // Initialise chart object, passing in the canvas element.
         const graph = new Chart(document.getElementById('lineGraph'), {
@@ -74,7 +76,8 @@ export default ({course, date}) => {
                 }
             }
         });
-    })
+
+    }, [])
 
     return (
         // Define canvas element to contain the graph.
