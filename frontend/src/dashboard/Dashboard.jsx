@@ -20,7 +20,7 @@ import CoursePage from "../course_page/CoursePage";
 
 export default () => {
     const [courses, setCourses] = useState([]);
-    const pagePaths = [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"}];
+    const pagePaths = [{link:<Link to="/" className="middle">HOME</Link>, path: "/"}];
 
     //retrieves courses that the current student is enrolled in.
     useEffect(() => {
