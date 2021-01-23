@@ -21,7 +21,7 @@ import {
  */
 
 const App = () => {
-    const pagePaths= [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"},
+    const pagePaths= [{link:<Link to="/" className="middle">HOME</Link>, path: "/"},
         {link:<Link to="/tasks" className="middle">TASKS</Link>, path: "/tasks"},
         {link:<Link to="/manage" className="middle">MANAGE</Link>, path: "/manage"}];
     const [currentOption, setCurrentOption] = useState({value: null, label: "COURSES"});
