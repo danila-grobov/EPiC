@@ -106,11 +106,11 @@ app.get('/api/t/tasks', ((req, res) => {
 // //     const {course, filter} = req.query;
 // //     getScatterData(course, filter).then(data => res.send(data));
 // // }));
-//
-// app.get('/api/t/line', ((req, res) => {
-//     const {course, date} = req.query;
-//     getLineData(course, date).then(data => res.send(data));
-// }));
+
+app.get('/api/t/line', ((req, res) => {
+    const {course, date} = req.query;
+    getLineData(course, date).then(data => res.send(data));
+}));
 
 app.get('/api/t/droptasks', ((req, res) => {
     const {course} = req.query;

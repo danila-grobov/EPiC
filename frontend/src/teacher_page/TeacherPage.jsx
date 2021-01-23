@@ -15,11 +15,9 @@ export default () => {
     const titleFilter = {label: "Filter", value: "Filter"};
     const [currentOptionFilter, setCurrentOptionFilter] = useState(titleFilter);
 
-    const titleDateFilter = {label: "Date", value: "Date"};
-    const [currentOptionDateFilter, setCurrentOptionDateFilter] = useState(titleDateFilter);
+    const [currentOptionDateFilter, setCurrentOptionDateFilter] = useState({label: "Filter", value: moment().format("YYYY-MM-DD")});
 
-    const titleTaskFilter = {label: "Task", value: "Task"};
-    const [currentOptionTaskFilter, setCurrentOptionTaskFilter] = useState(titleTaskFilter);
+    const [currentOptionTaskFilter, setCurrentOptionTaskFilter] = useState({label: "Filter", value: 0});
 
     const titleLimitedFilter = {label: "Filter", value: "Filter"};
     const [currentOptionLimitedFilter, setCurrentOptionLimitedFilter] = useState(titleLimitedFilter);
@@ -30,7 +28,7 @@ export default () => {
     useEffect(() => {
         axios.get('/api/t/droptasks', {
             params: {
-                course: "CSC2031"
+                course: "CSC2031" //Get from NavBar
             }
         }).then(res => {
             setTasks(res.data.tasks);
@@ -49,7 +47,6 @@ export default () => {
         {label: "Last 4 Weeks", value: moment().subtract(28, 'd').format('YYYY-MM-DD')},
         {label: "Last 8 Weeks", value: moment().subtract(56, 'd').format('YYYY-MM-DD')}]
 
-    console.log(taskDropOptions);
 
 
 
@@ -105,30 +102,29 @@ export default () => {
                                    task={currentOptionTaskFilter.value}/>
                 </div>
 
-                <div className="flex-item-full">
-                    <h3>Average Confidence VS. Average Grade</h3>
-                    <Dropdown currentOption={currentOptionLimitedFilter}
-                          setCurrentOption={setCurrentOptionLimitedFilter}
-                          dropOptions={[
-                              {label: "Gender", value: "Gender"},
-                              {label: "Nationality", value: "Nationality"},
-                              {label: "Ability", value: "Ability"},
-                              {label: "Confidence", value: "Confidence"}
-                          ]}
-                    />
-                    <ScatterGraph />
-                </div>
-                <div className="flex-item-full">
-                    <h3>Average Confidence Over Time</h3>
-                    <Dropdown currentOption={currentOptionDateFilter}
-                              setCurrentOption={setCurrentOptionDateFilter}
-                              dropOptions={[
-                                  {label: "Date 1", value: "Date 1"},
-                                  {label: "Date 2", value: "Date 2"}
-                              ]}
-                    />
-                    <LineGraph />
-                </div>
+                {/*<div className="flex-item-full">*/}
+                {/*    <h3>Average Confidence VS. Average Grade</h3>*/}
+                {/*    <Dropdown currentOption={currentOptionLimitedFilter}*/}
+                {/*          setCurrentOption={setCurrentOptionLimitedFilter}*/}
+                {/*          dropOptions={[*/}
+                {/*              {label: "Gender", value: "Gender"},*/}
+                {/*              {label: "Nationality", value: "Nationality"},*/}
+                {/*              {label: "Ability", value: "Ability"},*/}
+                {/*              {label: "Confidence", value: "Confidence"}*/}
+                {/*          ]}*/}
+                {/*    />*/}
+                {/*    <ScatterGraph />*/}
+                {/*</div>*/}
+
+                {/*<div className="flex-item-full">*/}
+                {/*    <h3>Average Confidence Over Time</h3>*/}
+                {/*    <Dropdown currentOption={currentOptionDateFilter}*/}
+                {/*              setCurrentOption={setCurrentOptionDateFilter}*/}
+                {/*              dropOptions={dateOptions}*/}
+                {/*    />*/}
+                {/*    <LineGraph course={"CSC2031"} date={"2021-01-14"}/>*/}
+                {/*</div>*/}
+
             </div>
             <ToastContainer />
         </div>

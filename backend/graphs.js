@@ -24,7 +24,6 @@ export function getTaskStatementData(course, taskID, date) {
 
 export function getTasks(course) {
     return getDBSession(session => {
-        console.log("in get tasks");
 
         session.sql("USE EPiC").execute();
 
@@ -43,8 +42,29 @@ export function getTasks(course) {
     }).then(res => {
         const tasks = res[0].fetchAll().map(task => task[0]);
         const taskIDs = res[1].fetchAll().map(ID => ID[0]);
-        console.log("res get tasks" + tasks);
         return {tasks, taskIDs};
+    })
+}
+
+export function getLineData(course, date) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+
+        const query = "SELECT ConfidenceLevel " +
+            " FROM Confidence " +
+            " WHERE Date > '" + date + "' AND CourseName = '"+course+"'";
+
+        const query2 = "SELECT Date " +
+            " FROM Confidence " +
+            " WHERE Date > '" + date + "' AND CourseName = '"+course+"'";
+
+        return Promise.all(
+            [session.sql(query).execute(), session.sql(query2).execute()]);
+
+    }).then(res => {
+        const confidenceVals = res[0].fetchAll().map(con => con[0]);
+        const CDates = res[1].fetchAll().map(dat => dat[0]);
+        return {confidenceVals, CDates};
     })
 }
 
@@ -81,20 +101,6 @@ export function getTasks(course) {
 // //         // return {thisData};
 // //     })
 // // }
-//
-// export function getLineData(course, date) {
-//     return getDBSession(session => {
-//         session.sql("USE EPiC").execute();
-//
-//         const query = "SELECT ConfidenceLevel, Date" +
-//             " FROM Confidence " +
-//             " WHERE Date < " + date + " AND CourseName = '" + course + "'";
-//
-//         return (session.sql(query).execute());
-//
-//     }).then(res => {
-//         // const[thisData] = res.fetchOne();
-//         // return {thisData};
-//     })
-// }
+
+
 
