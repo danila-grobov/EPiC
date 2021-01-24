@@ -12,6 +12,7 @@ import {
     Redirect
 } from "react-router-dom";
 import TasksTeacher from "./task_view/teacher/TasksTeacher";
+import TeacherPage from "./teacher_page/TeacherPage";
 
 //Controls the teacher-view.
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
                         <Redirect to="/"/>
                     </Route>
                     <Route path="/">
+                        <TeacherPage course={currentOption.value}/>
                     </Route>
                 </Switch>
             </div>

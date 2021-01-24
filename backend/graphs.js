@@ -28,12 +28,12 @@ export function getTaskStatementData(course, taskID, date) {
 }
 
 // Query function for getting tasks.
-export function getTasks(course) {
+export function getGraphTasks(course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
 
         // Get task title.
-        const query = "SELECT TaskTitle " +
+        const query = "SELECT TaskName " +
             " FROM Tasks " +
             " WHERE CourseName = '"+course+"'";
 
@@ -59,6 +59,7 @@ export function getLineData(course, date) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
 
+        console.log(date);
         // Get confidence level.
         const query = "SELECT ConfidenceLevel " +
             " FROM Confidence " +

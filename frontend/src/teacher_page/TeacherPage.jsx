@@ -13,8 +13,7 @@ import {ToastContainer} from "react-toastify";
 import TasksComplete from "./TasksComplete";
 import moment from "moment";
 
-export default () => {
-    const pages = ["CSC2031", "CSC2032", "CSC2033", "CSC2034"];
+export default ({course}) => {
 
     // Set initial dropdown values.
     const [currentOptionFilter, setCurrentOptionFilter] = useState({label: "Filter", value: ""});
@@ -100,7 +99,7 @@ export default () => {
                           ]}
                     />
                     {/*Pie chart, passing values from dropdowns and course from nav bar.*/}
-                    <PieGraph course={"CSC2031"} filter={currentOptionFilter.value} date={pieDateFilter.value}/>
+                    <PieGraph course={course} filter={currentOptionFilter.value} date={pieDateFilter.value}/>
                 </div>
 
                 <div className="flex-item-half-stat">
@@ -119,7 +118,7 @@ export default () => {
                     />
 
                     {/*Tasks complete, passing values from dropdowns and course from nav bar.*/}
-                    <TasksComplete course={/*Get from NavBar*/"CSC2031"}
+                    <TasksComplete course={course}
                                    date={currentOptionDateFilter.value}
                                    task={currentOptionTaskFilter.value}/>
                 </div>
@@ -138,7 +137,7 @@ export default () => {
                           ]}
                     />
                     {/*Scatter graph, passing value from dropdown and course from nav bar.*/}
-                    <ScatterGraph course={"CSC2031"} filter={currentOptionLimitedFilter.value}/>
+                    <ScatterGraph course={course} filter={currentOptionLimitedFilter.value}/>
                 </div>
 
                 <div className="flex-item-full">
@@ -150,7 +149,7 @@ export default () => {
                               dropOptions={dateOptions}
                     />
                     {/*Line graph, passing value from dropdown and course from nav bar.*/}
-                    <LineGraph course={"CSC2031"} date={currentOptionDateFilter.value}/>
+                    <LineGraph course={course} date={currentOptionDateFilter.value}/>
                 </div>
 
             </div>

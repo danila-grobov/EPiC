@@ -19,7 +19,7 @@ import {getStudentData} from "./student";
 import SessionStore from "./SessionStore";
 import {getConfidence, getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
 import {getTasks, deleteTaskDone, addTaskDone, getTasksDone} from './tasks'
-import {getLineData, getPieData, getScatterData, getTasks, getTaskStatementData} from "./graphs";
+import {getLineData, getPieData, getScatterData, getGraphTasks, getTaskStatementData} from "./graphs";
 
 const app = express()
 const port = 3000
@@ -183,7 +183,7 @@ app.get('/api/t/line', ((req, res) => {
 // Endpoint for getting tasks.
 app.get('/api/t/droptasks', ((req, res) => {
     const {course} = req.query;
-    getTasks(course).then(data => res.send(data));
+    getGraphTasks(course).then(data => res.send(data));
 }));
 
 app.get('*', (req, res) => {

@@ -69,23 +69,35 @@ export default ({course, date}) => {
                 valuesDict[dateKey] = sum / valuesDict[dateKey].length;
             }
 
-            console.log(date);
             const daysPrev = moment().diff(moment(date, "YYYY-MM-DD"), 'days');
-            const step = daysPrev/7;
+            const step = Math.round(daysPrev/7) === 0 ? 1 : Math.round(daysPrev/7);
+
             let dateLabels = new Array(daysPrev);
             let values = new Array(daysPrev);
             dateLabels.fill("");
             values.fill(0);
 
-            console.log(daysPrev);
 
             for (const dateKey in valuesDict){
-                const position = moment().diff(moment(dateKey, "YYYY-MM-DD"), 'days');
-                values[position] = valuesDict[dateKey];
-            }
+                console.log(moment().diff(moment("2021-01-23", "YYYY-MM-DD"), 'days'));
 
-            for (let i = 0; i < daysPrev; i+=step){
-                dateLabels[i] = moment().subtract(56-i, 'd').format("DD-MM-YYYY");
+                let position = null;
+                if (moment().isSame(dateKey, 'day')){
+                    position = 0
+                    console.log(position);
+                } else {
+                    position = moment().diff(moment(dateKey, "YYYY-MM-DD"), 'days') - 1
+                }
+
+
+                values[daysPrev-position-1] = valuesDict[dateKey];
+            }
+            console.log(values);
+
+            for (let i = 0; i < daysPrev; i++){
+                if (i % step === 0){
+                    dateLabels[i] = moment().subtract(daysPrev-i-1, 'd').format("DD-MM-YYYY");
+                }
             }
 
 
@@ -95,10 +107,9 @@ export default ({course, date}) => {
             lineGraph.data.datasets[0].borderColor = new Array(3).fill('rgba(197,109,181, 0.5)')
             lineGraph.update();
 
-            console.log(lineGraph);
         })
 
-    }, [date])
+    }, [date, course])
 
     return (
         // Define canvas element to contain the graph.

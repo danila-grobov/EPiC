@@ -64,15 +64,15 @@ export default ({course, filter, date}) => {
             // Get count for each confidence value and add to array.
             const confidenceSplit = [0,0,0,0,0];
             for (let i = 0; i < data.length; i++){
-                if (data[i] === 1){
+                if (data[i] === 0){
                     confidenceSplit[0] ++;
-                } else if (data[i] === 2){
+                } else if (data[i] === 1){
                     confidenceSplit[1] ++;
-                } else if (data[i] === 3){
+                } else if (data[i] === 2){
                     confidenceSplit[2] ++;
-                } else if (data[i] === 4){
+                } else if (data[i] === 3){
                     confidenceSplit[3] ++;
-                } else if (data[i] === 5){
+                } else if (data[i] === 4){
                     confidenceSplit[4] ++;
                 }
             }
