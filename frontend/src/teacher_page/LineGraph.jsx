@@ -11,18 +11,13 @@ export default ({course, date}) => {
     useEffect(() => {
         axios.get('/api/t/line', {
             params: {
-                course: "CSC2031",
-                date: "2021-01-01"
+                course: course,
+                date: date
             }
         }).then(({data}) => {
-            console.log("JUST RETRIEVED CON: " + data.confidenceVals);
-            console.log("JUST RETRIEVED DAT: " + data.CDates);
             setConfidence(data.confidenceVals);
             setDates(data.CDates);
         })
-
-        console.log("TRY TO USE CON: " + confidence);
-        console.log("TRY TO USE CON: " + dates);
 
         const valuesDict = {};
         const conCount = [0, 0, 0, 0, 0];
@@ -43,9 +38,6 @@ export default ({course, date}) => {
             valuesArr.push(valuesDict[i] / conCount[i]);
             labelsArr.push(valuesDict.key);
         }
-
-        console.log("VALUES ARR: " + valuesArr);
-        console.log("LABELS ARR: " + labelsArr);
 
         // Initialise chart object, passing in the canvas element.
         const graph = new Chart(document.getElementById('lineGraph'), {

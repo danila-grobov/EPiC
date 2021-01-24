@@ -105,19 +105,18 @@ export default () => {
                                    task={currentOptionTaskFilter.value}/>
                 </div>
 
-                {/*<div className="flex-item-full">*/}
-                {/*    <h3>Average Confidence VS. Average Grade</h3>*/}
-                {/*    <Dropdown currentOption={currentOptionLimitedFilter}*/}
-                {/*          setCurrentOption={setCurrentOptionLimitedFilter}*/}
-                {/*          dropOptions={[*/}
-                {/*              {label: "Gender", value: "Gender"},*/}
-                {/*              {label: "Nationality", value: "Nationality"},*/}
-                {/*              {label: "Ability", value: "Ability"},*/}
-                {/*              {label: "Confidence", value: "Confidence"}*/}
-                {/*          ]}*/}
-                {/*    />*/}
-                {/*    <ScatterGraph />*/}
-                {/*</div>*/}
+                <div className="flex-item-full">
+                    <h3>Average Confidence VS. Average Grade</h3>
+                    <Dropdown currentOption={currentOptionLimitedFilter}
+                          setCurrentOption={setCurrentOptionLimitedFilter}
+                          dropOptions={[
+                              {label: "Gender", value: "Gender"},
+                              {label: "Nationality", value: "Nationality"},
+                              {label: "Ability", value: "Ability"}
+                          ]}
+                    />
+                    <ScatterGraph />
+                </div>
 
                 <div className="flex-item-full">
                     <h3>Average Confidence Over Time</h3>

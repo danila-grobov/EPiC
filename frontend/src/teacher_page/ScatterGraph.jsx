@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Chart from 'chart.js';
 import axios from "axios";
 
@@ -17,6 +17,8 @@ export default ({course, filter})  => {
         return points;
     }
 
+    const [gotValues, setGotValues] = useState([]);
+
     useEffect(() => {
 
         axios.get('/api/t/scatter', {
@@ -24,12 +26,38 @@ export default ({course, filter})  => {
                 course: course,
                 filter: filter,
             }
-        }).then(res => {
-            // GET DATA
-
+        }).then(({data}) => {
+            setGotValues(data.scatValues);
         })
 
+        let conVals1 = [];
+        let gradeVals1 = [];
+        let conVals2 = [];
+        let gradeVals2 = [];
+        let conVals3 = [];
+        let gradeVals3 = [];
 
+        for (let i = 0; i < gotValues.length; i++){
+            if (gotValues[i][2] === "Male" || gotValues[i][2] === "UK Students" || gotValues[i][2] === "Advanced"){
+                conVals1.push(gotValues[i][0]);
+                gradeVals1.push(gotValues[i][1]);
+            } else if (gotValues[i][2] === "Female" || gotValues[i][2] === "EU Students" || gotValues[i][2] === "Intermediate"){
+                conVals2.push(gotValues[i][0]);
+                gradeVals2.push(gotValues[i][1]);
+            } else if (gotValues[i][2] === "Non-Binary" || gotValues[i][2] === "International Students" || gotValues[i][2] === "Beginner"){
+                conVals3.push(gotValues[i][0]);
+                gradeVals3.push(gotValues[i][1]);
+            }
+        }
+
+        let labels = []
+        if (filter === "Gender"){
+            labels = ["Male", "Female", "Non-Binary"];
+        } else if (filter === "Nationality"){
+            labels = ["UK", "EU", "International"];
+        } else if (filter === "Ability"){
+            labels = ["Advanced", "Intermediate", "Beginner"];
+        }
 
         // Initialise chart object, passing in the canvas element.
         const scatterChart = new Chart(document.getElementById('scatterGraph'), {
@@ -39,23 +67,23 @@ export default ({course, filter})  => {
                 // Three datasets one for each set of parameters.
                 datasets: [{
                     // Sets series label
-                    label: "UK",
+                    label: labels[0],
                     // Call function to generate points.
-                    data: generatePoints(ukXVals, ukYVals),
+                    data: generatePoints(conVals1, gradeVals1),
                     // Set colour for each point.
-                    backgroundColor: new Array(ukXVals.length).fill('rgba(110,179,206, 1)'),
+                    backgroundColor: new Array(conVals1.length).fill('rgba(110,179,206, 1)'),
                     borderWidth: 1
                 },
                 {
-                    label: "EU",
-                    data: generatePoints(euXVals, euYVals),
-                    backgroundColor: new Array(euXVals.length).fill('rgba(142,201,154, 1)'),
+                    label: labels[1],
+                    data: generatePoints(conVals2, gradeVals2),
+                    backgroundColor: new Array(conVals2.length).fill('rgba(142,201,154, 1)'),
                     borderWidth: 1
                 },
                 {
-                    label: "International",
-                    data: generatePoints(inXVals, inYVals),
-                    backgroundColor: new Array(inXVals.length).fill('rgba(122,48,108, 1)'),
+                    label: labels[2],
+                    data: generatePoints(conVals3, gradeVals3),
+                    backgroundColor: new Array(conVals3.length).fill('rgba(122,48,108, 1)'),
                     borderWidth: 1
                 }]
             },
@@ -84,7 +112,7 @@ export default ({course, filter})  => {
         });
 
 
-    })
+    }, [])
 
     return (
         // Define canvas element to contain the graph.

@@ -85,19 +85,51 @@ export function getPieData(course, filter, date) {
     })
 }
 
-// // export function getScatterData(course, filter, date) {
-// //     return getDBSession(session => {
-// //         session.sql("USE EPiC").execute();
-// //
-// //         const query = "";
-// //
-// //         return (session.sql(query).execute());
-// //
-// //     }).then(res => {
-// //         // const[thisData] = res.fetchOne();
-// //         // return {thisData};
-// //     })
-// // }
+export function getScatterData(course, filter) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
 
+        let query = "SELECT Confidence.ConfidenceLevel, Grades.Grade, Students.Gender " +
+            " FROM Confidence " +
+            " INNER JOIN Grades " +
+            " ON Confidence.Email = Grades.Email " +
+            " INNER JOIN Students " +
+            " ON Confidence.Email = Students.Email " +
+            " WHERE Grades.CourseName = '" + course + "'";
 
+        if (filter === "Gender"){
+            query = "SELECT Confidence.ConfidenceLevel, Grades.Grade, Students.Gender " +
+                " FROM Confidence " +
+                " INNER JOIN Grades " +
+                " ON Confidence.Email = Grades.Email " +
+                " INNER JOIN Students " +
+                " ON Confidence.Email = Students.Email " +
+                " WHERE Grades.CourseName = '" + course + "'";
 
+        } else if (filter === "Nationality"){
+            query = "SELECT Confidence.ConfidenceLevel, Grades.Grade, Students.StudentType " +
+                " FROM Confidence " +
+                " INNER JOIN Grades " +
+                " ON Confidence.Email = Grades.Email " +
+                " INNER JOIN Students " +
+                " ON Confidence.Email = Students.Email " +
+                " WHERE Grades.CourseName = '" + course + "'";
+
+        } else if (filter === "Ability"){
+            query = "SELECT Confidence.ConfidenceLevel, Grades.Grade, Students.Skill " +
+                " FROM Confidence " +
+                " INNER JOIN Grades " +
+                " ON Confidence.Email = Grades.Email " +
+                " INNER JOIN Students " +
+                " ON Confidence.Email = Students.Email " +
+                " WHERE Grades.CourseName = '" + course + "'";
+
+        }
+
+        return session.sql(query).execute();
+
+    }).then(res => {
+        const scatValues = res.fetchAll();
+        return {scatValues};
+    })
+}
