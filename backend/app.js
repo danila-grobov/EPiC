@@ -19,6 +19,7 @@ import {getStudentData} from "./student";
 import SessionStore from "./SessionStore";
 import {getConfidence, getCourses, getDeadlines, getDeadlinesByCourse, setConfidence} from "./coursePage";
 import {getTasks, deleteTaskDone, addTaskDone, getTasksDone} from './tasks'
+import {getLineData, getPieData, getScatterData, getTasks, getTaskStatementData} from "./graphs";
 
 const app = express()
 const port = 3000
@@ -110,7 +111,7 @@ app.put('/api/register', (req, res) => {
             res.send(errors)
         }
     });
-})
+});
 app.get('/api/login',(req, res) => {
     const {username, password} = req.query;
     getStudent(username, password).then(email => {
@@ -130,12 +131,12 @@ app.get('/api/login',(req, res) => {
             })
         }
     });
-})
+});
 app.get(['/register/:token', '/register'], (req, res) => {
     const {token} = req.params;
     checkInviteToken(token).then(email =>
         res.render("register", {email: email ? email[0] : null,token}));
-})
+});
 app.get('/login', (req, res) => {
     res.render("login");
 });
@@ -146,7 +147,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/api/t/teachers',(req, res) => {
-    const{email} = req.session;
+    const{email: email} = req.session;
     getTeacherData(email).then(data => res.send(data));
 })
 
@@ -154,6 +155,36 @@ app.get('/api/s/student',(req,res) =>{
     const{email} = req.session;
     getStudentData(email).then(data => res.send(data));
 })
+
+// Endpoint for tasks complete.
+app.get('/api/t/tasks', ((req, res) => {
+    const {course, taskID, date} = req.query;
+    getTaskStatementData(course, taskID, date).then(data => res.send(data));
+}));
+
+// Endpoint for pie chart.
+app.get('/api/t/pie', ((req, res) => {
+    const {course, filter, date} = req.query;
+    getPieData(course, filter, date).then(data => res.send(data));
+}));
+
+// Endpoint for scatter chart.
+app.get('/api/t/scatter', ((req, res) => {
+    const {course, filter} = req.query;
+    getScatterData(course, filter).then(data => res.send(data));
+}));
+
+// Endpoint for line chart.
+app.get('/api/t/line', ((req, res) => {
+    const {course, date} = req.query;
+    getLineData(course, date).then(data => res.send(data));
+}));
+
+// Endpoint for getting tasks.
+app.get('/api/t/droptasks', ((req, res) => {
+    const {course} = req.query;
+    getTasks(course).then(data => res.send(data));
+}));
 
 app.get('*', (req, res) => {
     if(req.session.role === "teacher") {
@@ -164,6 +195,8 @@ app.get('*', (req, res) => {
         res.redirect(303,"/login");
     }
 });
+
+
 
 function configExpress(app) {
     app.use(express.static(path.join(__dirname, '../dist')));

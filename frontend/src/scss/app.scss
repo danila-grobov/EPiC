@@ -1,6 +1,10 @@
 @import "colors";
 @import "fonts";
 .app {
+//<<<<<<<<< Temporary merge branch 1
+  padding-top:100px;
+//=========
+//>>>>>>>>> Temporary merge branch 2
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -32,3 +36,6 @@ body {
     background: $red_strong;
   }
 }
+
+
+

@@ -126,6 +126,42 @@ VALUES ('Test1',
         'Advanced',
         'UK Students',
         'Male',
+        'accepted'),
+       ('Test2',
+        '89cfa28dd61c8b109ad37d9786fdae2b9962213a48cf0b70051ea551904af031',
+        'Test2',
+        'test',
+        'test2@ncl.ac.uk',
+        'Advanced',
+        'UK Students',
+        'Female',
+        'accepted'),
+       ('Test3',
+        '89cfa28dd61c8b109ad37d9786fdae2b9962213a48cf0b70051ea551904af031',
+        'Test3',
+        'test',
+        'test3@ncl.ac.uk',
+        'Advanced',
+        'International Students',
+        'Female',
+        'accepted'),
+       ('Test4',
+        '89cfa28dd61c8b109ad37d9786fdae2b9962213a48cf0b70051ea551904af031',
+        'Test4',
+        'test',
+        'test4@ncl.ac.uk',
+        'Intermediate',
+        'EU Students',
+        'Male',
+        'accepted'),
+       ('Test5',
+        '89cfa28dd61c8b109ad37d9786fdae2b9962213a48cf0b70051ea551904af031',
+        'Test5',
+        'test',
+        'test5@ncl.ac.uk',
+        'Beginner',
+        'EU Students',
+        'Male',
         'accepted');
 
 # Create sample course data
@@ -151,7 +187,26 @@ INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
 VALUES ('CSC2034', 'test1@ncl.ac.uk', null, null);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
 VALUES ('CSC2035', 'test1@ncl.ac.uk', null, null);
-
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2031', 'test2@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2032', 'test2@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2033', 'test2@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2034', 'test2@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2035', 'test2@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2031', 'test3@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2032', 'test3@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2033', 'test3@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2034', 'test3@ncl.ac.uk', null, null);
+INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade)
+VALUES ('CSC2035', 'test3@ncl.ac.uk', null, null);
 
 # Create sample task data
 INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline)
@@ -210,38 +265,38 @@ INSERT INTO EPiC.Tasks (TaskName, CourseName, ParentTaskID, hasSubtasks, Descrip
 VALUES ('Task27', 'CSC2035', 22, false, null, null);
 
 #Sample data for tasksDone
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 1);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 2);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 3);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 4);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 5);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 17);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 7);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 9);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 10);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 11);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 12);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 13);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 15);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 21);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 25);
-INSERT INTO EPiC.TasksDone (Email, TaskID)
-VALUES ('test1@ncl.ac.uk', 26);
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test1@ncl.ac.uk', 1, "2021-09-01");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test1@ncl.ac.uk', 2, "2021-09-02");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test1@ncl.ac.uk', 3, "2021-09-03");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test1@ncl.ac.uk', 4, "2021-09-04");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test2@ncl.ac.uk', 5, "2021-09-04");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test2@ncl.ac.uk', 17, "2021-09-05");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test2@ncl.ac.uk', 7, "2021-09-06");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test3@ncl.ac.uk', 9, "2021-09-07");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test3@ncl.ac.uk', 10, "2021-09-08");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test3@ncl.ac.uk', 11, "2021-09-09");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test4@ncl.ac.uk', 12, "2021-09-10");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test4@ncl.ac.uk', 5, "2021-09-11");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test4@ncl.ac.uk', 15, "2021-09-12");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test5@ncl.ac.uk', 21, "2021-09-13");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test5@ncl.ac.uk', 25, "2021-09-14");
+INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone)
+VALUES ('test5@ncl.ac.uk', 26, "2021-09-15");
 
 #Create sample teaches data
 INSERT INTO EPiC.Teaches (CourseName, Email)
