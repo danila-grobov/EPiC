@@ -1,3 +1,7 @@
+/**
+ * Author: Jake Hobbs
+ */
+
 import React, {useEffect, useState} from "react";
 import Chart from 'chart.js';
 import axios from "axios";
@@ -13,23 +17,25 @@ export default ({course, filter})  => {
             // Update array with an object for each point.
             points[i] = {x: xVals[i], y: yVals[i]};
         }
-
         return points;
     }
 
     const [gotValues, setGotValues] = useState([]);
 
     useEffect(() => {
-
+        // Call to database.
         axios.get('/api/t/scatter', {
             params: {
                 course: course,
                 filter: filter,
             }
         }).then(({data}) => {
+            console.log("SCATTER VALS " + data.scatValues)
+            // Set values from DB to state.
             setGotValues(data.scatValues);
         })
 
+        // Initialise empty arrays for X and Y values for the three data sets.
         let conVals1 = [];
         let gradeVals1 = [];
         let conVals2 = [];
@@ -37,6 +43,7 @@ export default ({course, filter})  => {
         let conVals3 = [];
         let gradeVals3 = [];
 
+        // Take values from state, split into three data sets and X and Y values.
         for (let i = 0; i < gotValues.length; i++){
             if (gotValues[i][2] === "Male" || gotValues[i][2] === "UK Students" || gotValues[i][2] === "Advanced"){
                 conVals1.push(gotValues[i][0]);
@@ -50,6 +57,7 @@ export default ({course, filter})  => {
             }
         }
 
+        // Set labels, dependant on filter.
         let labels = []
         if (filter === "Gender"){
             labels = ["Male", "Female", "Non-Binary"];
@@ -66,6 +74,7 @@ export default ({course, filter})  => {
             data: {
                 // Three datasets one for each set of parameters.
                 datasets: [{
+                    // Data set 1
                     // Sets series label
                     label: labels[0],
                     // Call function to generate points.
@@ -75,18 +84,21 @@ export default ({course, filter})  => {
                     borderWidth: 1
                 },
                 {
+                    // Data set 2
                     label: labels[1],
                     data: generatePoints(conVals2, gradeVals2),
                     backgroundColor: new Array(conVals2.length).fill('rgba(142,201,154, 1)'),
                     borderWidth: 1
                 },
                 {
+                    // Data set 3
                     label: labels[2],
                     data: generatePoints(conVals3, gradeVals3),
                     backgroundColor: new Array(conVals3.length).fill('rgba(122,48,108, 1)'),
                     borderWidth: 1
                 }]
             },
+            // Formatting of graph
             options: {
                 scales: {
                     xAxes: [{

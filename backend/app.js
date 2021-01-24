@@ -92,26 +92,31 @@ app.get('/api/t/teachers',(req, res) => {
 
 });
 
+// Endpoint for tasks complete.
 app.get('/api/t/tasks', ((req, res) => {
     const {course, taskID, date} = req.query;
     getTaskStatementData(course, taskID, date).then(data => res.send(data));
 }));
 
+// Endpoint for pie chart.
 app.get('/api/t/pie', ((req, res) => {
     const {course, filter, date} = req.query;
     getPieData(course, filter, date).then(data => res.send(data));
 }));
 
+// Endpoint for scatter chart.
 app.get('/api/t/scatter', ((req, res) => {
     const {course, filter} = req.query;
     getScatterData(course, filter).then(data => res.send(data));
 }));
 
+// Endpoint for line chart.
 app.get('/api/t/line', ((req, res) => {
     const {course, date} = req.query;
     getLineData(course, date).then(data => res.send(data));
 }));
 
+// Endpoint for getting tasks.
 app.get('/api/t/droptasks', ((req, res) => {
     const {course} = req.query;
     getTasks(course).then(data => res.send(data));

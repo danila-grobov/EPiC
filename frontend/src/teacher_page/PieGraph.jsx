@@ -1,47 +1,28 @@
+/**
+ * Author: Jake Hobbs
+ */
+
 import React, {useEffect, useState} from "react";
 import Chart from 'chart.js';
 import axios from "axios";
+
+let pieChart = null;
 
 // Parameters passed in: data to populate chart.
 export default ({course, filter, date}) => {
     const [confidence, setConfidence] = useState([]);
 
+    // const [pieChart, setPieChart] = useState(null);
+
+
     useEffect(() => {
-
-        axios.get('/api/t/pie', {
-            params: {
-                course: course,
-                filter: filter,
-                date: date
-            }
-        }).then(({data}) => {
-            setConfidence(data);
-        })
-
-        const confidenceSplit = [0,0,0,0,0];
-
-        for (let i = 0; i < confidence.length; i++){
-            if (confidence[i] === 1){
-                confidenceSplit[0] ++;
-            } else if (confidence[i] === 2){
-                confidenceSplit[1] ++;
-            } else if (confidence[i] === 3){
-                confidenceSplit[2] ++;
-            } else if (confidence[i] === 4){
-                confidenceSplit[3] ++;
-            } else if (confidence[i] === 5){
-                confidenceSplit[4] ++;
-            }
-        }
-
-        // Initialise chart object, passing in canvas element.
-        const PieChart = new Chart(document.getElementById('PieChart'), {
+        pieChart = new Chart(document.getElementById('PieChart'), {
             // Set type of graph.
             type: 'doughnut',
             data: {
                 datasets: [{
                     // One dataset, set data passed in.
-                    data: confidenceSplit,
+                    data: [0,0,0,0,0],
                     // Set colours for each segment.
                     backgroundColor: [
                         'rgba(110,179,206,0.8)',
@@ -64,8 +45,43 @@ export default ({course, filter, date}) => {
                 // Set labels.
                 labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5']
             }
-        });
-    }, [])
+        })
+
+
+    },[])
+
+    useEffect(() => {
+        // Call to database, passing conditions.
+        axios.get('/api/t/pie', {
+            params: {
+                course: course,
+                filter: filter,
+                date: date
+            }
+        }).then(({data}) => {
+            // Set state to values from database.
+
+            // Get count for each confidence value and add to array.
+            const confidenceSplit = [0,0,0,0,0];
+            for (let i = 0; i < data.length; i++){
+                if (data[i] === 1){
+                    confidenceSplit[0] ++;
+                } else if (data[i] === 2){
+                    confidenceSplit[1] ++;
+                } else if (data[i] === 3){
+                    confidenceSplit[2] ++;
+                } else if (data[i] === 4){
+                    confidenceSplit[3] ++;
+                } else if (data[i] === 5){
+                    confidenceSplit[4] ++;
+                }
+            }
+
+            pieChart.data.datasets[0].data = confidenceSplit;
+            pieChart.update();
+
+    }, [filter, date])
+    })
 
     return (
         // Define canvas element to contain graph.

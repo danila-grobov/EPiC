@@ -1,6 +1,11 @@
+/**
+ * Author: Jake Hobbs
+ */
+
 @import "colors";
 @import "fonts";
 
+// Initialise flex container.
 .flex-container {
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +13,8 @@
   justify-content: center;
 }
 
+// Two flex items.
+// Half page.
 .flex-item-half {
   justify-content: center;
   background-color: #FFFFFF;
@@ -19,6 +26,7 @@
   font-family: $font_sanspro_bold;
 }
 
+// Half page, adapted for tasks complete stat.
 .flex-item-half-stat {
   justify-content: center;
   background-color: #FFFFFF;
@@ -27,11 +35,11 @@
   margin: 15px;
   text-align: center;
   border-radius: 15px;
-  //line-height: 75px !important;
   font-size: 35px !important;
   font-family: $font_sanspro_bold;
 }
 
+// Full page.
 .flex-item-full {
   background-color: #FFFFFF;
   width: 95%;
