@@ -23,7 +23,6 @@ const App = () => {
     return (
         <Router>
             <div className="app">
-                <ToastContainer/>
                 <NavBar currentOption={currentOption} setCurrentOption={setCurrentOption} pagePaths={pagePaths}
                         userRole="teacher"/>
                 <Switch>
@@ -43,6 +42,7 @@ const App = () => {
                     </Route>
                 </Switch>
             </div>
+            <ToastContainer/>
         </Router>
     );
 }
