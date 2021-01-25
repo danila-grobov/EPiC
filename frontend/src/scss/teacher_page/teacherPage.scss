@@ -11,6 +11,7 @@
   flex-wrap: wrap;
   background-color: $background;
   justify-content: center;
+  color: $text;
 }
 
 // Two flex items.
@@ -48,4 +49,6 @@
   margin: 15px;
   text-align: center;
   border-radius: 15px;
+  font-family: $font_sanspro;
+  color: $text;
 }

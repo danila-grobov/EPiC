@@ -96,5 +96,8 @@ export function getConfidence(email, course) {
             FROM Confidence
             WHERE Date=${escape(date)} AND Email=${escape(email)} AND CourseName=${escape(course)}
         `).execute();
-    }).then(res => res.fetchOne()[0])
+    }).then(res => {
+        const fetchedResult = res.fetchOne();
+        return fetchedResult === undefined ? 2 : fetchedResult[0];
+    })
 }

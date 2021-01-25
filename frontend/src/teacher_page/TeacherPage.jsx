@@ -155,6 +155,7 @@ export default ({course}) => {
                     {/*Line graph, passing value from dropdown and course from nav bar.*/}
                     <LineGraph course={course} date={currentOptionDateFilter.value}/>
                 </div>
+
             </div>
             <ToastContainer />
         </div>
