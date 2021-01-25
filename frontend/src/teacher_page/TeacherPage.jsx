@@ -55,9 +55,6 @@ export default ({course}) => {
     // Call components.
     return (
         <div className="app">
-            {/*Nav Bar*/}
-            {/*<NavBar pages={pages} name={name} pagePaths={pagePaths} adminRole={false}/>*/}
-
             {/*Insight at head of page.*/}
             <div className="flex-item-full">
                 <h4>Today's Insight</h4>
@@ -124,23 +121,6 @@ export default ({course}) => {
                 </div>
 
                 <div className="flex-item-full">
-                    {/*Scatter graph.*/}
-
-                    <h3>Average Confidence VS. Average Grade</h3>
-                    {/*Filter for scatter graph.*/}
-                    <Dropdown currentOption={currentOptionLimitedFilter}
-                          setCurrentOption={setCurrentOptionLimitedFilter}
-                          dropOptions={[
-                              {label: "Gender", value: "Gender"},
-                              {label: "Nationality", value: "Nationality"},
-                              {label: "Ability", value: "Ability"}
-                          ]}
-                    />
-                    {/*Scatter graph, passing value from dropdown and course from nav bar.*/}
-                    <ScatterGraph course={course} filter={currentOptionLimitedFilter.value}/>
-                </div>
-
-                <div className="flex-item-full">
                     {/*Line graph.*/}
                     <h3>Average Confidence Over Time</h3>
                     {/*Filter for line graph.*/}
@@ -150,6 +130,23 @@ export default ({course}) => {
                     />
                     {/*Line graph, passing value from dropdown and course from nav bar.*/}
                     <LineGraph course={course} date={currentOptionDateFilter.value}/>
+                </div>
+
+                <div className="flex-item-full">
+                    {/*Scatter graph.*/}
+
+                    <h3>Average Confidence VS. Average Grade</h3>
+                    {/*Filter for scatter graph.*/}
+                    <Dropdown currentOption={currentOptionLimitedFilter}
+                              setCurrentOption={setCurrentOptionLimitedFilter}
+                              dropOptions={[
+                                  {label: "Gender", value: "Gender"},
+                                  {label: "Nationality", value: "Nationality"},
+                                  {label: "Ability", value: "Ability"}
+                              ]}
+                    />
+                    {/*Scatter graph, passing value from dropdown and course from nav bar.*/}
+                    <ScatterGraph course={course} filter={currentOptionLimitedFilter.value}/>
                 </div>
 
             </div>

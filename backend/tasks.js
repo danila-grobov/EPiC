@@ -48,8 +48,9 @@ export function deleteTaskDone(taskID, email) {
 export function addTaskDone(taskID, email) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
-        return session.sql(`INSERT INTO TasksDone (Email, TaskID)
-                            VALUES (${escape(email)}, ${escape(taskID)})`
+        const todaysDate = moment().format("YYYY-MM-DD");
+        return session.sql(`INSERT INTO TasksDone (Email, TaskID, DateDone)
+                            VALUES (${escape(email)}, ${escape(taskID)}, ${escape(todaysDate)})`
         ).execute()
             .catch(e =>{
                     console.log(e.message);
