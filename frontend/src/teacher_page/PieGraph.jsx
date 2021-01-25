@@ -1,20 +1,22 @@
 /**
- * Author: Jake Hobbs
+ * @author Jake Hobbs
  */
 
 import React, {useEffect, useState} from "react";
 import Chart from 'chart.js';
 import axios from "axios";
 
+/**
+ * Pie chart component for displaying confidence distribution on teacher page,
+ * query database with filters applied then update chart with retrieved data.
+ */
+
 let pieChart = null;
 
-// Parameters passed in: data to populate chart.
+// Parameters passed in: will filter results in SQL query.
 export default ({course, filter, date}) => {
-    const [confidence, setConfidence] = useState([]);
 
-    // const [pieChart, setPieChart] = useState(null);
-
-
+    // Initialisation of chart with default values.
     useEffect(() => {
         pieChart = new Chart(document.getElementById('PieChart'), {
             // Set type of graph.
@@ -46,12 +48,11 @@ export default ({course, filter, date}) => {
                 labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5']
             }
         })
-
-
     },[])
 
+    // Get data from database and update pie chart.
     useEffect(() => {
-        // Call to database, passing conditions.
+        // Call to database, passing parameters.
         axios.get('/api/t/pie', {
             params: {
                 course: course,
@@ -59,8 +60,6 @@ export default ({course, filter, date}) => {
                 date: date
             }
         }).then(({data}) => {
-            // Set state to values from database.
-
             // Get count for each confidence value and add to array.
             const confidenceSplit = [0,0,0,0,0];
             for (let i = 0; i < data.length; i++){
@@ -77,6 +76,7 @@ export default ({course, filter, date}) => {
                 }
             }
 
+            // Update chart with new data.
             pieChart.data.datasets[0].data = confidenceSplit;
             pieChart.update();
 

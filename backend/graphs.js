@@ -1,17 +1,21 @@
 /**
- * Author: Jake Hobbs
+ * @author Jake Hobbs
  */
 
 import {getDBSession} from "./database";
 import React from "react";
 
-const domainName = "http://localhost/";
+/**
+ * Query functions to EPiC database for components on TeacherPage.
+ */
 
-// Query function for tasks complete.
+// Query function for tasks complete statistic.
 export function getTaskStatementData(course, taskID, date) {
     return getDBSession(session => {
+        // Start SQL session with database.
         session.sql("USE EPiC").execute();
 
+        // Get total number of tasks and tasks done relevant to the supplied course.
         const query = "SELECT COUNT(Grades.Email), COUNT(TasksDone.TaskID)" +
             " FROM Grades LEFT JOIN TasksDone " +
             " ON Grades.Email = TasksDone.Email " +
@@ -21,33 +25,34 @@ export function getTaskStatementData(course, taskID, date) {
         return (session.sql(query).execute());
 
     }).then(res => {
-        // Return retrieved data.
+        // Get data from res and return as object.
         const[totalTasks, tasksDone] = res.fetchOne();
         return {totalTasks, tasksDone};
     })
 }
 
-// Query function for getting tasks.
+// Query function for getting tasks relevant to supplied course.
 export function getGraphTasks(course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
 
-        // Get task title.
+        // Get task titles.
         const query = "SELECT TaskName " +
             " FROM Tasks " +
             " WHERE CourseName = '"+course+"'";
 
-        // Get task ID
+        // Get task IDs.
         const query2 = "SELECT TaskID " +
             " FROM Tasks " +
             " WHERE CourseName = '"+course+"'";
 
+        // Execute and return result of both queries.
         return Promise.all(
             [session.sql(query).execute(), session.sql(query2).execute()]
         )
 
     }).then(res => {
-        // Return data.
+        // Get data from res and return as an object.
         const tasks = res[0].fetchAll().map(task => task[0]);
         const taskIDs = res[1].fetchAll().map(ID => ID[0]);
         return {tasks, taskIDs};
@@ -59,8 +64,7 @@ export function getLineData(course, date) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
 
-        console.log(date);
-        // Get confidence level.
+        // Get confidence level for supplied date and course.
         const query = "SELECT ConfidenceLevel " +
             " FROM Confidence " +
             " WHERE Date > '" + date + "' AND CourseName = '"+course+"'";
@@ -74,7 +78,7 @@ export function getLineData(course, date) {
             [session.sql(query).execute(), session.sql(query2).execute()]);
 
     }).then(res => {
-        // Return data.
+        //get data from res and return as object.
         const confidenceVals = res[0].fetchAll().map(con => con[0]);
         const CDates = res[1].fetchAll().map(dat => dat[0]);
         return {confidenceVals, CDates};
@@ -85,7 +89,6 @@ export function getLineData(course, date) {
 export function getPieData(course, filter, date) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
-
 
         // Get confidence levels.
         const query = "SELECT Confidence.ConfidenceLevel " +
@@ -110,7 +113,7 @@ export function getScatterData(course, filter) {
 
         // Choose query based on filter.
 
-        // Default query.
+        // Default query, as gender filter.
         let query = "SELECT Confidence.ConfidenceLevel, Grades.Grade, Students.Gender " +
             " FROM Confidence " +
             " INNER JOIN Grades " +
@@ -150,11 +153,10 @@ export function getScatterData(course, filter) {
                 " WHERE Grades.CourseName = '" + course + "'";
 
         }
-
         return session.sql(query).execute();
 
     }).then(res => {
-        // Return data.
+        // Return data as object.
         const scatValues = res.fetchAll();
         return {scatValues};
     })

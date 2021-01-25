@@ -1,10 +1,15 @@
 /**
- * Author: Jake Hobbs
+ * @author Jake Hobbs
  */
 
 import React, {useEffect, useState} from "react";
 import Chart from 'chart.js';
 import axios from "axios";
+
+/**
+ * Scatter graph component, get confidence and grade values from EPiC database and update chart.
+ * ** INCOMPLETE **
+ */
 
 // Parameters: X and Y values for three datasets.
 export default ({course, filter})  => {
@@ -30,7 +35,6 @@ export default ({course, filter})  => {
                 filter: filter,
             }
         }).then(({data}) => {
-            console.log("SCATTER VALS " + data.scatValues)
             // Set values from DB to state.
             setGotValues(data.scatValues);
         })
@@ -122,8 +126,6 @@ export default ({course, filter})  => {
                 }
             }
         });
-
-
     }, [])
 
     return (

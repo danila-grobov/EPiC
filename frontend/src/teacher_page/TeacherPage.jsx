@@ -1,8 +1,8 @@
 /**
- * Author: Jake Hobbs
+ * @author Jake Hobbs
  */
 
-import "../scss/teacherPage.scss";
+import "../scss/teacher_page/teacherPage.scss";
 import React, {useEffect, useState} from "react";
 import PieGraph from "./PieGraph";
 import ScatterGraph from "./ScatterGraph";
@@ -12,6 +12,10 @@ import axios from "axios";
 import {ToastContainer} from "react-toastify";
 import TasksComplete from "./TasksComplete";
 import moment from "moment";
+
+/**
+ * Hold and call each of the graph/stat components for the teacher page.
+ */
 
 export default ({course}) => {
 
@@ -151,7 +155,6 @@ export default ({course}) => {
                     {/*Line graph, passing value from dropdown and course from nav bar.*/}
                     <LineGraph course={course} date={currentOptionDateFilter.value}/>
                 </div>
-
             </div>
             <ToastContainer />
         </div>

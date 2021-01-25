@@ -2,8 +2,8 @@
  * Author: Jake Hobbs
  */
 
-@import "colors";
-@import "fonts";
+@import "frontend/src/scss/colors";
+@import "frontend/src/scss/fonts";
 
 // Initialise flex container.
 .flex-container {
@@ -14,6 +14,7 @@
 }
 
 // Two flex items.
+
 // Half page.
 .flex-item-half {
   justify-content: center;
