@@ -22,7 +22,7 @@ CREATE TABLE SessionStore
 
 CREATE TABLE Students
 (
-    Username     varchar(50) UNIQUE,
+    Username     varchar(50) UNIQUE COLLATE latin1_general_cs,
     Pwd          varchar(200),
     Firstname    varchar(50),
     Lastname     varchar(50),
