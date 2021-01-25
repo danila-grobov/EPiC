@@ -1,0 +1,27 @@
+@import "../fonts";
+@import "../colors";
+.calendarTask {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  column-gap: 15px;
+}
+.calendarTask__color {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  align-self: center;
+}
+.calendarTask__info {
+  display: flex;
+  column-gap: 10px;
+  color: $text;
+  font-size: 18px;
+  font-family: $font_sanspro_semibold;
+  align-items: center;
+}
+.calendarTask__sepparator {
+  height: 23px;
+  width: 0;
+  border-right: solid 2px $text;
+  margin-bottom: -1px;
+}

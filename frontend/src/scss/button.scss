@@ -1,0 +1,89 @@
+@import "fonts";
+@import "colors";
+
+%button {
+  display: grid;
+  align-items: center;
+  border-radius: 42px;
+  padding: 0 25px;
+  width: max-content;
+  cursor: pointer;
+}
+
+.button--secondary {
+  @extend %button;
+  background: none;
+  border-color: $blue;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.button--primary {
+  @extend %button;
+  background: $blue;
+  z-index: 1;
+  position: relative;
+  overflow: hidden;
+  .button__label {
+    color: white;
+    z-index: 2;
+  }
+}
+
+.button--primary:after {
+  @extend %button;
+  content: "";
+  background: $orange_strong;
+  z-index: 1;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 0;
+  padding: 0;
+  transition: width 0.5s;
+  transition-timing-function: ease-in;
+}
+
+.button--primary:hover:after {
+  width: 100%;
+}
+.button__label {
+  font-size: 20px;
+  color: #6EB3CB;
+  font-family: $font_lack;
+  text-align: center;
+}
+.button--primary--loading {
+  background: none;
+  cursor: auto;
+}
+.button--secondary--loading {
+  cursor: auto;
+  border: none;
+}
+.button--primary--loading:after, .button--primary--error:after {
+  background: none;
+}
+.button__loading {
+  justify-self: center;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+}
+.button--primary--done, .button--secondary--done {
+  display: grid;
+  grid-template-columns: auto 18px;
+  padding-right:15px;
+  padding-left: 35px;
+  column-gap: 10px;
+  .button__label {
+    text-align: center;
+  }
+}
+.button--primary--error {
+  background-color: $red_strong;
+}
+.button__icon {
+  width: 100%;
+  z-index: 2;
+}

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {inputTypes} from "../general_components/FancyInput";
+import {inputTypes} from "../general_components/TextInput/inputTypes";
 
 export default (type) => {
     const [errorMessage, setErrorMessage] = useState("");

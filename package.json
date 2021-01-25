@@ -6,15 +6,80 @@
     "docker": "docker-compose --project-name epic_app -f docker_config/docker-compose.yml up",
     "rebuild": "docker-compose --project-name epic_app -f docker_config/docker-compose.yml build --force-rm",
     "backend": "docker exec -it web npm run start",
-    "install": "docker exec -it web npm i",
+    "install": "docker exec web npm i",
+    "killall": "docker exec -it web npm run stop-all",
     "frontend": "docker exec -it web npm run webpack",
-    "type": "module"
+    "frontend:livereload": "docker exec -it web npm run livereload",
+    "stop-all": "killall node",
+    "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js",
+    "webpack": "webpack --watch",
+    "livereload": "npm run webpack & browser-sync start --proxy 'localhost:3000' --no-open --files 'dist'"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "axios_redirect": "<rootDir>/frontend/src/modified_axios.js"
+    },
+    "transform": {
+      "\\.[jt]sx?$": [
+        "babel-jest",
+        {
+          "configFile": "./server_config/babel.config.json"
+        }
+      ],
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    }
   },
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "@babel/preset-react": "^7.12.10",
+    "@mysql/xdevapi": "^8.0.22",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
+    "babel-jest": "^26.6.3",
+    "babel-loader": "^8.2.2",
+    "bootstrap": "^4.5.3",
+    "browser-sync": "^2.26.13",
+    "chart.js": "^2.9.4",
+    "cookie-parser": "^1.4.5",
+    "crypto-random-string": "^3.3.0",
+    "css-loader": "^5.0.1",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "file-loader": "^6.2.0",
+    "jest": "^26.6.3",
+    "md5": "^2.3.0",
+    "moment": "^2.29.1",
+    "moment-range": "^4.0.2",
+    "moment-ranges": "^0.8.12",
+    "msw": "^0.25.0",
+    "node-sass": "^5.0.0",
+    "nodemailer": "^6.4.17",
+    "nodemon": "^2.0.6",
+    "qs": "^6.9.4",
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.4.0",
+    "react-dom": "^17.0.1",
+    "react-draggable": "^4.4.3",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-toastify": "^6.2.0"
+    "react-toastify": "^6.2.0",
+    "sass-loader": "^10.1.0",
+    "sqlstring": "^2.3.2",
+    "style-loader": "^2.0.0",
+    "uuid": "^8.3.2",
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
   }
 }

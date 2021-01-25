@@ -1,6 +1,6 @@
 import React, {useRef, cloneElement} from "react"
 import {toast} from 'react-toastify';
-import {inputTypes} from "./FancyInput";
+import {inputTypes} from "./TextInput/inputTypes";
 
 export default props => {
     const fileInput = useRef(null);
@@ -10,7 +10,7 @@ export default props => {
     return (
         <>
             {button}
-            <input ref={fileInput} type="file" style={{display: "none"}} accept={".json"}
+            <input aria-label={"file input"} ref={fileInput} type="file" style={{display: "none"}} accept={".json"}
                    onChange={event => processFile(event, {...props, fileInput})}/>
         </>
     )

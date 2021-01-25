@@ -1,0 +1,14 @@
+@import 'colors';
+@import 'fonts';
+
+#task-deadline{
+  margin-left: 20px;
+  border: 0;
+  color: #6EB3CB; // Blue #6EB3CB as shown in design on figma, not found in colors.scss
+  padding: 5px;
+}
+
+#task-deadline:focus{
+  border: 1px solid #6EB3CB;
+  border-radius: 15px;
+}

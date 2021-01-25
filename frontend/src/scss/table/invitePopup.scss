@@ -1,0 +1,125 @@
+@import "frontend/src/scss/colors";
+@import "frontend/src/scss/fonts";
+
+.invitePopup {
+  position: fixed;
+  min-height: 296px;
+  width: 608px;
+  padding: 20px;
+  z-index: 3;
+  background: white;
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-gap: 30px;
+  border-radius: 5px;
+}
+
+.invitePopup__wrapper {
+  left: 0;
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  z-index: 2;
+}
+
+.invitePopup__background {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.invitePopup__title {
+  font-family: $font_lack;
+  color: $text;
+  font-size: 24px;
+}
+
+.invitePopup__header {
+  display: grid;
+  grid-template-columns: auto min-content;
+  align-items: start;
+  width: auto;
+}
+
+.invitePopup__closeIcon {
+  justify-self: end;
+  cursor: pointer;
+}
+
+.invitePopup__content {
+  width: auto;
+  display: grid;
+  grid-gap: 27px;
+  grid-template-columns: 1fr 86px;
+}
+
+.invitePopup__addButton {
+  grid-row: 1;
+  justify-self: end;
+
+  .button__label {
+    font-size: 18px;
+  }
+}
+
+.invitePopup__input {
+  grid-row: 1;
+}
+
+.invitePopup__inviteList {
+  grid-row: 3;
+  grid-column: 1/3;
+  max-height: 143px;
+  .scrollable__container {
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 12px;
+    gap: 5px;
+  }
+}
+
+.invitePopup__emptyList {
+  width: 100%;
+  font-family: $font_lack;
+  font-size: 16px;
+  text-align: center;
+  color: $text;
+  height: 32px;
+  grid-column: 1/3;
+}
+
+.invitePopup__inviteButton {
+  grid-column: 2;
+  grid-row: 4;
+  justify-self: end;
+
+  .button__label {
+    font-size: 18px;
+  }
+}
+.invitePopup__importButton {
+  grid-column: 1/3;
+  max-width: 232px;
+  padding: 4px 25px!important;
+}
+.invitePopup__addButton {
+  font-family: $font_sanspro_bold;
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  background-color: $text_secondary;
+  width: 100%;
+  height: 44px;
+  align-self: start;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  cursor: pointer;
+}
+

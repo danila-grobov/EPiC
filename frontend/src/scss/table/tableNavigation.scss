@@ -1,0 +1,85 @@
+@import "frontend/src/scss/colors";
+@import "frontend/src/scss/fonts";
+
+.tableNavigation {
+  background: white;
+  height: 42px;
+  border-radius: 5px;
+  padding: 0 12px;
+  width: auto;
+  display: grid;
+  align-items: center;
+}
+.tablePagination {
+  grid-row: 1;
+  display: grid;
+  align-items: center;
+  grid-gap: 10px;
+  grid-auto-columns: min-content;
+}
+%pageNumber{
+  grid-row: 1;
+  font-size: 16px;
+  color: $text;
+  font-family: $font_sanspro_bold;
+  width:24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 5px;
+  padding-bottom: 1.5px;
+  cursor: pointer;
+}
+.tablePagination__pageNumber {
+  @extend %pageNumber;
+}
+.tablePagination__pageNumber--current {
+  @extend %pageNumber;
+  background: $background;
+}
+.tablePagination__arrow,.tablePagination__arrow--left {
+  grid-row: 1;
+  cursor: pointer;
+}
+.tablePagination__arrow--left {
+  transform: rotateY(180deg);
+}
+.tableSizeSelector {
+  grid-row: 1;
+  display: grid;
+  justify-self: end;
+  grid-gap:20px;
+}
+.tableSizeSelector__info {
+  padding-top: 1.5px;
+  grid-row: 1;
+  color: $text_secondary;
+  font-family: $font_sanspro;
+  font-size: 16px;
+}
+.sizeDropdown {
+  grid-row: 1;
+  display: grid;
+  grid-gap: 10px;
+}
+.sizeDropdown__label {
+  padding-top: 1.5px;
+  grid-row: 1;
+  font-size: 16px;
+  color: $text;
+  font-family: $font_sanspro;
+}
+.sizeDropdown__dropdown {
+  grid-row: 1;
+  border-radius: 5px;
+  background: $background;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  font-size: 16px;
+  color: $text;
+  font-family: $font_sanspro;
+  text-align: center;
+  border:none;
+  outline: none;
+}

@@ -4,17 +4,11 @@ import "../scss/navBar.scss"
 import dropDownArrow from "../imgs/downArrow.svg";
 
 //Controls the drop down, will include all of the functionality for that and what not.
-//NavDropdown = the section on the left that lets teachers/admin decide which module they're looking at
-
-function buttonPush() {
-    document.getElementById("dropdownContent").classList.toggle("show");
-}
-
+//Takes an array of value/label objects called "dropOptions", and displays them in a list, when the dropdownBase is
+//clicked. currentOption displays the last-clicked object, which can be set with setCurrentOption.
 export default (props) => {
     const {dropOptions, className="", currentOption, setCurrentOption} = props;
     const [isShown, setShow] = useState(false)
-
-
 
     return (
         <div className={"dropdown " + className} onBlur={ ()=> setShow(false)} tabIndex='-1'>
