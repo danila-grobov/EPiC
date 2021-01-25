@@ -4,6 +4,7 @@
   "description": "CSC2033-Software Engineering Team Project, Team 54, EPiC Learning and Engagement Tool",
   "main": "index.js",
   "scripts": {
+    "stop-all" : "killall node",
     "start": "nodemon -L --watch ./backend --exec babel-node backend/app.js",
     "webpack": "webpack --watch"
   },
@@ -28,6 +29,7 @@
     "react-dom": "^17.0.1",
     "sass-loader": "^10.1.0",
     "node-sass": "^5.0.0",
-    "ejs": "^3.1.5"
+    "ejs": "^3.1.5",
+    "file-loader": "^6.2.0"
   }
 }

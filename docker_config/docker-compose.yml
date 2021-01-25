@@ -15,8 +15,8 @@ services:
     container_name: web
     #Select which dockerfile to use
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: docker_config/Dockerfile
     #Expose port 3000 to host as port 80
     ports:
       - "80:3000"
@@ -24,7 +24,7 @@ services:
     #Basicaly here I'm just syncing local files with the container.
     volumes:
       - logvolume01:/var/log
-      - ../server_config/docker.package.json:/app/docker.package.json
+      - ../server_config/docker.package.json:/app/package.json
       - ../backend:/app/backend
       - ../frontend:/app/frontend
       - ../server_config/babel.config.json:/app/babel.config.json

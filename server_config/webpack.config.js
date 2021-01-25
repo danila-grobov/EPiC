@@ -1,11 +1,33 @@
 const path = require("path");
 module.exports = {
     //The file to start interpretation from.
-    entry: "./frontend/src/index.js",
+    entry: "./frontend/src/index.jsx",
     mode: "development",
     watchOptions: { poll: true }, //This is required in order for auto-reload to work in docker.
     module: {
         rules: [
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'imgs',
+                        publicPath: 'imgs',
+                        name: '[hash]-[name].[ext]'
+                    }
+                }
+            },
+            {
+                test: /\.(otf|ttf)$/i,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        outputPath: 'fonts',
+                        publicPath: 'fonts',
+                        name: '[hash]-[name].[ext]'
+                    }
+                }
+            },
             {
                 //Convert all the ES6 and jsx syntax into regular javascript.
                 test: /\.(js|jsx)$/,
