@@ -1,0 +1,28 @@
+@import 'colors';
+@import 'fonts';
+
+.tasks-list {
+  width: 100%;
+}
+
+.task-row-main{
+  display: grid;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.task-row-subtask{
+  margin-bottom: 30px;
+  margin-left: 50px;
+  margin-top: 30px;
+  border-left: 2px solid $text_secondary;
+}
+
+.taskContent{
+  display: grid;
+  border-radius: 5px;
+  background: white;
+  margin-bottom: 10px;
+  padding: 20px;
+  grid-template-columns: auto 180px 300px;
+}

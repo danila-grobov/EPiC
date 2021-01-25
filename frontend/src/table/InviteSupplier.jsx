@@ -1,9 +1,10 @@
 import React, {useRef} from "react"
-import FancyInput from "../general_components/FancyInput";
+import FancyInput from "../general_components/TextInput/FancyInput";
 import FileInput from "../general_components/FileInput";
 import Button from "../general_components/Button";
 import useValid from "../hooks/useValid";
 import useValue from "../hooks/useValue";
+
 //Responsible for adding invites to the invite list.
 export default props => {
     const {invites, setInvites} = props;
@@ -19,7 +20,7 @@ export default props => {
     }
     return <>
         <FancyInput label={"Email"} className={"invitePopup__input"} errorMessage={errorMessage}
-                    type={"email"} onSubmit={addInvite} charLimit={30} autoWidth={true}
+                    type={"email"} onSubmit={addInvite} maxLength={30} autoWidth={true}
                     value={email} setValue={setEmail} inputRef={emailInput}
         />
         <div className="invitePopup__addButton" onClick={() => addInvite(email)}>ADD</div>

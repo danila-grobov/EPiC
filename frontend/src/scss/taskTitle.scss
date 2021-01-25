@@ -1,0 +1,25 @@
+@import 'colors';
+@import 'fonts';
+
+#task-title{
+  margin-left: 20px;
+  font-family: $font_sanspro;
+  font-size: 18px;
+  color: $text;
+  border: 0;
+  padding: 5px;
+}
+
+#task-title:focus{
+  border: 1px solid $text;
+  border-radius: 15px;
+  background-image: url("../imgs/ArrowR.svg");
+  background-position: 10px center;
+  background-repeat: no-repeat;
+  padding-left: 25px;
+  background-size: 8px;
+}
+
+.task-title-checkbox-input{
+  margin-right: 5px;
+}

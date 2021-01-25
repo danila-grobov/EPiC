@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import FancyInput from "../general_components/FancyInput";
+import FancyInput from "../general_components/TextInput/FancyInput";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";
@@ -41,8 +41,9 @@ export default () => {
         <div className="loginPage">
             <span className="loginPage__title">EPiC Login</span>
             <div className="loginPage__inputs">
-                <FancyInput onSubmit={handleLogin} label={"Username"} {...inputStates.userName} />
-                <FancyInput onSubmit={handleLogin} label={"Password"} type={"password"} {...inputStates.password} />
+                <FancyInput onSubmit={handleLogin} label={"Username"} {...inputStates.userName} width={"auto"}/>
+                <FancyInput onSubmit={handleLogin} label={"Password"} type={"password"}
+                            {...inputStates.password}  width={"auto"}/>
             </div>
             <Button type={"primary"} className={"loginPage__button"} label={"LOGIN"} height={42} onClick={handleLogin}
                     status={loadingState}
