@@ -1,9 +1,15 @@
+/**
+ * @author Danila Grobov
+ */
 import {getDBSession} from "./database";
 import {escape} from "sqlstring";
 import {Store} from "express-session";
 
 const timeToExpire = 1800; // 30 minutes
 
+/**
+ * Custom session store for express-session, made to fit our database.
+ */
 export default class SessionStore extends Store {
     destroy(sid, callback = () => {}) {
         getDBSession( session => {

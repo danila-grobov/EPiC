@@ -1,7 +1,15 @@
+/**
+ * @author Danila Grobov
+ */
 import {getDBSession} from "./database";
 import moment from "moment";
 import {escape} from "sqlstring";
 
+/**
+ * Get all deadlines form the db, which were not completed yet.
+ * @param email
+ * @returns Promise(deadlines)
+ */
 export function getDeadlines(email) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
@@ -22,6 +30,11 @@ export function getDeadlines(email) {
     }).then(result => formatDeadlines(result.fetchAll()))
 }
 
+/**
+ * Formats the deadlines, to the front-end requirements.
+ * @param deadlines
+ * @returns an array with formatted deadlines.
+ */
 function formatDeadlines(deadlines) {
     return deadlines.map(deadline => ({
         name: deadline[2],
@@ -30,6 +43,11 @@ function formatDeadlines(deadlines) {
     }))
 }
 
+/**
+ * Fetch courses' data and student's progress from the database.
+ * @param email
+ * @returns Promise(courses)
+ */
 export function getCourses(email) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
@@ -55,6 +73,12 @@ function formatCourses(courses) {
     }))
 }
 
+/**
+ * Get all student's deadlines in the course.
+ * @param email
+ * @param course
+ * @returns Promise(deadlines)
+ */
 export function getDeadlinesByCourse(email, course) {
     return getDBSession(session => {
         session.sql('USE EPiC').execute();
@@ -67,6 +91,11 @@ export function getDeadlinesByCourse(email, course) {
     }).then( result => formatCourseDeadlines(result.fetchAll()))
 }
 
+/**
+ * Format the course deadlines, to fit front-end requirements.
+ * @param tasks
+ * @returns an array with formatted deadlines.
+ */
 function formatCourseDeadlines(tasks) {
     return tasks.map(task => ({
         title: task[0],
@@ -75,6 +104,13 @@ function formatCourseDeadlines(tasks) {
     }))
 }
 
+/**
+ * Set student's confidence for the specified course.
+ * @param course
+ * @param email
+ * @param confidence
+ * @returns Promise()
+ */
 export function setConfidence(course, email, confidence) {
     return getDBSession(session => {
         session.sql('USE EPiC').execute();
@@ -87,6 +123,12 @@ export function setConfidence(course, email, confidence) {
     })
 }
 
+/**
+ * Get today's student confidence,from the db, in the specified course.
+ * @param email
+ * @param course
+ * @returns Promise(confidence)
+ */
 export function getConfidence(email, course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
