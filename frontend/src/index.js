@@ -1,4 +1,4 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App.js";
-ReactDOM.render(<App />, document.getElementById("root"));
+import Profile_Page from "./Profile_Page/Profile_Page.js";
+ReactDOM.render(<Profile_Page />, document.getElementById("root"));

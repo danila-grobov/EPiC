@@ -11,5 +11,10 @@
     "type": "module"
   },
   "author": "Erikas Nakonecnikovas, Danila Grobov, Jake Hobbs, Max Champagne, Sofia Trevino",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.21.1",
+    "react-router-dom": "^5.2.0",
+    "react-toastify": "^6.2.0"
+  }
 }
