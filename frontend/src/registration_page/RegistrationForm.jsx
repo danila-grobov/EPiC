@@ -1,3 +1,6 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useState} from "react"
 import FancyInput from "../general_components/TextInput/FancyInput";
 import "../scss/registration_page/registrationForm.scss";
@@ -9,6 +12,10 @@ import {toast} from "react-toastify";
 import Dropdown from "../general_components/Dropdown";
 import "../scss/app.scss";
 import md5 from "md5";
+
+/**
+ * Allows students to fill in their data and register to the system.
+ */
 export default props => {
     const {inviteToken, email} = props;
     const [loadingState, setLoadingState] = useState("idle");
@@ -107,8 +114,4 @@ export default props => {
                     onClick={handleSubmit} status={loadingState}/>
         </div>
     )
-}
-
-function isEmpty(object) {
-    return Object.keys(object).length === 0 && object.constructor === Object;
 }

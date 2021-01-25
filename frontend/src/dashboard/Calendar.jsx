@@ -1,3 +1,6 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useLayoutEffect, useState} from "react"
 import "../scss/app.scss"
 import "../scss/dashboard/calendar.scss";
@@ -5,6 +8,10 @@ import winter_image from "../imgs/winter_calendar.png";
 import CalendarTask from "./CalendarTask";
 import moment from "moment";
 import axios from "axios_redirect";
+
+/**
+ * Displays a calendar with incoming deadlines showcased.
+ */
 export default () => {
     const [tasks, setTasks] = useState([]);
     useLayoutEffect(

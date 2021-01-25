@@ -1,7 +1,14 @@
-import React, {useState, useEffect} from "react"
+/**
+ * @author Danila Grobov
+ */
+import React from "react"
 import Row from "./Row";
 
+/**
+ * Component that's responsible for displaying students' data.
+ */
 export default ({data, selectedCheckboxes, setSelectedCheckboxes, sortState, setSortState}) => {
+    //Add supplied checkboxes' index to selectedCheckboxes array.
     const tickCheckbox = index => {
         if (selectedCheckboxes.includes(index)) {
             setSelectedCheckboxes(
@@ -10,7 +17,8 @@ export default ({data, selectedCheckboxes, setSelectedCheckboxes, sortState, set
         } else {
             setSelectedCheckboxes([...selectedCheckboxes, index]);
         }
-    }
+    };
+    //Add all checkboxes to selectedCheckboxes array.
     const tickAll = () => {
         if (selectedCheckboxes.length !== data.length) {
             setSelectedCheckboxes([...data.keys()]);
@@ -18,6 +26,7 @@ export default ({data, selectedCheckboxes, setSelectedCheckboxes, sortState, set
             setSelectedCheckboxes([]);
         }
     }
+    //Determine the status of the master checkbox
     const getCheckboxStatus = () => {
         const withoutHeaderCheckbox = selectedCheckboxes.filter(checkboxId => checkboxId !== 0);
         if (withoutHeaderCheckbox.length >= data.length - 1)
@@ -27,7 +36,7 @@ export default ({data, selectedCheckboxes, setSelectedCheckboxes, sortState, set
         return "partial"
     }
     const dataRows = data.map((rowData, index) => {
-        if (index === 0)
+        if (index === 0) // the header row
             return (<Row sortState={sortState} setSortState={setSortState} key={index} rowType={"header"}
                          values={rowData} tickCheckbox={tickAll} selected={getCheckboxStatus()}/>)
         else

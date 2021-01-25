@@ -1,5 +1,12 @@
+/**
+ * @author Danila Grobov
+ */
 import React from "react"
 import "../scss/dashboard/calendarTask.scss"
+
+/**
+ * Displays a deadline in the calendar.
+ */
 export default props => {
     const {name, deadline, color} = props;
     return (

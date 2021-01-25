@@ -1,7 +1,13 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useState} from "react"
 import useHelper from "../../hooks/useHelper";
 import {inputTypes} from "./inputTypes";
 
+/**
+ * Provides components in the fancy input with required states.
+ */
 export default props => {
     const {children, value, setValue, maxLength, type = "text", inputRef, ...otherProps} = props;
     const {helper = "", onChange, reset: emptyHelper} = useHelper(setValue, inputTypes[type].helpers, maxLength);

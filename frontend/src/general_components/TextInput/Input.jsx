@@ -1,33 +1,28 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useEffect, useRef, useState} from "react";
 import "../../scss/textInput.scss";
 import useValue from "../../hooks/useValue";
 
+/**
+ * Component responsible for displaying and controlling an input.
+ */
 export default props => {
     const {
         onSubmit,
         inputRef,
         width = null,
         type,
-        className,
-        maxLength
+        className
     } = props;
-    let onChange, value, setValue;
-    if(props.onChange) {
-        onChange = props.onChange;
-        value = props.value;
-        setValue = props.setValue;
-    } else {
-        const valueState = useValue("");
-        value = valueState.value;
-        setValue = valueState.setValue;
-        onChange = e => e.target.value.length <= maxLength ? setValue(e.target.value) : null
-    }
+    const {onChange, value, setValue} = getInputStates(props);
     const inputListeners = {
         onKeyDown: props.onKeyDown,
         onFocus: props.onFocus,
         onBlur: props.onBlur,
         onChange: onChange
-    }
+    };
     const inputType = type === "password" ? "password" : "text";
     const handleSubmit = e => {
         e.preventDefault();
@@ -46,4 +41,24 @@ export default props => {
             <span className="textInput__widthDonor" ref={widthDonor}>{value}</span>
         </form>
     );
+}
+
+/**
+ * Provides an object with states for controlling an input.
+ * @param props
+ * @returns an object with states for controlling an input.
+ */
+function getInputStates(props) {
+    if (props.onChange)
+        return {
+            onChange: props.onChange,
+            value: props.value,
+            setValue: props.setValue
+        };
+    const {onChange, value, setValue} = useValue("");
+    return {
+        onChange,
+        value,
+        setValue: e => e.target.value.length <= props.maxLength ? setValue(e.target.value) : null
+    };
 }

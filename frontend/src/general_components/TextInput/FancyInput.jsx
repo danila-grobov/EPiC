@@ -1,5 +1,5 @@
 /**
- * @author Danila Grobov, Sofia Trevino
+ * @author Danila Grobov
  */
 import React, {useRef} from "react";
 import "../../scss/textInput.scss";
@@ -7,6 +7,10 @@ import Input from "./Input";
 import Helper from "./Helper";
 import Label from "./Label";
 import InputStateProvider from "./InputStateProvider";
+
+/**
+ * Displays an input with char counter and helper capabilities.
+ */
 export default props => {
     const {
         className = "", maxLength, value, errorMessage = "", disabled = false,

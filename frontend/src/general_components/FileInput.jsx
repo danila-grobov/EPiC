@@ -1,7 +1,13 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useRef, cloneElement} from "react"
 import {toast} from 'react-toastify';
 import {inputTypes} from "./TextInput/inputTypes";
 
+/**
+ * Component responsible for retrieving data from a file.
+ */
 export default props => {
     const fileInput = useRef(null);
     const button = cloneElement(props.button, {
@@ -15,6 +21,14 @@ export default props => {
         </>
     )
 }
+/**
+ *
+ * @param event
+ * @param type: the type of a file which will be imported (grades or emails)
+ * @param fileInput
+ * @param successMessage
+ * @param setFileData
+ */
 const processFile = (event, {type, fileInput, successMessage, setFileData}) => {
     const jsonFile = event.target.files[0];
     const fileReader = new FileReader();
@@ -35,6 +49,11 @@ const processFile = (event, {type, fileInput, successMessage, setFileData}) => {
     });
     fileReader.readAsText(jsonFile);
 }
+/**
+ * Check if the file data is formatted correctly.
+ * @param fileContent
+ * @param type
+ */
 const dataIsValid = (fileContent, type) => fileContent.reduce((valid, element) => {
     switch (type){
         case "emails":

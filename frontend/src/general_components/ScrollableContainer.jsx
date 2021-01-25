@@ -1,7 +1,13 @@
+/**
+ * @author Danila Grobov
+ */
 import React from "react"
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
+/**
+ * Wraps elements in it's container and enables the use of custom scrollbar.
+ */
 export default props => {
     const {className, children} = props;
 

@@ -1,3 +1,6 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useState} from "react"
 import "../scss/table/invitePopup.scss"
 import remove_dark from "../imgs/remove__dark.svg"
@@ -6,6 +9,9 @@ import ScrollableContainer from "../general_components/ScrollableContainer";
 import useInvite from "../hooks/useInvite";
 import InviteSupplier from "./InviteSupplier";
 
+/**
+ * Displays a popup, for inviting the students into the system.
+ */
 export default props => {
     const {closePopup, course} = props;
     const [loadState, setLoadState] = useState("idle");

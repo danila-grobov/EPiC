@@ -1,6 +1,12 @@
+/**
+ * @author Danila Grobov
+ */
 import React from "react"
 import "../scss/dashboard/progressBar.scss";
 
+/**
+ * Displays a progressbar for the course.
+ */
 export default props => {
     const {progress, className, color, size = 8} = props;
     const numberOfDots = 17;

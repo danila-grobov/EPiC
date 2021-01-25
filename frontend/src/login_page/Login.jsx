@@ -1,3 +1,6 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useState} from "react"
 import FancyInput from "../general_components/TextInput/FancyInput";
 import Button from "../general_components/Button";
@@ -8,6 +11,9 @@ import "../scss/app.scss";
 import axios from "axios_redirect";
 import md5 from "md5";
 
+/**
+ * Displays a login form and allows users to login into the system.
+ */
 export default () => {
     const inputStates = {
         userName: {...useValue(""), ...useValid("text")},

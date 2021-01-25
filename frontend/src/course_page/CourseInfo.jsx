@@ -1,7 +1,13 @@
+/**
+ * @author Danila Grobov
+ */
 import React from "react"
 import ProgressBar from "../dashboard/ProgressBar";
 import "../scss/course_page/courseInfo.scss";
 
+/**
+ * Displays detailed course information.
+ */
 export default props => {
     const {name, fullCourseName, progress, color} = props;
     return (
