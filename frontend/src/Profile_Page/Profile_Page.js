@@ -47,7 +47,7 @@ export default props => {
                     window.location = "/";
                 }
             });
-    }
+    }}
     return (
         <div className="registrationForm">
             <FancyInput label={"First name"} {...inputStates.firstName}/>
@@ -66,4 +66,4 @@ export default props => {
                         value={email} disabled={true}/>
             <Button type={"primary"} height={42} label={"SAVE"} className={"Profile_Page_Save"}
                     onClick={handleSubmit} status={loadingState}/>
-        </div>)}}
+        </div>)}
