@@ -1,11 +1,17 @@
+/**
+ * @author Sofia Trevino
+ */
 import {getDBSession} from "./database";
 import {emailMessage} from "./email";
 import {escape} from "sqlstring";
 import React from "react";
 
-const domainName = "http://localhost/";
+/**
+ * Student.js queries the database and retrieves the current student's first name using the email stored in the session.
+ *
+ */
 
-//Gets current student's name
+const domainName = "http://localhost/";
 export function getStudentData(email) {
     return getDBSession(session => {
 
