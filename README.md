@@ -1,6 +1,12 @@
 # EPiC Learning and Engagement Tool
 ***
-Hi, welcome to our application!
+Hi, welcome to our application! EPiC is a research group within the School of Computing that focus on improving the 
+experience for students and finding innovative teaching methods to aid learning.
+The group is one of the biggest in the country that focuses on computer education research and they
+are well known internationally.
+
+This tool is designed to track student progress and confidence in each course and
+will help contribute to EPiC's research in student learning and engagement.
 
 
 ## Getting Started
@@ -25,36 +31,6 @@ start the containers.
 ### Starting Backend Server:
 Similarly to starting up the frontend, open up a new terminal and without closing the other two, type in the new one,
   ```npm run backend```. Once it's ready, you should receive a link which you can follow to your preferred browser!
-  
-
-
-## Coding Conventions
-***
-###Project Structure:
-####Frontend - 
-* All components related to the same feature are located within the same folder.
-* Scss files are located in a Scss folder.
-* General components that are used in several pages are located in a separate folder.
-* All assets are located in their respective folders. 
-* All custom hooks are located in their respective folder.
-
-####Backend - 
-* All the operations relating to the same entity in the database are located in their respective files.
-* All endpoints are located in the app.js file.
-
-###Variables:
-* Variables are named with camelCase.
-* Use const variables wherever possible, use let variables if necessary.
-
-###Functions:
-* Functions are named with camelCase.
-* Use arrow functions where possible and only use regular functions if necessary. 
-* Name functions using verbs.
-
-###Components:
-* Named with PascalCase. 
-* All the components are functional (no classes). 
-
 
 
 ## Requirement Features
@@ -84,11 +60,43 @@ JSON files of student emails, or manually, to invite them to one of their course
 * Manage:
 
 ###Student-View:
-###Logging in -
+####Logging in -
 * You can log in as a student by using the username "Test1" and the password "Test1234"
-###Pages -
-* Home:
+####Pages -
+* Home: 
 * Course Pages:
+
+
+
+## Coding Conventions
+***
+###Project Structure:
+####Frontend -
+* All components related to the same feature are located within the same folder.
+* Scss files are located in a Scss folder.
+* General components that are used in several pages are located in a separate folder.
+* All assets are located in their respective folders.
+* All custom hooks are located in their respective folder.
+
+####Backend -
+* All the operations relating to the same entity in the database are located in their respective files.
+* All endpoints are located in the app.js file.
+
+###Variables:
+* Variables are named with camelCase.
+* Use const variables wherever possible, use let variables if necessary.
+
+###Functions:
+* Functions are named with camelCase.
+* Use arrow functions where possible and only use regular functions if necessary.
+* Name functions using verbs.
+
+###Components:
+* Named with PascalCase.
+* All the components are functional (no classes).
+
+
 
 ##Testing
 ***
+
