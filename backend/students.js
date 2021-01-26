@@ -42,7 +42,7 @@ export function addStudentsToDB(data, course) {
                     } else if (!studentData) {
                         emailsToSend.push({
                             email: element.Email,
-                            message: domainName + "register/" + element.userName
+                            message: domainName + "register/" + element.Username
                         })
                         await session.sql(`
                             INSERT INTO Students (${Object.keys(element).join(", ")})
