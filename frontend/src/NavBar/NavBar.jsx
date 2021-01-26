@@ -1,20 +1,21 @@
+/**
+ * @author Sofia Trevino
+ */
 import React, {useState, useEffect} from 'react';
 import "../scss/navBar.scss"
 import profilePhoto from "../imgs/profilePhoto.svg"
 import Dropdown from "../general_components/Dropdown";
 import Button from "../general_components/Button";
 import {Link, useLocation} from "react-router-dom";
-
 import axios from "axios_redirect";
-//controls all of the nav bar.
 
-//MenuBase = the entire nav bar
-
-//NavMainMenu = the section on the right, that contains the logo the links to other pages and for admin, their profile,
-//a toggle button
-
-//innerMenu = section to the farther right, contains user's available pages, separator, profile, profile picture, and
-
+/**
+ * This component controls all of the navigation bar. It is written in a way that it recognises the role of the current
+ * user and changes the nav-bar accordingly. The MenuBase div holds the entire navigation bar. Teacher view nav-bars
+ * has a dropdown and beside it, the NavMainMenu. Student view does not have access to the dropdown, and therefore only
+ * has NavMainMenu--Student. Within both NavMainMenus, there is the innerMenu, which holds the page names, separator,
+ * profile link, profile picture, and a logout button.
+ */
 
 export default (props) => {
     const {currentOption, setCurrentOption, userRole, pagePaths} = props;

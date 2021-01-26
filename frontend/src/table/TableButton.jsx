@@ -1,5 +1,12 @@
-import React from "react"
-import "../scss/table/tableButtons.scss"
+/**
+ * @author Danila Grobov
+ */
+import React from "react";
+import "../scss/table/tableButtons.scss";
+
+/**
+ * Displays button for table actions.
+ */
 export default props => {
     const {icon, title, onClick} = props;
     return (
@@ -7,5 +14,5 @@ export default props => {
             <img src={icon} alt={title} className="tableButton__icon"/>
             <span className="tableButton__title">{title}</span>
         </div>
-    )
-}
+    );
+};

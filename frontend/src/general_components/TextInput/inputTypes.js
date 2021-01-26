@@ -1,3 +1,7 @@
+/**
+ * @author Danila Grobov
+ * validation options for different types of inputs.
+ */
 export const inputTypes = {
     email: {
         regEx: /^([a-zA-Z0-9_\-\.]+)@(ncl|newcastle).ac.uk$/,
@@ -16,4 +20,4 @@ export const inputTypes = {
             "one upper case letter and a number",
         helpers: []
     }
-}
+};

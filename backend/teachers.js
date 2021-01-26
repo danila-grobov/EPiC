@@ -1,16 +1,19 @@
+/**
+ * @author Sofia Trevino
+ */
 import {getDBSession} from "./database";
-import {emailMessage} from "./email";
 import {escape} from "sqlstring";
 import React from "react";
 
-const domainName = "http://localhost/";
+/**
+ * teacher.js queries the database and retrieves the current teacher's name and the courses they teach using the email
+ * stored in the session.
+ *
+ */
 
-//Gets teacher's name
+const domainName = "http://localhost/";
 export function getTeacherData(email){
     return getDBSession(session => {
-
-        //const teachers = session.getSchema("EPiC").getTable("Teachers").get
-        //const whereClause = emails.map(email => `Email = "${email}"`)
 
         session.sql("USE EPiC").execute();
         const teacherNameSQL = `

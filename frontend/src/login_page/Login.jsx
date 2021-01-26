@@ -1,4 +1,7 @@
-import React, {useState} from "react"
+/**
+ * @author Danila Grobov
+ */
+import React, {useState} from "react";
 import FancyInput from "../general_components/TextInput/FancyInput";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
@@ -8,11 +11,14 @@ import "../scss/app.scss";
 import axios from "axios_redirect";
 import md5 from "md5";
 
+/**
+ * Displays a login form and allows users to login into the system.
+ */
 export default () => {
     const inputStates = {
         userName: {...useValue(""), ...useValid("text")},
         password: {...useValue(""), ...useValid("text")},
-    }
+    };
     const [loadingState, setLoadingState] = useState("idle");
     const handleLogin = () => {
         const inputsValid = Object.keys(inputStates).reduce((valid, inputType) => {
@@ -20,7 +26,7 @@ export default () => {
             return checkValidity(value) && valid;
         }, true);
         if (inputsValid) {
-            setLoadingState("loading")
+            setLoadingState("loading");
             axios
                 .get("/api/login", {
                     params: {
@@ -34,9 +40,9 @@ export default () => {
                         setLoadingState("error")
                         setTimeout(() => setLoadingState("idle"),1000);
                     }
-            })
+            });
         }
-    }
+    };
     return (
         <div className="loginPage">
             <span className="loginPage__title">EPiC Login</span>
@@ -49,5 +55,5 @@ export default () => {
                     status={loadingState}
             />
         </div>
-    )
-}
+    );
+};

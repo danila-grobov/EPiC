@@ -1,3 +1,6 @@
+/**
+ * @author Sofia Trevino
+ */
 import React, {useState} from "react";
 import "./scss/app.scss";
 import Table from "./table/Table";
@@ -14,9 +17,13 @@ import {
 import TasksTeacher from "./task_view/teacher/TasksTeacher";
 import TeacherPage from "./teacher_page/TeacherPage";
 
-//Controls the teacher-view.
+/**
+ * This component controls all of the teacher-view. The router holds the routes/paths to each of the pages available to
+ * them.
+ */
+
 const App = () => {
-    const pagePaths= [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"},
+    const pagePaths= [{link:<Link to="/" className="middle">HOME</Link>, path: "/"},
         {link:<Link to="/tasks" className="middle">TASKS</Link>, path: "/tasks"},
         {link:<Link to="/manage" className="middle">MANAGE</Link>, path: "/manage"}];
     const [currentOption, setCurrentOption] = useState({value: null, label: "COURSES"});

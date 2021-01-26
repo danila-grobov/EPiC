@@ -1,8 +1,15 @@
-import React from "react"
-import "../scss/button.scss"
+/**
+ * @author Danila Grobov
+ */
+import React from "react";
+import "../scss/button.scss";
 import loading__orange from "../imgs/loading_orange.svg";
 import loading__grey from "../imgs/loading_grey.svg";
 import checkmark from "../imgs/checkmark.svg";
+
+/**
+ * Displays a button, with progress functionality.
+ */
 export default props => {
     const {height, label, onClick, type, status = "idle", width = "auto", loadingColor = "orange"} = props;
     const className = `button--${type} ` + props.className + ` button--${type}--${status}`;
@@ -20,5 +27,5 @@ export default props => {
         <div className={className} style={{height, width}} onClick={onClick}>
             {content}
         </div>
-    )
-}
+    );
+};

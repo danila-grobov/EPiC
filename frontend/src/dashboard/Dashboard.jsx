@@ -1,4 +1,7 @@
-import React, {useState,useEffect} from "react"
+/**
+ * @author Sofia Trevino, Danila Grobov
+ */
+import React, {useState,useEffect} from "react";
 import CourseCard from "./CourseCard";
 import "../scss/app.scss";
 import "../scss/dashboard/dashboard.scss";
@@ -9,11 +12,15 @@ import axios from "axios_redirect";
 import {BrowserRouter as Router, Link, Redirect, Route, Switch} from "react-router-dom";
 import CoursePage from "../course_page/CoursePage";
 
-//Controls the student view
+/**
+ * This component controls all of thr student view. The router holds the routes/paths to each of the pages available to
+ * them. The routes include paths to profile page, and the home page which contains the calendar and course cards.
+ *
+ */
 
 export default () => {
     const [courses, setCourses] = useState([]);
-    const pagePaths = [{link:<Link to="/home" className="middle">HOME</Link>, path: "/home"}];
+    const pagePaths = [{link:<Link to="/" className="middle">HOME</Link>, path: "/"}];
 
     //retrieves courses that the current student is enrolled in.
     useEffect(() => {
@@ -48,6 +55,5 @@ export default () => {
             </div>
             <ToastContainer/>
         </Router>
-    )
-
-}
+    );
+};

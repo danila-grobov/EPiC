@@ -1,9 +1,15 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useState, useLayoutEffect} from "react";
 import "../scss/course_page/confidenceCard.scss";
 import Trackbar from "./Trackbar";
 import Button from "../general_components/Button";
 import axios from "axios_redirect";
 
+/**
+ * Manages student's confidence.
+ */
 export default ({course}) => {
     const [loadingState, setLoadingState] = useState("idle");
     const confidenceLevels = [
@@ -45,4 +51,4 @@ export default ({course}) => {
                         }}/>
         </div>
     );
-}
+};

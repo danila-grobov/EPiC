@@ -1,5 +1,8 @@
+/**
+ * @author Danila Grobov
+ */
 import {getDBSession} from "./database";
-import {emailMessage, sendMessagesInBulk} from "./email";
+import {sendMessagesInBulk} from "./email";
 import React from "react";
 import md5 from "md5";
 import {v4 as uuidV4} from "uuid";
@@ -7,6 +10,12 @@ import {escape} from "sqlstring";
 
 const domainName = "http://localhost/";
 
+/**
+ * Invites students to the system and adds them to the course.
+ * @param data
+ * @param course
+ * @returns Promise(errors)
+ */
 export function addStudentsToDB(data, course) {
     const emailsToSend = [];
     return getDBSession(session => {
@@ -62,10 +71,21 @@ export function addStudentsToDB(data, course) {
     })
 }
 
+/**
+ * Format an array to be used in the SQL statement.
+ * @param values
+ * @returns formatted string with values.
+ */
 function getSQLValues(values) {
     return values.map(value => escape(value)).join(", ")
 }
 
+/**
+ * Generate an SQL statement to select students by their email from the course.
+ * @param course
+ * @param whereClause
+ * @returns string SQL statement
+ */
 function getSQLBody(course, whereClause) {
     return `
         FROM Students AS s
@@ -74,6 +94,15 @@ function getSQLBody(course, whereClause) {
         WHERE c.CourseName = ${escape(course)} ${whereClause}`;
 }
 
+/**
+ * Gets a subset of students from the database.
+ * @param count
+ * @param offset
+ * @param course
+ * @param filters
+ * @param sortState
+ * @returns Promise(students)
+ */
 export function getStudentsFromDB({count, offset, course}, filters = [], sortState) {
     return getDBSession(session => {
         const columnNames = [
@@ -106,6 +135,12 @@ export function getStudentsFromDB({count, offset, course}, filters = [], sortSta
     )
 }
 
+/**
+ * Removes provided students from the course in the Grades table in the database.
+ * @param emails
+ * @param course
+ * @returns Promise()
+ */
 export function removeStudentFromDB(emails, course) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
@@ -118,6 +153,12 @@ export function removeStudentFromDB(emails, course) {
     })
 }
 
+/**
+ * Set course grades of the supplied students.
+ * @param data
+ * @param course
+ * @returns Promise()
+ */
 export function setStudentGrades({data, course}) {
     return getDBSession(session => {
         const grades = session.getSchema("EPiC").getTable("Grades");
@@ -133,6 +174,11 @@ export function setStudentGrades({data, course}) {
     })
 }
 
+/**
+ * Updates the student's data in the database, by the provided token.
+ * @param data
+ * @returns Promise(errors)
+ */
 export function registerStudent(data) {
     return getDBSession(session => {
         const salt = md5(uuidV4());
@@ -160,6 +206,11 @@ export function registerStudent(data) {
     })
 }
 
+/**
+ * Checks if the invite token is valid and can be found in the database.
+ * @param inviteToken
+ * @returns Promise(email)
+ */
 export function checkInviteToken(inviteToken) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
@@ -171,6 +222,12 @@ export function checkInviteToken(inviteToken) {
     }).then(email => email.fetchOne());
 }
 
+/**
+ * Get a student from the database by his password and username.
+ * @param username
+ * @param password
+ * @returns doesExist
+ */
 export function getStudent(username, password) {
     return getDBSession(session => {
         session.sql("USE EPiC").execute();
@@ -190,6 +247,12 @@ export function getStudent(username, password) {
     });
 }
 
+/**
+ * Generate SQL where clause from supplied filters.
+ * @param filters
+ * @param columnNames
+ * @returns string SQL where clause.
+ */
 function getFilterWhereClause(filters, columnNames) {
     const whereClause = filters.map(
         filter => columnNames.map(columnName =>
@@ -201,6 +264,11 @@ function getFilterWhereClause(filters, columnNames) {
     return whereClause ? "AND (" + whereClause + ")" : whereClause;
 }
 
+/**
+ * Format fetched students from the database to fit front-end requirements.
+ * @param array
+ * @returns {*[]}
+ */
 function formatStudentArray(array) {
     const header = [
         {value: "First name", type: "title"},
@@ -220,6 +288,12 @@ function formatStudentArray(array) {
     return [header, ...valuesWithType]
 }
 
+/**
+ * Generates a hash of a given password and appends a salt to it.
+ * @param password
+ * @param salt
+ * @returns string hashed password.
+ */
 export function hashPassword(password, salt) {
     const hash = md5(password + salt);
     return hash + salt;

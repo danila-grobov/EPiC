@@ -1,8 +1,14 @@
+/**
+ * @author Danila Grobov
+ */
 import {useState, useEffect} from "react";
 import {stringify} from "qs";
 import axios from "axios_redirect";
 import {toast} from "react-toastify";
-// Manages and updates all states related to Table component
+
+/**
+ * Manages and updates all states related to Table component.
+ */
 export default course => {
     const [popupState, setPopupState] = useState(false);
     const [total, setTotal] = useState(0);
@@ -13,7 +19,7 @@ export default course => {
     const [studentData, setStudentData] = useState([]);
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
 
-    //Get data from the server
+    //Get data from the database
     const fetchData = async () => {
         try {
             const offset = (currentPage - 1) * rowCount; // The first element of the data to retrieve
@@ -21,19 +27,19 @@ export default course => {
                 params: {count: rowCount, offset, course, filters, sortState},
                 // axios doesn't support arrays in params, this is a workaround
                 paramsSerializer: params => stringify(params)
-            })
+            });
             return data;
         } catch (error) {
             toast.error("Unexpected error occurred, when trying to load students' data.");
             return {};
         }
-    }
+    };
     //Fetch data and update the states with the results.
     const updateTable = () => {
         fetchData().then(({students, count}) => {
             setStudentData(students);
             setTotal(count);
-        })
+        });
     };
     useEffect(
         updateTable,
@@ -44,8 +50,8 @@ export default course => {
         return selectedCheckboxes
             .filter(id => id !== 0)
             .map(id => studentData[id][3].value)
-            .filter(email => email !== "")
-    }
+            .filter(email => email !== "");
+    };
     return {
         getSelectedEmails,
         updateTable,
@@ -60,5 +66,5 @@ export default course => {
         studentData, setStudentData,
         selectedCheckboxes, setSelectedCheckboxes,
         resetCheckboxes: () => setSelectedCheckboxes([])
-    }
-}
+    };
+};
