@@ -18,5 +18,5 @@ export default props => {
             </span>
             <SizeDropdown total={total} rowCount={rowCount} setRowCount={setRowCount}/>
         </div>
-    )
-}
+    );
+};

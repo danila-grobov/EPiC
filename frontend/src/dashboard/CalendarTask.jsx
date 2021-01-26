@@ -1,8 +1,8 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
-import "../scss/dashboard/calendarTask.scss"
+import React from "react";
+import "../scss/dashboard/calendarTask.scss";
 
 /**
  * Displays a deadline in the calendar.
@@ -18,5 +18,5 @@ export default props => {
                 <span>{deadline}</span>
             </div>
         </div>
-    )
-}
+    );
+};

@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React, {useState, useLayoutEffect} from "react"
+import React, {useState, useLayoutEffect} from "react";
 import "../scss/course_page/deadlines.scss";
 import ScrollableContainer from "../general_components/ScrollableContainer";
 import axios from "axios_redirect";
@@ -36,5 +36,5 @@ export default ({course}) => {
                 }
             </ScrollableContainer>
         </div>
-    )
-}
+    );
+};

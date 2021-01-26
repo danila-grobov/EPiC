@@ -1,14 +1,14 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
+import React from "react";
 import SearchArea from "./SearchArea";
 import TableContent from "./TableContent";
 import TableButtons from "./TableButtons";
 import TableNavigation from "./TableNavigation";
 import InvitePopup from "./InvitePopup";
 import useTable from "../hooks/useTable";
-import "../scss/table/table.scss"
+import "../scss/table/table.scss";
 
 /**
  * Displays a table with all the students enrolled in the course.
@@ -29,5 +29,5 @@ export default ({course}) => {
                              setRowCount={tableState.setRowCount} currentPage={tableState.currentPage}
                              setCurrentPage={tableState.setCurrentPage}/>
         </div>
-    )
-}
+    );
+};

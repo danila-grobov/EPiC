@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React, {useEffect} from "react"
+import React, {useEffect} from "react";
 
 /**
  * Displays a label for an input.
@@ -15,7 +15,7 @@ export default ({label, setFocused, inputRef, focused, value, errorMessage}) => 
             <span className={className}>{label}</span>
         );
     return null;
-}
+};
 
 /**
  * Sets up mousedown listener to determine when the input was in-focus.

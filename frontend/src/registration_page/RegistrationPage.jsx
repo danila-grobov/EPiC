@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
+import React from "react";
 import RegistrationForm from "./RegistrationForm";
 import "../scss/registration_page/registrationPage.scss";
 import sad_face from "../imgs/sad_face.svg";
@@ -42,6 +42,5 @@ export default () => {
             <img src={sad_face} alt="sad face" className="registrationPage__errorImg"/>
             <span className="registrationPage__errorMessage">The registration link is not valid.</span>
         </div>
-    )
-
-}
+    );
+};

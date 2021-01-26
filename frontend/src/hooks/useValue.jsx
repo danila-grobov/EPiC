@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import {useState} from "react"
+import {useState} from "react";
 
 /**
  * This hooks main purpose is to simplify the setup of inputs
@@ -13,7 +13,7 @@ export default initialValue => {
     const onChange = e => {
         const newValue = e.target.value ? e.target.value : e.target.innerText;
         setValue(newValue);
-    }
+    };
     return {
         value,
         setValue,
@@ -24,4 +24,4 @@ export default initialValue => {
             onChange
         }
     };
-}
+};

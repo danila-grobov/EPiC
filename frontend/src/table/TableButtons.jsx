@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect} from "react";
 import TableButton from "./TableButton";
 import remove from "../imgs/delete.svg";
 import add from "../imgs/add.svg";
@@ -29,8 +29,8 @@ export default props => {
                        type={"grades"}
             />
         </div>
-    )
-}
+    );
+};
 
 /**
  * Remove selected students from the course.
@@ -49,7 +49,7 @@ function removeFromCourse(course, emails, updateTable, reset) {
             .then(() => {
                 reset();
                 updateTable();
-            })
+            });
 }
 
 /**
@@ -61,5 +61,5 @@ function setGrades(data, course) {
     if (data.length !== 0)
         axios.put("/api/t/students/grade", {data,course}).then(
             () => toast.success("The grades were successfully updated!")
-        )
+        );
 }

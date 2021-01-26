@@ -11,11 +11,11 @@ export default (type) => {
     const [errorMessage, setErrorMessage] = useState("");
     const checkValidity = (value) => {
         if (value.match(inputTypes[type].regEx)) {
-            setErrorMessage("")
+            setErrorMessage("");
             return true;
         }
-        setErrorMessage(inputTypes[type].errorMessage)
+        setErrorMessage(inputTypes[type].errorMessage);
         return false;
     }
-    return {errorMessage, checkValidity, setErrorMessage}
-}
+    return {errorMessage, checkValidity, setErrorMessage};
+};

@@ -11,7 +11,7 @@ export default (setValue, helpers, charLimit) => {
     const [helper, setHelper] = useState("");
     const reset = () => {
         setHelper("");
-    }
+    };
     const onChange = e => {
         const value = e.target.value ? e.target.value : e.target.innerText;
         let noOverlap = true;
@@ -30,16 +30,16 @@ export default (setValue, helpers, charLimit) => {
             if(!charLimit || value.length <= charLimit)
                 setValue(value);
             if(!charLimit || (value !== "" && value.length + defaultHelper.length <= charLimit) )
-                setHelper(defaultHelper)
-            else setHelper("")
+                setHelper(defaultHelper);
+            else setHelper("");
         }
-    }
+    };
     return {
         helper,
         onChange,
         reset
-    }
-}
+    };
+};
 
 /**
  * Split the value into two halves, value's overlap with the helper and the remainder.

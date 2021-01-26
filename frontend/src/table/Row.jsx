@@ -1,11 +1,11 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
-import "../scss/table/row.scss"
-import checkbox from "../imgs/checkbox.svg"
-import checkbox__checked from "../imgs/checkbox__checked.svg"
-import checkbox__partial from "../imgs/checkbox_partial.svg"
+import React from "react";
+import "../scss/table/row.scss";
+import checkbox from "../imgs/checkbox.svg";
+import checkbox__checked from "../imgs/checkbox__checked.svg";
+import checkbox__partial from "../imgs/checkbox_partial.svg";
 import sort_up_active from "../imgs/sort_up_active.svg";
 import sort_down_active from "../imgs/sort_down_active.svg";
 import sort_up from "../imgs/sort_up.svg";
@@ -46,7 +46,7 @@ export default props => {
     if (selected === "full")
         icon = checkbox__checked;
     else if (selected === "partial")
-        icon = checkbox__partial
+        icon = checkbox__partial;
     return (
         <div className={`row--${rowType}`} role={"row"} aria-label={rowType === "header" ? "header row" : "table row"}>
             <img onClick={tickCheckbox} src={icon} className="row__cell--checkbox" role={"checkbox"}
@@ -57,7 +57,7 @@ export default props => {
             {cells}
         </div>
     );
-}
+};
 
 /**
  * Display correct sorting icons according to the sorting state.
@@ -72,7 +72,7 @@ function getSortIcons(sortState, index) {
                  className="row__sortIcon"/>,
             <img key={"sort_down" + index} src={sort_down} alt="sort idle"
                  className="row__sortIcon"/>
-        ]
+        ];
     else if (sortState.index === index) {
         return sortState.ascending
             ? <img key={"sort_down" + index} src={sort_down_active} alt="sort asc" className="row__sortIcon"/>

@@ -1,8 +1,8 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
-import "../scss/button.scss"
+import React from "react";
+import "../scss/button.scss";
 import loading__orange from "../imgs/loading_orange.svg";
 import loading__grey from "../imgs/loading_grey.svg";
 import checkmark from "../imgs/checkmark.svg";
@@ -27,5 +27,5 @@ export default props => {
         <div className={className} style={{height, width}} onClick={onClick}>
             {content}
         </div>
-    )
-}
+    );
+};

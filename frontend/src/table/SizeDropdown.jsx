@@ -12,7 +12,7 @@ export default props => {
     const {bind,value:inputValue,setValue} = useValue(rowCount);
     useEffect(() => {
         setValue(rowCount);
-    },[rowCount])
+    },[rowCount]);
     const handleChange = () => {
         // Keep the value in the appropriate range of values.
         let value = inputValue;
@@ -21,7 +21,7 @@ export default props => {
         if(value > total) value = total;
         setValue(value);
         setRowCount(value);
-    }
+    };
     return (
         <div className="sizeDropdown">
             <span className="sizeDropdown__label">
@@ -32,5 +32,5 @@ export default props => {
                        type={"text"} className="sizeDropdown__dropdown"/>
             </form>
         </div>
-    )
-}
+    );
+};

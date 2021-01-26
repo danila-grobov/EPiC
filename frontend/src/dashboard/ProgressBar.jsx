@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
+import React from "react";
 import "../scss/dashboard/progressBar.scss";
 
 /**
@@ -15,10 +15,10 @@ export default props => {
         <div key={`progressDot__${dotNumber}`} className={
             `progressBar__dot--size-${size}${dotNumber + 1 > numberOfFilledDots ? " progressBar__dot--empty" : ""}`
         } style={{backgroundColor: color}}/>
-    )
+    );
     return (
         <div className={"progressBar " + className} style={{columnGap:size / 4}}>
             {dots}
         </div>
-    )
-}
+    );
+};

@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React, {useRef, cloneElement} from "react"
+import React, {useRef, cloneElement} from "react";
 import {toast} from 'react-toastify';
 import {inputTypes} from "./TextInput/inputTypes";
 
@@ -19,8 +19,8 @@ export default props => {
             <input aria-label={"file input"} ref={fileInput} type="file" style={{display: "none"}} accept={".json"}
                    onChange={event => processFile(event, {...props, fileInput})}/>
         </>
-    )
-}
+    );
+};
 /**
  *
  * @param event
@@ -48,7 +48,7 @@ const processFile = (event, {type, fileInput, successMessage, setFileData}) => {
         }
     });
     fileReader.readAsText(jsonFile);
-}
+};
 /**
  * Check if the file data is formatted correctly.
  * @param fileContent
@@ -62,5 +62,4 @@ const dataIsValid = (fileContent, type) => fileContent.reduce((valid, element) =
             return typeof element === "object" && element.hasOwnProperty("email") &&
                 element.hasOwnProperty("grade") && valid
     }
-
-}, true)
+}, true);

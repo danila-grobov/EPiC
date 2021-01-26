@@ -19,8 +19,8 @@ const getNumberRange = (from, to) => {
         const numbers = Array(to - from + 1).keys();
         return [...numbers].map(number => number + from);
     }
-    return []
-}
+    return [];
+};
 /**
  * Creates an array of page-numbers order as they are supposed to be shown in the pagination.
  * @param currentPage
@@ -45,7 +45,7 @@ const getOrderedPages = (currentPage, pageCount) => {
         currentPage + 1,
         Math.min(pageCount, currentPage + nOfPagesAfter));
     return [...numbersBeforeCurr, currentPage, ...numbersAfterCurr].slice(0,5);
-}
+};
 /**
  * Determines, which page is going to be shown.
  */
@@ -57,12 +57,12 @@ export default props => {
         if (newPage > pageCount) newPage = pageCount;
         if (newPage < 1) newPage = 1;
         setCurrentPage(newPage);
-    }
+    };
     useLayoutEffect( () => {
         if(currentPage > pageCount && pageCount !== 0) {
-            setCurrentPage(pageCount)
+            setCurrentPage(pageCount);
         }
-    },[rowCount])
+    },[rowCount]);
     return (
         <div className="tablePagination">
             <img src={currentPage === 1 ? doubleArrow_d : doubleArrow}
@@ -90,5 +90,5 @@ export default props => {
                  alt="right double arrow" className="tablePagination__arrow"
                  onClick={() => setCurrentPage(pageCount)}/>
         </div>
-    )
-}
+    );
+};

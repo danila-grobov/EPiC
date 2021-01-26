@@ -14,5 +14,5 @@ export default props => {
             <img src={icon} alt={title} className="tableButton__icon"/>
             <span className="tableButton__title">{title}</span>
         </div>
-    )
-}
+    );
+};

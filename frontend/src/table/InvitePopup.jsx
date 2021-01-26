@@ -1,9 +1,9 @@
 /**
  * @author Danila Grobov
  */
-import React, {useState} from "react"
-import "../scss/table/invitePopup.scss"
-import remove_dark from "../imgs/remove__dark.svg"
+import React, {useState} from "react";
+import "../scss/table/invitePopup.scss";
+import remove_dark from "../imgs/remove__dark.svg";
 import Button from "../general_components/Button";
 import ScrollableContainer from "../general_components/ScrollableContainer";
 import useInvite from "../hooks/useInvite";
@@ -38,5 +38,5 @@ export default props => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

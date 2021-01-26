@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
+import React from "react";
 import right_button from "../../imgs/right_button.svg";
 
 /**
@@ -16,4 +16,4 @@ export default ({helper, autoComplete, focused, value, type}) => {
             </span>
         );
     return null;
-}
+};

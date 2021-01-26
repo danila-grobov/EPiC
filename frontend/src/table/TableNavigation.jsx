@@ -17,4 +17,4 @@ export default ({rowCount, currentPage, setCurrentPage, setRowCount, total}) => 
             <TableSizeSelector currentPage={currentPage} total={total} rowCount={rowCount} setRowCount={setRowCount}/>
         </div>
     );
-}
+};

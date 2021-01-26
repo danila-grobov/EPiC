@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React, {useEffect} from "react"
+import React, {useEffect} from "react";
 import CourseInfo from "./CourseInfo";
 import "../scss/course_page/coursePage.scss";
 import Deadlines from "./Deadlines";
@@ -26,5 +26,5 @@ export default props => {
             <ConfidenceCard course={courseName} />
             <TasksStudent course={courseName}/>
         </div>
-    )
-}
+    );
+};

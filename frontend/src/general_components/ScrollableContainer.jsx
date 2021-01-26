@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
+import React from "react";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
@@ -10,7 +10,6 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
  */
 export default props => {
     const {className, children} = props;
-
     return (
         <div className={className}>
             <PerfectScrollbar
@@ -22,5 +21,5 @@ export default props => {
                 </div>
             </PerfectScrollbar>
         </div>
-    )
-}
+    );
+};

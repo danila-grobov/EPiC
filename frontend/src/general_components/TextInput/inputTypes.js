@@ -20,4 +20,4 @@ export const inputTypes = {
             "one upper case letter and a number",
         helpers: []
     }
-}
+};

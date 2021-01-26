@@ -34,14 +34,14 @@ export default props => {
     useEffect(() => {
         setDonorWidth(widthDonor.current.clientWidth + 2)
     }, [value]);
-    const inputConfig = {type: inputType, ref: inputRef, value, className}
+    const inputConfig = {type: inputType, ref: inputRef, value, className};
     return (
         <form onSubmit={handleSubmit}>
             <input style={{width: width ? width : donorWidth}} {...inputListeners} {...inputConfig}/>
             <span className="textInput__widthDonor" ref={widthDonor}>{value}</span>
         </form>
     );
-}
+};
 
 /**
  * Provides an object with states for controlling an input.

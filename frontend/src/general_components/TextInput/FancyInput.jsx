@@ -16,13 +16,13 @@ export default props => {
         className = "", maxLength, value, errorMessage = "", disabled = false,
         inputRef = useRef(null), ...otherProps
     } = props;
-    const stateProviderConfig = {maxLength, value, errorMessage, inputRef}
+    const stateProviderConfig = {maxLength, value, errorMessage, inputRef};
     const wrapperConfig = !disabled ? {
         className: "textInput__wrapper " + className,
         onClick: () => inputRef.current.focus()
     } : {
         className: "textInput__wrapper " + className + " textInput__wrapper--disabled"
-    }
+    };
     return (
         <div {...wrapperConfig}>
             <div className={`textInput ${errorMessage.length === 0 ? "" : "textInput--error"}`}>
@@ -35,8 +35,8 @@ export default props => {
             <CharCounter maxLength={maxLength} length={value.length}/>
             <span className="textInput__error">{errorMessage.length === 0 ? "" : errorMessage}</span>
         </div>
-    )
-}
+    );
+};
 
 function CharCounter({maxLength, length}) {
     if (maxLength)

@@ -1,7 +1,7 @@
 /**
  * @author Danila Grobov
  */
-import React from "react"
+import React from "react";
 import removeIcon from "../imgs/remove.svg";
 
 /**
@@ -17,5 +17,5 @@ export default props => {
             <img src={removeIcon} role={"button"} aria-label={"remove filter"} className="searchPhrase__remove"
                  onClick={() => handleDelete(index)}/>
         </div>
-    )
-}
+    );
+};

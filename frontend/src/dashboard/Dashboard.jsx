@@ -1,7 +1,7 @@
 /**
  * @author Sofia Trevino, Danila Grobov
  */
-import React, {useState,useEffect} from "react"
+import React, {useState,useEffect} from "react";
 import CourseCard from "./CourseCard";
 import "../scss/app.scss";
 import "../scss/dashboard/dashboard.scss";
@@ -55,6 +55,5 @@ export default () => {
             </div>
             <ToastContainer/>
         </Router>
-    )
-
-}
+    );
+};
