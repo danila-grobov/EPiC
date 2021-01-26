@@ -29,7 +29,7 @@ const App = () => {
                         userRole="teacher"/>
                 <Switch>
                     <Route path="/profile">
-                        <Profile_Page/>
+                        <Profile_Page userRole={"teacher"}/>
                     </Route>
                     <Route path="/manage">
                         <Table course={currentOption.value}/>

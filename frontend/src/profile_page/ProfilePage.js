@@ -12,7 +12,8 @@ import axios from "axios";
 import {toast} from "react-toastify";
 import profilePhoto from "../imgs/profilePhoto.svg";
 export default props => {
-    const {inviteToken, email} = props;
+    const {email, userRole} = props;
+    console.log(userRole);
     const [loadingState, setLoadingState] = useState("idle");
     const inputStates = {
         email: {...useValue(""), ...useValid("email")},
@@ -60,7 +61,16 @@ export default props => {
             <FancyInput label={"Username"} charLimit={20} {...inputStates.userName} width = "auto"/>
             <FancyInput type={"email"} label={"Email address"} className={"Profile_Page_Email"} charLimit={40}
                         {...inputStates.email} autoWidth={true}/>
-            <Button type={"secondary"} height={42} width = {188}label={"Change password"} className={"Profile_Page_ChangePAss"}/>
+
+            {userRole === "student" ? <Dropdown currentOption={inputStates.skill.value}
+                      setCurrentOption={inputStates.skill.setValue}
+                      dropOptions={[
+                          {label: "Advanced", value: "Advanced"},
+                          {label: "Intermediate", value: "Intermediate"},
+                          {label: "Beginner", value: "Beginner"},
+                          {label: "Prefer not to say", value: null}]}
+                      className={"profilePage_dropdown"}/>: ""}
+            <Button type={"secondary"} height={42} width = {188}label={"Change password"} className={"Profile_Page_ChangePass"}/>
             <Button type={"primary"} height={42} width={150}label={"SAVE"} className={"Profile_Page_Save"}
                     onClick={handleSubmit} status={loadingState}/>
         </div>)}

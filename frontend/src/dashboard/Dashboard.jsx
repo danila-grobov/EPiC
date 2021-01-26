@@ -2,6 +2,7 @@ import React, {useState,useEffect} from "react"
 import CourseCard from "./CourseCard";
 import "../scss/app.scss";
 import "../scss/dashboard/dashboard.scss";
+import ProfilePage from "../profile_page/ProfilePage";
 import Calendar from "./Calendar";
 import NavBar from "../NavBar/NavBar";
 import {ToastContainer} from 'react-toastify';
@@ -30,6 +31,7 @@ export default () => {
                 <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
                 <Switch>
                     <Route path="/profile">
+                        <ProfilePage userRole={"student"}/>
                     </Route>
                     <Route path="/coursePage/:course">
                         <CoursePage courses={courses}/>
