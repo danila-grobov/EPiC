@@ -1,8 +1,14 @@
-import React, {useState} from "react"
+/**
+ * @author Danila Grobov
+ */
+import React, {useState} from "react";
 import SearchPhrase from "../table/SearchPhrase";
 import axios from "axios_redirect";
 import {toast} from "react-toastify";
 
+/**
+ * Handles all the operations related to managing the student invites.
+ */
 export default (course) => {
     const [invites, setInvites] = useState([]);
     const deleteInvite = index => setInvites([...invites.slice(0, index), ...invites.slice(index + 1)]);
@@ -11,7 +17,7 @@ export default (course) => {
         <SearchPhrase index={index} key={index} value={invite} onDelete={deleteInvite}/>
     ).reverse();
     const sendInvites = setLoadState => {
-        setLoadState("loading")
+        setLoadState("loading");
         axios.post('/api/t/students', {invites, course})
             .then(function ({data: errors}) {
                 setTimeout(() => {
@@ -24,8 +30,8 @@ export default (course) => {
                     }
                 }, 500);
                 setTimeout(() => setLoadState("idle"), 1500);
-            })
-    }
+            });
+    };
     return {
         invites,
         setInvites,
@@ -33,5 +39,5 @@ export default (course) => {
         deleteInvite,
         resetInvites,
         getInviteElements
-    }
-}
+    };
+};

@@ -23,8 +23,8 @@ export default (props) => {
                 <button className="dropbtn">{currentOption.label}</button>
 
                 { isShown === true ? <div id= "dropdownContent" className="dropdown-content">
-                    {dropOptions.map((dropOption) =>
-                        <li><a onMouseDown={(event) => setCurrentOption(dropOption)}>{dropOption.label}</a></li>
+                    {dropOptions.map((dropOption,index) =>
+                        <li key={"dropOption"+index}><a onMouseDown={(event) => setCurrentOption(dropOption)}>{dropOption.label}</a></li>
                     )}
 
                 </div> : ""}

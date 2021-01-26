@@ -1,17 +1,32 @@
-import React, {useState} from "react";
+/**
+ * @author Danila Grobov
+ */
+import React from "react";
 import arrow from "../imgs/arrow.svg";
 import arrow_d from "../imgs/arrow_disabled.svg";
 import doubleArrow from "../imgs/doubleArrow.svg";
 import doubleArrow_d from "../imgs/doubleArrow_disabled.svg";
 import {useLayoutEffect} from "react";
 
+/**
+ * Generates an array of integers in the supplied range.
+ * @param from
+ * @param to
+ * @returns an array of ints
+ */
 const getNumberRange = (from, to) => {
     if (from <= to) {
         const numbers = Array(to - from + 1).keys();
         return [...numbers].map(number => number + from);
     }
-    return []
-}
+    return [];
+};
+/**
+ * Creates an array of page-numbers order as they are supposed to be shown in the pagination.
+ * @param currentPage
+ * @param pageCount
+ * @returns an array of integers(page-numbers)
+ */
 const getOrderedPages = (currentPage, pageCount) => {
     let nOfPagesAfter = pageCount - currentPage;
     let nOfPagesBefore = Math.max(0, currentPage - 1);
@@ -30,21 +45,24 @@ const getOrderedPages = (currentPage, pageCount) => {
         currentPage + 1,
         Math.min(pageCount, currentPage + nOfPagesAfter));
     return [...numbersBeforeCurr, currentPage, ...numbersAfterCurr].slice(0,5);
-}
+};
+/**
+ * Determines, which page is going to be shown.
+ */
 export default props => {
     const {rowCount, total, setCurrentPage, currentPage} = props;
     const pageCount = Math.ceil(total / rowCount);
-    const moveCurrPage = dir => {
+    const moveCurrPage = dir => { //Change the current page to the next one in a supplied direction.
         let newPage = currentPage + dir;
         if (newPage > pageCount) newPage = pageCount;
         if (newPage < 1) newPage = 1;
         setCurrentPage(newPage);
-    }
+    };
     useLayoutEffect( () => {
         if(currentPage > pageCount && pageCount !== 0) {
-            setCurrentPage(pageCount)
+            setCurrentPage(pageCount);
         }
-    },[rowCount])
+    },[rowCount]);
     return (
         <div className="tablePagination">
             <img src={currentPage === 1 ? doubleArrow_d : doubleArrow}
@@ -72,5 +90,5 @@ export default props => {
                  alt="right double arrow" className="tablePagination__arrow"
                  onClick={() => setCurrentPage(pageCount)}/>
         </div>
-    )
-}
+    );
+};

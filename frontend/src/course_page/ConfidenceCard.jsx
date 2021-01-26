@@ -1,11 +1,16 @@
-import React, {useState} from "react";
+/**
+ * @author Danila Grobov
+ */
+import React, {useState, useLayoutEffect} from "react";
 import "../scss/course_page/confidenceCard.scss";
 import Trackbar from "./Trackbar";
 import Button from "../general_components/Button";
 import axios from "axios_redirect";
 
-export default props => {
-    const {name} = props;
+/**
+ * Manages student's confidence.
+ */
+export default ({course}) => {
     const [loadingState, setLoadingState] = useState("idle");
     const confidenceLevels = [
         "Very unconfident",
@@ -13,8 +18,12 @@ export default props => {
         "Sort of confident",
         "Confident",
         "Very confident"
-    ]
+    ];
     const [selectedOption, setSelectedOption] = useState(2);
+    useLayoutEffect(() => {
+        axios.get('/api/s/confidence', {params: {course}})
+            .then(({data}) => setSelectedOption(data.confidence));
+    }, [course]);
     return (
         <div className="confidenceCard">
             <span className="confidenceCard__title">
@@ -33,13 +42,13 @@ export default props => {
                             setLoadingState("loading");
                             axios.post('/api/s/confidence', {
                                     confidence: selectedOption,
-                                    course: name
+                                    course
                                 }
                             ).then(() => {
                                 setTimeout(() => setLoadingState("done"), 500);
-                                setTimeout(() => setLoadingState("idle"),1500);
+                                setTimeout(() => setLoadingState("idle"), 1500);
                             })
                         }}/>
         </div>
     );
-}
+};

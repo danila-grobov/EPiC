@@ -1,6 +1,12 @@
+/**
+ * @author Danila Grobov
+ */
 import React from "react";
 import SizeDropdown from "./SizeDropdown";
 
+/**
+ * Displays the information and a selector for the amount of rows being displayed in the table.
+ */
 export default props => {
     const {total, rowCount, setRowCount, currentPage} = props;
     return (
@@ -12,5 +18,5 @@ export default props => {
             </span>
             <SizeDropdown total={total} rowCount={rowCount} setRowCount={setRowCount}/>
         </div>
-    )
-}
+    );
+};

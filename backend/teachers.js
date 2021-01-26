@@ -2,7 +2,6 @@
  * @author Sofia Trevino
  */
 import {getDBSession} from "./database";
-import {emailMessage} from "./email";
 import {escape} from "sqlstring";
 import React from "react";
 
@@ -36,6 +35,7 @@ export function getTeacherData(email){
            const[firstName] = results[0].fetchOne();
            const courses = results[1].fetchAll().map(course => course[0]);
            return {firstName, courses};
+
         })
 
 }

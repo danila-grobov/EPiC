@@ -1,7 +1,7 @@
 /**
  * @author Sofia Trevino, Danila Grobov
  */
-import React, {useState,useEffect} from "react"
+import React, {useState,useEffect} from "react";
 import CourseCard from "./CourseCard";
 import "../scss/app.scss";
 import "../scss/dashboard/dashboard.scss";
@@ -32,7 +32,6 @@ export default () => {
     },[]);
     return (
         <Router>
-            <ToastContainer/>
             <div className="dashboard">
                 <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
                 <Switch>
@@ -54,7 +53,7 @@ export default () => {
                     </Route>
                 </Switch>
             </div>
+            <ToastContainer/>
         </Router>
-    )
-
-}
+    );
+};

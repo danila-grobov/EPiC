@@ -1,5 +1,8 @@
-import React, {useState} from "react"
-import FancyInput from "../general_components/FancyInput";
+/**
+ * @author Danila Grobov
+ */
+import React, {useState} from "react";
+import FancyInput from "../general_components/TextInput/FancyInput";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";
@@ -8,11 +11,14 @@ import "../scss/app.scss";
 import axios from "axios_redirect";
 import md5 from "md5";
 
+/**
+ * Displays a login form and allows users to login into the system.
+ */
 export default () => {
     const inputStates = {
         userName: {...useValue(""), ...useValid("text")},
         password: {...useValue(""), ...useValid("text")},
-    }
+    };
     const [loadingState, setLoadingState] = useState("idle");
     const handleLogin = () => {
         const inputsValid = Object.keys(inputStates).reduce((valid, inputType) => {
@@ -20,7 +26,7 @@ export default () => {
             return checkValidity(value) && valid;
         }, true);
         if (inputsValid) {
-            setLoadingState("loading")
+            setLoadingState("loading");
             axios
                 .get("/api/login", {
                     params: {
@@ -34,19 +40,20 @@ export default () => {
                         setLoadingState("error")
                         setTimeout(() => setLoadingState("idle"),1000);
                     }
-            })
+            });
         }
-    }
+    };
     return (
         <div className="loginPage">
             <span className="loginPage__title">EPiC Login</span>
             <div className="loginPage__inputs">
-                <FancyInput onSubmit={handleLogin} label={"Username"} {...inputStates.userName} />
-                <FancyInput onSubmit={handleLogin} label={"Password"} type={"password"} {...inputStates.password} />
+                <FancyInput onSubmit={handleLogin} label={"Username"} {...inputStates.userName} width={"auto"}/>
+                <FancyInput onSubmit={handleLogin} label={"Password"} type={"password"}
+                            {...inputStates.password}  width={"auto"}/>
             </div>
             <Button type={"primary"} className={"loginPage__button"} label={"LOGIN"} height={42} onClick={handleLogin}
                     status={loadingState}
             />
         </div>
-    )
-}
+    );
+};

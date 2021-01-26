@@ -1,8 +1,14 @@
-import React, {useState} from "react";
+/**
+ * @author Danila Grobov
+ */
+import React from "react";
 import "../scss/table/tableNavigation.scss";
 import TablePagination from "./TablePagination";
 import TableSizeSelector from "./TableSizeSelector";
 
+/**
+ * Displays the navigation components for the table.
+ */
 export default ({rowCount, currentPage, setCurrentPage, setRowCount, total}) => {
     return (
         <div className="tableNavigation">
@@ -11,4 +17,4 @@ export default ({rowCount, currentPage, setCurrentPage, setRowCount, total}) => 
             <TableSizeSelector currentPage={currentPage} total={total} rowCount={rowCount} setRowCount={setRowCount}/>
         </div>
     );
-}
+};

@@ -20,23 +20,23 @@ import axios from "axios_redirect";
 export default (props) => {
     const {currentOption, setCurrentOption, userRole, pagePaths} = props;
     const [courses, setCourses] = useState([]); //courses for the dropdown menu on teacher nav-bars
-    const dropOptions = courses.map((course) =>({label:course,value:course}));
-    const[firstName,setFirstName] = useState(""); //sets the user's first name in the nav-bar
+    const dropOptions = courses.map((course) => ({label: course, value: course}));
+    const [firstName, setFirstName] = useState(""); //sets the user's first name in the nav-bar
     let currentPath = useLocation(); //gets the current path/route
 
     //retrieving data from the backend for teachers (their first name, as well as the modules they teach).
-    if(userRole === "teacher"){
-        useEffect(()=> {
+    if (userRole === "teacher") {
+        useEffect(() => {
             axios.get('/api/t/teachers').then(({data}) => {
                 setFirstName(data.firstName);
                 setCourses(data.courses);
-                setCurrentOption({value : data.courses[0], label : data.courses[0] });
+                setCurrentOption({value: data.courses[0], label: data.courses[0]});
             })
         }, [])
     }
     //retrieving data from the backed for students (their first name).
-    if(userRole === "student"){
-        useEffect(()=> {
+    if (userRole === "student") {
+        useEffect(() => {
             axios.get('/api/s/student').then(({data}) => {
                 setFirstName(data);
             })
@@ -48,20 +48,26 @@ export default (props) => {
     return (
         <div className="menuBase">
 
-            { userRole === "teacher" ? <Dropdown dropOptions={dropOptions} currentOption={currentOption}
-                                               setCurrentOption={setCurrentOption} /> : ""}
+            {userRole === "teacher" ? <Dropdown dropOptions={dropOptions} currentOption={currentOption}
+                                                setCurrentOption={setCurrentOption}/> : ""}
 
-            <div className={ "navMainMenu" + (userRole === "student" ? " navMainMenu--Student": "")}>
+            <div className={"navMainMenu" + (userRole === "student" ? " navMainMenu--Student" : "")}>
 
                 <Link to="/home" className="epicLogo">EPiC</Link>
 
                 <div className="innerMenu">
 
-                    <div className= "pages">
+                    <div className="pages">
                         <ul className="ulStyle">
-                            {pagePaths.map((page) =>
-                                <li className={(page.path === currentPath.pathname ? "pageName pageNameActive liStyle":"pageName liStyle")}>
-                                    {page.link}</li>)}
+                            {pagePaths.map((page, index) =>
+                                <li key={`navLink${index}`}
+                                    className={(
+                                        page.path === currentPath.pathname
+                                            ? "pageName pageNameActive liStyle"
+                                            : "pageName liStyle"
+                                    )}>
+                                    {page.link}
+                                </li>)}
                         </ul>
                     </div>
 

@@ -2,7 +2,6 @@
  * @author Sofia Trevino
  */
 import {getDBSession} from "./database";
-import {emailMessage} from "./email";
 import {escape} from "sqlstring";
 import React from "react";
 

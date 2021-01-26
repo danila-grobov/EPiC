@@ -1,3 +1,6 @@
+/**
+ * @author Danila Grobov
+ */
 import mailer from "nodemailer";
 
 const emailCredentials = {
@@ -5,6 +8,11 @@ const emailCredentials = {
     pass: "G(R:fQ+v]Mn7W$/"
 }
 
+/**
+ * Sends messages to the supplied email addresses.
+ * @param emails
+ * @returns Promise()
+ */
 export function sendMessagesInBulk(emails) {
     const emailTransporter = mailer.createTransport({
         host: "smtp.gmail.com",
@@ -20,6 +28,13 @@ export function sendMessagesInBulk(emails) {
     }, Promise.resolve()).then(() => emailTransporter.close())
 }
 
+/**
+ * Sends a message to an email.
+ * @param message
+ * @param email
+ * @param emailTransporter
+ * @returns Promise()
+ */
 export function emailMessage(message, email, emailTransporter) {
     return new Promise((resolve, reject) =>
         emailTransporter.sendMail({

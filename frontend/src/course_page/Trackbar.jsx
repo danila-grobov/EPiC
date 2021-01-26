@@ -1,3 +1,6 @@
+/**
+ * @author Danila Grobov
+ */
 import React, {useState, useEffect, useRef} from "react";
 import "../scss/trackbar.scss";
 import Draggable from 'react-draggable';
@@ -7,6 +10,9 @@ import confused from "../imgs/confused.svg";
 import sad from "../imgs/sad.svg";
 import unhappy from "../imgs/unhappy.svg";
 
+/**
+ * Displays a trackbar.
+ */
 export default props => {
     const [trackProps, setTrackProps] = useState(null);
     const sliderTrack = useRef(null);
@@ -39,4 +45,4 @@ export default props => {
         </div>
 
     );
-}
+};

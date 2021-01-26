@@ -1,6 +1,12 @@
-import React from "react"
+/**
+ * @author Danila Grobov
+ */
+import React from "react";
 import removeIcon from "../imgs/remove.svg";
 
+/**
+ * Component that displays search phrase and a delete button.
+ */
 export default props => {
     const {value, index, onDelete: handleDelete} = props;
     return (
@@ -11,5 +17,5 @@ export default props => {
             <img src={removeIcon} role={"button"} aria-label={"remove filter"} className="searchPhrase__remove"
                  onClick={() => handleDelete(index)}/>
         </div>
-    )
-}
+    );
+};

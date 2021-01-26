@@ -1,18 +1,23 @@
-import React, {useState, useLayoutEffect} from "react"
+/**
+ * @author Danila Grobov
+ */
+import React, {useState, useLayoutEffect} from "react";
 import "../scss/course_page/deadlines.scss";
 import ScrollableContainer from "../general_components/ScrollableContainer";
 import axios from "axios_redirect";
 
-export default props => {
-    const {name} = props;
+/**
+ * Displays all the deadlines for the course.
+ */
+export default ({course}) => {
     const [deadlines, setDeadlines] = useState([]);
     useLayoutEffect(() => {
         axios
-            .get('/api/s/deadlines', {params: {course: name}})
+            .get('/api/s/deadlines', {params: {course}})
             .then(({data: deadlines}) => {
-                setDeadlines(deadlines)
-            })
-    }, []);
+                setDeadlines(deadlines);
+            });
+    }, [course]);
     return (
         <div className="deadlines">
             <span className="deadlines__title">Deadlines</span>
@@ -31,5 +36,5 @@ export default props => {
                 }
             </ScrollableContainer>
         </div>
-    )
-}
+    );
+};
