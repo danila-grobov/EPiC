@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import FancyInput from "../general_components/FancyInput";
+import FancyInput from "../general_components/TextInput/FancyInput";
 import "../scss/registration_page/registrationForm.scss";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
@@ -64,9 +64,10 @@ export default props => {
     }
     return (
         <div className="registrationForm">
-            <FancyInput onSubmit={handleSubmit} label={"First name"} {...inputStates.firstName}/>
-            <FancyInput onSubmit={handleSubmit} label={"Last name"} {...inputStates.lastName}/>
-            <FancyInput onSubmit={handleSubmit} label={"Username"} charLimit={20} {...inputStates.userName}/>
+            <FancyInput onSubmit={handleSubmit} label={"First name"} {...inputStates.firstName} width={"auto"}/>
+            <FancyInput onSubmit={handleSubmit} label={"Last name"} {...inputStates.lastName} width={"auto"}/>
+            <FancyInput onSubmit={handleSubmit} label={"Username"} maxLength={20}
+                        {...inputStates.userName} width={"auto"}/>
             <Dropdown currentOption={inputStates.skill.value}
                       setCurrentOption={inputStates.skill.setValue}
                       dropOptions={[
@@ -96,12 +97,12 @@ export default props => {
                       ]}
                       className={"registrationForm__dropdown"}
             />
-            <FancyInput onSubmit={handleSubmit} label={"Password"} type={"password"} charCounter={false}
-                        charLimit={30} {...inputStates.password}/>
-            <FancyInput onSubmit={handleSubmit} label={"Confirm password"} type={"password"} charCounter={false}
-                        charLimit={30} {...inputStates.confirmPassword}/>
+            <FancyInput onSubmit={handleSubmit} label={"Password"} type={"password"} width={"auto"}
+                        maxLength={30} {...inputStates.password}/>
+            <FancyInput onSubmit={handleSubmit} label={"Confirm password"} type={"password"} width={"auto"}
+                        maxLength={30} {...inputStates.confirmPassword}/>
             <FancyInput onSubmit={handleSubmit} type={"email"} label={"Email address"}
-                        className={"registrationForm__email"} charLimit={40} value={email} disabled={true}/>
+                        className={"registrationForm__email"} maxLength={40} value={email} disabled={true}/>
             <Button type={"primary"} height={42} label={"REGISTER"} className={"registrationForm__button"}
                     onClick={handleSubmit} status={loadingState}/>
         </div>

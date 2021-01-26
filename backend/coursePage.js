@@ -7,7 +7,7 @@ export function getDeadlines(email) {
         session.sql("USE EPiC").execute();
         const dateInAMonth = moment().add(30, 'days').format('YYYY-MM-DD');
         const SQL = `
-            SELECT t.Deadline, c.Color, t.TaskTitle
+            SELECT t.Deadline, c.Color, t.TaskName
             FROM Grades AS g
             JOIN Tasks t ON t.CourseName = g.CourseName
             JOIN Courses c ON c.CourseName = t.CourseName
@@ -59,7 +59,7 @@ export function getDeadlinesByCourse(email, course) {
     return getDBSession(session => {
         session.sql('USE EPiC').execute();
         return session.sql(`
-            SELECT t.TaskTitle, t.Deadline, td.taskID
+            SELECT t.TaskName, t.Deadline, td.taskID
             FROM Tasks AS t
             LEFT JOIN TasksDone td ON t.TaskID = td.TaskID AND Email = ${escape(email)}
             WHERE t.CourseName = ${escape(course)} AND t.Deadline IS NOT NULL
@@ -84,5 +84,20 @@ export function setConfidence(course, email, confidence) {
             VALUES(${escape(email)}, ${escape(course)}, ${escape(date)}, ${escape(confidence)})
             ON DUPLICATE KEY UPDATE ConfidenceLevel=${escape(confidence)}
         `).execute();
+    })
+}
+
+export function getConfidence(email, course) {
+    return getDBSession(session => {
+        session.sql("USE EPiC").execute();
+        const date = moment().format("YYYY-MM-DD");
+        return session.sql(`
+            SELECT ConfidenceLevel
+            FROM Confidence
+            WHERE Date=${escape(date)} AND Email=${escape(email)} AND CourseName=${escape(course)}
+        `).execute();
+    }).then(res => {
+        const fetchedResult = res.fetchOne();
+        return fetchedResult === undefined ? 2 : fetchedResult[0];
     })
 }

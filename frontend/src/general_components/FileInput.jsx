@@ -1,6 +1,6 @@
 import React, {useRef, cloneElement} from "react"
 import {toast} from 'react-toastify';
-import {inputTypes} from "./FancyInput";
+import {inputTypes} from "./TextInput/inputTypes";
 
 export default props => {
     const fileInput = useRef(null);

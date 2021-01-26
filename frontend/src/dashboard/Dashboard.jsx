@@ -32,7 +32,6 @@ export default () => {
     },[]);
     return (
         <Router>
-            <ToastContainer/>
             <div className="dashboard">
                 <NavBar className="navwidth" userRole={"student"} pagePaths={pagePaths}/>
                 <Switch>
@@ -54,6 +53,7 @@ export default () => {
                     </Route>
                 </Switch>
             </div>
+            <ToastContainer/>
         </Router>
     )
 
