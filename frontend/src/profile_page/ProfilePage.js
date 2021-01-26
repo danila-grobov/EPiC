@@ -1,17 +1,21 @@
-import React, { Component } from "react";
-import "./app.scss";
-import Profile from "../Profile";
+/**
+ * @author Maxime Champagne
+ */
+import React, { useState } from "react";
 import Button from "../general_components/Button";
 import useValue from "../hooks/useValue";
 import useValid from "../hooks/useValid";
-import FancyInput from "../general_components/FancyInput";
+import FancyInput from "../general_components/TextInput/FancyInput.jsx";
 import Dropdown from "../general_components/Dropdown";
+import "../scss/profile_page/profilePage.scss"
 import axios from "axios";
 import {toast} from "react-toastify";
+import profilePhoto from "../imgs/profilePhoto.svg";
 export default props => {
     const {inviteToken, email} = props;
     const [loadingState, setLoadingState] = useState("idle");
     const inputStates = {
+        email: {...useValue(""), ...useValid("email")},
         firstName: {...useValue(""), ...useValid("text")},
         lastName: {...useValue(""), ...useValid("text")},
         userName: {...useValue(""), ...useValid("text")},
@@ -49,21 +53,14 @@ export default props => {
             });
     }}
     return (
-        <div className="registrationForm">
-            <FancyInput label={"First name"} {...inputStates.firstName}/>
-            <FancyInput label={"Last name"} {...inputStates.lastName}/>
-            <FancyInput label={"Username"} charLimit={20} {...inputStates.userName}/>
-            <Dropdown currentOption={inputStates.skill.value}
-                      setCurrentOption={inputStates.skill.setValue}
-                      dropOptions={[
-                          {label: "Advanced", value: "Advanced"},
-                          {label: "Intermediate", value: "Intermediate"},
-                          {label: "Beginner", value: "Beginner"},
-                          {label: "Prefer not to say", value: null}]}
-                      className={"registrationForm__dropdown"}
-            />
+        <div className="profilePage">
+            <img src={profilePhoto} alt="Your profile photo" className="profile_icon" height={100} width={100}/>
+            <FancyInput label={"First name"} {...inputStates.firstName} width = "auto" />
+          <FancyInput label={"Last name"} {...inputStates.lastName} width = "auto"/>
+            <FancyInput label={"Username"} charLimit={20} {...inputStates.userName} width = "auto"/>
             <FancyInput type={"email"} label={"Email address"} className={"Profile_Page_Email"} charLimit={40}
-                        value={email} disabled={true}/>
-            <Button type={"primary"} height={42} label={"SAVE"} className={"Profile_Page_Save"}
+                        {...inputStates.email} autoWidth={true}/>
+            <Button type={"secondary"} height={42} width = {188}label={"Change password"} className={"Profile_Page_ChangePAss"}/>
+            <Button type={"primary"} height={42} width={150}label={"SAVE"} className={"Profile_Page_Save"}
                     onClick={handleSubmit} status={loadingState}/>
         </div>)}

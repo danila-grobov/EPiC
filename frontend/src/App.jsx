@@ -4,6 +4,7 @@ import Table from "./table/Table";
 import NavBar from "./NavBar/NavBar";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Profile_Page from "./profile_page/ProfilePage";
 import {
     BrowserRouter as Router,
     Switch,
@@ -28,6 +29,7 @@ const App = () => {
                         userRole="teacher"/>
                 <Switch>
                     <Route path="/profile">
+                        <Profile_Page/>
                     </Route>
                     <Route path="/manage">
                         <Table course={currentOption.value}/>

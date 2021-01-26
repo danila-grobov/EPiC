@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Profile_Page/app.scss";
+import "./profile_page/app.scss";
 function Profile() {
     //Get teacher info here
     const teacherID = "dwightSchrute";
