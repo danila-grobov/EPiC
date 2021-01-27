@@ -1,0 +1,22 @@
+/**
+ * @author Maxime Champagne
+ */
+.ProfilePage{background: white;
+border-radius: 15px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1.5fr;
+  column-gap: 30px;
+  padding: 40px;
+  row-gap: 20px;
+  min-height: 376px;
+  grid-auto-rows: min-content;
+}
+.profile_icon{
+  grid-column: 1 / 5;
+  grid-row: 1;
+}
+.ProfilePageSave{
+  justify-self: end;
+  grid-row: 4;
+  grid-column: 1/5;
+}

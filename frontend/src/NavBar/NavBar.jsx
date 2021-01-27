@@ -73,7 +73,7 @@ export default (props) => {
 
                     <div className="separator"/>
 
-                    <Link to="/profile" className="userName">{name}</Link>
+                    <Link to="/profile" className="userName">{name} </Link>
                     <img src={profilePhoto} alt="Your profile photo" className="profile__icon"/>
 
                     <Button height={32} label="LOGOUT" onClick={() => axios.get('/logout')}
