@@ -1,7 +1,15 @@
+/**
+ * @author Erikas Nakonecnikovas
+ */
 @import 'colors';
 @import 'fonts';
 
-#task-desc{
+/**
+ The scss file is responsible for all styling that occurs in the task description
+ component of the main task component.
+ */
+
+.task-desc{
   margin-left: 20px;
   margin-top: 5px;
   font-family: $font_sanspro;
@@ -11,8 +19,8 @@
   grid-column-end: 4;
   padding: 5px;
 }
-
-#task-desc:focus{
+/* will occur when component is clicked */
+.task-desc:focus{
   border: 1px solid $text_secondary;
   border-radius: 5px;
 }

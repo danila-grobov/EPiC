@@ -1,5 +1,14 @@
+/**
+ * @author Erikas Nakonecnikovas
+ */
 @import 'colors';
 @import 'fonts';
+
+/**
+ The scss file is responsible for all styling that occurs in the main body
+ containing all of the tasks. A grid display is used to format the information
+ presented to the user by frontend.
+ */
 
 .tasks-list {
   width: 100%;
