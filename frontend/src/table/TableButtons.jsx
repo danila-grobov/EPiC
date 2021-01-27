@@ -22,7 +22,7 @@ export default props => {
     return (
         <div className="tableButtons">
             <TableButton icon={remove} title={"remove selected"}
-                         onClick={() => removeFromCourse(course,emails, updateTable, reset)}/>
+                         onClick={() => removeFromCourse(course, emails, updateTable, reset)}/>
             <TableButton onClick={openPopup} icon={add} title={"invite student"}/>
             <FileInput setFileData={setFileData}
                        button={<TableButton icon={upload} title={"import grades"}/>}
@@ -40,16 +40,34 @@ export default props => {
  * @param reset: unselect all rows.
  */
 function removeFromCourse(course, emails, updateTable, reset) {
-    if (emails.length !== 0)
-        axios
-            .delete('/api/t/students', {
-                params: {emails,course},
+    if (emails.length !== 0 && emails.length <= 50)
+        Promise.all(chunk(emails, 10).map(chunk =>
+            axios.delete('/api/t/students', {
+                params: {emails: chunk, course},
                 paramsSerializer: params => stringify(params)
             })
-            .then(() => {
-                reset();
-                updateTable();
-            });
+        )).then(() => {
+            reset();
+            updateTable();
+        });
+    else if (emails.length > 50)
+        toast.error("Cannot remove more than 50 students at a time.");
+}
+
+/**
+ * Splits an array into chunks
+ * @param array
+ * @param size - size of a single chunk
+ * @returns array of chunks
+ */
+function chunk(array, size) {
+    const chunked_arr = [];
+    const copied = [...array];
+    const numOfChild = Math.ceil(copied.length / size);
+    for (let i = 0; i < numOfChild; i++) {
+        chunked_arr.push(copied.splice(0, size));
+    }
+    return chunked_arr;
 }
 
 /**
@@ -59,7 +77,7 @@ function removeFromCourse(course, emails, updateTable, reset) {
  */
 function setGrades(data, course) {
     if (data.length !== 0)
-        axios.put("/api/t/students/grade", {data,course}).then(
+        axios.put("/api/t/students/grade", {data, course}).then(
             () => toast.success("The grades were successfully updated!")
         );
 }
