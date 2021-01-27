@@ -164,6 +164,10 @@ VALUES ('Test1',
         'Male',
         'accepted');
 
+# Sample unregistered student.
+INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus)
+VALUES ('22334bb017fe1730', null, null, null, 'studentsemail@ncl.ac.uk', null, null, null, 'waiting');
+
 # Create sample course data
 INSERT INTO EPiC.Courses (CourseName, Color, FullCourseName)
 VALUES ('CSC2033', '#7A306C', 'Software Engineering Team Project');

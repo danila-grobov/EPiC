@@ -12,6 +12,7 @@ export default props => {
     const {invites, setInvites} = props;
     const {errorMessage, checkValidity} = useValid("email");
     const emailInput = useRef(null);
+    const emailMaxLength = 30;
     const {reset:resetEmail,value:email,setValue:setEmail} = useValue("");
     const addInvite = invite => {
         if(checkValidity(invite)) {
@@ -22,7 +23,7 @@ export default props => {
     };
     return <>
         <FancyInput label={"Email"} className={"invitePopup__input"} errorMessage={errorMessage}
-                    type={"email"} onSubmit={addInvite} maxLength={30} autoWidth={true}
+                    type={"email"} onSubmit={addInvite} maxLength={emailMaxLength} autoWidth={true}
                     value={email} setValue={setEmail} inputRef={emailInput}/>
         <div className="invitePopup__addButton" onClick={() => addInvite(email)}>ADD</div>
         <FileInput setFileData={setInvites}

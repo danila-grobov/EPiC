@@ -59,8 +59,8 @@ export default props => {
             <img src={profilePhoto} alt="Your profile photo" className="profile_icon" height={100} width={100}/>
             <FancyInput label={"First name"} {...inputStates.firstName} width = "auto" />
           <FancyInput label={"Last name"} {...inputStates.lastName} width = "auto"/>
-            <FancyInput label={"Username"} charLimit={20} {...inputStates.userName} width = "auto"/>
-            <FancyInput type={"email"} label={"Email address"} className={"ProfilePageEmail"} charLimit={40}
+            <FancyInput label={"Username"} maxLength={20} {...inputStates.userName} width = "auto"/>
+            <FancyInput type={"email"} label={"Email address"} className={"ProfilePageEmail"} maxLength={40}
                         {...inputStates.email} autoWidth={true}/>
                         {/*The dropdown only shows for students*/}
             {userRole === "student" ? <Dropdown currentOption={inputStates.skill.value}
@@ -72,7 +72,7 @@ export default props => {
                           {label: "Prefer not to say", value: null}]}
                       className={"profilePage_dropdown"}/>: ""}
             {/*Neither button currently works*/}
-            <Button type={"secondary"} height={42} width = {188}label={"Change password"} className={"ProfilePageChangePass"}/>
-            <Button type={"primary"} height={42} width={150}label={"SAVE"} className={"ProfilePageSave"}
+            <Button type={"secondary"} height={42} width = {188} label={"Change password"} className={"ProfilePageChangePass"}/>
+            <Button type={"primary"} height={42} width={150} label={"SAVE"} className={"ProfilePageSave"}
                     onClick={handleSubmit} status={loadingState}/>
         </div>)}

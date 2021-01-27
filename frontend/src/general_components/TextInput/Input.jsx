@@ -55,10 +55,10 @@ function getInputStates(props) {
             value: props.value,
             setValue: props.setValue
         };
-    const {onChange, value, setValue} = useValue("");
+    const {onChange, value, setValue} = useValue("", props.maxLength);
     return {
-        onChange,
+        setValue,
         value,
-        setValue: e => e.target.value.length <= props.maxLength ? setValue(e.target.value) : null
+        onChange
     };
 }

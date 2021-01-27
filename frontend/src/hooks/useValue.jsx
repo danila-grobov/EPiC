@@ -8,11 +8,11 @@ import {useState} from "react";
  * Typical use case: <input {...bind} type="text"/>
  * bind object contains all of the props needed to track the state of an input.
  */
-export default initialValue => {
+export default (initialValue, maxLength) => {
     const [value, setValue] = useState(initialValue);
     const onChange = e => {
         const newValue = e.target.value ? e.target.value : e.target.innerText;
-        setValue(newValue);
+        if (!maxLength || newValue.length <= maxLength) setValue(newValue);
     };
     return {
         value,

@@ -1,14 +1,13 @@
 import Table from "../frontend/src/table/Table";
-import React, {useState} from "react";
+import React from "react";
 import {
     render,
     fireEvent,
     screen,
-    act, cleanup
+    act
 } from '@testing-library/react';
-import {rest, setupWorker} from 'msw'
-import {setupServer} from 'msw/node'
-import {parse} from "qs";
+import {rest} from 'msw';
+import {setupServer} from 'msw/node';
 import TableContent from "../frontend/src/table/TableContent";
 import '@testing-library/jest-dom';
 import SearchArea from "../frontend/src/table/SearchArea";
@@ -16,7 +15,6 @@ import userEvent from "@testing-library/user-event";
 import Row from "../frontend/src/table/Row";
 import TablePagination from "../frontend/src/table/TablePagination";
 import path from "path";
-import TableButtons from "../frontend/src/table/TableButtons";
 import FileInput from "../frontend/src/general_components/FileInput";
 import {ToastContainer} from "react-toastify";
 import InvitePopup from "../frontend/src/table/InvitePopup";
