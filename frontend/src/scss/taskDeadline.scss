@@ -1,14 +1,22 @@
+/**
+ * @author Erikas Nakonecnikovas
+ */
 @import 'colors';
 @import 'fonts';
 
-#task-deadline{
+/**
+ The scss file is responsible for all styling that occurs in the task deadline
+ component of the main task component.
+ */
+
+.task-deadline{
   margin-left: 20px;
   border: 0;
   color: #6EB3CB; // Blue #6EB3CB as shown in design on figma, not found in colors.scss
   padding: 5px;
 }
-
-#task-deadline:focus{
+/* will occur when component is clicked */
+.task-deadline:focus{
   border: 1px solid #6EB3CB;
   border-radius: 15px;
 }
