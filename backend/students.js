@@ -230,6 +230,7 @@ export function checkInviteToken(inviteToken) {
  */
 export function getStudent(username, password) {
     return getDBSession(session => {
+
         session.sql("USE EPiC").execute();
         return session.sql(`
             SELECT Pwd, Email

@@ -94,12 +94,12 @@ export default ({course}) => {
                           setCurrentOption={setPieDateFilter}
                           dropOptions={[
                               {label: moment().format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
-                              {label: moment().subtract(1, 'd').format("DD-MM-YYYY"), value: moment(1, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(2, 'd').format("DD-MM-YYYY"), value: moment(2, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(3, 'd').format("DD-MM-YYYY"), value: moment(3, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(4, 'd').format("DD-MM-YYYY"), value: moment(4, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(5, 'd').format("DD-MM-YYYY"), value: moment(5, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(6, 'd').format("DD-MM-YYYY"), value: moment(6, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(1, 'd').format("DD-MM-YYYY"), value: moment().subtract(1, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(2, 'd').format("DD-MM-YYYY"), value: moment().subtract(2, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(3, 'd').format("DD-MM-YYYY"), value: moment().subtract(3, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(4, 'd').format("DD-MM-YYYY"), value: moment().subtract(4, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(5, 'd').format("DD-MM-YYYY"), value: moment().subtract(5, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(6, 'd').format("DD-MM-YYYY"), value: moment().subtract(6, 'd').format("YYYY-MM-DD")},
                           ]}
                     />
                     {/*Pie chart, passing values from dropdowns and course from nav bar.*/}
@@ -145,12 +145,12 @@ export default ({course}) => {
                     <h3>Average Confidence VS. Average Grade</h3>
                     {/*Filter for scatter graph.*/}
                     <Dropdown currentOption={currentOptionLimitedFilter}
-                              setCurrentOption={setCurrentOptionLimitedFilter}
-                              dropOptions={[
-                                  {label: "Gender", value: "Gender"},
-                                  {label: "Nationality", value: "Nationality"},
-                                  {label: "Ability", value: "Ability"}
-                              ]}
+                          setCurrentOption={setCurrentOptionLimitedFilter}
+                          dropOptions={[
+                              {label: "Gender", value: "Gender"},
+                              {label: "Nationality", value: "Nationality"},
+                              {label: "Ability", value: "Ability"}
+                          ]}
                     />
                     {/*Scatter graph, passing value from dropdown and course from nav bar.*/}
                     <ScatterGraph course={course} filter={currentOptionLimitedFilter.value}/>
