@@ -54,7 +54,7 @@ JSON files of student emails, or manually, to invite them to one of their course
 ####Logging in - 
 * You can log in as a teacher by using the username "Teacher1", and the password "Teacher1"
 
-####Pages (App.jsx) - 
+####Pages - 
 * **Home**: After logging in, teachers are able to see the dashboard for one of the courses they teach. Using the dropdown 
   button in the navigation bar, a teacher can toggle between the various courses they teach. Each course dashboard has
   an insights bar at the top, that when fully implemented, would show a statement describing unusual trends for that 
@@ -78,10 +78,11 @@ whe fully implemented, they can edit their profile data.
 * When students receive their registration link, they'll be sent to the registration form which allows them to creat a
 a username, password, and answer some questions for us which help with tracking progress of various student groups. 
 * Our program uses Gmail as our SMTP server.
+* If you'd like to try out registering yourself, here is a registration link that is unused: 
 
 ####Logging in -
 * You can log in as a student by using the username "Test1" and the password "Test1234"
-####Pages (Dashboard.jsx) -
+####Pages -
 * **Home**: After logging in, students are able to see their dashboard. Students are greeted by a
   calendar that displays the date, as well as some any deadlines they have within the next month. Below this are the
   course cards for each module a student is enrolled in. It displays the course code as well as the progress bar.
@@ -166,9 +167,18 @@ compliance with the business requirements and verify if it is has met the requir
 making sure the three main requirements for the EPiC project are met. We have also included tests for the registration
 and login pages. 
 
+* Edge Cases:
+  * Using Internet Explorer
+  * Sending no invites and many invites
+  * Importing unrelated files instead of JSON files
+  * Not completing the registration form
+  * SQL injections as the name
+  * Logging in incorrectly (without one of the inputs)
+
 These tests can be found in the ``__tests__`` folder within the EPiC project, and called ```req_testing_template.docx```
+and ```edge_testing_template.docx```.
 . The results cn be found within the ```__results__``` folder outside of the EPiC project, 
-called ```Testing_[person's name].docx```.
+called ```Testing_[person's name].docx``` and ```Edge_Testing.docx```.
 
 
 
