@@ -94,12 +94,12 @@ export default ({course}) => {
                           setCurrentOption={setPieDateFilter}
                           dropOptions={[
                               {label: moment().format("DD-MM-YYYY"), value: moment().format("YYYY-MM-DD")},
-                              {label: moment().subtract(1, 'd').format("DD-MM-YYYY"), value: moment(1, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(2, 'd').format("DD-MM-YYYY"), value: moment(2, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(3, 'd').format("DD-MM-YYYY"), value: moment(3, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(4, 'd').format("DD-MM-YYYY"), value: moment(4, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(5, 'd').format("DD-MM-YYYY"), value: moment(5, 'd').format("YYYY-MM-DD")},
-                              {label: moment().subtract(6, 'd').format("DD-MM-YYYY"), value: moment(6, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(1, 'd').format("DD-MM-YYYY"), value: moment().subtract(1, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(2, 'd').format("DD-MM-YYYY"), value: moment().subtract(2, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(3, 'd').format("DD-MM-YYYY"), value: moment().subtract(3, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(4, 'd').format("DD-MM-YYYY"), value: moment().subtract(4, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(5, 'd').format("DD-MM-YYYY"), value: moment().subtract(5, 'd').format("YYYY-MM-DD")},
+                              {label: moment().subtract(6, 'd').format("DD-MM-YYYY"), value: moment().subtract(6, 'd').format("YYYY-MM-DD")},
                           ]}
                     />
                     {/*Pie chart, passing values from dropdowns and course from nav bar.*/}
@@ -128,6 +128,18 @@ export default ({course}) => {
                 </div>
 
                 <div className="flex-item-full">
+                    {/*Line graph.*/}
+                    <h3>Average Confidence Over Time</h3>
+                    {/*Filter for line graph.*/}
+                    <Dropdown currentOption={currentOptionDateFilter}
+                              setCurrentOption={setCurrentOptionDateFilter}
+                              dropOptions={dateOptions}
+                    />
+                    {/*Line graph, passing value from dropdown and course from nav bar.*/}
+                    <LineGraph course={course} date={currentOptionDateFilter.value}/>
+                </div>
+
+                <div className="flex-item-full">
                     {/*Scatter graph.*/}
 
                     <h3>Average Confidence VS. Average Grade</h3>
@@ -143,19 +155,6 @@ export default ({course}) => {
                     {/*Scatter graph, passing value from dropdown and course from nav bar.*/}
                     <ScatterGraph course={course} filter={currentOptionLimitedFilter.value}/>
                 </div>
-
-                <div className="flex-item-full">
-                    {/*Line graph.*/}
-                    <h3>Average Confidence Over Time</h3>
-                    {/*Filter for line graph.*/}
-                    <Dropdown currentOption={currentOptionDateFilter}
-                              setCurrentOption={setCurrentOptionDateFilter}
-                              dropOptions={dateOptions}
-                    />
-                    {/*Line graph, passing value from dropdown and course from nav bar.*/}
-                    <LineGraph course={course} date={currentOptionDateFilter.value}/>
-                </div>
-
             </div>
             <ToastContainer />
         </div>
