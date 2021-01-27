@@ -36,10 +36,14 @@ export default course => {
     };
     //Fetch data and update the states with the results.
     const updateTable = () => {
+        let isMounted = true;
         fetchData().then(({students, count}) => {
-            setStudentData(students);
-            setTotal(count);
+            if (isMounted) {
+                setStudentData(students);
+                setTotal(count);
+            }
         });
+        return () => {isMounted = false};
     };
     useEffect(
         updateTable,

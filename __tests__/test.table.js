@@ -214,7 +214,7 @@ describe("Pagintaion", () => {
         expect(pageNumbers[3]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(pageNumbers[4]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(path.basename(lastPageArrow.src, '.svg')).toBe("doubleArrow");
-        expect(path.basename(nextPageArrow.src, '.svg')).toBe("arrow");
+        expect(path.basename(nextPageArrow.src, '.svg')).toBe("Arrow");
     })
     test("displays pagination with current page at the middle", () => {
         render(<TablePagination rowCount={5} total={60} currentPage={5}/>);
@@ -227,14 +227,14 @@ describe("Pagintaion", () => {
         } = getPaginationElements(screen);
 
         expect(path.basename(firstPageArrow.src, '.svg')).toBe("doubleArrow");
-        expect(path.basename(prevPageArrow.src, '.svg')).toBe("arrow");
+        expect(path.basename(prevPageArrow.src, '.svg')).toBe("Arrow");
         expect(pageNumbers[0]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(pageNumbers[1]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(pageNumbers[2]).toHaveClass('tablePagination__pageNumber--current');
         expect(pageNumbers[3]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(pageNumbers[4]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(path.basename(lastPageArrow.src, '.svg')).toBe("doubleArrow");
-        expect(path.basename(nextPageArrow.src, '.svg')).toBe("arrow");
+        expect(path.basename(nextPageArrow.src, '.svg')).toBe("Arrow");
     })
 
     test("displays pagination with current page at the end", () => {
@@ -248,7 +248,7 @@ describe("Pagintaion", () => {
         } = getPaginationElements(screen);
 
         expect(path.basename(firstPageArrow.src, '.svg')).toBe("doubleArrow");
-        expect(path.basename(prevPageArrow.src, '.svg')).toBe("arrow");
+        expect(path.basename(prevPageArrow.src, '.svg')).toBe("Arrow");
         expect(pageNumbers[0]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(pageNumbers[1]).not.toHaveClass('tablePagination__pageNumber--current');
         expect(pageNumbers[2]).not.toHaveClass('tablePagination__pageNumber--current');
