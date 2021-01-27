@@ -78,7 +78,8 @@ whe fully implemented, they can edit their profile data.
 * When students receive their registration link, they'll be sent to the registration form which allows them to creat a
 a username, password, and answer some questions for us which help with tracking progress of various student groups. 
 * Our program uses Gmail as our SMTP server.
-* If you'd like to try out registering yourself, here is a registration link that is unused: 
+* If you'd like to try out registering yourself, here is a registration link that is currently unused: 
+  http://localhost/register/22334bb017fe1730
 
 ####Logging in -
 * You can log in as a student by using the username "Test1" and the password "Test1234"
