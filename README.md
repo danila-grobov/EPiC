@@ -64,18 +64,18 @@ JSON files of student emails, or manually, to invite them to one of their course
   course over a period of time. Lastly is a scatter graph, that when implemented, displays a graph where you can filter
   and view the various groups and where they lie in terms of average confidence and average
   grades.
-* **Tasks**: On this page, students can view the tasks set for students in that course. When fully implemented, teachers
-  edit the tasks, remove them, and add more.
-* **Manage**: The manage page holds a table of all of the students enrolled in that course. In this page, teachers can
+* **Tasks**: On this page, teachers can view the tasks set for students in that course. When fully implemented, teachers
+  will be able to edit the tasks, remove them, and add more.
+* **Manage**: The manage page holds a table of all the students enrolled in that course. In this page, teachers can
   add and remove students, as well as check their invite status. Teachers can also filter through their students and 
   search for them using the bar above the table. Lastly, teachers can import grades with JSON files!
 * **Profile**: When a teacher clicks on the phrase "Hello, (their name)", They'll be taken to their profile page, where
-whe fully implemented, they can edit their profile data.
+when fully implemented, they can edit their profile data.
 
 ###Student-View:
 
 ####Registration:
-* When students receive their registration link, they'll be sent to the registration form which allows them to creat a
+* When students receive their registration link, they'll be sent to the registration form which allows them to create
 a username, password, and answer some questions for us which help with tracking progress of various student groups. 
 * Our program uses Gmail as our SMTP server.
 * If you'd like to try out registering yourself, here is a registration link that is currently unused: 
@@ -85,44 +85,44 @@ a username, password, and answer some questions for us which help with tracking 
 * You can log in as a student by using the username "Test1" and the password "Test1234"
 ####Pages -
 * **Home**: After logging in, students are able to see their dashboard. Students are greeted by a
-  calendar that displays the date, as well as some any deadlines they have within the next month. Below this are the
-  course cards for each module a student is enrolled in. It displays the course code as well as the progress bar.
+  calendar that displays the date, as well as any deadlines they have within the next month. Below this are the
+  course cards for each module the student is enrolled in. It displays the course code as well as the progress bar.
   
-* **Course Pages**: When a student clicks on a course card, it will take them to that course's page. In that course's
-  page, a student can find an enlarged version of the progress bar. Next to it is a card that displays the deadlines for
+* **Course Pages**: When a student clicks on a course card, it will take them to that course's page. There, a student
+  can find an enlarged version of the progress bar. Next to it is a card that displays the deadlines for
   that course. Below these a student can find a card that allows students to enter their confidence in the course for
   the day. Lastly, below the confidence card, students can find their own versions of the course checklists.
   Once they tick a task as complete and updates the page, it will be marked as complete both on
   the deadlines card, as well as fill out slightly more of the progress bar!
 * **Profile**: When a student clicks on the phrase "Hello, (their name)", They'll be taken to their profile page, where
-  whe fully implemented, they can edit their profile data.
+  when fully implemented, they can edit their profile data.
 
 
 
 ## Coding Conventions
 ***
 ###Project Structure:
-####Frontend -
+####Frontend
 * All components related to the same feature are located within the same folder.
-* Scss files are located in a Scss folder.
+* SCSS files are located in the scss folder.
 * General components that are used in several pages are located in a separate folder.
 * All assets are located in their respective folders.
 * All custom hooks are located in their respective folder.
 
-####Backend -
+####Backend
 * All the operations relating to the same entity in the database are located in their respective files.
 * All endpoints are located in the app.js file.
 
-###Variables:
+###Variables
 * Variables are named with camelCase.
 * Use const variables wherever possible, use let variables if necessary.
 
-###Functions:
+###Functions
 * Functions are named with camelCase.
 * Use arrow functions where possible and only use regular functions if necessary.
 * Name functions using verbs.
 
-###Components:
+###Components
 * Named with PascalCase.
 * All the components are functional (no classes).
 
@@ -173,7 +173,7 @@ and login pages.
   * Sending no invites and many invites
   * Importing unrelated files instead of JSON files
   * Not completing the registration form
-  * SQL injections as the name
+  * SQL injections
   * Logging in incorrectly (without one of the inputs)
 
 These tests can be found in the ``__tests__`` folder within the EPiC project, and called ```req_testing_template.docx```
