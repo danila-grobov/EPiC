@@ -48,13 +48,13 @@ JSON files of student emails, or manually, to invite them to one of their course
    
 
 
-##Using the Web-Application
+## Using the Web-Application
 ***
-###Teacher-View:
-####Logging in - 
+### Teacher-View:
+#### Logging in - 
 * You can log in as a teacher by using the username "Teacher1", and the password "Teacher1"
 
-####Pages - 
+#### Pages - 
 * **Home**: After logging in, teachers are able to see the dashboard for one of the courses they teach. Using the dropdown 
   button in the navigation bar, a teacher can toggle between the various courses they teach. Each course dashboard has
   an insights bar at the top, that when fully implemented, would show a statement describing unusual trends for that 
@@ -72,18 +72,18 @@ JSON files of student emails, or manually, to invite them to one of their course
 * **Profile**: When a teacher clicks on the phrase "Hello, (their name)", They'll be taken to their profile page, where
 when fully implemented, they can edit their profile data.
 
-###Student-View:
+### Student-View:
 
-####Registration:
+#### Registration:
 * When students receive their registration link, they'll be sent to the registration form which allows them to create
 a username, password, and answer some questions for us which help with tracking progress of various student groups. 
 * Our program uses Gmail as our SMTP server.
 * If you'd like to try out registering yourself, here is a registration link that is currently unused: 
   http://localhost/register/22334bb017fe1730
 
-####Logging in -
+#### Logging in -
 * You can log in as a student by using the username "Test1" and the password "Test1234"
-####Pages -
+#### Pages -
 * **Home**: After logging in, students are able to see their dashboard. Students are greeted by a
   calendar that displays the date, as well as any deadlines they have within the next month. Below this are the
   course cards for each module the student is enrolled in. It displays the course code as well as the progress bar.
@@ -101,55 +101,55 @@ a username, password, and answer some questions for us which help with tracking 
 
 ## Coding Conventions
 ***
-###Project Structure:
-####Frontend
+### Project Structure:
+#### Frontend
 * All components related to the same feature are located within the same folder.
 * SCSS files are located in the scss folder.
 * General components that are used in several pages are located in a separate folder.
 * All assets are located in their respective folders.
 * All custom hooks are located in their respective folder.
 
-####Backend
+#### Backend
 * All the operations relating to the same entity in the database are located in their respective files.
 * All endpoints are located in the app.js file.
 
-###Variables
+### Variables
 * Variables are named with camelCase.
 * Use const variables wherever possible, use let variables if necessary.
 
-###Functions
+### Functions
 * Functions are named with camelCase.
 * Use arrow functions where possible and only use regular functions if necessary.
 * Name functions using verbs.
 
-###Components
+### Components
 * Named with PascalCase.
 * All the components are functional (no classes).
 
 
 
-##Disclaimers
+## Disclaimers
 ***
 Unfortunately, we were unable to fully deliver on some of the following features/functionalities. Some are included in 
 the front-end with limited or no functionality, while others were left out.
 
-####Frontend Still Included:
+#### Frontend Still Included:
 * Insights
 * Profile page
 * Scatter graph
 * Teacher tasks page
 
-####Not Included:
+#### Not Included:
 * Login limit
 * Average confidence graph in the student course page
 * Checkboxes being clicked updating the progress bar without having to refresh
 * Admin view
 
 
-##Testing
+## Testing
 ***
 
-###Our Approach
+### Our Approach
 Our team addressed testing our web application in two different ways with the time we had available. 
 
 We have used unit tests to test the table component, this allows us to make sure that the table itself
