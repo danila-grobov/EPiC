@@ -12,7 +12,6 @@ import axios from "axios";
 import {ToastContainer} from "react-toastify";
 import TasksComplete from "./TasksComplete";
 import moment from "moment";
-
 /**
  * Hold and call each of the graph/stat components for the teacher page.
  */
