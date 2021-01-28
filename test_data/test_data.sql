@@ -1,20 +1,8 @@
 -- SAMPLE DATA
--- Teachers
 -- Students
--- Courses
--- Tasks
 -- Grades
 -- TasksDone
--- Teaches
 -- Confidence
-
--- Teachers
-INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin) VALUES ('CNapier', 'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec', 'Chris', 'Napier', 'CNapier@ncl.ac.uk', 1);
-INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin) VALUES ('JColquhoun', 'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec', 'John', 'JColquhoun', 'JColquhoun@ncl.ac.uk', 1);
-INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin) VALUES ('JSteggles', 'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec', 'Jason', 'Steggles', 'JSteggles@ncl.ac.uk', 1);
-INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin) VALUES ('MDevlin', 'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec', 'Marie', 'Devlin', 'MDevlin@ncl.ac.uk', 1);
-INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin) VALUES ('NCook', 'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec', 'Nick', 'Cook', 'NCook@ncl.ac.uk', 1);
-INSERT INTO EPiC.Teachers (Username, Pwd, Firstname, Lastname, Email, Admin) VALUES ('Teacher1', 'de8bb720e7e3df1cb968777d9ee2f1908bcafbe1e047daeda0443ef5583b24ec', 'Nick', 'Cook', 'teacher@ncl.ac.uk', 1);
 
 -- Students
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('afylanb2', '74c22636458fedf15e80cd47d36bd9949c6bcf26d2361e4e96807b36539919eb', 'Jaimie', 'Okenfold', 'afylanb2@ncl.ac.uk', 'Advanced', 'UK Students', 'Non-Binary', 'accepted');
@@ -257,7 +245,6 @@ INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, Stu
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('rrubinsztein7x', '74c22636458fedf15e80cd47d36bd9949c6bcf26d2361e4e96807b36539919eb', 'Baldwin', 'Baff', 'rrubinsztein7x@ncl.ac.uk', 'Beginner', 'EU Students', 'Male', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('rrubinsztein7x1', 'ce5b8debe7a450633df8243a01a9afb1c230331e3689058770eb31aea7cc04ce', 'Kaja', 'Joyner', 'rrubinsztein7x1@ncl.ac.uk', 'Intermediate', 'International Students', 'Non-Binary', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('sbilliarda9', '74c22636458fedf15e80cd47d36bd9949c6bcf26d2361e4e96807b36539919eb', 'Davina', 'Paulillo', 'sbilliarda9@ncl.ac.uk', 'Beginner', 'International Students', 'Non-Binary', 'accepted');
-INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('sbilliarda91', 'fa59512ec8542c13efc9b92a6523ed41bc657a60230307c5250e19853a5dc9fa', 'Leif', 'Nancekivell', 'sbilliarda91@ncl.ac.uk', 'Intermediate', 'UK Students', 'Female', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('sbluck4x', '74c22636458fedf15e80cd47d36bd9949c6bcf26d2361e4e96807b36539919eb', 'Jorrie', 'Rodenhurst', 'sbluck4x@ncl.ac.uk', 'Intermediate', 'International Students', 'Male', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('sbluck4x1', '949f38a9a59b86589229c71d36ffb19e830f40c9d92a0026ef4961c86f18157d', 'Walton', 'Finley', 'sbluck4x1@ncl.ac.uk', 'Beginner', 'EU Students', 'Female', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('sdavey38', 'ce5b8debe7a450633df8243a01a9afb1c230331e3689058770eb31aea7cc04ce', 'Cornelle', 'Turl', 'sdavey38@ncl.ac.uk', 'Beginner', 'EU Students', 'Female', 'accepted');
@@ -285,7 +272,6 @@ INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, Stu
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('tcathesyed531', '91be848f9ecd5094e53bb1d675d927e04e362cfaf89bd4100b780a18bb6dc836', 'Otha', 'Mease', 'tcathesyed511@ncl.ac.uk', 'Beginner', 'EU Students', 'Non-Binary', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('tcathesyed53', '949f38a9a59b86589229c71d36ffb19e830f40c9d92a0026ef4961c86f18157d', 'Job', 'Pudney', 'tcathesyed53@ncl.ac.uk', 'Beginner', 'EU Students', 'Non-Binary', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('tclorley9m', '74c22636458fedf15e80cd47d36bd9949c6bcf26d2361e4e96807b36539919eb', 'Glenine', 'Perillio', 'tclorley9m@ncl.ac.uk', 'Advanced', 'UK Students', 'Non-Binary', 'accepted');
-INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('Test1', 'ce5b8debe7a450633df8243a01a9afb1c230331e3689058770eb31aea7cc04ce', 'Test1', 'Test1', 'test1@ncl.ac.uk', 'Advanced', 'UK Students', 'Male', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('Test2', 'ce5b8debe7a450633df8243a01a9afb1c230331e3689058770eb31aea7cc04ce', 'Test2', 'Test2', 'test2@ncl.ac.uk', 'Advanced', 'UK Students', 'Male', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('Test3', 'ce5b8debe7a450633df8243a01a9afb1c230331e3689058770eb31aea7cc04ce', 'Test3', 'Test3', 'test3@ncl.ac.uk', 'Advanced', 'International Students', 'Female', 'accepted');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('Test4', 'ce5b8debe7a450633df8243a01a9afb1c230331e3689058770eb31aea7cc04ce', 'Test4', 'Test4', 'test4@ncl.ac.uk', 'Advanced', 'EU Students', 'Female', 'accepted');
@@ -321,52 +307,6 @@ INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, Stu
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('838b1afb180dc6b3', null, null, null, 'ygrier7o@ncl.ac.uk', null, null, null, 'waiting');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('5b0e6159b45ec4cf', null, null, null, 'yharper10@ncl.ac.uk', null, null, null, 'waiting');
 INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('2e1e157ac51471c4', null, null, null, 'yharper101@ncl.ac.uk', null, null, null, 'waiting');
-INSERT INTO EPiC.Students (Username, Pwd, Firstname, Lastname, Email, Skill, StudentType, Gender, InviteStatus) VALUES ('22334bb017fe1730', null, null, null, 'zanetaylor@ncl.ac.uk', null, null, null, 'waiting');
-
--- Courses
-INSERT INTO EPiC.Courses (CourseName, FullCourseName, Color) VALUES ('CSC2031', 'Security and Programming Paradigms', '#F28F38');
-INSERT INTO EPiC.Courses (CourseName, FullCourseName, Color) VALUES ('CSC2032', 'Algorithm Design and Analysis', '#F28F38');
-INSERT INTO EPiC.Courses (CourseName, FullCourseName, Color) VALUES ('CSC2033', 'Software Engineering Team Project', '#7A306C');
-INSERT INTO EPiC.Courses (CourseName, FullCourseName, Color) VALUES ('CSC2034', 'Introducing Contemporary Topics in Computing', '#C8553D');
-INSERT INTO EPiC.Courses (CourseName, FullCourseName, Color) VALUES ('CSC2035', 'Operating Systems and Networks', '#7A306C');
-
--- Tasks
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (1, 'Task1', 'CSC2031', null, 1, null, '2021-01-20 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (2, 'Task2', 'CSC2031', 1, 1, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (3, 'Task3', 'CSC2031', 2, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (4, 'Task4', 'CSC2031', 1, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (5, 'Task5', 'CSC2031', null, 1, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (6, 'Task6', 'CSC2031', 5, 0, null, '2021-03-03 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (7, 'Task7', 'CSC2032', null, 1, null, '2021-09-30 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (8, 'Task8', 'CSC2032', 7, 1, null, '2021-09-17 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (9, 'Task9', 'CSC2032', 8, 1, null, '2021-09-30 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (10, 'Task10', 'CSC2032', 9, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (11, 'Task11', 'CSC2032', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (12, 'Task12', 'CSC2033', null, 1, null, '2021-09-09 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (13, 'Task13', 'CSC2033', 12, 0, null, '2021-09-16 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (14, 'Task14', 'CSC2033', 12, 0, null, '2021-09-23 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (15, 'Task15', 'CSC2033', 12, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (16, 'Task16', 'CSC2033', null, 1, null, '2021-09-30 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (17, 'Task17', 'CSC2034', null, 0, null, '2021-01-20 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (18, 'Task18', 'CSC2034', null, 1, null, '2021-01-20 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (19, 'Task19', 'CSC2035', null, 0, null, '2021-02-01 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (20, 'Task20', 'CSC2035', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (21, 'Task21', 'CSC2035', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (22, 'Task22', 'CSC2035', null, 1, null, '2021-02-10 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (23, 'Task23', 'CSC2035', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (24, 'Task24', 'CSC2035', 22, 1, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (25, 'Task25', 'CSC2035', 24, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (26, 'Task26', 'CSC2035', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (27, 'Task27', 'CSC2035', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (29, 'Task29', 'CSC2031', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (30, 'Task30', 'CSC2031', null, 1, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (31, 'Task31', 'CSC2032', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (32, 'Task32', 'CSC2032', null, 0, null, '2021-02-02 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (35, 'Task35', 'CSC2035', null, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (37, 'Task37', 'CSC2031', 30, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (38, 'Task38', 'CSC2033', 16, 0, null, null);
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (39, 'Task39', 'CSC2031', null, 0, null, '2021-02-06 15:00:00');
-INSERT INTO EPiC.Tasks (TaskID, TaskName, CourseName, ParentTaskID, hasSubtasks, Description, Deadline) VALUES (40, 'Task40', 'CSC2034', 18, 0, null, null);
 
 -- Grades
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'afylanb2@ncl.ac.uk', 0.64, 0.92);
@@ -609,7 +549,6 @@ INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'rrubinsztein7x@ncl.ac.uk', 0.5, 0.34);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'rrubinsztein7x1@ncl.ac.uk', 0.28, 0.56);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'sbilliarda9@ncl.ac.uk', 0.76, 0.59);
-INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'sbilliarda91@ncl.ac.uk', 0.52, 0.81);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'sbluck4x@ncl.ac.uk', 0.2, 0.68);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'sbluck4x1@ncl.ac.uk', 0.66, 0.45);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'sdavey38@ncl.ac.uk', 0.42, 0.92);
@@ -637,7 +576,6 @@ INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'tcathesyed511@ncl.ac.uk', 0.3, 0.91);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'tcathesyed53@ncl.ac.uk', 0.13, 0.95);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'tclorley9m@ncl.ac.uk', 0.58, 0.67);
-INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'test1@ncl.ac.uk', 0.42, 0.9);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'test2@ncl.ac.uk', 0.27, 0.31);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'test3@ncl.ac.uk', 0.16, 0.77);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'test4@ncl.ac.uk', 0.04, 0.38);
@@ -673,7 +611,6 @@ INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'ygrier7o@ncl.ac.uk', null, null);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'yharper10@ncl.ac.uk', null, null);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'yharper101@ncl.ac.uk', null, null);
-INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2031', 'zanetaylor@ncl.ac.uk', null, null);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2032', 'afylanb2@ncl.ac.uk', 0.12, 0.74);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2032', 'agirardi1r@ncl.ac.uk', 0.69, 0.62);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2032', 'agormally7w@ncl.ac.uk', 0.34, 0.66);
@@ -959,7 +896,6 @@ INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'rrubinsztein7x@ncl.ac.uk', 0.06, 0.4);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'rrubinsztein7x1@ncl.ac.uk', 0.11, 0.77);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'sbilliarda9@ncl.ac.uk', 0.15, 0.5);
-INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'sbilliarda91@ncl.ac.uk', 0.47, 0.62);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'sbluck4x@ncl.ac.uk', 0.14, 0.46);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'sbluck4x1@ncl.ac.uk', 0.2, 0.32);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'sdavey38@ncl.ac.uk', 0.08, 0.41);
@@ -987,7 +923,6 @@ INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'tcathesyed511@ncl.ac.uk', 0.41, 0.45);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'tcathesyed53@ncl.ac.uk', 0.1, 0.41);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'tclorley9m@ncl.ac.uk', 0.65, 0.5);
-INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'test1@ncl.ac.uk', 0.65, 0.4);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'test2@ncl.ac.uk', 0.74, 0.77);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'test3@ncl.ac.uk', 0.4, 0.42);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'test4@ncl.ac.uk', 0.61, 0.55);
@@ -1023,7 +958,6 @@ INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'ygrier7o@ncl.ac.uk', null, null);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'yharper10@ncl.ac.uk', null, null);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'yharper101@ncl.ac.uk', null, null);
-INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2034', 'zanetaylor@ncl.ac.uk', null, null);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2035', 'cscrauniage9v@ncl.ac.uk', 0.38, 0.38);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2035', 'cscrauniage9v1@ncl.ac.uk', 0.46, 0.71);
 INSERT INTO EPiC.Grades (CourseName, Email, PercentDone, Grade) VALUES ('CSC2035', 'cscrauniage9v11@ncl.ac.uk', 0.6, 0.3);
@@ -1219,12 +1153,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 3, '2020-12-13');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 3, '2021-01-03');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 3, '2021-01-07');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 3, '2020-12-14');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 3, '2020-12-11');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 3, '2021-01-16');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 3, '2020-12-18');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 3, '2020-12-19');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 3, '2021-01-13');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 3, '2021-01-18');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 3, '2020-12-20');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 3, '2020-12-18');
@@ -1494,12 +1426,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 5, '2021-01-08');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 5, '2021-01-19');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 5, '2020-12-31');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 5, '2021-01-19');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 5, '2020-12-23');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 5, '2021-01-24');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 5, '2021-01-12');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 5, '2020-12-15');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 5, '2021-01-12');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 5, '2021-01-16');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 5, '2021-01-21');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 5, '2020-12-21');
@@ -1769,12 +1699,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 7, '2020-12-15');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 8, '2021-01-26');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 8, '2021-01-23');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 8, '2021-01-18');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 8, '2020-12-31');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 8, '2020-12-26');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 8, '2021-01-28');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 8, '2020-12-26');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 8, '2021-01-25');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 8, '2020-12-18');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 8, '2021-01-24');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 8, '2020-12-22');
@@ -2044,12 +1972,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 12, '2021-01-27');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 12, '2021-01-19');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 12, '2021-01-22');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 12, '2021-01-16');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 12, '2020-12-06');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 12, '2021-01-10');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 12, '2021-01-23');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 12, '2020-12-10');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 12, '2020-12-20');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 12, '2021-01-26');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 12, '2021-01-11');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 12, '2020-12-11');
@@ -2319,12 +2245,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 14, '2020-12-28');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 14, '2021-01-17');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 14, '2020-12-07');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 14, '2021-01-18');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 14, '2021-01-12');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 14, '2020-12-10');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 14, '2021-01-12');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 14, '2020-12-12');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 14, '2020-12-22');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 14, '2021-01-07');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 14, '2020-12-26');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 14, '2021-01-13');
@@ -2594,12 +2518,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 18, '2020-12-06');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 18, '2020-12-31');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 18, '2021-01-21');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 18, '2021-01-18');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 18, '2020-12-28');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 18, '2021-01-22');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 18, '2020-12-16');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 18, '2020-12-17');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 18, '2021-01-07');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 18, '2020-12-26');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 18, '2021-01-19');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 18, '2021-01-17');
@@ -2869,12 +2791,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 22, '2021-01-28');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 22, '2020-12-29');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 22, '2021-01-08');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 22, '2021-01-23');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 22, '2020-12-13');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 22, '2021-01-09');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 22, '2020-12-20');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 22, '2020-12-24');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 22, '2021-01-03');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 22, '2020-12-08');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 22, '2021-01-11');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 22, '2021-01-13');
@@ -3144,12 +3064,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 26, '2021-01-17');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 26, '2021-01-05');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 26, '2020-12-11');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 26, '2021-01-08');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 26, '2020-12-24');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 26, '2021-01-11');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 26, '2020-12-04');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 26, '2021-01-14');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 26, '2021-01-20');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 26, '2020-12-06');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 26, '2021-01-15');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 26, '2021-01-28');
@@ -3419,12 +3337,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 29, '2020-12-08');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 29, '2021-01-17');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 29, '2020-12-18');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 29, '2020-12-30');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 29, '2020-12-05');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 29, '2021-01-17');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 29, '2021-01-08');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 29, '2021-01-13');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 29, '2021-01-10');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 29, '2021-01-17');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 29, '2021-01-25');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 29, '2021-01-08');
@@ -3694,12 +3610,10 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 35, '2020-12-05');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 35, '2021-01-26');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 35, '2021-01-13');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 35, '2020-12-08');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 35, '2021-01-10');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 35, '2021-01-28');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 35, '2020-12-21');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 35, '2021-01-03');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 35, '2020-12-09');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 35, '2021-01-07');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 35, '2020-12-06');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 35, '2021-01-28');
@@ -3969,61 +3883,14 @@ INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrowdell1n@ncl.ac.
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x@ncl.ac.uk', 40, '2021-01-04');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('rrubinsztein7x1@ncl.ac.uk', 40, '2021-01-27');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda9@ncl.ac.uk', 40, '2021-01-21');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbilliarda91@ncl.ac.uk', 40, '2020-12-16');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x@ncl.ac.uk', 40, '2020-12-12');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sbluck4x1@ncl.ac.uk', 40, '2021-01-27');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey38@ncl.ac.uk', 40, '2021-01-10');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('sdavey381@ncl.ac.uk', 40, '2020-12-09');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test1@ncl.ac.uk', 40, '2020-12-16');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test2@ncl.ac.uk', 40, '2020-12-26');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test3@ncl.ac.uk', 40, '2020-12-04');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test4@ncl.ac.uk', 40, '2020-12-09');
 INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES ('test5@ncl.ac.uk', 40, '2020-12-06');
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-INSERT INTO EPiC.TasksDone (Email, TaskID, DateDone) VALUES (null, null, null);
-
--- Teaches
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2031', 'CNapier@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2031', 'JColquhoun@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2031', 'MDevlin@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2031', 'teacher@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2032', 'CNapier@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2032', 'JColquhoun@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2032', 'NCook@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2032', 'teacher@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2033', 'CNapier@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2033', 'JSteggles@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2033', 'teacher@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2034', 'CNapier@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2034', 'JSteggles@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2034', 'teacher@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2035', 'CNapier@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2035', 'JSteggles@ncl.ac.uk');
-INSERT INTO EPiC.Teaches (CourseName, Email) VALUES ('CSC2035', 'teacher@ncl.ac.uk');
 
 -- Confidence
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('afylanb2@ncl.ac.uk', 'CSC2031', 2, '2020-12-17');
@@ -4951,10 +4818,6 @@ INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda9@ncl.ac.uk', 'CSC2031', 2, '2020-12-11');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda9@ncl.ac.uk', 'CSC2031', 2, '2020-12-24');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda9@ncl.ac.uk', 'CSC2031', 2, '2021-01-18');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2031', 4, '2020-12-18');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2031', 4, '2020-12-23');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2031', 2, '2021-01-17');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2031', 1, '2021-01-21');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbluck4x@ncl.ac.uk', 'CSC2031', 0, '2020-12-04');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbluck4x@ncl.ac.uk', 'CSC2031', 0, '2020-12-17');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbluck4x@ncl.ac.uk', 'CSC2031', 1, '2020-12-24');
@@ -5062,10 +4925,6 @@ INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('tclorley9m@ncl.ac.uk', 'CSC2031', 1, '2020-12-08');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('tclorley9m@ncl.ac.uk', 'CSC2031', 2, '2021-01-01');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('tclorley9m@ncl.ac.uk', 'CSC2031', 0, '2021-01-06');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2031', 1, '2020-12-06');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2031', 1, '2021-01-05');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2031', 4, '2021-01-22');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2031', 1, '2021-01-27');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test2@ncl.ac.uk', 'CSC2031', 2, '2020-12-05');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test2@ncl.ac.uk', 'CSC2031', 4, '2020-12-30');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test2@ncl.ac.uk', 'CSC2031', 4, '2021-01-08');
@@ -6203,10 +6062,6 @@ INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda9@ncl.ac.uk', 'CSC2034', 1, '2021-01-07');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda9@ncl.ac.uk', 'CSC2034', 4, '2021-01-09');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda9@ncl.ac.uk', 'CSC2034', 1, '2021-01-11');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2034', 4, '2020-12-31');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2034', 3, '2021-01-02');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2034', 4, '2021-01-17');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbilliarda91@ncl.ac.uk', 'CSC2034', 2, '2021-01-18');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbluck4x@ncl.ac.uk', 'CSC2034', 0, '2020-12-24');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbluck4x@ncl.ac.uk', 'CSC2034', 3, '2021-01-06');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('sbluck4x@ncl.ac.uk', 'CSC2034', 1, '2021-01-14');
@@ -6311,10 +6166,6 @@ INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('tclorley9m@ncl.ac.uk', 'CSC2034', 3, '2020-12-30');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('tclorley9m@ncl.ac.uk', 'CSC2034', 1, '2021-01-24');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('tclorley9m@ncl.ac.uk', 'CSC2034', 1, '2021-01-25');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2034', 2, '2020-12-08');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2034', 4, '2020-12-11');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2034', 0, '2020-12-29');
-INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test1@ncl.ac.uk', 'CSC2034', 2, '2021-01-02');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test2@ncl.ac.uk', 'CSC2034', 2, '2020-12-17');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test2@ncl.ac.uk', 'CSC2034', 3, '2020-12-24');
 INSERT INTO EPiC.Confidence (Email, CourseName, ConfidenceLevel, Date) VALUES ('test2@ncl.ac.uk', 'CSC2034', 4, '2021-01-16');
