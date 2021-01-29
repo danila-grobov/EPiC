@@ -148,7 +148,7 @@ the front-end with limited or no functionality, while others were left out.
 
 ## Testing
 ***
-
+  
 ### Our Approach
 Our team addressed testing our web application in two different ways with the time we had available. 
 
@@ -158,6 +158,9 @@ result in some sort of visual feedback, we were able to overcome that by using a
 rendering components in a browser, we do it in a simulated environment, where we can interact with them
 programmatically and query the virtual screen to make sure that the expected result is achieved. We did not
 test other components due to lack of time, ideally every component would be tested like that.
+
+To be able to run our unit test on your machine you would have to install our node packages, by running ```npm install```
+in the terminal.
 
 These tests can be found in the  ``__tests__`` folder within the EPiC project, called ```test.table.js```. The results
 can be found in the ```__results__``` folder outside the EPiC project, called ```Test_Results_-_test_table_js```.
